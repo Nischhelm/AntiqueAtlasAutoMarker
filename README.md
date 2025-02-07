@@ -1,3 +1,3 @@
 AntiqueAtlasAutoMarker
 
-marks waystones for now
+Auto marks waystones for now, might expand in the future

@@ -1,19 +1,21 @@
 package antiqueatlasautomarker;
 
-import java.util.Map;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
-import org.spongepowered.asm.launch.MixinBootstrap;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import org.spongepowered.asm.launch.MixinBootstrap;
+
+import java.util.Map;
 
 @IFMLLoadingPlugin.MCVersion("1.12.2")
 public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 	public AntiqueAtlasAutoMarkerPlugin() {
 		MixinBootstrap.init();
-		//False for Vanilla/Coremod mixins, true for regular mod mixins
+
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.antiqueatlasautomarker.vanilla.json");
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.jei.json", () -> Loader.isModLoaded("jei"));
+
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.waystones.json", () -> Loader.isModLoaded("waystones"));
 	}
 
 	@Override

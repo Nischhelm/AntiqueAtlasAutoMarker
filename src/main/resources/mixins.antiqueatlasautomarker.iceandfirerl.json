@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.iceandfire.rlcraft",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "WorldGenCyclopsCaveMixin",
+    "WorldGenDragonRoostMixin"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

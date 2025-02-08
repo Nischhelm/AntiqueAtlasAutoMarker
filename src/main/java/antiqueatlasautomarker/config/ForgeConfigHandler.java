@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.handlers;
+package antiqueatlasautomarker.config;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import net.minecraftforge.common.config.Config;
@@ -19,21 +19,15 @@ public class ForgeConfigHandler {
 	public static final ClientConfig client = new ClientConfig();
 
 	public static class ServerConfig {
-		@Config.Comment("Auto mark wild waystones when they generate with new chunks")
-		@Config.Name("Wild Waystones: Auto Mark")
-		public boolean autoMarkWildWaystones = true;
-
-		@Config.Comment("Players this many blocks away will receive the wild waystone marker on generation")
-		@Config.Name("Wild Waystones: Distance")
-		public int wildWaystoneDistance = 320;
-
-		@Config.Comment("Name new wild waystone markers with this (use DEFAULT for using the name it generates with")
-		@Config.Name("Wild Waystones: Name")
-		public String wildWayStoneName = "Wild Waystone";
-
-		@Config.Comment("Marker Type registry id of the marker to use for wild waystones (find them in config/antiqueatlas/markers.cfg)")
-		@Config.Name("Wild Waystones: Marker Type")
-		public String wildWayStoneMarkerType = "antiqueatlas:waystone";
+		@Config.Comment("Pattern: structureType; enabled; distance; marker label; marker type")
+		@Config.Name("Auto marked structures on generation")
+		public String[] structureMarkers = {
+				"wildWaystone; true; 320; Wild Waystone; antiqueatlas:waystone",
+				"fireDragon; true; 320; Fire Dragon; antiqueatlas:dragon_red",
+				"iceDragon; true; 320; Ice Dragon; antiqueatlas:dragon_blue",
+				"lightningDragon; true; 320; Lightning Dragon; antiqueatlas:dragon_gold",
+				"cyclopsCave; true; 320; Cyclops; antiqueatlas:red_x_small"
+		};
 	}
 
 	public static class ClientConfig {

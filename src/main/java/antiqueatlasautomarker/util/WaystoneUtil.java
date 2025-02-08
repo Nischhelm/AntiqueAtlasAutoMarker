@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.util;
 
-import antiqueatlasautomarker.handlers.ForgeConfigHandler;
+import antiqueatlasautomarker.config.ForgeConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.marker.Marker;

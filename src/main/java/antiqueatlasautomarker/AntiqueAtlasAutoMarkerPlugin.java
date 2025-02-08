@@ -1,5 +1,6 @@
 package antiqueatlasautomarker;
 
+import antiqueatlasautomarker.util.IceAndFireUtil;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
@@ -14,8 +15,11 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		MixinBootstrap.init();
 
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.antiqueatlasautomarker.vanilla.json");
-
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.waystones.json", () -> Loader.isModLoaded("waystones"));
+
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.iceandfirerotn.json", () -> Loader.isModLoaded("iceandfire") && (IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN || IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_1_9_1));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.iceandfirerl.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.RLCRAFT);
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.iceandfire.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_OLD);
 	}
 
 	@Override

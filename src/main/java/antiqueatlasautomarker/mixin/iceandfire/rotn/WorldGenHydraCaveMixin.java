@@ -1,8 +1,7 @@
 package antiqueatlasautomarker.mixin.iceandfire.rotn;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.StructureGenerationUtil;
-import com.github.alexthe666.iceandfire.world.gen.WorldGenCyclopsCave;
+import antiqueatlasautomarker.util.MarkerUtil;
 import com.github.alexthe666.iceandfire.world.gen.WorldGenHydraCave;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -20,10 +19,10 @@ public class WorldGenHydraCaveMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0)
     )
     void markHydra(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir) {
-        StructureGenerationUtil.markStructure(
+        MarkerUtil.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.autoMarkSettings.get("hydraCave")
+                AutoMarkSetting.get("hydraCave")
         );
     }
 }

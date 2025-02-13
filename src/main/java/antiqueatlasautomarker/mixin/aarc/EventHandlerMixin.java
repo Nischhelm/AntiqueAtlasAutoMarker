@@ -2,7 +2,7 @@ package antiqueatlasautomarker.mixin.aarc;
 
 import aarcaddon.handlers.EventHandler;
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.StructureGenerationUtil;
+import antiqueatlasautomarker.util.MarkerUtil;
 import hunternif.mc.atlas.api.MarkerAPI;
 import hunternif.mc.atlas.marker.Marker;
 import net.minecraft.util.math.BlockPos;
@@ -21,9 +21,9 @@ public class EventHandlerMixin {
             remap = false
     )
     private Marker aaam_replaceAARCglobalMarkerWithLocalMarker(MarkerAPI instance, @Nonnull World world, boolean visibleAhead, String markerType, String label, int x, int z) {
-        AutoMarkSetting setting = AutoMarkSetting.autoMarkSettings.get("AARCAddonMarker");
+        AutoMarkSetting setting = AutoMarkSetting.get("AARCAddonMarker");
         if (setting != null && setting.enabled) {
-            StructureGenerationUtil.markStructure(world, new BlockPos(x, 0, z), setting.dist, markerType, label);
+            MarkerUtil.markStructure(world, new BlockPos(x, 0, z), setting.dist, markerType, label);
             return null; //return value is unused
         } else
             //Default behavior

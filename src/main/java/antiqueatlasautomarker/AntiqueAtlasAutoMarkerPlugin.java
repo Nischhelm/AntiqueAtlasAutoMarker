@@ -33,8 +33,8 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.dungeons2.json", () -> Loader.isModLoaded("dungeons2"));
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.doomlikedungeons.json", () -> Loader.isModLoaded("dldungeonsjbg"));
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.lycanitesmobs.json", () -> Loader.isModLoaded("lycanitesmobs"));
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.ruins.json", () -> Loader.isModLoaded("ruins"));
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.roguelike.json", () -> Loader.isModLoaded("roguelike"));
+		//FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.ruins.json", () -> Loader.isModLoaded("ruins"));
+		//FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.roguelike.json", () -> Loader.isModLoaded("roguelike"));
 	}
 
 	@Override

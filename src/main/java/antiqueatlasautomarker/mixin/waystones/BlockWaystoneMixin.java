@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.waystones;
 
-import antiqueatlasautomarker.config.ForgeConfigHandler;
+import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.util.WaystoneUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.api.AtlasAPI;
@@ -27,15 +27,17 @@ public abstract class BlockWaystoneMixin {
             remap = false
     )
     private void aaam_markActivatedWaystone(Args args, @Local(argsOnly = true) EntityPlayer player, @Local(argsOnly = true) World world) {
-        if (ForgeConfigHandler.client.autoMarkActivatedWaystones) {
-            String waystoneName = args.get(0);
-            BlockPos waystonePos = args.get(1);
+        AutoMarkSetting setting = AutoMarkSetting.get("activatedWaystone");
+        if (setting == null || !setting.enabled) return;
 
-            //Search for atlases in player inventory and mark waystone
-            for (int atlasID : AtlasAPI.getPlayerAtlases(player)) {
-                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, ForgeConfigHandler.client.activatedWayStoneMarkerType, waystoneName, waystonePos.getX(), waystonePos.getZ());
-            }
-        }
+        String waystoneName = args.get(0);
+        BlockPos waystonePos = args.get(1);
+
+        String label = setting.label.equals("DEFAULT") ? waystoneName : setting.label;
+
+        //Search for atlases in player inventory and mark waystone
+        for (int atlasID : AtlasAPI.getPlayerAtlases(player))
+            AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, setting.type, label, waystonePos.getX(), waystonePos.getZ());
     }
 
     @Inject(

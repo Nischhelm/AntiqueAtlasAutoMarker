@@ -7,6 +7,7 @@ This mod adds a lot of automatic marking features for the Antique Atlas.
 ### Features clientside
 - Automatic marking of activated Waystones
   - with an option to auto rename the marker when the waystone is renamed.
+- Automatic marking of Librarian book trades (can define in config which books you want it to mark)
 
 ### Features serverside (needs mod on server)
 - Automatic marking of newly generated wild waystones near to a player.
@@ -27,4 +28,4 @@ This mod adds a lot of automatic marking features for the Antique Atlas.
 ### Community suggested features
 Feel free to suggest more things to automatically mark in comments
 
-- Librarian book trades
+All implemented

@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.iceandfire.rotn;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.StructureGenerationUtil;
+import antiqueatlasautomarker.util.MarkerUtil;
 import com.github.alexthe666.iceandfire.world.gen.WorldGenFireDragonRoosts;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,10 +16,10 @@ import java.util.Random;
 public class WorldGenFireDragonRoostsMixin {
     @Inject(method = "generate", at = @At("HEAD"))
     void markFireDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
-        StructureGenerationUtil.markStructure(
+        MarkerUtil.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.autoMarkSettings.get("fireDragon")
+                AutoMarkSetting.get("fireDragon")
         );
     }
 }

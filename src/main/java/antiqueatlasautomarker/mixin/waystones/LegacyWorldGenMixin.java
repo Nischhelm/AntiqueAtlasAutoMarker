@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.waystones;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.StructureGenerationUtil;
+import antiqueatlasautomarker.util.MarkerUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.blay09.mods.waystones.worldgen.LegacyWorldGen;
 import net.minecraft.util.math.BlockPos;
@@ -19,11 +19,11 @@ public class LegacyWorldGenMixin {
     )
     private String markGeneratedWildWaystone(String waystoneName, @Local(argsOnly = true) World world, @Local(ordinal = 0) BlockPos pos) {
         //Search for atlasses in all nearby players inventory and mark generated waystone
-        AutoMarkSetting settings = AutoMarkSetting.autoMarkSettings.get("wildWaystone");
+        AutoMarkSetting settings = AutoMarkSetting.get("wildWaystone");
         if(settings != null && settings.enabled) {
             String label = settings.label;
             if(label.equals("DEFAULT")) label = waystoneName;
-            StructureGenerationUtil.markStructure(
+            MarkerUtil.markStructure(
                     world,
                     pos,
                     settings.dist,

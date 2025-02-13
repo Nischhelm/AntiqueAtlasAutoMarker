@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.doomlikedungeons;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.StructureGenerationUtil;
+import antiqueatlasautomarker.util.MarkerUtil;
 import jaredbgreat.dldungeons.planner.Dungeon;
 import jaredbgreat.dldungeons.themes.Theme;
 import jaredbgreat.dldungeons.util.cache.Coords;
@@ -13,15 +13,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Locale;
-
 @Mixin(Dungeon.class)
 public class BuilderMixin {
     @Shadow(remap = false) public Theme theme;
 
     @Inject(method = "<init>(Lnet/minecraft/world/World;Ljaredbgreat/dldungeons/util/cache/Coords;)V", at = @At(value = "TAIL"), remap = false)
     private void markDoomlike(World world, Coords coords, CallbackInfo ci) {
-        AutoMarkSetting setting = AutoMarkSetting.autoMarkSettings.get("doomlikeDungeon");
+        AutoMarkSetting setting = AutoMarkSetting.get("doomlikeDungeon");
 
         if (setting != null && setting.enabled) {
             String label = setting.label;
@@ -31,7 +29,7 @@ public class BuilderMixin {
                 label = label.substring(0,1).toUpperCase() + label.substring(1, label.length()-4)+ " Doomlike Dungeon";
             }
 
-            StructureGenerationUtil.markStructure(
+            MarkerUtil.markStructure(
                     world,
                     new BlockPos(coords.getX() << 4, 0, coords.getZ() << 4),
                     setting.dist,

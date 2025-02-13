@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.dungeons2;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.StructureGenerationUtil;
+import antiqueatlasautomarker.util.MarkerUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.someguyssoftware.dungeons2.model.DungeonInfo;
 import com.someguyssoftware.dungeons2.tileentity.DeferredDungeonGeneratorTileEntity;
@@ -18,10 +18,10 @@ public abstract class DungeonBuilderMixin extends TileEntity {
             at = @At(value = "INVOKE", target = "Lcom/someguyssoftware/dungeons2/persistence/DungeonsGenSavedData;get(Lnet/minecraft/world/World;)Lcom/someguyssoftware/dungeons2/persistence/DungeonsGenSavedData;", remap = false)
     )
     private void markDungeons2Dungeon(CallbackInfo ci, @Local DungeonInfo info){
-        StructureGenerationUtil.markStructure(
+        MarkerUtil.markStructure(
                 this.world,
                 this.pos,
-                AutoMarkSetting.autoMarkSettings.get("dungeons2")
+                AutoMarkSetting.get("dungeons2")
         );
     }
 }

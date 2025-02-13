@@ -58,11 +58,22 @@ dependencies {
     implementation fg.deobf("curse.maven:fermiumbooter-${fermiumbooter_version}")
     implementation fg.deobf("curse.maven:waystones-${waystones_version}")
     implementation fg.deobf("curse.maven:antique-atlas-${antiqueatlas_version}")
+    implementation fg.deobf("curse.maven:aarc-${aarc_version}")
 
     //Bruh
     implementation fg.deobf("curse.maven:iceandfire-${iceandfire_version}")
     implementation fg.deobf("curse.maven:iceandfire-rlcraft-${iceandfirerl_version}")
     implementation fg.deobf("curse.maven:iceandfire-rotn-${iceandfirerotn_version}")
+
+    //Dungeons
+    implementation fg.deobf("curse.maven:dungeons2-${dungeons2_version}")
+    implementation fg.deobf("curse.maven:gottschcore-${gottschcore_version}")
+    implementation fg.deobf("curse.maven:yungs-better-mineshafts-forge-${bettermineshafts_version}")
+    implementation fg.deobf("curse.maven:ruins-${ruins_version}")
+    implementation fg.deobf("curse.maven:lycanitesmobs-${lycanites_version}")
+    implementation fg.deobf("curse.maven:doomlikedungeons-${doomlikedungeons_version}")
+    implementation fg.deobf("curse.maven:fnars-roguelike-dungeons-${fnarsroguelikedungeons_version}")
+    //implementation fg.deobf("curse.maven:roguelike-dungeons-${roguelikedungeons_version}")
 }
 
 mixin {

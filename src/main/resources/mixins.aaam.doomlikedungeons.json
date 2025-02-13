@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.doomlikedungeons",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "BuilderMixin"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

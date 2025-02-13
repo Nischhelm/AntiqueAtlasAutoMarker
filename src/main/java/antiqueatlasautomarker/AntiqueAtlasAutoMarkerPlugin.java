@@ -14,12 +14,27 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 	public AntiqueAtlasAutoMarkerPlugin() {
 		MixinBootstrap.init();
 
-		FermiumRegistryAPI.enqueueMixin(false, "mixins.antiqueatlasautomarker.vanilla.json");
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.waystones.json", () -> Loader.isModLoaded("waystones"));
+		//Vanilla
+		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
 
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.iceandfirerotn.json", () -> Loader.isModLoaded("iceandfire") && (IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN || IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_1_9_1));
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.iceandfirerl.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.RLCRAFT);
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.antiqueatlasautomarker.iceandfire.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_OLD);
+		//Waystones
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.waystones.json", () -> Loader.isModLoaded("waystones"));
+
+		//Ice and Fire
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrotn.json", () -> Loader.isModLoaded("iceandfire") && (IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN || IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_1_9_1));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrl.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.RLCRAFT);
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infbase.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_OLD);
+
+		//AARC Addon
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.aarc.json", () -> Loader.isModLoaded("aarcaddon"));
+
+		//Dungeons
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.bettermineshafts.json", () -> Loader.isModLoaded("bettermineshafts"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.dungeons2.json", () -> Loader.isModLoaded("dungeons2"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.doomlikedungeons.json", () -> Loader.isModLoaded("dldungeonsjbg"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.lycanitesmobs.json", () -> Loader.isModLoaded("lycanitesmobs"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.ruins.json", () -> Loader.isModLoaded("ruins"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.roguelike.json", () -> Loader.isModLoaded("roguelike"));
 	}
 
 	@Override

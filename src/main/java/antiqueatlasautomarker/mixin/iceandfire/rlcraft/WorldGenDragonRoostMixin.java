@@ -18,7 +18,7 @@ import java.util.Random;
 @Mixin(WorldGenDragonRoost.class)
 public class WorldGenDragonRoostMixin {
     @Inject(method = "generate", at = @At("HEAD"))
-    void markFireDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
+    void markDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
         String dragonType = "";
         if(((Object) this) instanceof WorldGenFireDragonRoost)
             dragonType = "fireDragon";

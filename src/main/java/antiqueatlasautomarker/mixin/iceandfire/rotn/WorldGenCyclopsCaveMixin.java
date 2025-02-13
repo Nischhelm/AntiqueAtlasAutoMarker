@@ -14,7 +14,10 @@ import java.util.Random;
 
 @Mixin(WorldGenCyclopsCave.class)
 public class WorldGenCyclopsCaveMixin {
-    @Inject(method = "generate", at = @At("HEAD"))
+    @Inject(
+            method = "generate",
+            at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0)
+    )
     void markCyclops(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
         StructureGenerationUtil.markStructure(
                 worldIn,

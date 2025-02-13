@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.iceandfire.rotn",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "WorldGenCyclopsCaveMixin",
+    "WorldGenFireDragonRoostsMixin",
+    "WorldGenHydraCaveMixin",
+    "WorldGenIceDragonRoostsMixin",
+    "WorldGenLightningDragonRoostsMixin"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

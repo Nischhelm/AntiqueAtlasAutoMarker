@@ -38,4 +38,9 @@ public class AutoMarkSetting {
         }
     }
 
+    public static void resetAutoMarkSettings(){
+        autoMarkSettings.clear();
+        initAutoMarkSettings();
+    }
+
 }

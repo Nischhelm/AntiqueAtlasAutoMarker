@@ -4,6 +4,7 @@ import antiqueatlasautomarker.config.AutoMarkSetting;
 import hunternif.mc.atlas.api.AtlasAPI;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class StructureGenerationUtil {
@@ -12,7 +13,9 @@ public class StructureGenerationUtil {
                 world.getPlayers(EntityPlayer.class, player -> {
                     if (player == null) return false;
                     BlockPos dist = player.getPosition().subtract(pos);
-                    return Math.abs(dist.getX()) < maxDist && Math.abs(dist.getZ()) < maxDist;
+                    boolean closeEnough = Math.abs(dist.getX()) < maxDist && Math.abs(dist.getZ()) < maxDist;
+                if(!closeEnough) player.sendMessage(new TextComponentString("Not close enough "+markerName + " " + pos.getX() + ","+pos.getZ()));
+                    return closeEnough;
                 })
         )
             for (int atlasID : AtlasAPI.getPlayerAtlases(player))

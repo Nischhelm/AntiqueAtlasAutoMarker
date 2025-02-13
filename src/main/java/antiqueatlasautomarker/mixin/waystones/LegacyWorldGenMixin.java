@@ -17,18 +17,18 @@ public class LegacyWorldGenMixin {
             at = @At(value = "INVOKE", target = "Lnet/blay09/mods/waystones/block/TileWaystone;setWaystoneName(Ljava/lang/String;)V"),
             remap = false
     )
-    private String aaam_markGeneratedWildWaystone(String waystoneName, @Local(argsOnly = true) World world, @Local(ordinal = 0) BlockPos pos) {
+    private String markGeneratedWildWaystone(String waystoneName, @Local(argsOnly = true) World world, @Local(ordinal = 0) BlockPos pos) {
         //Search for atlasses in all nearby players inventory and mark generated waystone
         AutoMarkSetting settings = AutoMarkSetting.autoMarkSettings.get("wildWaystone");
         if(settings != null && settings.enabled) {
-            String name = settings.label;
-            if(name.equals("DEFAULT")) name = waystoneName;
+            String label = settings.label;
+            if(label.equals("DEFAULT")) label = waystoneName;
             StructureGenerationUtil.markStructure(
                     world,
                     pos,
                     settings.dist,
                     settings.type,
-                    name
+                    label
             );
         }
 

@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.iceandfire.base;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.MarkerUtil;
+import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.github.alexthe666.iceandfire.structures.WorldGenCyclopsCave;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -19,7 +19,7 @@ public class WorldGenCyclopsCaveMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0)
     )
     private void markCyclops(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
-        MarkerUtil.markStructure(
+        StructureMarkersDataHandler.markStructure(
                 worldIn,
                 position,
                 AutoMarkSetting.get("cyclopsCave")

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class WaystoneUtil {
     @SideOnly(Side.CLIENT)
     public static void updateRenamedWaystoneMarker(EntityPlayer player, World world, BlockPos waystonePos, String newName) {
-        if (!ForgeConfigHandler.client.autoUpdateWaystones) return;
+        if (!ForgeConfigHandler.autoUpdateWaystones) return;
         AutoMarkSetting setting = AutoMarkSetting.get("activatedWaystone");
         if(setting == null || !setting.enabled) return;
 
@@ -36,13 +36,13 @@ public class WaystoneUtil {
             int counterMarkersRemoved = 0;
             for (Marker marker : markersAtPosition) {
                 //Not renamed: don't delete, don't add
-                if (marker.getLabel().equals(newName) && !ForgeConfigHandler.client.alwaysMarkWaystones) continue;
+                if (marker.getLabel().equals(newName) && !ForgeConfigHandler.alwaysMarkWaystones) continue;
                 //Remove
                 AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId());
                 counterMarkersRemoved++;
             }
             //Put new waystone marker, but not if player doesn't want a marker there
-            if (counterMarkersRemoved > 0 || ForgeConfigHandler.client.alwaysMarkWaystones)
+            if (counterMarkersRemoved > 0 || ForgeConfigHandler.alwaysMarkWaystones)
                 AtlasAPI.getMarkerAPI().putMarker(world, false, atlasID, setting.type, newName, waystonePos.getX(), waystonePos.getZ());
         }
     }

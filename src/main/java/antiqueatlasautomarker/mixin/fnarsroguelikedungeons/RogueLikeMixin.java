@@ -14,7 +14,7 @@ public class RogueLikeMixin {
 
     @Inject(method = "generate", at = @At(value = "TAIL"), remap = false)
     private void markRoguelike(DungeonSettings dungeonSettings, Coord coord, CallbackInfo ci){
-        //MarkerUtil.markStructure(
+        //StructureMarkersDataHandler.markStructure(
         //        this.editor.getWo.
         //);
     }

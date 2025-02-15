@@ -28,17 +28,17 @@ public class EnchMarkSetting {
     }
 
     public static void init() {
-        if(ForgeConfigHandler.client.enchantmentsToMark.length == 1 && ForgeConfigHandler.client.enchantmentsToMark[0].equals("ALL"))
+        if(ForgeConfigHandler.enchantmentsToMark.length == 1 && ForgeConfigHandler.enchantmentsToMark[0].equals("ALL"))
             acceptAll = true;
         else {
-            for (String s : ForgeConfigHandler.client.enchantmentsToMark) {
+            for (String s : ForgeConfigHandler.enchantmentsToMark) {
                 String[] split = s.split(";");
-                if (split.length != 3 && split.length != 2) continue;
+                if (split.length < 1 || split.length > 3) continue;
                 try {
                     enchMarkSettings.put(split[0].trim(),
                             new EnchMarkSetting(
                                     split[0].trim(),
-                                    Integer.parseInt(split[1].trim()),
+                                    split.length > 1 && !split[1].isEmpty() ? Integer.parseInt(split[1].trim()) : 0,
                                     split.length == 3 ? split[2].trim() : ""
                             )
                     );

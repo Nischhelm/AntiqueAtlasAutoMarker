@@ -1,5 +1,6 @@
 package antiqueatlasautomarker;
 
+import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.util.IceAndFireUtil;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
@@ -16,6 +17,8 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 		//Vanilla
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
+		//Antique Atlas
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.json", () -> Loader.isModLoaded("antiqueatlas"));
 
 		//Waystones
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.waystones.json", () -> Loader.isModLoaded("waystones"));
@@ -26,7 +29,7 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infbase.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_OLD);
 
 		//AARC Addon
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.aarc.json", () -> Loader.isModLoaded("aarcaddon"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.aarc.json", ModCompat::isAARCLoaded);
 
 		//Dungeons
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.bettermineshafts.json", () -> Loader.isModLoaded("bettermineshafts"));

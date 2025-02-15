@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.lycanitesmobs;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.MarkerUtil;
+import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.lycanitesmobs.core.dungeon.definition.DungeonSchematic;
 import com.lycanitesmobs.core.dungeon.instance.DungeonInstance;
 import net.minecraft.util.math.BlockPos;
@@ -24,17 +24,17 @@ public class DungeonInstanceMixin {
             remap = false
     )
     private void markLycaDungeon(World world, ChunkPos chunkPos, CallbackInfo ci){
-        AutoMarkSetting setting = AutoMarkSetting.get("lycaniteDungeon");
+        AutoMarkSetting setting = AutoMarkSetting.get("lycanite");
 
         if(setting != null && setting.enabled) {
             String label = setting.label;
             if(label.equals("DEFAULT")) label = this.schematic.name;
-            MarkerUtil.markStructure(
+            StructureMarkersDataHandler.markStructure(
                     world,
                     originPos,
-                    setting.dist,
                     setting.type,
-                    label
+                    label,
+                    setting.context
             );
         }
     }

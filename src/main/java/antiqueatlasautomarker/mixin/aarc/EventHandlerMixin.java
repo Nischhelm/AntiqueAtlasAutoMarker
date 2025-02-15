@@ -2,10 +2,10 @@ package antiqueatlasautomarker.mixin.aarc;
 
 import aarcaddon.handlers.EventHandler;
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.util.MarkerUtil;
+import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
+import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.api.MarkerAPI;
 import hunternif.mc.atlas.marker.Marker;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,11 +20,14 @@ public class EventHandlerMixin {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/api/MarkerAPI;putGlobalMarker(Lnet/minecraft/world/World;ZLjava/lang/String;Ljava/lang/String;II)Lhunternif/mc/atlas/marker/Marker;"),
             remap = false
     )
-    private Marker aaam_replaceAARCglobalMarkerWithLocalMarker(MarkerAPI instance, @Nonnull World world, boolean visibleAhead, String markerType, String label, int x, int z) {
-        AutoMarkSetting setting = AutoMarkSetting.get("AARCAddonMarker");
+    private Marker aaam_replaceAARCglobalMarkerWithLocalMarker(MarkerAPI instance, @Nonnull World world, boolean visibleAhead, String markerType, String label, int x, int z, @Local(ordinal = 0) String structureName) {
+        AutoMarkSetting setting = AutoMarkSetting.get("AARCAddon");
         if (setting != null && setting.enabled) {
-            MarkerUtil.markStructure(world, new BlockPos(x, 0, z), setting.dist, markerType, label);
-            return null; //return value is unused
+            //Context AARCAddon gets $structureName appended in order to use client settings
+            /*if(!markerType.contains(":"))
+                markerType = "antiqueatlas:" + markerType;*/
+            StructureMarkersDataHandler.markStructure(world, x, z, markerType, label, setting.context+"$"+structureName);
+            return null; //return value is unused in AARC
         } else
             //Default behavior
             return instance.putGlobalMarker(world, visibleAhead, markerType, label, x, z);

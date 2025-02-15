@@ -4,7 +4,6 @@ import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.EnchMarkSetting;
 import antiqueatlasautomarker.util.EnchantmentOffer;
 import antiqueatlasautomarker.util.EnchantmentUtil;
-import antiqueatlasautomarker.util.MarkerUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;

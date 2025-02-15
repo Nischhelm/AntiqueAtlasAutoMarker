@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "AAORenderEventReceiverMixin",
+    "DeleteMarkerPacketMixin",
+    "ItemAtlasMixin",
+    "MarkerApiImpllMixin",
+    "MarkerMixin",
+    "MarkersDataMixin",
+    "PacketDispatcherMixin",
+    "StructureWatcherGenericMixin",
+    "StructureWatcherVillageMixin"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

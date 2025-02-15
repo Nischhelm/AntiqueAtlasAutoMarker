@@ -31,7 +31,6 @@ public abstract class MarkersDataMixin extends WorldSavedData implements IDelete
     public void addDeletedMarker(int markerID) {
         if(removedMarkerIds == null) removedMarkerIds = new ArrayList<>();
         removedMarkerIds.add(markerID);
-        AntiqueAtlasAutoMarker.LOGGER.info("added deleted marker id {}", markerID);
         this.markDirty();
     }
 
@@ -58,10 +57,8 @@ public abstract class MarkersDataMixin extends WorldSavedData implements IDelete
         NBTTagList idList = compound.getTagList("aaam_removedIds", 3);
 
         if(removedMarkerIds == null) removedMarkerIds = new ArrayList<>();
-        for(int i=0; i<idList.tagCount(); i++) {
+        for(int i=0; i<idList.tagCount(); i++)
             removedMarkerIds.add(idList.getIntAt(i));
-            AntiqueAtlasAutoMarker.LOGGER.info("added deleted marker id "+idList.getIntAt(i));
-        }
 
         this.markDirty();
     }

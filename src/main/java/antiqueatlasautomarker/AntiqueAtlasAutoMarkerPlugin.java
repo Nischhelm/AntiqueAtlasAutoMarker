@@ -1,7 +1,7 @@
 package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.compat.ModCompat;
-import antiqueatlasautomarker.util.IceAndFireUtil;
+import antiqueatlasautomarker.compat.IceAndFireUtil;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;

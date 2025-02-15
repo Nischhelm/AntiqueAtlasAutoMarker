@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.waystones;
 
-import antiqueatlasautomarker.util.WaystoneUtil;
+import antiqueatlasautomarker.compat.WaystoneUtil;
 import net.blay09.mods.waystones.client.gui.GuiEditWaystone;
 import net.blay09.mods.waystones.util.WaystoneEntry;
 import net.minecraft.client.gui.GuiButton;

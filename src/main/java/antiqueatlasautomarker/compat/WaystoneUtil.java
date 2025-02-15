@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.util;
+package antiqueatlasautomarker.compat;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ForgeConfigHandler;

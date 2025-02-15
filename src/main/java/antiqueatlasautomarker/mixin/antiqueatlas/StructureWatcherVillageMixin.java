@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas;
 
+import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import hunternif.mc.atlas.api.MarkerAPI;
 import hunternif.mc.atlas.ext.watcher.impl.StructureWatcherVillage;
@@ -23,7 +24,7 @@ public abstract class StructureWatcherVillageMixin {
         //don't need to check for AA config bc that was already checked
 
         //instead mark it in structure markers list
-        StructureMarkersDataHandler.markStructure(
+        return StructureMarkersDataHandler.markStructure(
                 world,
                 x,
                 z,
@@ -31,8 +32,5 @@ public abstract class StructureWatcherVillageMixin {
                 label,
                 "aa_village"
         );
-
-        //Return value isn't used by AA
-        return null;
     }
 }

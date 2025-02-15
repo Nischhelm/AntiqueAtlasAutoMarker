@@ -19,7 +19,7 @@ This mod adds a lot of automatic marking features for the Antique Atlas.
 - Automatic marking of Yung's Better Mineshafts
 - Automatic marking of Doomlike Dungeons
 - Automatic marking of Dungeons2 Dungeons
-- Can turn AARC Addon global Markers into AAAM structure markers, will use client AARC config for the added marker
+- Can turn AARC Addon global Markers into AAAM structure markers, will use client AARC config for the structure markers
 
 Structure Markers
 - are global markers (saved on server) which are sent to the players atlas when the player discovers the chunks the structure is in.
@@ -36,3 +36,4 @@ AAAM turns any global marker that other mods might create into AAAM structure ma
 Feel free to suggest more things to automatically mark in comments
 
 - Remove dragon marker once the dragon is killed (both on player atlas and on structure marker list server side)
+- Battletowers (bruh why did i not think of that)

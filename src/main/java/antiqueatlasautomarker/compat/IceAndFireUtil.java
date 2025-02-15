@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.util;
+package antiqueatlasautomarker.compat;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;

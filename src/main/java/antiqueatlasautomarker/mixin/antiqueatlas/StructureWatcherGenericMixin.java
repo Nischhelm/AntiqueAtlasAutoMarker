@@ -23,7 +23,7 @@ public abstract class StructureWatcherGenericMixin {
         //don't need to check for enabled in AA config bc that was already checked
 
         //instead mark it in structure markers list
-        StructureMarkersDataHandler.markStructure(
+        return StructureMarkersDataHandler.markStructure(
                 world,
                 x,
                 z,
@@ -31,8 +31,5 @@ public abstract class StructureWatcherGenericMixin {
                 label,
                 "aa_generic"
         );
-
-        //Return value isn't used by AA
-        return null;
     }
 }

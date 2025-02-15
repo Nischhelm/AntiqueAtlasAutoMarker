@@ -102,8 +102,6 @@ public class StructureMarkersDataHandler {
 
                 List<Marker> existingMarkers = atlasMarkers.getMarkersAtChunk(dimension, bigChunkX, bigChunkZ);
                 for (Marker marker : structureMarkers) {
-                    //Only add markers that we don't have already
-                    AntiqueAtlasAutoMarker.LOGGER.info("marker with id {}, name {}, type {} is deleted? {}",-marker.getId(), marker.getLabel(), marker.getType(), ((IDeletedMarkerList) atlasMarkers).markerIsDeleted(-marker.getId()));
                     //Check if we got the marker already, so we don't send existing markers multiple times (wouldn't get added anyway bc same id, but less networking
                     if (existingMarkers == null || !listContainsMarker(existingMarkers, marker))
                         //Check if that marker has been deleted on players atlas

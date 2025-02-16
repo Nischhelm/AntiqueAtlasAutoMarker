@@ -32,13 +32,11 @@ public class AutoMarkSetting {
             String[] split = s.split(";");
             if(split.length != 4) continue;
             try {
-                autoMarkSettings.put(split[0].trim(),
-                        new AutoMarkSetting(
-                                Boolean.parseBoolean(split[1].trim()), //enabled
-                                split[2].trim(), //label
-                                split[3].trim(), //type
-                                split[0].trim()  //context
-                        )
+                registerAutoMarkSetting(
+                        split[0].trim(), //context
+                        Boolean.parseBoolean(split[1].trim()), //enabled
+                        split[2].trim(), //label
+                        split[3].trim() //type
                 );
             } catch (Exception e){
                 AntiqueAtlasAutoMarker.LOGGER.warn("Could not parse AAAM config line, skipping {}", s);
@@ -49,6 +47,22 @@ public class AutoMarkSetting {
     public static void reset(){
         autoMarkSettings.clear();
         init();
+    }
+
+    /**
+     * Mods can use this function to register their own structure markers
+     * The structures can be marked using the MarkStructureEvent.setContext
+     * This can also be done without registering a new context here, but will force clients to use the marker settings the event uses
+     */
+    public static void registerAutoMarkSetting(String context, boolean enabled, String label, String type){
+        autoMarkSettings.put(context,
+                new AutoMarkSetting(
+                        enabled,
+                        label,
+                        type,
+                        context
+                )
+        );
     }
 
 }

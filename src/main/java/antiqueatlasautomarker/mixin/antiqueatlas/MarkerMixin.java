@@ -25,7 +25,9 @@ public abstract class MarkerMixin implements IMarkerConstructor {
                 -this.id,
                 clientType,
                 clientLabel,
-                this.dim, this.x, this.z, this.visibleAhead
+                this.dim,
+                this.x, this.z,
+                this.visibleAhead
         );
     }
 }

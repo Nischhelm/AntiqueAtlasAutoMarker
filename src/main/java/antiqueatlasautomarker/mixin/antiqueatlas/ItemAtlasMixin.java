@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas;
 
-import antiqueatlasautomarker.structuremarkers.OptionalStructureMarkerPacket;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
+import antiqueatlasautomarker.structuremarkers.network.OptionalStructureMarkerPacket;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.item.ItemAtlas;

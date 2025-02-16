@@ -21,11 +21,21 @@ This mod adds a lot of automatic marking features for the Antique Atlas.
 - Automatic marking of Dungeons2 Dungeons
 - Can turn AARC Addon global Markers into AAAM structure markers, will use client AARC config for the structure markers
 
-Structure Markers
+Structure Markers:
 - are global markers (saved on server) which are sent to the players atlas when the player discovers the chunks the structure is in.
 - can be deleted from an atlas, but will stay for any other atlas.
 - enable any client to use their own AAAM settings for the marker customisation (whether it should get marked, the marker icon and marker label)
 AAAM turns any global marker that other mods might create into AAAM structure markers, bc AA global markers have performance issues and can't be deleted.
+
+### Custom Position Structure Markers
+
+Custom Position Markers can be defined in the config which will have a specified location but will get discovered on a different location.
+For example, a custom position marker could be discovered when a player gets to 0,0 which would make them receive a marker at a different position marking something they should check out.
+
+### Mod Support
+
+Mods can use the ReceivedStructureMarkerEvent in order to do custom actions for a client that receives a structure marker.
+They can also use the MarkStructureEvent to mark their own structures using this system (can register custom AutoMarkSettings to enable players to customise those markers on receive)
 
 ### Planned features
 
@@ -37,3 +47,4 @@ Feel free to suggest more things to automatically mark in comments
 
 - Remove dragon marker once the dragon is killed (both on player atlas and on structure marker list server side)
 - Battletowers (bruh why did i not think of that)
+- Mark destination points of vanilla maps you find (interaction marker)

@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.structuremarkers;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.util.IDeletedMarkerList;
 import antiqueatlasautomarker.util.IMarkerConstructor;
@@ -11,17 +10,23 @@ import hunternif.mc.atlas.marker.MarkersData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Mod.EventBusSubscriber
 public class StructureMarkersDataHandler {
     private static final String DATA_KEY = "aAtlasStructureMarkers";
 
     //Stores structure markers server-side, only sends them to client atlas on chunk discovery
     private static MarkersData data;
 
+    //This is technically not needed bc we already load on world load
     public static MarkersData getData(World world) {
         //Create or load the data
         if (data == null) data = (MarkersData) world.loadData(MarkersData.class, DATA_KEY);
@@ -33,15 +38,17 @@ public class StructureMarkersDataHandler {
         return data;
     }
 
-    public static Marker markStructure(@Nonnull World world, int x, int z, String markerType, String markerName, String context) {
+    public static Marker markStructure(@Nonnull World world, int x, int z, String markerType, String markerName, String context, int... providedDimension) {
         MarkersData data = getData(world);
+        boolean isCustomPositionMarker = providedDimension != null && providedDimension.length == 1;
+        int dimension = !isCustomPositionMarker ? world.provider.getDimension() : providedDimension[0];
 
         markerType = IMarkerConstructor.addContext(markerType, context); //append context to marker type
 
         //Only for stupid things like doomlike dungeons generating the same dungeon multiple times bruh
-        //Server side only comparison, so it's fine with clientside overrides
+        //Server side only comparison, so it's fine with clientside deletions/overrides
         boolean hasMarkerAlready = false;
-        List<Marker> markersHere = data.getMarkersAtChunk(world.provider.getDimension(), (x >> 4) / MarkersData.CHUNK_STEP, (z >> 4) / MarkersData.CHUNK_STEP);
+        List<Marker> markersHere = data.getMarkersAtChunk(dimension, (x >> 4) / MarkersData.CHUNK_STEP, (z >> 4) / MarkersData.CHUNK_STEP);
         if(markersHere != null) {
             for (Marker marker : markersHere) {
                 if (marker.getX() != x) continue;
@@ -54,7 +61,7 @@ public class StructureMarkersDataHandler {
 
         if (!hasMarkerAlready)
             //Use context appended at type, client overrides if not AARC and DEFAULT
-            return data.createAndSaveMarker(markerType, markerName, world.provider.getDimension(), x, z, false);
+            return data.createAndSaveMarker(markerType, markerName, dimension, x, z, isCustomPositionMarker);
         return null;
     }
 
@@ -70,6 +77,13 @@ public class StructureMarkersDataHandler {
 
     public static Marker markStructure(@Nonnull World world, BlockPos pos, AutoMarkSetting settings) {
         return markStructure(world, pos.getX(), pos.getZ(), settings);
+    }
+
+    public static Marker markCustomPositionStructure(@Nonnull World world, int dim, int x, int z, int xDiscover, int zDiscover, String markerType, String markerName){
+        //set threadLocal to position where the custom marker would get discovered
+        CustomPosition.set(xDiscover, zDiscover);
+        //The actual marker position is where the marker will appear in the atlas
+        return markStructure(world, x, z, markerType, markerName, "customPos", dim);
     }
 
     public static ArrayList<Marker> updateMarkersAroundPlayer(EntityPlayer player, MarkersData atlasMarkers) {
@@ -127,5 +141,18 @@ public class StructureMarkersDataHandler {
         //Assumes that the player atlas marker id is the same id as the structure marker id just with a minus
         if (markerPlayer.getId() != -markerServer.getId()) return false;
         return true;
+    }
+
+    //Reloads the structure markers data if a new world is loaded
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public void resetDataOnWorldLoad(WorldEvent.Load event) {
+        if (!event.getWorld().isRemote && event.getWorld().provider.getDimension() == 0) {
+            data = (MarkersData) event.getWorld().loadData(MarkersData.class, DATA_KEY);
+            if (data == null) {
+                data = new MarkersData(DATA_KEY);
+                data.markDirty();
+                event.getWorld().setData(DATA_KEY, data);
+            }
+        }
     }
 }

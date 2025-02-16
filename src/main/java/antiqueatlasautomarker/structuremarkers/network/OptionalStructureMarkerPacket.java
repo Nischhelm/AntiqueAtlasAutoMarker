@@ -1,8 +1,10 @@
-package antiqueatlasautomarker.structuremarkers;
+package antiqueatlasautomarker.structuremarkers.network;
 
 import antiqueatlasautomarker.compat.AARCCompat;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.ForgeConfigHandler;
+import antiqueatlasautomarker.structuremarkers.event.ReceivedStructureMarkerEvent;
 import antiqueatlasautomarker.util.IMarkerConstructor;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -14,6 +16,7 @@ import hunternif.mc.atlas.network.AbstractMessage;
 import hunternif.mc.atlas.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -49,7 +52,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             String type = ByteBufUtils.readUTF8String(buffer);
             int markersLength = buffer.readVarInt();
             for (int j = 0; j < markersLength; j++) {
-                Marker marker = new Marker(buffer.readVarInt(), type, ByteBufUtils.readUTF8String(buffer), dimension, buffer.readInt(), buffer.readInt(), false);
+                Marker marker = new Marker(buffer.readVarInt(), type, ByteBufUtils.readUTF8String(buffer), dimension, buffer.readInt(), buffer.readInt(), buffer.readBoolean());
                 markersByType.put(type, marker);
             }
         }
@@ -70,6 +73,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
                 ByteBufUtils.writeUTF8String(buffer, marker.getLabel());
                 buffer.writeInt(marker.getX());
                 buffer.writeInt(marker.getZ());
+                buffer.writeBoolean(marker.isVisibleAhead());
             }
         }
     }
@@ -93,7 +97,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             String serverType = context_type[1];
             String serverLabel = marker.getLabel();
 
-            AutoMarkSetting clientSetting = null;
+            AutoMarkSetting clientSetting;
 
             //AARC compat
             if(ModCompat.isAARCLoaded() && context.startsWith("AARCAddon"))
@@ -102,20 +106,31 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             //Overwrite for AA global markers (village+end_city/generic), use serverside label/type but clientside enabled config (true if generic global marker by some random mod idk)
             else if(context.startsWith("aa_")) clientSetting = new AutoMarkSetting(context.equals("aa_global") || SettingsConfig.gameplay.autoVillageMarkers, "DEFAULT", "DEFAULT", context);
 
+            //Custom position markers
+            else if(context.equals("customPos"))
+                clientSetting = new AutoMarkSetting(true, "DEFAULT", "DEFAULT", context);
+
+            //Structure Markers added by MarkStructureEvent
+            else if(context.isEmpty())
+                clientSetting = new AutoMarkSetting(true, "DEFAULT", "DEFAULT", context);
+
             //AAAM base behavior
             else clientSetting = AutoMarkSetting.get(context);
 
             //Check if client has a config for this and whether its enabled
             if(clientSetting != null && clientSetting.enabled) {
-                String clientType = clientSetting.type.equals("DEFAULT") ? serverType : clientSetting.type;
-                String clientLabel = clientSetting.label.equals("DEFAULT") ? serverLabel : clientSetting.label;
+                //Fire event if config is enabled and check if any mod canceled it
+                if(ForgeConfigHandler.fireReceivedMarkerEvent && !MinecraftForge.EVENT_BUS.post(new ReceivedStructureMarkerEvent(player, marker, context))) {
+                    String clientType = clientSetting.type.equals("DEFAULT") ? serverType : clientSetting.type;
+                    String clientLabel = clientSetting.label.equals("DEFAULT") ? serverLabel : clientSetting.label;
 
-                //Copy has client side type+label and negative id to not run into conflicts (can conflict with global markers though)
-                Marker newMarker = ((IMarkerConstructor) marker).structureMarkerCopy(clientType, clientLabel);
-                markersData.loadMarker(newMarker);
+                    //Copy has client side type+label and negative id to not run into conflicts (can conflict with global markers though)
+                    Marker newMarker = ((IMarkerConstructor) marker).structureMarkerCopy(clientType, clientLabel);
+                    markersData.loadMarker(newMarker);
 
-                //Collect for sending back to server for sync
-                updatePacket.putMarker(newMarker);
+                    //Collect for sending back to server for sync
+                    updatePacket.putMarker(newMarker);
+                }
             }
         }
 

@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.structuremarkers;
+package antiqueatlasautomarker.structuremarkers.network;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;

@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.mixin.antiqueatlas;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.util.IDeletedMarkerList;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import hunternif.mc.atlas.marker.MarkersData;

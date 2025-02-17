@@ -50,10 +50,6 @@ public class ForgeConfigHandler {
 			//"0;2000;0;0;0;Test Custom Position Marker;antiqueatlas:diamond"
 	};
 
-	@Config.Comment("AA Global Markers are bugged + laggy. Built-in global markers (village + end city) already get rerouted to AAAM structure markers). Keep this enabled to reroute any other modded markers to AAAM structure markers. Disabling this can lead to unexpected behavior.")
-	@Config.Name("Reroute modded Global Markers")
-	public static boolean rerouteGlobalMarkers = true;
-
 	@Config.Comment("AAAM can fire events when players receive a structure marker to enable mods to do custom actions for specific markers. Set to false for performance if no mods in the pack subscribe to the event")
 	@Config.Name("Fire ReceivedStructureMarkerEvents on client")
 	public static boolean fireReceivedMarkerEvent = true;
@@ -150,8 +146,26 @@ public class ForgeConfigHandler {
 			"mujmajnkraftsbettersurvival:range",
 			"mujmajnkraftsbettersurvival:rapidfire",
 			"charm:magnetic",
-			"grapplinghook:doublejumpenchantment;1"
+			"grapplinghook:doublejumpenchantment"
 	};
+
+	@Config.Comment("Overhaul Antique Atlas")
+	@Config.Name("Antique Atlas Overhaul ")
+	public static AAOverhaulConfig overhaul = new AAOverhaulConfig();
+
+	public static class AAOverhaulConfig {
+		@Config.Comment("AA Global Markers are bugged + laggy. Built-in global markers (village + end city) already get rerouted to AAAM structure markers). Keep this enabled to reroute any other modded markers to AAAM structure markers. Disabling this can lead to unexpected behavior.")
+		@Config.Name("Reroute modded Global Markers")
+		public boolean rerouteGlobalMarkers = true;
+
+		@Config.Comment("Antique Atlas sends packets to all players whenever anything is added to or removed from any atlas (markers/tiles). Set to true to only send packets to players with the modified atlas in inventory.")
+		@Config.Name("Only send to all holding the atlas")
+		public boolean sendToAllHolding = true;
+
+		@Config.Comment("Whenever Antique Atlas checks for atlases in a players inventory it forgets to also check the offhand. Set to true to check offhand as well.")
+		@Config.Name("Also check player offhand for atlases")
+		public boolean checkOffhand = true;
+	}
 
 
 	@Mod.EventBusSubscriber(modid = AntiqueAtlasAutoMarker.MODID)

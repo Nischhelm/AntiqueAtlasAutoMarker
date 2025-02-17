@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.structuremarkers.network.AddedStructureMarkersPacket;
@@ -24,7 +24,7 @@ public abstract class PacketDispatcherMixin {
             at = @At(value = "TAIL"),
             remap = false
     )
-    private static void updateStructureMarkers(CallbackInfo ci){
+    private static void registerStructureMarkers(CallbackInfo ci){
         registerMessage(OptionalStructureMarkerPacket.class);
         registerMessage(AddedStructureMarkersPacket.class);
     }

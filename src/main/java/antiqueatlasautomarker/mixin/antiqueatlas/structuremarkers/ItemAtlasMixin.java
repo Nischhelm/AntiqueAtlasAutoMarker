@@ -1,6 +1,8 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
+import antiqueatlasautomarker.config.ForgeConfigHandler;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
+import antiqueatlasautomarker.structuremarkers.network.CustomPacketDispatcher;
 import antiqueatlasautomarker.structuremarkers.network.OptionalStructureMarkerPacket;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.AntiqueAtlasMod;
@@ -36,8 +38,10 @@ public abstract class ItemAtlasMixin {
             OptionalStructureMarkerPacket packet = new OptionalStructureMarkerPacket(stack.getItemDamage(), player.dimension);
             for (Marker m : newMarkers)
                 packet.putMarker(m);
-            PacketDispatcher.sendTo(packet, (EntityPlayerMP) player);
+            if(ForgeConfigHandler.overhaul.sendToAllHolding)
+                CustomPacketDispatcher.sendToAllHoldingAtlas(stack.getItemDamage(), packet);
+            else
+                PacketDispatcher.sendToAll(packet);
         }
-
     }
 }

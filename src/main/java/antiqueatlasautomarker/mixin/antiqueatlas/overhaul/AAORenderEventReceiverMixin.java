@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.overhaul;
 
 import hunternif.mc.atlas.core.DimensionData;
 import hunternif.mc.atlas.marker.DimensionMarkersData;

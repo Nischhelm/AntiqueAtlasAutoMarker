@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import hunternif.mc.atlas.api.MarkerAPI;

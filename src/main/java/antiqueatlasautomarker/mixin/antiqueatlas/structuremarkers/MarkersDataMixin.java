@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.util.IDeletedMarkerList;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -7,19 +7,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.storage.WorldSavedData;
-import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Mixin(MarkersData.class)
 public abstract class MarkersDataMixin extends WorldSavedData implements IDeletedMarkerList {
     public MarkersDataMixin(String name) { super(name); }
 
-    private List<Integer> removedMarkerIds = null;
+    @Unique private List<Integer> removedMarkerIds = null;
 
     @Override
     public boolean markerIsDeleted(int markerID) {

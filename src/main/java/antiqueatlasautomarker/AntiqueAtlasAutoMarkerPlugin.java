@@ -2,6 +2,7 @@ package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.compat.IceAndFireUtil;
 import antiqueatlasautomarker.compat.ModCompat;
+import antiqueatlasautomarker.config.EarlyConfigReader;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
@@ -19,6 +20,12 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
 		//Antique Atlas
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.json", () -> Loader.isModLoaded("antiqueatlas"));
+
+		//Antique Atlas sendToAll overhaul
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.sendtoallholding.json", () ->
+				Loader.isModLoaded("antiqueatlas") &&
+				EarlyConfigReader.getBoolean("Only send to all holding the atlas")
+		);
 
 		//Waystones
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.waystones.json", () -> Loader.isModLoaded("waystones"));

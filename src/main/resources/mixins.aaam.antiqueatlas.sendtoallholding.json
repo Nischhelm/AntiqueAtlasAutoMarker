@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.overhaul.sendtoallholding",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "AddMarkerPacketMixin",
+    "ItemAtlasMixin",
+    "MarkerApiImplMixin",
+    "MarkersDataAccessor",
+    "TileApiImplMixin"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

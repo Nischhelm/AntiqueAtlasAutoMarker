@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.util.IDeletedMarkerList;
 import hunternif.mc.atlas.AntiqueAtlasMod;

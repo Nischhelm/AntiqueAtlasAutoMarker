@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.structuremarkers.CustomPosition;
 import hunternif.mc.atlas.marker.DimensionMarkersData;

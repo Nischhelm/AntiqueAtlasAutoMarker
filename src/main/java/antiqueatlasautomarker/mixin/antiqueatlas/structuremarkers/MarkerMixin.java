@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.util.IMarkerConstructor;
 import hunternif.mc.atlas.marker.Marker;
@@ -10,8 +10,6 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(Marker.class)
 public abstract class MarkerMixin implements IMarkerConstructor {
     @Shadow(remap = false) @Final private int id;
-    @Shadow(remap = false) @Final private String type;
-    @Shadow(remap = false) @Final private String label;
     @Shadow(remap = false) @Final private int dim;
     @Shadow(remap = false) @Final private int x;
     @Shadow(remap = false) @Final private int z;

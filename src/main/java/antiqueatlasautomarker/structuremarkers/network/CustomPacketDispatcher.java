@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.structuremarkers.network;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.mixin.antiqueatlas.overhaul.sendtoallholding.MarkersDataAccessor;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.network.PacketDispatcher;

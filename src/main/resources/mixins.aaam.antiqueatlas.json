@@ -8,13 +8,13 @@
   "mixins": [
     "overhaul.AAORenderEventReceiverMixin",
     "overhaul.AtlasAPIMixin",
+    "overhaul.MarkersDataSyncInChunksMixin",
     "structuremarkers.DeleteMarkerPacketMixin",
     "structuremarkers.DimensionMarkersDataMixin",
     "structuremarkers.ItemAtlasMixin",
     "structuremarkers.MarkerApiImpllMixin",
     "structuremarkers.MarkerMixin",
     "structuremarkers.MarkersDataMixin",
-    "overhaul.MarkersDataSyncInChunksMixin",
     "structuremarkers.PacketDispatcherMixin",
     "structuremarkers.StructureWatcherGenericMixin",
     "structuremarkers.StructureWatcherVillageMixin"

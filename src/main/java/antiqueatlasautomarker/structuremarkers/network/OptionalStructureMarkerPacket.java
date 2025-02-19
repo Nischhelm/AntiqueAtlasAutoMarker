@@ -86,6 +86,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
         MarkersData markersData = AntiqueAtlasMod.markersData.getMarkersData(atlasID, player.world);
 
         AddedStructureMarkersPacket updatePacket = new AddedStructureMarkersPacket(atlasID, player.world.provider.getDimension());
+        int addedMarkerCount = 0;
 
         for (Marker marker : markersByType.values()) {
 
@@ -130,11 +131,13 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
 
                     //Collect for sending back to server for sync
                     updatePacket.putMarker(newMarker);
+                    addedMarkerCount++;
                 }
             }
         }
 
         //Send the new Markers back to the server
-        PacketDispatcher.sendToServer(updatePacket);
+        if(addedMarkerCount > 0)
+            PacketDispatcher.sendToServer(updatePacket);
     }
 }

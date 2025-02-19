@@ -10,7 +10,8 @@
     "ItemAtlasMixin",
     "MarkerApiImplMixin",
     "MarkersDataAccessor",
-    "TileApiImplMixin"
+    "TileApiImplMixin",
+    "MarkersDataHandlerMixin"
   ],
   "injectors": {
     "maxShiftBy": 10

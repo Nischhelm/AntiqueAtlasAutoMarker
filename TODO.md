@@ -7,4 +7,3 @@
 
 ### fix AA networking
   - rate limit for client -> server packets
-  - maybe do a checksum check before syncing on player

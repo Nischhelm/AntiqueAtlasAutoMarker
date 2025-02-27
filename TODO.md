@@ -3,10 +3,6 @@
 - roguelikes? ugh
 - remove WildWaystone marker once the wild waystone is activated and thus renamed bruh
 - quark pirateship
-- xp ship (ruins)
-- sky castle (ruins)
-- lycanite dungeon naming is small letters
-- silk touch boat (ruins)
 
 
 ### fix AA networking

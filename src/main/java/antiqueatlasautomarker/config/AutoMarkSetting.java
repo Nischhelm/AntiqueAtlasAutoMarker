@@ -59,6 +59,7 @@ public class AutoMarkSetting {
      * This can also be done without registering a new context here, but will force clients to use the marker settings the event uses
      */
     public static void registerAutoMarkSetting(String context, boolean enabled, String label, String type){
+        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Registering marker {} {} {} {}", context, enabled, label, type);
         autoMarkSettings.put(context,
                 new AutoMarkSetting(
                         enabled,

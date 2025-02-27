@@ -205,6 +205,9 @@ public class ConfigHandler {
 		public boolean checkOffhand = true;
 	}
 
+	@Config.Name("Send Debug Messages")
+	public static boolean doDebugLogs = false;
+
 	@Mod.EventBusSubscriber(modid = AntiqueAtlasAutoMarker.MODID)
 	private static class EventHandler{
 

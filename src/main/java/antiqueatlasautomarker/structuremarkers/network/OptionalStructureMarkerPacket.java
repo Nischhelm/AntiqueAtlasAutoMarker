@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.structuremarkers.network;
 
+import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.compat.AARCCompat;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.AutoMarkSetting;
@@ -88,6 +89,8 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
         AddedStructureMarkersPacket updatePacket = new AddedStructureMarkersPacket(atlasID, player.world.provider.getDimension());
         int addedMarkerCount = 0;
 
+        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Receiving {} structure markers for atlas #{}", markersByType.size(), atlasID);
+
         for (Marker marker : markersByType.values()) {
 
             //Decode received marker from server
@@ -97,6 +100,8 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             String context = context_type[0];
             String serverType = context_type[1];
             String serverLabel = marker.getLabel();
+
+            if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Trying to add marker {} {} {}", context, serverLabel, serverType);
 
             AutoMarkSetting clientSetting;
 
@@ -127,6 +132,11 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             //AAAM base behavior, also for ruins
             else clientSetting = AutoMarkSetting.get(context);
 
+            if(ConfigHandler.doDebugLogs) {
+                if (clientSetting == null) AntiqueAtlasAutoMarker.LOGGER.info("Client setting for marker is null");
+                else AntiqueAtlasAutoMarker.LOGGER.info("Found client setting for marker {} {} {} {}", clientSetting.enabled, clientSetting.context, clientSetting.label, clientSetting.type);
+            }
+
             //Check if client has a config for this and whether its enabled
             if(clientSetting != null && clientSetting.enabled) {
                 //Fire event if config is enabled and check if any mod canceled it
@@ -144,6 +154,8 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
                 }
             }
         }
+
+        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Added {} new structure markers", addedMarkerCount);
 
         //Send the new Markers back to the server
         if(addedMarkerCount > 0)

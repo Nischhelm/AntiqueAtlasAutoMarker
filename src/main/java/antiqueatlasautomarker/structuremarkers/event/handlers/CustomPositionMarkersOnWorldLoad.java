@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.structuremarkers.event.handlers;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
-import antiqueatlasautomarker.config.ForgeConfigHandler;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +13,7 @@ public class CustomPositionMarkersOnWorldLoad {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void markCustomPositionsOnWorldLoad(WorldEvent.Load event) {
         if (!event.getWorld().isRemote && event.getWorld().provider.getDimension() == 0) {
-            for(String s : ForgeConfigHandler.customPositionMarkers){
+            for(String s : ConfigHandler.customPositionMarkers){
                 try {
                     //Read config line
                     String[] split = s.split(";");

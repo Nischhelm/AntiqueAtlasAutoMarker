@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.compat;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.config.ForgeConfigHandler;
+import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.marker.Marker;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class WaystoneUtil {
     @SideOnly(Side.CLIENT)
     public static void updateRenamedWaystoneMarker(EntityPlayer player, World world, BlockPos waystonePos, String newName) {
-        if (!ForgeConfigHandler.autoUpdateWaystones) return;
+        if (!ConfigHandler.autoUpdateWaystones) return;
         AutoMarkSetting setting = AutoMarkSetting.get("activatedWaystone");
         if(setting == null || !setting.enabled) return;
 
@@ -36,13 +36,13 @@ public class WaystoneUtil {
             int counterMarkersRemoved = 0;
             for (Marker marker : markersAtPosition) {
                 //Not renamed: don't delete, don't add
-                if (marker.getLabel().equals(newName) && !ForgeConfigHandler.alwaysMarkWaystones) continue;
+                if (marker.getLabel().equals(newName) && !ConfigHandler.alwaysMarkWaystones) continue;
                 //Remove
                 AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId());
                 counterMarkersRemoved++;
             }
             //Put new waystone marker, but not if player doesn't want a marker there
-            if (counterMarkersRemoved > 0 || ForgeConfigHandler.alwaysMarkWaystones)
+            if (counterMarkersRemoved > 0 || ConfigHandler.alwaysMarkWaystones)
                 AtlasAPI.getMarkerAPI().putMarker(world, false, atlasID, setting.type, newName, waystonePos.getX(), waystonePos.getZ());
         }
     }

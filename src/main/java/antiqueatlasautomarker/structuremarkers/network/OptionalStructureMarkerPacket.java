@@ -3,7 +3,7 @@ package antiqueatlasautomarker.structuremarkers.network;
 import antiqueatlasautomarker.compat.AARCCompat;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.config.ForgeConfigHandler;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.structuremarkers.event.ReceivedStructureMarkerEvent;
 import antiqueatlasautomarker.util.IMarkerConstructor;
 import com.google.common.collect.ArrayListMultimap;
@@ -101,11 +101,20 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             AutoMarkSetting clientSetting;
 
             //AARC compat
-            if(ModCompat.isAARCLoaded() && context.startsWith("AARCAddon"))
+            if(ModCompat.isAARCLoaded() && context.startsWith("AARCAddon")) {
+                AutoMarkSetting aarcSetting = AutoMarkSetting.get("AARCAddon");
+                if (aarcSetting == null || !aarcSetting.enabled) continue;
                 clientSetting = AARCCompat.getAARCSetting(context);
+            }
 
             //Overwrite for AA global markers (village+end_city/generic), use serverside label/type but clientside enabled config (true if generic global marker by some random mod idk)
             else if(context.startsWith("aa_")) clientSetting = new AutoMarkSetting(context.equals("aa_global") || SettingsConfig.gameplay.autoVillageMarkers, "DEFAULT", "DEFAULT", context);
+
+            else if(context.startsWith("ruins_")){
+                AutoMarkSetting ruinsSetting = AutoMarkSetting.get("ruins");
+                if(ruinsSetting == null || !ruinsSetting.enabled) continue;
+                clientSetting = AutoMarkSetting.get(context);
+            }
 
             //Custom position markers
             else if(context.equals("customPos"))
@@ -115,13 +124,13 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             else if(context.isEmpty())
                 clientSetting = new AutoMarkSetting(true, "DEFAULT", "DEFAULT", context);
 
-            //AAAM base behavior
+            //AAAM base behavior, also for ruins
             else clientSetting = AutoMarkSetting.get(context);
 
             //Check if client has a config for this and whether its enabled
             if(clientSetting != null && clientSetting.enabled) {
                 //Fire event if config is enabled and check if any mod canceled it
-                if(ForgeConfigHandler.fireReceivedMarkerEvent && !MinecraftForge.EVENT_BUS.post(new ReceivedStructureMarkerEvent(player, marker, context))) {
+                if(ConfigHandler.fireReceivedMarkerEvent && !MinecraftForge.EVENT_BUS.post(new ReceivedStructureMarkerEvent(player, marker, context))) {
                     String clientType = clientSetting.type.equals("DEFAULT") ? serverType : clientSetting.type;
                     String clientLabel = clientSetting.label.equals("DEFAULT") ? serverLabel : clientSetting.label;
 

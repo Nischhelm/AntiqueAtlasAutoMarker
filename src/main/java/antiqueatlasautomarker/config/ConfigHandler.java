@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = AntiqueAtlasAutoMarker.MODID)
-public class ForgeConfigHandler {
+public class ConfigHandler {
 	@Config.Comment("Pattern: structureType(=context); enabled; marker label; marker type. \n" +
 			"Clients can disable structure markers here in order to decline getting this type of structure marker, no matter if the option is enabled on server\n"+
 			"The marker label and type will use the settings of the client that first discovers the structure marker, \n" +
@@ -31,7 +31,22 @@ public class ForgeConfigHandler {
 			"betterMineshaft; true; Mineshaft; antiqueatlas:tracks",
 			"doomlike; true; DEFAULT; antiqueatlas:dungeon",
 			"dungeons2; true; Dungeon2; antiqueatlas:dungeon",
-			"AARCAddon; true; See AARC config; Enable to turn AARC Global markers into AAAM local markers"
+			"ruins; true; See Ruins config below; Set to false to disable all ruins markers",
+			"AARCAddon; true; See AARC config; Set to true on server to turn AARC Global markers into AAAM local markers"
+	};
+
+	@Config.Comment("Lycanite Dungeons don't have good displayable names. Change this if you want them to be displayed differently.")
+	@Config.Name("Lycanite Dungeon Names")
+	public static String[] lycaDungeonNames = {
+			"aberrantstation; Aberrant Station",
+			"aberrantstation_random; Aberrant Station",
+			"ashenmausoleum; Ashen Mausoleum",
+			"demonictemple;Demonic Temple",
+			"desertcrypts;Desert Crypts",
+			"lushtomb;Lush Tomb",
+			"shadowlabyrinth;Shadow Labyrinth",
+			"shadowlabyrinth_random;Shadow Labyrinth",
+			"streamshrine;Streamshrine"
 	};
 
 	@Config.Comment("Pattern: interactionType; enabled; marker label; marker type.")
@@ -48,6 +63,29 @@ public class ForgeConfigHandler {
 	@Config.RequiresWorldRestart
 	public static String[] customPositionMarkers = {
 			//"0;2000;0;0;0;Test Custom Position Marker;antiqueatlas:diamond"
+	};
+
+	@Config.Comment("Pattern: ruinsName; enabled; marker label; marker type.")
+	@Config.Name("Ruins Structure Markers")
+	public static String[] ruinsMarkers = {
+			"Tower-ruined-short; false; Ruined BT Short; antiqueatlas:ruins",
+			"Tower-edit; true; Ruined BT; antiqueatlas:tower",
+			"TowerEasy; true; Ruined BT Easy; antiqueatlas:tower",
+			"TowerMedium; true; Ruined BT Medium; antiqueatlas:tower",
+			"TowerHard; true; Ruined BT Hard; antiqueatlas:tower",
+			"ZombieHut; false; Two Zombie Spawners; antiqueatlas:sword",
+			"SkyCastle; true; Sky Castle; antiqueatlas:diamond",
+			"UnderwaterBase; false; Underwater Base; antiqueatlas:diamond",
+			"Floater; true; Floater; antiqueatlas:diamond",
+			"PirateShip; true; XP Ship; antiqueatlas:ship",
+			"StoneHouseM; false; Small Starter House; antiqueatlas:ruins",
+			"PortalShrine; true; Nether Portal; antiqueatlas:nether_portal",
+			"GraveyardHaunted; true; Graveyard; antiqueatlas:diamond",
+			"GateUnderGlass; false; Nether Portal; antiqueatlas:nether_portal",
+			"Mausoleum; false; Eight Zombie Spawners; antiqueatlas:sword",
+			"ArrowTrapTomb; false; Simple Dungeon Loot; antiqueatlas:diamond",
+			"SnowCastleSpire; false; Blaze Spawners; antiqueatlas:sword",
+			"NetherShrine; true; Nether Portal; antiqueatlas:nether_portal"
 	};
 
 	@Config.Comment("AAAM can fire events when players receive a structure marker to enable mods to do custom actions for specific markers. Set to false for performance if no mods in the pack subscribe to the event")
@@ -167,7 +205,6 @@ public class ForgeConfigHandler {
 		public boolean checkOffhand = true;
 	}
 
-
 	@Mod.EventBusSubscriber(modid = AntiqueAtlasAutoMarker.MODID)
 	private static class EventHandler{
 
@@ -177,6 +214,7 @@ public class ForgeConfigHandler {
 				ConfigManager.sync(AntiqueAtlasAutoMarker.MODID, Config.Type.INSTANCE);
 				AutoMarkSetting.reset();
 				EnchMarkSetting.reset();
+				ConfigProvider.init();
 			}
 		}
 	}

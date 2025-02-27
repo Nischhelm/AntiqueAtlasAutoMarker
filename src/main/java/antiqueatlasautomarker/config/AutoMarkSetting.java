@@ -4,6 +4,9 @@ import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class AutoMarkSetting {
     public final String label;
@@ -25,8 +28,9 @@ public class AutoMarkSetting {
     }
     public static void init(){
         List<String> bothConfigs = new ArrayList<>();
-        bothConfigs.addAll(Arrays.asList(ForgeConfigHandler.structureMarkers));
-        bothConfigs.addAll(Arrays.asList(ForgeConfigHandler.interactionMarkers));
+        bothConfigs.addAll(Arrays.asList(ConfigHandler.structureMarkers));
+        bothConfigs.addAll(Arrays.asList(ConfigHandler.interactionMarkers));
+        bothConfigs.addAll(Arrays.stream(ConfigHandler.ruinsMarkers).map(s -> "ruins_"+s).collect(Collectors.toList())); //adding "ruins_" in front of each context
 
         for(String s : bothConfigs){
             String[] split = s.split(";");

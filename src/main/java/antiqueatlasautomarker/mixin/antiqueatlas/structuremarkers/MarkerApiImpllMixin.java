@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
-import antiqueatlasautomarker.config.ForgeConfigHandler;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.api.impl.MarkerApiImpl;
@@ -25,7 +25,7 @@ public abstract class MarkerApiImpllMixin {
     @Nullable
     private Marker rerouteGlobalMarkers(MarkersData instance, String type, String label, int dimension, int x, int z, boolean visibleAhead, @Local(argsOnly = true) World world){
         //Default behavior
-        if(!ForgeConfigHandler.overhaul.rerouteGlobalMarkers) instance.createAndSaveMarker(type, label, dimension, x, z, visibleAhead);
+        if(!ConfigHandler.overhaul.rerouteGlobalMarkers) instance.createAndSaveMarker(type, label, dimension, x, z, visibleAhead);
 
         return StructureMarkersDataHandler.markStructure(world, x, z, type, label, "aa_global");
     }
@@ -38,7 +38,7 @@ public abstract class MarkerApiImpllMixin {
     )
     private void dontSendToAll(World world, boolean visibleAhead, int atlasID, String markerType, String label, int x, int z, CallbackInfoReturnable<Marker> cir, @Local Marker marker){
         //Can't redirect bc that would conflict with sendToAllHoldingAtlas
-        if(ForgeConfigHandler.overhaul.rerouteGlobalMarkers)
+        if(ConfigHandler.overhaul.rerouteGlobalMarkers)
             cir.setReturnValue(marker);
     }
 }

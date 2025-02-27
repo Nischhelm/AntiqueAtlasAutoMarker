@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.mixin.lycanitesmobs;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.ConfigProvider;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.lycanitesmobs.core.dungeon.definition.DungeonSchematic;
 import com.lycanitesmobs.core.dungeon.instance.DungeonInstance;
@@ -28,7 +29,11 @@ public class DungeonInstanceMixin {
 
         if(setting != null && setting.enabled) {
             String label = setting.label;
-            if(label.equals("DEFAULT")) label = this.schematic.name;
+            if(label.equals("DEFAULT")) {
+                label = this.schematic.name;
+                if (ConfigProvider.lycaDungeonNames.containsKey(label))
+                    label = ConfigProvider.lycaDungeonNames.get(label);
+            }
             StructureMarkersDataHandler.markStructure(
                     world,
                     originPos,

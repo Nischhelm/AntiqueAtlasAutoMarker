@@ -19,6 +19,7 @@ This mod adds a lot of automatic marking features for the Antique Atlas and fixe
 - Automatic marking of Yung's Better Mineshafts
 - Automatic marking of Doomlike Dungeons
 - Automatic marking of Dungeons2 Dungeons
+- Automatic marking of Battletowers
 - Automatic marking of Ruins mod structures (custom config per structure)
 - Can turn [AARC Addon](https://www.curseforge.com/minecraft/mc-mods/antiqueatlas-recurrentcomplex-compatability) global Markers into AAAM structure markers, will use client AARC config for the structure markers
 
@@ -52,6 +53,5 @@ They can also use the MarkStructureEvent to mark their own structures using this
 ### Community suggested features
 Feel free to suggest more things to automatically mark in comments
 
-- Remove dragon marker once the dragon is killed (both on player atlas and on structure marker list server side)
-- Auto mark Battletowers
+- Remove dragon marker once the dragon is killed (also on player atlas)
 - Mark destination points of vanilla maps you find (interaction marker)

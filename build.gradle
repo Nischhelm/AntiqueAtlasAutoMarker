@@ -74,6 +74,7 @@ dependencies {
     implementation fg.deobf("curse.maven:lycanitesmobs-${lycanites_version}")
     implementation fg.deobf("curse.maven:doomlikedungeons-${doomlikedungeons_version}")
     implementation fg.deobf("curse.maven:fnars-roguelike-dungeons-${fnarsroguelikedungeons_version}")
+    implementation fg.deobf("curse.maven:atomicstrykers-battle-towers-${battletowers_version}")
     //implementation fg.deobf("curse.maven:roguelike-dungeons-${roguelikedungeons_version}")
 }
 

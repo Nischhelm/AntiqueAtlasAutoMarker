@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.handlers;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import atomicstryker.ruins.common.EventRuinTemplateSpawn;

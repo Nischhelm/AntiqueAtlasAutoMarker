@@ -1,15 +1,13 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.iceandfire",
+  "package": "antiqueatlasautomarker.mixin.battletowers",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
-    "EntityDragonBaseMixin",
-    "rlcraft.WorldGenCyclopsCaveMixin",
-    "rlcraft.WorldGenDragonRoostMixin",
-    "rlcraft.WorldGenHydraCaveMixin"
+    "AS_TowerDestroyerMixin",
+    "BTWorldGenMixin"
   ],
   "injectors": {
     "maxShiftBy": 10

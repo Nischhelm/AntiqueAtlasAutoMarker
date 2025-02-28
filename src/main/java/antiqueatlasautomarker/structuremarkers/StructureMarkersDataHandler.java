@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber
 public class StructureMarkersDataHandler {
@@ -148,5 +149,21 @@ public class StructureMarkersDataHandler {
         //Assumes that the player atlas marker id is the same id as the structure marker id just with a minus
         if (markerPlayer.getId() != -markerServer.getId()) return false;
         return true;
+    }
+
+    public static void removeStructureMarker(World world, String context, BlockPos coords, int radius) {
+        if(world.isRemote) return;
+
+        List<Marker> markers = getData(world)
+                .getMarkersDataInDimension(world.provider.getDimension())
+                .getMarkersAtChunk((coords.getX() >> 4) / MarkersData.CHUNK_STEP, (coords.getZ() >> 4) / MarkersData.CHUNK_STEP)
+                .stream()
+                .filter(marker -> IMarkerConstructor.splitContext(marker.getType())[0].equals(context))
+                .filter(marker -> Math.abs(marker.getX() - coords.getX()) <= radius && Math.abs(marker.getZ() - coords.getZ()) <= radius)
+                .collect(Collectors.toList());
+
+        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Removing {} structure markers", markers.size());
+        
+        for (Marker marker : markers) getData(world).removeMarker(marker.getId());
     }
 }

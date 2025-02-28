@@ -18,7 +18,8 @@ public class ConfigHandler {
 			"DEFAULT Marker Label names (have to be set server side in order to work):\n" +
 			"wildWaystone: DEFAULT marks the wild waystone with the name it will generate as on first activation\n" +
 			"lycanite: DEFAULT marks the lyca dungeon with the default name of the dungeon, like \"Ashen Mausoleum\"" +
-			"doomlikeDungeon: DEFAULT uses the name of the dungeon's theme, like \"Urban Doomlike Dungeon\"")
+			"doomlikeDungeon: DEFAULT uses the name of the dungeon's theme, like \"Urban Doomlike Dungeon\"\n" +
+			"battleTower: DEFAULT uses the battle tower type name and adds \"Reverse\" if it is upside down.")
 	@Config.Name("Auto marked structures - needs AAAM on server")
 	public static String[] structureMarkers = {
 			"wildWaystone; true; Wild Waystone; antiqueatlas:waystone",
@@ -31,6 +32,7 @@ public class ConfigHandler {
 			"betterMineshaft; true; Mineshaft; antiqueatlas:tracks",
 			"doomlike; true; DEFAULT; antiqueatlas:dungeon",
 			"dungeons2; true; Dungeon2; antiqueatlas:dungeon",
+			"battleTowers; true; DEFAULT; antiqueatlas:tower",
 			"ruins; true; See Ruins config below; Set to false to disable all ruins markers",
 			"AARCAddon; true; See AARC config; Set to true on server to turn AARC Global markers into AAAM local markers"
 	};

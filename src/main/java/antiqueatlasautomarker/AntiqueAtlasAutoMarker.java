@@ -1,9 +1,9 @@
 package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.ConfigProvider;
 import antiqueatlasautomarker.config.EnchMarkSetting;
-import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
 import antiqueatlasautomarker.util.PlayerLogoutHandler;

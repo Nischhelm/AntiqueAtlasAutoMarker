@@ -4,8 +4,6 @@ import hunternif.mc.atlas.marker.Marker;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Fired on Forge.EVENT_BUS when a client receives a structure marker.
@@ -17,7 +15,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * None of the properties of this event can be modified
  */
 @Cancelable
-@SideOnly(Side.CLIENT)
 public class ReceivedStructureMarkerEvent extends Event {
     private final EntityPlayer player;
     private final Marker marker;

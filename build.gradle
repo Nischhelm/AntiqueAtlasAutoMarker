@@ -64,6 +64,7 @@ dependencies {
     implementation fg.deobf("curse.maven:iceandfire-${iceandfire_version}")
     implementation fg.deobf("curse.maven:iceandfire-rlcraft-${iceandfirerl_version}")
     implementation fg.deobf("curse.maven:iceandfire-rotn-${iceandfirerotn_version}")
+    implementation fg.deobf("curse.maven:llibrary-${llibrary_version}")
 
     //Dungeons
     implementation fg.deobf("curse.maven:dungeons2-${dungeons2_version}")

@@ -198,11 +198,17 @@ public class ConfigHandler {
 
 		@Config.Comment("Antique Atlas sends packets to all players whenever anything is added to or removed from any atlas (markers/tiles). Set to true to only send packets to players with the modified atlas in inventory.")
 		@Config.Name("Only send to all holding the atlas")
+		@Config.RequiresMcRestart
 		public boolean sendToAllHolding = true;
 
 		@Config.Comment("Whenever Antique Atlas checks for atlases in a players inventory it forgets to also check the offhand. Set to true to check offhand as well.")
 		@Config.Name("Also check player offhand for atlases")
 		public boolean checkOffhand = true;
+
+		@Config.Comment("Antique Atlas uses a questionable regex to check if a marker label is a lang key (not allowing numbers for example), instead of using I18n.hasKey. It also only allows one parameter for parameterised lang keys. Both get fixed by this.")
+		@Config.Name("Fix Atlas Marker Lang Keys")
+		@Config.RequiresMcRestart
+		public boolean fixLangKeys = true;
 	}
 
 	@Config.Name("Send Debug Messages")

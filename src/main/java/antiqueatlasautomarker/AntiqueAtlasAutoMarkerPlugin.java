@@ -2,6 +2,7 @@ package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.compat.IceAndFireUtil;
 import antiqueatlasautomarker.compat.ModCompat;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EarlyConfigReader;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
@@ -24,7 +25,12 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		//Antique Atlas sendToAll overhaul
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.sendtoallholding.json", () ->
 				Loader.isModLoaded("antiqueatlas") &&
-				EarlyConfigReader.getBoolean("Only send to all holding the atlas")
+				EarlyConfigReader.getBoolean("Only send to all holding the atlas", ConfigHandler.overhaul.sendToAllHolding)
+		);
+		//Lang key fix
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.sendtoallholding.json", () ->
+				Loader.isModLoaded("antiqueatlas") &&
+						EarlyConfigReader.getBoolean("Fix Atlas Marker Lang Keys", ConfigHandler.overhaul.fixLangKeys)
 		);
 
 		//Waystones
@@ -34,6 +40,7 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrotn.json", () -> Loader.isModLoaded("iceandfire") && (IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN || IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_1_9_1));
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrl.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.RLCRAFT);
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infbase.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_OLD);
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.inf.easter.json", () -> Loader.isModLoaded("iceandfire"));
 
 		//AARC Addon
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.aarc.json", ModCompat::isAARCLoaded);

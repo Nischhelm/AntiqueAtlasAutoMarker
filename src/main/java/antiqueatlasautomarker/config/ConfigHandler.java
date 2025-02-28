@@ -33,6 +33,7 @@ public class ConfigHandler {
 			"doomlike; true; DEFAULT; antiqueatlas:dungeon",
 			"dungeons2; true; Dungeon2; antiqueatlas:dungeon",
 			"battleTowers; true; DEFAULT; antiqueatlas:tower",
+			"quarkPirateShip; true; Pirates; antiqueatlas:skull",
 			"ruins; true; See Ruins config below; Set to false to disable all ruins markers",
 			"AARCAddon; true; See AARC config; Set to true on server to turn AARC Global markers into AAAM local markers"
 	};

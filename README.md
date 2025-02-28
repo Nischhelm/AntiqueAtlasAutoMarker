@@ -20,6 +20,7 @@ This mod adds a lot of automatic marking features for the Antique Atlas and fixe
 - Automatic marking of Doomlike Dungeons
 - Automatic marking of Dungeons2 Dungeons
 - Automatic marking of Battletowers
+- Automatic marking of Quark Pirateships
 - Automatic marking of Ruins mod structures (custom config per structure)
 - Can turn [AARC Addon](https://www.curseforge.com/minecraft/mc-mods/antiqueatlas-recurrentcomplex-compatability) global Markers into AAAM structure markers, will use client AARC config for the structure markers
 

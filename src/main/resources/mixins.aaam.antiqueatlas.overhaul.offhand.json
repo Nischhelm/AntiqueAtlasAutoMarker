@@ -1,11 +1,12 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.ruins",
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.overhaul",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
+    "AtlasAPIMixin"
   ],
   "injectors": {
     "maxShiftBy": 10

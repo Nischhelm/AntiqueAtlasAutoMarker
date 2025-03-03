@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.overhaul;
 
-import antiqueatlasautomarker.config.ConfigHandler;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.SettingsConfig;
@@ -23,7 +22,6 @@ public abstract class AtlasAPIMixin{
     )
     private static List<Integer> alsoCheckOffhand(List<Integer> original, @Local(argsOnly = true) EntityPlayer player){
         if (!SettingsConfig.gameplay.itemNeeded) return original;
-        if (!ConfigHandler.overhaul.checkOffhand) return original;
 
         //Check if player has atlas in offhand
         ItemStack offhandStack = player.getHeldItemOffhand();

@@ -24,6 +24,7 @@ public abstract class DeleteMarkerPacketMixin implements IDeletedMarkerList {
             remap = false
     )
     private void saveDeletedMarkerId(EntityPlayer player, Side side, CallbackInfo ci){
+        //Saving what Structure Markers got deleted
         if(side.isClient()) return;
         if(this.markerID >= 0) return;
         if(this.isGlobal()) return; //can't remove global markers anyway but just safety check

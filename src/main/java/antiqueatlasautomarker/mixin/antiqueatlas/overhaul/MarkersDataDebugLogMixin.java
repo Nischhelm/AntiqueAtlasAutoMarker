@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.mixin.antiqueatlas;
+package antiqueatlasautomarker.mixin.antiqueatlas.overhaul;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.ConfigHandler;

@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(Marker.class)
 public abstract class MarkerMixin implements IMarkerConstructor {
+    //Makes a copy of a structure marker with negative id
     @Shadow(remap = false) @Final private int id;
     @Shadow(remap = false) @Final private int dim;
     @Shadow(remap = false) @Final private int x;

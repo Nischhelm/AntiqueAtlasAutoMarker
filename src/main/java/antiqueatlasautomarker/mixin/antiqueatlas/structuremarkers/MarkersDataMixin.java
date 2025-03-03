@@ -18,6 +18,7 @@ import java.util.List;
 
 @Mixin(MarkersData.class)
 public abstract class MarkersDataMixin extends WorldSavedData implements IDeletedMarkerList {
+    //Saves and loads deleted marker ids
     public MarkersDataMixin(String name) { super(name); }
 
     @Unique private List<Integer> removedMarkerIds = null;

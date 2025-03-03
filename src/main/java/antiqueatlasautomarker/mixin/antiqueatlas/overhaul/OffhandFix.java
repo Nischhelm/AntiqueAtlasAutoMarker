@@ -14,7 +14,7 @@ import java.util.List;
 import static hunternif.mc.atlas.api.AtlasAPI.ATLAS_ITEM;
 
 @Mixin(AtlasAPI.class)
-public abstract class AtlasAPIMixin{
+public abstract class OffhandFix {
     @ModifyReturnValue(
             method = "getPlayerAtlases",
             at = @At(value = "RETURN"),

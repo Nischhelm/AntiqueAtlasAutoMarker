@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Map;
 
 @Mixin(MarkersData.class)
-public abstract class MarkersDataDebugLogMixin {
+public abstract class LoadDuplicatedIdDebug {
     @Shadow(remap = false) @Final private Map<Integer, Marker> idMap;
 
     @Inject(

@@ -6,10 +6,10 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
-    "MarkersDataDebugLogMixin"
+    "LoadDuplicatedIdDebug"
   ],
   "client": [
-    "AAORenderEventReceiverMixin"
+    "OverlayDoubleRenderFix"
   ],
   "injectors": {
     "maxShiftBy": 10

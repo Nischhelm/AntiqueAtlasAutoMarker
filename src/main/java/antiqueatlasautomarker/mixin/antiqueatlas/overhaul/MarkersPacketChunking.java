@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.*;
 import java.util.*;
 
 @Mixin(MarkersData.class)
-public abstract class MarkersDataSyncInChunksMixin {
+public abstract class MarkersPacketChunking {
     @Shadow(remap = false) @Final private Map<Integer, DimensionMarkersData> dimensionMap;
     @Shadow(remap = false) @Final private Set<EntityPlayer> playersSentTo;
     @Shadow(remap = false) public abstract DimensionMarkersData getMarkersDataInDimension(int dimension);

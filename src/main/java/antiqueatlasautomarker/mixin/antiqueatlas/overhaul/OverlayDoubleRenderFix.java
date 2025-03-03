@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(AAORenderEventReceiver.class)
-public abstract class AAORenderEventReceiverMixin {
+public abstract class OverlayDoubleRenderFix {
     //@Shadow(remap = false) private static void drawMarkersData(DimensionMarkersData markersData, Rect shape, DimensionData biomeData, Vec3d position) {}
 
     @WrapWithCondition(

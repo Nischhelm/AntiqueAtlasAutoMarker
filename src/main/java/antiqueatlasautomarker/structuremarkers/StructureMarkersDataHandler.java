@@ -154,16 +154,19 @@ public class StructureMarkersDataHandler {
     public static void removeStructureMarker(World world, String context, BlockPos coords, int radius) {
         if(world.isRemote) return;
 
-        List<Marker> markers = getData(world)
+        List<Marker> markersHere = getData(world)
                 .getMarkersDataInDimension(world.provider.getDimension())
-                .getMarkersAtChunk((coords.getX() >> 4) / MarkersData.CHUNK_STEP, (coords.getZ() >> 4) / MarkersData.CHUNK_STEP)
-                .stream()
-                .filter(marker -> IMarkerConstructor.splitContext(marker.getType())[0].equals(context))
-                .filter(marker -> Math.abs(marker.getX() - coords.getX()) <= radius && Math.abs(marker.getZ() - coords.getZ()) <= radius)
-                .collect(Collectors.toList());
+                .getMarkersAtChunk((coords.getX() >> 4) / MarkersData.CHUNK_STEP, (coords.getZ() >> 4) / MarkersData.CHUNK_STEP);
 
-        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Removing {} structure markers", markers.size());
-        
-        for (Marker marker : markers) getData(world).removeMarker(marker.getId());
+        if(markersHere == null) return;
+
+        markersHere = markersHere.stream()
+            .filter(marker -> IMarkerConstructor.splitContext(marker.getType())[0].equals(context))
+            .filter(marker -> Math.abs(marker.getX() - coords.getX()) <= radius && Math.abs(marker.getZ() - coords.getZ()) <= radius)
+            .collect(Collectors.toList());
+
+        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Removing {} structure markers", markersHere.size());
+
+        markersHere.forEach(marker -> getData(world).removeMarker(marker.getId()));
     }
 }

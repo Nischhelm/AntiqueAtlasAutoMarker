@@ -32,7 +32,7 @@ public class ConfigHandler {
 			"betterMineshaft; true; Mineshaft; antiqueatlas:tracks",
 			"doomlike; true; DEFAULT; antiqueatlas:dungeon",
 			"dungeons2; true; Dungeon2; antiqueatlas:dungeon",
-			"battleTowers; true; DEFAULT; antiqueatlas:tower",
+			"battleTower; true; DEFAULT; antiqueatlas:tower",
 			"quarkPirateShip; true; Pirates; antiqueatlas:skull",
 			"ruins; true; See Ruins config below; Set to false to disable all ruins markers",
 			"AARCAddon; true; See AARC config; Set to true on server to turn AARC Global markers into AAAM local markers"
@@ -61,8 +61,9 @@ public class ConfigHandler {
 
 	@Config.Comment("Pattern: dimension; posX; posZ; discoverX; discoverZ; marker label; marker type.\n" +
 					"where the first set of coordinates are where the marker will be located on the atlas,\n" +
-					"and the second set of coordinates will be where the player has to be to discover that marker.")
-	@Config.Name("Custom Position Markers, will get set on server creation. Only needs to be defined on server")
+					"and the second set of coordinates will be where the player has to be to discover that marker.\n" +
+					"Will get set on server world creation. Only needs to be defined on server")
+	@Config.Name("Custom Position Markers")
 	@Config.RequiresWorldRestart
 	public static String[] customPositionMarkers = {
 			//"0;2000;0;0;0;Test Custom Position Marker;antiqueatlas:diamond"

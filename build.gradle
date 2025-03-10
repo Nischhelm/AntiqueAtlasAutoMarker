@@ -45,6 +45,7 @@ minecraft {
 repositories {
     flatDir { dirs 'libs' }
     maven { url = 'https://www.cursemaven.com' }
+    maven { url = "https://api.modrinth.com/maven" }
 }
 
 dependencies {
@@ -77,6 +78,11 @@ dependencies {
     implementation fg.deobf("curse.maven:atomicstrykers-battle-towers-${battletowers_version}")
     implementation fg.deobf("curse.maven:quark-${quark_version}")
     //implementation fg.deobf("curse.maven:roguelike-dungeons-${roguelikedungeons_version}")
+
+    //Better End stuff
+    implementation fg.deobf("curse.maven:betterendforge-backport-${betterend_version}")
+    implementation fg.deobf("curse.maven:betternether-${betternether_version}")
+    implementation fg.deobf("maven.modrinth:nether-api:${netherapi_version}")
 }
 
 mixin {

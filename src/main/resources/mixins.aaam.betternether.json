@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.betternether",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "ConfigLoaderAccessor"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

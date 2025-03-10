@@ -35,6 +35,9 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		//Antique Atlas Overhaul - Rest
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.json", () -> Loader.isModLoaded("antiqueatlas"));
 
+		//Antique Atlas Waystones Map Selection
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.mapselect.json", () -> Loader.isModLoaded("antiqueatlas") && Loader.isModLoaded("waystones"));
+
 		//Waystones
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.waystones.json", () -> Loader.isModLoaded("waystones"));
 
@@ -55,6 +58,13 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.battletowers.json", () -> Loader.isModLoaded("battletowers"));
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.quark.json", () -> Loader.isModLoaded("quark"));
 		//FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.roguelike.json", () -> Loader.isModLoaded("roguelike"));
+
+		//Better End stuff
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.ruins.json", () -> Loader.isModLoaded("ruins"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.betterend.json", () -> Loader.isModLoaded("betterendforge"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.netherapi.json", () -> Loader.isModLoaded("nether_api"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.betternether.json", () -> Loader.isModLoaded("betternether"));
+
 	}
 
 	@Override

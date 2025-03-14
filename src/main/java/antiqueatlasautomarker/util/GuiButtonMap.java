@@ -13,12 +13,13 @@ import javax.annotation.Nonnull;
 
 public class GuiButtonMap extends GuiButtonExt {
     private static final ResourceLocation ANTIQUEATLAS = new ResourceLocation("antiqueatlas:textures/items/antique_atlas.png");
+    private static MapWaystoneSelectionUtil.WarpProperty tmpWarpProperty = null;
 
     public GuiButtonMap(int id, int x, int y, MapWaystoneSelectionUtil.WarpProperty warpProperty) {
         super(id, x, y, "");
         this.width = 20;
         this.height = 20;
-        MapWaystoneSelectionUtil.warpProperty.set(warpProperty);
+        tmpWarpProperty = warpProperty;
     }
 
     public boolean mousePressed(@Nonnull Minecraft mc, int mouseX, int mouseY) {
@@ -40,6 +41,8 @@ public class GuiButtonMap extends GuiButtonExt {
             if(firstAtlas == null) return false;
 
             mc.player.closeScreen();
+            MapWaystoneSelectionUtil.warpProperty.set(tmpWarpProperty);
+            tmpWarpProperty = null;
             AntiqueAtlasMod.proxy.openAtlasGUI(firstAtlas);
             return true;
         }

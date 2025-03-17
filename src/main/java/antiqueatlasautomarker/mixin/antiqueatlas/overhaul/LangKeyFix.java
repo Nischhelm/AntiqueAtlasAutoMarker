@@ -40,6 +40,6 @@ public class LangKeyFix {
     )
     private boolean dontCheckAfterwards(String instance, Object o, Operation<Boolean> original){
         //No need to check if the translated text is still the same as before, as we use I18n.  hasKey
-        return true;
+        return false;
     }
 }

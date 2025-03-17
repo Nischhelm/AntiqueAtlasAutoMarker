@@ -30,9 +30,11 @@ public class BTWorldGenMixin {
 
         String usedLabel = setting.label;
         if(setting.label.equals("DEFAULT")) {
-            String chosenType = AS_WorldGenTower.TowerTypes.values()[choice].getName() + " Battle Tower";
+            //String chosenType = AS_WorldGenTower.TowerTypes.values()[choice].getName() + " Battle Tower";
+            String chosenType = "gui.antiqueatlas.marker.BT." + AS_WorldGenTower.TowerTypes.values()[choice].getName();
 
-            if(underground) usedLabel = "Reverse " + chosenType;
+            //if(underground) usedLabel = "Reverse " + chosenType;
+            if(underground) usedLabel = chosenType + "_r";
             else usedLabel = chosenType;
         }
 

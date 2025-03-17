@@ -1,0 +1,73 @@
+# Config pages
+antiqueatlasautomarker.general.enchantmentstomark=Enchantments Trades to Mark
+antiqueatlasautomarker.general.interactionmarkers=Auto Markers on player interaction
+antiqueatlasautomarker.general.lycadungeonnames=Lycanite Dungeon Names
+antiqueatlasautomarker.general.ruinsmarkers=Ruins Structure Markers
+antiqueatlasautomarker.general.structuremarkers=Auto marked structures - needs AAAM on server
+
+# Marker labels
+gui.antiqueatlas.marker.wildWaystone=Wild Waystone
+gui.antiqueatlas.marker.betterMineshaft=Mineshaft
+gui.antiqueatlas.marker.dungeons2=Dungeon2
+gui.antiqueatlas.marker.quarkPirateShip=Pirates
+
+gui.antiqueatlas.marker.btRuinedShort=Ruined BT Short
+gui.antiqueatlas.marker.btRuined=Ruined BT
+gui.antiqueatlas.marker.btRuinedEasy=Ruined BT Easy
+gui.antiqueatlas.marker.btRuinedMedium=Ruined BT Medium
+gui.antiqueatlas.marker.btRuinedHard=Ruined BT Hard
+gui.antiqueatlas.marker.zombieHut=Two Zombie Spawners
+gui.antiqueatlas.marker.castleSky=Sky Castle
+gui.antiqueatlas.marker.baseUnderwater=Underwater Base
+gui.antiqueatlas.marker.shipVillager=Floater
+gui.antiqueatlas.marker.shipPirate=XP Ship
+gui.antiqueatlas.marker.houseStoneM=Small Starter House
+gui.antiqueatlas.marker.graveyard=Graveyard
+gui.antiqueatlas.marker.mausoleum=Eight Zombie Spawners
+gui.antiqueatlas.marker.tombArrowTrap=Simple Dungeon Loot
+gui.antiqueatlas.marker.castleSnowSpire=Blaze Spawners
+
+# Doomlike Dungeons.
+# Themes names are the file names in /config/DLDungeonsJBG/themes
+gui.antiqueatlas.marker.doomlikeCommon=Common Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeContinentalShelf=Continental Shelf Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeDank=Dank Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeDesert=Desert Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeFrozen=Frozen Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeJungle=Jungle Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeMesa=Mesa Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeNether=Nether Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeOceanic=Oceanic Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeTemplate=Template Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeUrban=Urban Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeVillagelike=Villagelike Doomlike Dungeon
+gui.antiqueatlas.marker.doomlikeVolvanic=Volcanic Doomlike Dungeon
+
+# Lycanite Dungeons
+gui.antiqueatlas.marker.lycaAberrantStation=Aberrant Station
+gui.antiqueatlas.marker.lycaAberrantStationRandom=Aberrant Station
+gui.antiqueatlas.marker.lycaAshenMausoleum=Ashen Mausoleum
+gui.antiqueatlas.marker.lycaDemonicTemple=Demonic Temple
+gui.antiqueatlas.marker.lycaDesertCrypts=Desert Crypts
+gui.antiqueatlas.marker.lycaLushTomb=Lush Tomb
+gui.antiqueatlas.marker.lycaShadowLabyrinth=Shadow Labyrinth
+gui.antiqueatlas.marker.lycaShadowLabyrinthRandom=Shadow Labyrinth
+gui.antiqueatlas.marker.lycaStreamShrine=Streamshrine
+
+# Battle Towers
+gui.antiqueatlas.marker.BT.null=Null Battle Tower
+gui.antiqueatlas.marker.BT.null_r=Reverse Null Battle Tower
+gui.antiqueatlas.marker.BT.cobblestone=Cobblestone Battle Tower
+gui.antiqueatlas.marker.BT.cobblestone_r=Reverse Cobblestone Battle Tower
+gui.antiqueatlas.marker.BT.cobblestonemossy=Cobblestone Mossy Battle Tower
+gui.antiqueatlas.marker.BT.cobblestonemossy_r=Reverse Cobblestone Mossy Battle Tower
+gui.antiqueatlas.marker.BT.sandstone=Sandstone Battle Tower
+gui.antiqueatlas.marker.BT.sandstone_r=Reverse Sandstone Battle Tower
+gui.antiqueatlas.marker.BT.ice=Ice Battle Tower
+gui.antiqueatlas.marker.BT.ice_r=Reverse Ice Battle Tower
+gui.antiqueatlas.marker.BT.smoothstone=Smoothstone Battle Tower
+gui.antiqueatlas.marker.BT.smoothstone_r=Reverse Smoothstone Battle Tower
+gui.antiqueatlas.marker.BT.netherrack=Netherrack Battle Tower
+gui.antiqueatlas.marker.BT.netherrack_r=Reverse Netherrack Battle Tower
+gui.antiqueatlas.marker.BT.jungle=Jungle Battle Tower
+gui.antiqueatlas.marker.BT.jungle_r=Reverse Jungle Battle Tower

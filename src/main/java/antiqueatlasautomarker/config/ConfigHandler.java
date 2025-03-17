@@ -22,18 +22,18 @@ public class ConfigHandler {
 			"battleTower: DEFAULT uses the battle tower type name and adds \"Reverse\" if it is upside down.")
 	@Config.Name("Auto marked structures - needs AAAM on server")
 	public static String[] structureMarkers = {
-			"wildWaystone; true; Wild Waystone; antiqueatlas:waystone",
-			"fireDragon; true; Fire Dragon; antiqueatlas:dragon_red",
-			"iceDragon; true; Ice Dragon; antiqueatlas:dragon_blue",
-			"lightningDragon; true; Lightning Dragon; antiqueatlas:dragon_gold",
-			"cyclopsCave; true; Cyclops; antiqueatlas:red_x_small",
-			"hydraCave; true; Hydra; antiqueatlas:dragon_green",
+			"wildWaystone; true; gui.antiqueatlas.marker.wildWaystone; antiqueatlas:waystone",
+			"fireDragon; true; entity.firedragon.name; antiqueatlas:dragon_red",
+			"iceDragon; true; entity.icedragon.name; antiqueatlas:dragon_blue",
+			"lightningDragon; true; entity.lightningdragon.name; antiqueatlas:dragon_gold",
+			"cyclopsCave; true; entity.cyclops.name; antiqueatlas:red_x_small",
+			"hydraCave; true; entity.if_hydra.name; antiqueatlas:dragon_green",
 			"lycanite; true; DEFAULT; antiqueatlas:dungeon",
-			"betterMineshaft; true; Mineshaft; antiqueatlas:tracks",
+			"betterMineshaft; true; gui.antiqueatlas.marker.betterMineshaft; antiqueatlas:tracks",
 			"doomlike; true; DEFAULT; antiqueatlas:dungeon",
-			"dungeons2; true; Dungeon2; antiqueatlas:dungeon",
+			"dungeons2; true; gui.antiqueatlas.marker.dungeons2; antiqueatlas:dungeon",
 			"battleTower; true; DEFAULT; antiqueatlas:tower",
-			"quarkPirateShip; true; Pirates; antiqueatlas:skull",
+			"quarkPirateShip; true; gui.antiqueatlas.marker.quarkPirateShip; antiqueatlas:skull",
 			"ruins; true; See Ruins config below; Set to false to disable all ruins markers",
 			"AARCAddon; true; See AARC config; Set to true on server to turn AARC Global markers into AAAM local markers"
 	};
@@ -41,15 +41,15 @@ public class ConfigHandler {
 	@Config.Comment("Lycanite Dungeons don't have good displayable names. Change this if you want them to be displayed differently.")
 	@Config.Name("Lycanite Dungeon Names")
 	public static String[] lycaDungeonNames = {
-			"aberrantstation; Aberrant Station",
-			"aberrantstation_random; Aberrant Station",
-			"ashenmausoleum; Ashen Mausoleum",
-			"demonictemple;Demonic Temple",
-			"desertcrypts;Desert Crypts",
-			"lushtomb;Lush Tomb",
-			"shadowlabyrinth;Shadow Labyrinth",
-			"shadowlabyrinth_random;Shadow Labyrinth",
-			"streamshrine;Streamshrine"
+			"aberrantstation; gui.antiqueatlas.marker.lycaAberrantStation",
+			"aberrantstation_random; gui.antiqueatlas.marker.lycaAberrantStationRandom",
+			"ashenmausoleum; gui.antiqueatlas.marker.lycaAshenMausoleum",
+			"demonictemple; gui.antiqueatlas.marker.lycaDemonicTemple",
+			"desertcrypts; gui.antiqueatlas.marker.lycaDesertCrypts",
+			"lushtomb; gui.antiqueatlas.marker.lycaLushTomb",
+			"shadowlabyrinth; gui.antiqueatlas.marker.lycaShadowLabyrinth",
+			"shadowlabyrinth_random; gui.antiqueatlas.marker.lycaShadowLabyrinthRandom",
+			"streamshrine; gui.antiqueatlas.marker.lycaStreamShrine"
 	};
 
 	@Config.Comment("Pattern: interactionType; enabled; marker label; marker type.")
@@ -72,24 +72,24 @@ public class ConfigHandler {
 	@Config.Comment("Pattern: ruinsName; enabled; marker label; marker type.")
 	@Config.Name("Ruins Structure Markers")
 	public static String[] ruinsMarkers = {
-			"Tower-ruined-short; false; Ruined BT Short; antiqueatlas:ruins",
-			"Tower-edit; true; Ruined BT; antiqueatlas:tower",
-			"TowerEasy; true; Ruined BT Easy; antiqueatlas:tower",
-			"TowerMedium; true; Ruined BT Medium; antiqueatlas:tower",
-			"TowerHard; true; Ruined BT Hard; antiqueatlas:tower",
-			"ZombieHut; false; Two Zombie Spawners; antiqueatlas:sword",
-			"SkyCastle; true; Sky Castle; antiqueatlas:diamond",
-			"UnderwaterBase; false; Underwater Base; antiqueatlas:diamond",
-			"Floater; true; Floater; antiqueatlas:diamond",
-			"PirateShip; true; XP Ship; antiqueatlas:ship",
-			"StoneHouseM; false; Small Starter House; antiqueatlas:ruins",
-			"PortalShrine; true; Nether Portal; antiqueatlas:nether_portal",
-			"GraveyardHaunted; true; Graveyard; antiqueatlas:diamond",
-			"GateUnderGlass; false; Nether Portal; antiqueatlas:nether_portal",
-			"Mausoleum; false; Eight Zombie Spawners; antiqueatlas:sword",
-			"ArrowTrapTomb; false; Simple Dungeon Loot; antiqueatlas:diamond",
-			"SnowCastleSpire; false; Blaze Spawners; antiqueatlas:sword",
-			"NetherShrine; true; Nether Portal; antiqueatlas:nether_portal"
+			"Tower-ruined-short; false; gui.antiqueatlas.marker.btRuinedShort; antiqueatlas:ruins",
+			"Tower-edit; true; gui.antiqueatlas.marker.btRuined; antiqueatlas:tower",
+			"TowerEasy; true; gui.antiqueatlas.marker.btRuinedEasy; antiqueatlas:tower",
+			"TowerMedium; true; gui.antiqueatlas.marker.btRuinedMedium; antiqueatlas:tower",
+			"TowerHard; true; gui.antiqueatlas.marker.btRuinedHard; antiqueatlas:tower",
+			"ZombieHut; false; gui.antiqueatlas.marker.zombieHut; antiqueatlas:sword",
+			"SkyCastle; true; gui.antiqueatlas.marker.castleSky; antiqueatlas:diamond",
+			"UnderwaterBase; false; gui.antiqueatlas.marker.baseUnderwater; antiqueatlas:diamond",
+			"Floater; true; gui.antiqueatlas.marker.shipVillager; antiqueatlas:diamond",
+			"PirateShip; true; gui.antiqueatlas.marker.shipPirate; antiqueatlas:ship",
+			"StoneHouseM; false; gui.antiqueatlas.marker.houseStoneM; antiqueatlas:ruins",
+			"PortalShrine; true; gui.antiqueatlas.marker.netherPortal; antiqueatlas:nether_portal",
+			"GraveyardHaunted; true; gui.antiqueatlas.marker.graveyard; antiqueatlas:diamond",
+			"GateUnderGlass; false; gui.antiqueatlas.marker.netherPortal; antiqueatlas:nether_portal",
+			"Mausoleum; false; gui.antiqueatlas.marker.mausoleum; antiqueatlas:sword",
+			"ArrowTrapTomb; false; gui.antiqueatlas.marker.tombArrowTrap; antiqueatlas:diamond",
+			"SnowCastleSpire; false; gui.antiqueatlas.marker.castleSnowSpire; antiqueatlas:sword",
+			"NetherShrine; true; gui.antiqueatlas.marker.netherPortal; antiqueatlas:nether_portal"
 	};
 
 	@Config.Comment("AAAM can fire events when players receive a structure marker to enable mods to do custom actions for specific markers. Set to false for performance if no mods in the pack subscribe to the event")

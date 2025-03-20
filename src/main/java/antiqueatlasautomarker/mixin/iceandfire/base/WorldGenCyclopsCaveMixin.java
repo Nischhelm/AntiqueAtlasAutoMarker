@@ -19,10 +19,16 @@ public class WorldGenCyclopsCaveMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0)
     )
     private void markCyclops(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
+        AutoMarkSetting setting = AutoMarkSetting.get("cyclopsCave");
+        if(setting == null || !setting.enabled) return;
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "entity.cyclops.name";
         StructureMarkersDataHandler.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.get("cyclopsCave")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

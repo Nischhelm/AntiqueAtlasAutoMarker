@@ -6,9 +6,7 @@ import git.jbredwards.nether_api.mod.common.compat.betternether.BetterNetherHand
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import paulevs.betternether.biomes.BiomeRegister;
-import paulevs.betternether.config.ConfigLoader;
 
-import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.function.ObjIntConsumer;
 

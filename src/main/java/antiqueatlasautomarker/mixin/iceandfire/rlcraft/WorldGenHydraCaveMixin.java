@@ -19,10 +19,16 @@ public class WorldGenHydraCaveMixin {
             at = @At(value = "INVOKE", target = "Lcom/github/alexthe666/iceandfire/structures/WorldGenHydraCave;generateExterior(Lnet/minecraft/world/World;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;I)V", remap = false)
     )
     void markHydra(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
+        AutoMarkSetting setting = AutoMarkSetting.get("hydraCave");
+        if(setting == null || !setting.enabled) return;
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "entity.if_hydra.name";
         StructureMarkersDataHandler.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.get("hydraCave")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

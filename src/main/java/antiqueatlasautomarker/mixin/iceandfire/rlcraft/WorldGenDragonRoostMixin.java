@@ -19,18 +19,28 @@ import java.util.Random;
 public class WorldGenDragonRoostMixin {
     @Inject(method = "generate", at = @At("HEAD"))
     void markDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
-        String dragonType = "";
-        if(((Object) this) instanceof WorldGenFireDragonRoost)
-            dragonType = "fireDragon";
-        else if(((Object) this) instanceof WorldGenIceDragonRoost)
-            dragonType = "iceDragon";
-        else if(((Object) this) instanceof WorldGenLightningDragonRoost)
-            dragonType = "lightningDragon";
+        String dragonType;
+        if(((Object) this) instanceof WorldGenFireDragonRoost) dragonType = "fireDragon";
+        else if(((Object) this) instanceof WorldGenIceDragonRoost) dragonType = "iceDragon";
+        else if(((Object) this) instanceof WorldGenLightningDragonRoost) dragonType = "lightningDragon";
+        else return;
 
+        AutoMarkSetting setting = AutoMarkSetting.get(dragonType);
+        if(setting == null || !setting.enabled) return;
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) {
+            switch (dragonType) {
+                case "fireDragon": usedLabel = "entity.firedragon.name"; break;
+                case "iceDragon": usedLabel = "entity.icedragon.name"; break;
+                case "lightningDragon": usedLabel = "entity.lightningdragon.name"; break;
+            }
+        }
         StructureMarkersDataHandler.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.get(dragonType)
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

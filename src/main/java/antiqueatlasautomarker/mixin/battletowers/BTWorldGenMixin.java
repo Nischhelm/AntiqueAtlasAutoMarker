@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.mixin.battletowers;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import atomicstryker.battletowers.common.AS_WorldGenTower;
@@ -24,16 +23,12 @@ public class BTWorldGenMixin {
         original.call(instance, world, random,  x, y, z, choice, underground);
 
         AutoMarkSetting setting = AutoMarkSetting.get("battleTower");
-        AntiqueAtlasAutoMarker.LOGGER.info("setting not null {}", setting!=null);
-        if(setting!= null) AntiqueAtlasAutoMarker.LOGGER.info("setting enabled {}", setting.enabled);
         if(setting == null || !setting.enabled) return;
 
         String usedLabel = setting.label;
         if(setting.label.equals("DEFAULT")) {
-            String chosenType = AS_WorldGenTower.TowerTypes.values()[choice].getName() + " Battle Tower";
-
-            if(underground) usedLabel = "Reverse " + chosenType;
-            else usedLabel = chosenType;
+            usedLabel = "gui.aaam.marker.BT." + AS_WorldGenTower.TowerTypes.values()[choice].getName();
+            if(underground) usedLabel += "_r";
         }
 
         StructureMarkersDataHandler.markStructure(

@@ -19,10 +19,16 @@ public class WorldGenHydraCaveMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/Random;nextInt(I)I", ordinal = 0)
     )
     void markHydra(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir) {
+        AutoMarkSetting setting = AutoMarkSetting.get("hydraCave");
+        if(setting == null || !setting.enabled) return;
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "entity.if_hydra.name";
         StructureMarkersDataHandler.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.get("hydraCave")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

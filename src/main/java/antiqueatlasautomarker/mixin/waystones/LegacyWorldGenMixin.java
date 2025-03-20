@@ -22,7 +22,7 @@ public class LegacyWorldGenMixin {
         AutoMarkSetting settings = AutoMarkSetting.get("wildWaystone");
         if(settings != null && settings.enabled) {
             String label = settings.label;
-            if(label.equals("DEFAULT")) label = waystoneName;
+            if(label.equals("DEFAULT")) label = "gui.aaam.marker.wildWaystone";
             StructureMarkersDataHandler.markStructure(
                     world,
                     pos,

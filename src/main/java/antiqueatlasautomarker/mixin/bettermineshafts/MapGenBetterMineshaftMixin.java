@@ -14,11 +14,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MapGenBetterMineshaftMixin extends MapGenMineshaft {
     @Inject(method = "getStructureStart", at = @At("HEAD"))
     private void markBetterMineshaft(int chunkX, int chunkZ, CallbackInfoReturnable<StructureStart> cir){
+        AutoMarkSetting setting = AutoMarkSetting.get("betterMineshaft");
+        if(setting == null || !setting.enabled) return;
+
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "gui.aaam.marker.betterMineshaft";
+
         StructureMarkersDataHandler.markStructure(
-                this.world,
+                world,
                 chunkX << 4,
                 chunkZ << 4,
-                AutoMarkSetting.get("betterMineshaft")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

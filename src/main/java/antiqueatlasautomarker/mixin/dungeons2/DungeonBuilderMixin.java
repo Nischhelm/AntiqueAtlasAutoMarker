@@ -18,11 +18,19 @@ public abstract class DungeonBuilderMixin extends TileEntity {
             at = @At(value = "INVOKE", target = "Lcom/someguyssoftware/dungeons2/persistence/DungeonsGenSavedData;get(Lnet/minecraft/world/World;)Lcom/someguyssoftware/dungeons2/persistence/DungeonsGenSavedData;", remap = false)
     )
     private void markDungeons2Dungeon(CallbackInfo ci, @Local DungeonInfo info){
+        AutoMarkSetting setting = AutoMarkSetting.get("dungeons2");
+        if(setting == null || !setting.enabled) return;
+
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "gui.aaam.marker.dungeons2";
+
         StructureMarkersDataHandler.markStructure(
-                this.world,
+                world,
                 this.pos.getX(),
                 this.pos.getZ(),
-                AutoMarkSetting.get("dungeons2")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

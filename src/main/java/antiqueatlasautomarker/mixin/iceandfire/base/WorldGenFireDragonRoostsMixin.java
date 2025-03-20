@@ -16,10 +16,16 @@ import java.util.Random;
 public class WorldGenFireDragonRoostsMixin {
     @Inject(method = "generate", at = @At("HEAD"))
     void markFireDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
+        AutoMarkSetting setting = AutoMarkSetting.get("fireDragon");
+        if(setting == null || !setting.enabled) return;
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "entity.firedragon.name";
         StructureMarkersDataHandler.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.get("fireDragon")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

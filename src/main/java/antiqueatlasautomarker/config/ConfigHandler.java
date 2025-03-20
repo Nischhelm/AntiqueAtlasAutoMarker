@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.config;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.config.folders.AAOverhaulConfig;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -13,43 +14,30 @@ public class ConfigHandler {
 			"Clients can disable structure markers here in order to decline getting this type of structure marker, no matter if the option is enabled on server\n"+
 			"The marker label and type will use the settings of the client that first discovers the structure marker, \n" +
 			"except if client sets label to DEFAULT, in which case the server label (and type if its an AARC marker) is used\n" +
-			"same can be done with client type in which case the server type is used"+
+			"same can be done with client type in which case the server type is used\n"+
 			"Marker types are defined in AntiqueAtlas Marker config and can be customised there using ResourceLoader mod.\n" +
 			"DEFAULT Marker Label names (have to be set server side in order to work):\n" +
-			"wildWaystone: DEFAULT marks the wild waystone with the name it will generate as on first activation\n" +
 			"lycanite: DEFAULT marks the lyca dungeon with the default name of the dungeon, like \"Ashen Mausoleum\"" +
 			"doomlikeDungeon: DEFAULT uses the name of the dungeon's theme, like \"Urban Doomlike Dungeon\"\n" +
-			"battleTower: DEFAULT uses the battle tower type name and adds \"Reverse\" if it is upside down.")
+			"battleTower: DEFAULT uses the battle tower type name and adds \"Reverse\" if it is upside down." +
+			"inf mobs: DEFAULT uses their localised mob name (ex: Fire Dragon)\n" +
+			"for all other ones, DEFAULT will use the lang key defined in the lang file or in the lang key config below")
 	@Config.Name("Auto marked structures - needs AAAM on server")
 	public static String[] structureMarkers = {
-			"wildWaystone; true; gui.antiqueatlas.marker.wildWaystone; antiqueatlas:waystone",
-			"fireDragon; true; entity.firedragon.name; antiqueatlas:dragon_red",
-			"iceDragon; true; entity.icedragon.name; antiqueatlas:dragon_blue",
-			"lightningDragon; true; entity.lightningdragon.name; antiqueatlas:dragon_gold",
-			"cyclopsCave; true; entity.cyclops.name; antiqueatlas:red_x_small",
-			"hydraCave; true; entity.if_hydra.name; antiqueatlas:dragon_green",
+			"wildWaystone; true; DEFAULT; antiqueatlas:waystone",
+			"fireDragon; true; DEFAULT; antiqueatlas:dragon_red",
+			"iceDragon; true; DEFAULT; antiqueatlas:dragon_blue",
+			"lightningDragon; true; DEFAULT; antiqueatlas:dragon_gold",
+			"cyclopsCave; true; DEFAULT; antiqueatlas:red_x_small",
+			"hydraCave; true; DEFAULT; antiqueatlas:dragon_green",
 			"lycanite; true; DEFAULT; antiqueatlas:dungeon",
-			"betterMineshaft; true; gui.antiqueatlas.marker.betterMineshaft; antiqueatlas:tracks",
-			"doomlike; true; DEFAULT; antiqueatlas:dungeon",
-			"dungeons2; true; gui.antiqueatlas.marker.dungeons2; antiqueatlas:dungeon",
+			"betterMineshaft; false; DEFAULT; antiqueatlas:tracks",
+			"doomlike; false; DEFAULT; antiqueatlas:dungeon",
+			"dungeons2; false; DEFAULT; antiqueatlas:dungeon",
 			"battleTower; true; DEFAULT; antiqueatlas:tower",
-			"quarkPirateShip; true; gui.antiqueatlas.marker.quarkPirateShip; antiqueatlas:skull",
+			"quarkPirateShip; true; DEFAULT; antiqueatlas:skull",
 			"ruins; true; See Ruins config below; Set to false to disable all ruins markers",
 			"AARCAddon; true; See AARC config; Set to true on server to turn AARC Global markers into AAAM local markers"
-	};
-
-	@Config.Comment("Lycanite Dungeons don't have good displayable names. Change this if you want them to be displayed differently.")
-	@Config.Name("Lycanite Dungeon Names")
-	public static String[] lycaDungeonNames = {
-			"aberrantstation; gui.antiqueatlas.marker.lycaAberrantStation",
-			"aberrantstation_random; gui.antiqueatlas.marker.lycaAberrantStationRandom",
-			"ashenmausoleum; gui.antiqueatlas.marker.lycaAshenMausoleum",
-			"demonictemple; gui.antiqueatlas.marker.lycaDemonicTemple",
-			"desertcrypts; gui.antiqueatlas.marker.lycaDesertCrypts",
-			"lushtomb; gui.antiqueatlas.marker.lycaLushTomb",
-			"shadowlabyrinth; gui.antiqueatlas.marker.lycaShadowLabyrinth",
-			"shadowlabyrinth_random; gui.antiqueatlas.marker.lycaShadowLabyrinthRandom",
-			"streamshrine; gui.antiqueatlas.marker.lycaStreamShrine"
 	};
 
 	@Config.Comment("Pattern: interactionType; enabled; marker label; marker type.")
@@ -69,27 +57,54 @@ public class ConfigHandler {
 			//"0;2000;0;0;0;Test Custom Position Marker;antiqueatlas:diamond"
 	};
 
-	@Config.Comment("Pattern: ruinsName; enabled; marker label; marker type.")
+	@Config.Comment("Pattern: ruinsName; enabled; marker label; marker type. DEFAULT uses the corresponding lang key set in lang file or in the lang config here")
 	@Config.Name("Ruins Structure Markers")
 	public static String[] ruinsMarkers = {
-			"Tower-ruined-short; false; gui.antiqueatlas.marker.btRuinedShort; antiqueatlas:ruins",
-			"Tower-edit; true; gui.antiqueatlas.marker.btRuined; antiqueatlas:tower",
-			"TowerEasy; true; gui.antiqueatlas.marker.btRuinedEasy; antiqueatlas:tower",
-			"TowerMedium; true; gui.antiqueatlas.marker.btRuinedMedium; antiqueatlas:tower",
-			"TowerHard; true; gui.antiqueatlas.marker.btRuinedHard; antiqueatlas:tower",
-			"ZombieHut; false; gui.antiqueatlas.marker.zombieHut; antiqueatlas:sword",
-			"SkyCastle; true; gui.antiqueatlas.marker.castleSky; antiqueatlas:diamond",
-			"UnderwaterBase; false; gui.antiqueatlas.marker.baseUnderwater; antiqueatlas:diamond",
-			"Floater; true; gui.antiqueatlas.marker.shipVillager; antiqueatlas:diamond",
-			"PirateShip; true; gui.antiqueatlas.marker.shipPirate; antiqueatlas:ship",
-			"StoneHouseM; false; gui.antiqueatlas.marker.houseStoneM; antiqueatlas:ruins",
-			"PortalShrine; true; gui.antiqueatlas.marker.netherPortal; antiqueatlas:nether_portal",
-			"GraveyardHaunted; true; gui.antiqueatlas.marker.graveyard; antiqueatlas:diamond",
-			"GateUnderGlass; false; gui.antiqueatlas.marker.netherPortal; antiqueatlas:nether_portal",
-			"Mausoleum; false; gui.antiqueatlas.marker.mausoleum; antiqueatlas:sword",
-			"ArrowTrapTomb; false; gui.antiqueatlas.marker.tombArrowTrap; antiqueatlas:diamond",
-			"SnowCastleSpire; false; gui.antiqueatlas.marker.castleSnowSpire; antiqueatlas:sword",
-			"NetherShrine; true; gui.antiqueatlas.marker.netherPortal; antiqueatlas:nether_portal"
+			"Tower-ruined-short; false; DEFAULT; antiqueatlas:ruins",
+			"Tower-edit; true; DEFAULT; antiqueatlas:tower",
+			"TowerEasy; true; DEFAULT; antiqueatlas:tower",
+			"TowerMedium; true; DEFAULT; antiqueatlas:tower",
+			"TowerHard; true; DEFAULT; antiqueatlas:tower",
+			"ZombieHut; false; DEFAULT; antiqueatlas:sword",
+			"SkyCastle; true; DEFAULT; antiqueatlas:diamond",
+			"UnderwaterBase; false; DEFAULT; antiqueatlas:diamond",
+			"Floater; true; DEFAULT; antiqueatlas:diamond",
+			"PirateShip; true; DEFAULT; antiqueatlas:ship",
+			"StoneHouseM; false; DEFAULT; antiqueatlas:ruins",
+			"PortalShrine; true; DEFAULT; antiqueatlas:nether_portal",
+			"GraveyardHaunted; true; DEFAULT; antiqueatlas:diamond",
+			"GateUnderGlass; false; DEFAULT; antiqueatlas:nether_portal",
+			"Mausoleum; false; DEFAULT; antiqueatlas:sword",
+			"ArrowTrapTomb; false; DEFAULT; antiqueatlas:diamond",
+			"SnowCastleSpire; false; DEFAULT; antiqueatlas:sword",
+			"NetherShrine; true; DEFAULT; antiqueatlas:nether_portal"
+	};
+
+	@Config.Comment("AAAM will use these lang keys if there is no other lang file present that would translate those lang keys (internal name of the lang keys: gui.aaam.marker.xxx). Use this to rename structure markers, allows players with other languages seeing the same marker in their own language.")
+	@Config.Name("Default Lang Keys")
+	public static String[] langKeys = {
+			"wildWaystone=Wild Waystone",
+			"betterMineshaft=Mineshaft",
+			"dungeons2=Dungeon2",
+			"quarkPirateShip=Pirates",
+			"Tower-ruined-short=Ruined BT Short",
+			"Tower-edit=Ruined BT",
+			"TowerEasy=Ruined BT",
+			"TowerMedium=Ruined BT",
+			"TowerHard=Ruined BT",
+			"ZombieHut=Two Zombie Spawners",
+			"SkyCastle=Sky Castle",
+			"UnderwaterBase=Underwater Base",
+			"Floater=Floater",
+			"PirateShip=XP Ship",
+			"StoneHouseM=Small Starter House",
+			"PortalShrine=Nether Portal",
+			"GraveyardHaunted=Graveyard",
+			"GateUnderGlass=Nether Portal",
+			"Mausoleum=Eight Zombie Spawners",
+			"ArrowTrapTomb=Simple Dungeon Loot",
+			"SnowCastleSpire=Blaze Spawners",
+			"NetherShrine=Nether Portal"
 	};
 
 	@Config.Comment("AAAM can fire events when players receive a structure marker to enable mods to do custom actions for specific markers. Set to false for performance if no mods in the pack subscribe to the event")
@@ -107,6 +122,7 @@ public class ConfigHandler {
 	@Config.Comment("Use \"ALL\" to mark all trades. Otherwise pattern is modid:enchname; minLvlToMark; optionalAbbreviation")
 	@Config.Name("Enchantments Trades to mark")
 	public static String[] enchantmentsToMark = {
+			"minecraft:protection;2;Prot",
 			"minecraft:feather_falling;4;FF",
 			"minecraft:respiration;3",
 			"minecraft:aqua_affinity;;Aqua Aff",
@@ -115,28 +131,27 @@ public class ConfigHandler {
 			"minecraft:efficiency;3;Eff",
 			"minecraft:silk_touch",
 			"minecraft:unbreaking;2",
-			"minecraft:fortune;3",
+			"minecraft:fortune;2",
 			"minecraft:power;3",
 			"minecraft:infinity",
 			"minecraft:mending",
-			"somanyenchantments:advancedefficiency;3;Adv Eff",
-			"somanyenchantments:advancedsharpness;3;Adv Sharp",
-			"somanyenchantments:advancedsmite;3;Adv Smite",
+			"somanyenchantments:advancedefficency;2;Adv Eff",
+			"somanyenchantments:advancedsharpness;2;Adv Sharp",
 			"somanyenchantments:fieryedge",
-			"somanyenchantments:purification;3;Purif",
-			"somanyenchantments:rune_piercingcapabilities;3;R:PC",
-			"somanyenchantments:swifterslashes;3;Swifter",
+			"somanyenchantments:purification;2;Purif",
+			"somanyenchantments:rune_piercingcapabilities;;R:PC",
+			"somanyenchantments:swifterslashes;2;Swifter",
 			"somanyenchantments:parry",
 			"somanyenchantments:lifesteal",
-			"somanyenchantments:clearsky;4;Clearskies",
+			"somanyenchantments:clearsky;3;Clearskies",
 			"somanyenchantments:smelter",
 			"somanyenchantments:empowereddefence;;Emp Def",
 			"somanyenchantments:strafe;2",
-			"somanyenchantments:advancedlooting;2;Adv Loot",
-			"somanyenchantments:ashdestroyer;3",
-			"somanyenchantments:desolator;3",
-			"somanyenchantments:purgingblade;3",
-			"somanyenchantments:viper;3",
+			"somanyenchantments:advancedlooting;;Adv Loot",
+			"somanyenchantments:ashdestroyer;2",
+			"somanyenchantments:desolator;2",
+			"somanyenchantments:purgingblade;2;Purging",
+			"somanyenchantments:viper;2",
 			"somanyenchantments:advancedpower;3",
 			"somanyenchantments:envenomed;2",
 			"somanyenchantments:advancedlure;2;Adv Lure",
@@ -144,32 +159,32 @@ public class ConfigHandler {
 			"somanyenchantments:advancedfeatherfalling;3;Adv FF",
 			"somanyenchantments:advancedthorns;2;Adv Thorns",
 			"somanyenchantments:advancedprotection;2;Adv Prot",
-			"somanyenchantments:atomicdeconstructor;2;At Dec",
+			"somanyenchantments:atomicdeconstructor;;Atomic",
 			"somanyenchantments:disarmament;4;Disarma",
 			"somanyenchantments:afa;;Adv FA",
-			"somanyenchantments:swiper;2;Arc Sl",
+			"somanyenchantments:swiper;;Arc Sl",
 			"somanyenchantments:afl;;Adv Flame",
 			"somanyenchantments:splitshot;3",
 			"somanyenchantments:strengthenedvitality;2;Str Vitality",
 			"somanyenchantments:burningshield;3;Burn Shield",
 			"somanyenchantments:naturalblocking;;Nat Block",
 			"somanyenchantments:rune_arrowpiercing;2;R:AP",
-			"somanyenchantments:innerberserk;4",
+			"somanyenchantments:innerberserk;3",
 			"somanyenchantments:luckmagnification;;Luck Mag",
-			"somanyenchantments:lightweight;2",
+			"somanyenchantments:lightweight",
 			"somanyenchantments:underwaterstrider;2;UW Strider",
 			"somanyenchantments:frenzy",
 			"somanyenchantments:evasion",
-			"somanyenchantments:bluntness;3",
-			"somanyenchantments:english;3;Subj Eng",
+			"somanyenchantments:bluntness;2",
+			"somanyenchantments:english;2;Subj Eng",
 			"somanyenchantments:pe;3;Subj PE",
 			"somanyenchantments:supremesharpness;;Sup Sharp",
-			"somanyenchantments:supremesmite;;Sup Smite",
+			"somanyenchantments:supremesmite;4;Sup Smite",
 			"somanyenchantments:curseofpossession;;C. of Poss",
 			"somanyenchantments:sfa;;Sup FA",
 			"somanyenchantments:advancedmending;;Adv Mend",
-			"somanyenchantments:sfl",
-			"somanyenchantments:upgradedpotentials;;Upg Pot",
+			"somanyenchantments:sfl;;Sup Flame",
+			"somanyenchantments:upgrade;;Upg Pot",
 			"somanyenchantments:adept",
 			"somanyenchantments:magmawalker;2",
 			"spartanweaponry:rapid_load;2",
@@ -179,52 +194,21 @@ public class ConfigHandler {
 			"mujmajnkraftsbettersurvival:vampirism",
 			"mujmajnkraftsbettersurvival:agility",
 			"mujmajnkraftsbettersurvival:arrowrecovery;3;Arr Rec",
-			"mujmajnkraftsbettersurvival:combo;2",
+			"mujmajnkraftsbettersurvival:combo",
 			"mujmajnkraftsbettersurvival:highjump;2",
 			"mujmajnkraftsbettersurvival:smelting",
-			"mujmajnkraftsbettersurvival:education;2",
+			"mujmajnkraftsbettersurvival:education",
 			"mujmajnkraftsbettersurvival:versatility;;Versa",
 			"mujmajnkraftsbettersurvival:multishot;3",
 			"mujmajnkraftsbettersurvival:range",
 			"mujmajnkraftsbettersurvival:rapidfire",
 			"charm:magnetic",
-			"grapplinghook:doublejumpenchantment"
+			"grapplemod:doublejumpenchantment"
 	};
 
 	@Config.Comment("Overhaul Antique Atlas")
 	@Config.Name("Antique Atlas Overhaul ")
 	public static AAOverhaulConfig overhaul = new AAOverhaulConfig();
-
-	public static class AAOverhaulConfig {
-		@Config.Comment("AA Global Markers are bugged + laggy. Built-in global markers (village + end city) already get rerouted to AAAM structure markers. Keep this enabled to reroute any other modded markers to AAAM structure markers. Disabling this can lead to unexpected behavior.")
-		@Config.Name("Reroute modded Global Markers")
-		public boolean rerouteGlobalMarkers = true;
-
-		@Config.Comment("Antique Atlas sends packets to all players whenever anything is added to or removed from any atlas (markers/tiles). Set to true to only send packets to players with the modified atlas in inventory.")
-		@Config.Name("Only send to all holding the atlas")
-		@Config.RequiresMcRestart
-		public boolean sendToAllHolding = true;
-
-		@Config.Comment("Whenever Antique Atlas checks for atlases in a players inventory it forgets to also check the offhand. Set to true to check offhand as well.")
-		@Config.Name("Also check player offhand for atlases")
-		@Config.RequiresMcRestart
-		public boolean checkOffhand = true;
-
-		@Config.Comment("Antique Atlas uses a questionable regex to check if a marker label is a lang key (not allowing numbers for example), instead of using I18n.hasKey. It also only allows one parameter for parameterised lang keys. Both get fixed by this.")
-		@Config.Name("Fix Atlas Marker Lang Keys")
-		@Config.RequiresMcRestart
-		public boolean fixLangKeys = true;
-
-		@Config.Comment("When combining atlases, the stack size of the output slot is not set correctly, resulting in a dupe. This fixes it.")
-		@Config.Name("Fix Atlas Combining Recipe Dupe")
-		@Config.RequiresMcRestart
-        public boolean fixCombiningRecipe = true;
-
-		@Config.Comment("Markers data is sent in one packet per dimension, which can get really large and lag the server. Keep this enabled to send the markers in chunks of 100 markers per packet to reduce lag on player login.")
-		@Config.Name("Marker data in smaller packets")
-		@Config.RequiresMcRestart
-		public boolean markerPacketChunking = true;
-	}
 
 	@Config.Name("Send Debug Messages")
 	public static boolean doDebugLogs = false;
@@ -238,7 +222,6 @@ public class ConfigHandler {
 				ConfigManager.sync(AntiqueAtlasAutoMarker.MODID, Config.Type.INSTANCE);
 				AutoMarkSetting.reset();
 				EnchMarkSetting.reset();
-				ConfigProvider.init();
 			}
 		}
 	}

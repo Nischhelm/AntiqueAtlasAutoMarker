@@ -19,9 +19,20 @@ public class RuinsHandler {
         RuinTemplate template = event.template;
         String name = template.getName().replace(".tml","");
         BlockPos pos = new BlockPos(event.x, 0, event.z);
-        AutoMarkSetting ruinsSetting = AutoMarkSetting.get("ruins_"+name);
 
+        AutoMarkSetting ruinsSetting = AutoMarkSetting.get("ruins_"+name);
         if(ruinsSetting == null || !ruinsSetting.enabled) return;
-        StructureMarkersDataHandler.markStructure(event.getWorld(), pos, ruinsSetting);
+
+        String usedLabel = ruinsSetting.label;
+        //DEFAULT labels with lang key using the structure name
+        if(usedLabel.equals("DEFAULT")) usedLabel = "gui.aaam.marker."+name;
+
+        StructureMarkersDataHandler.markStructure(
+                event.getWorld(),
+                pos,
+                ruinsSetting.type,
+                usedLabel,
+                ruinsSetting.context
+        );
     }
 }

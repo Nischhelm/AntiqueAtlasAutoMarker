@@ -1,73 +1,76 @@
 # Config pages
 antiqueatlasautomarker.general.enchantmentstomark=Enchantments Trades to Mark
 antiqueatlasautomarker.general.interactionmarkers=Auto Markers on player interaction
-antiqueatlasautomarker.general.lycadungeonnames=Lycanite Dungeon Names
 antiqueatlasautomarker.general.ruinsmarkers=Ruins Structure Markers
 antiqueatlasautomarker.general.structuremarkers=Auto marked structures - needs AAAM on server
 
-# Marker labels
-gui.antiqueatlas.marker.wildWaystone=Wild Waystone
-gui.antiqueatlas.marker.betterMineshaft=Mineshaft
-gui.antiqueatlas.marker.dungeons2=Dungeon2
-gui.antiqueatlas.marker.quarkPirateShip=Pirates
+# Marker labels, only uncomment for non-default lang files
+# However, recommended is to use the config file lang key setting instead, to allow players to manually change how the structure marker is displayed for them
+#gui.aaam.marker.wildWaystone=Wild Waystone
+#gui.aaam.marker.betterMineshaft=Mineshaft
+#gui.aaam.marker.dungeons2=Dungeon2
+#gui.aaam.marker.quarkPirateShip=Pirates
 
-gui.antiqueatlas.marker.btRuinedShort=Ruined BT Short
-gui.antiqueatlas.marker.btRuined=Ruined BT
-gui.antiqueatlas.marker.btRuinedEasy=Ruined BT Easy
-gui.antiqueatlas.marker.btRuinedMedium=Ruined BT Medium
-gui.antiqueatlas.marker.btRuinedHard=Ruined BT Hard
-gui.antiqueatlas.marker.zombieHut=Two Zombie Spawners
-gui.antiqueatlas.marker.castleSky=Sky Castle
-gui.antiqueatlas.marker.baseUnderwater=Underwater Base
-gui.antiqueatlas.marker.shipVillager=Floater
-gui.antiqueatlas.marker.shipPirate=XP Ship
-gui.antiqueatlas.marker.houseStoneM=Small Starter House
-gui.antiqueatlas.marker.graveyard=Graveyard
-gui.antiqueatlas.marker.mausoleum=Eight Zombie Spawners
-gui.antiqueatlas.marker.tombArrowTrap=Simple Dungeon Loot
-gui.antiqueatlas.marker.castleSnowSpire=Blaze Spawners
+#gui.aaam.marker.Tower-ruined-short=Ruined BT Short
+#gui.aaam.marker.Tower-edit=Ruined BT
+#gui.aaam.marker.TowerEasy=Ruined BT
+#gui.aaam.marker.TowerMedium=Ruined BT
+#gui.aaam.marker.TowerHard=Ruined BT
+#gui.aaam.marker.ZombieHut=Two Zombie Spawners
+#gui.aaam.marker.SkyCastle=Sky Castle
+#gui.aaam.marker.UnderwaterBase=Underwater Base
+#gui.aaam.marker.Floater=Floater
+#gui.aaam.marker.PirateShip=XP Ship
+#gui.aaam.marker.StoneHouseM=Small Starter House
+#gui.aaam.marker.PortalShrine=Nether Portal
+#gui.aaam.marker.GraveyardHaunted=Graveyard
+#gui.aaam.marker.GateUnderGlass=Nether Portal
+#gui.aaam.marker.Mausoleum=Eight Zombie Spawners
+#gui.aaam.marker.ArrowTrapTomb=Simple Dungeon Loot
+#gui.aaam.marker.SnowCastleSpire=Blaze Spawners
+#gui.aaam.marker.NetherShrine=Nether Portal
 
 # Doomlike Dungeons.
 # Themes names are the file names in /config/DLDungeonsJBG/themes
-gui.antiqueatlas.marker.doomlikeCommon=Common Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeContinentalShelf=Continental Shelf Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeDank=Dank Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeDesert=Desert Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeFrozen=Frozen Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeJungle=Jungle Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeMesa=Mesa Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeNether=Nether Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeOceanic=Oceanic Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeTemplate=Template Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeUrban=Urban Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeVillagelike=Villagelike Doomlike Dungeon
-gui.antiqueatlas.marker.doomlikeVolvanic=Volcanic Doomlike Dungeon
+gui.aaam.marker.doomlike_common=Common Doomlike Dungeon
+gui.aaam.marker.doomlike_continentalShelf=Continental Shelf Doomlike Dungeon
+gui.aaam.marker.doomlike_dank=Dank Doomlike Dungeon
+gui.aaam.marker.doomlike_desert=Desert Doomlike Dungeon
+gui.aaam.marker.doomlike_frozen=Frozen Doomlike Dungeon
+gui.aaam.marker.doomlike_jungle=Jungle Doomlike Dungeon
+gui.aaam.marker.doomlike_mesa=Mesa Doomlike Dungeon
+gui.aaam.marker.doomlike_nether=Nether Doomlike Dungeon
+gui.aaam.marker.doomlike_oceanic=Oceanic Doomlike Dungeon
+gui.aaam.marker.doomlike_template=Template Doomlike Dungeon
+gui.aaam.marker.doomlike_urban=Urban Doomlike Dungeon
+gui.aaam.marker.doomlike_villagelike=Villagelike Doomlike Dungeon
+gui.aaam.marker.doomlike_volvanic=Volcanic Doomlike Dungeon
 
 # Lycanite Dungeons
-gui.antiqueatlas.marker.lycaAberrantStation=Aberrant Station
-gui.antiqueatlas.marker.lycaAberrantStationRandom=Aberrant Station
-gui.antiqueatlas.marker.lycaAshenMausoleum=Ashen Mausoleum
-gui.antiqueatlas.marker.lycaDemonicTemple=Demonic Temple
-gui.antiqueatlas.marker.lycaDesertCrypts=Desert Crypts
-gui.antiqueatlas.marker.lycaLushTomb=Lush Tomb
-gui.antiqueatlas.marker.lycaShadowLabyrinth=Shadow Labyrinth
-gui.antiqueatlas.marker.lycaShadowLabyrinthRandom=Shadow Labyrinth
-gui.antiqueatlas.marker.lycaStreamShrine=Streamshrine
+gui.aaam.marker.lycaAberrantStation=Aberrant Station
+gui.aaam.marker.lycaAberrantStationRandom=Aberrant Station
+gui.aaam.marker.lycaAshenMausoleum=Ashen Mausoleum
+gui.aaam.marker.lycaDemonicTemple=Demonic Temple
+gui.aaam.marker.lycaDesertCrypts=Desert Crypts
+gui.aaam.marker.lycaLushTomb=Lush Tomb
+gui.aaam.marker.lycaShadowLabyrinth=Shadow Labyrinth
+gui.aaam.marker.lycaShadowLabyrinthRandom=Shadow Labyrinth
+gui.aaam.marker.lycaStreamShrine=Streamshrine
 
 # Battle Towers
-gui.antiqueatlas.marker.BT.null=Null Battle Tower
-gui.antiqueatlas.marker.BT.null_r=Reverse Null Battle Tower
-gui.antiqueatlas.marker.BT.cobblestone=Cobblestone Battle Tower
-gui.antiqueatlas.marker.BT.cobblestone_r=Reverse Cobblestone Battle Tower
-gui.antiqueatlas.marker.BT.cobblestonemossy=Cobblestone Mossy Battle Tower
-gui.antiqueatlas.marker.BT.cobblestonemossy_r=Reverse Cobblestone Mossy Battle Tower
-gui.antiqueatlas.marker.BT.sandstone=Sandstone Battle Tower
-gui.antiqueatlas.marker.BT.sandstone_r=Reverse Sandstone Battle Tower
-gui.antiqueatlas.marker.BT.ice=Ice Battle Tower
-gui.antiqueatlas.marker.BT.ice_r=Reverse Ice Battle Tower
-gui.antiqueatlas.marker.BT.smoothstone=Smoothstone Battle Tower
-gui.antiqueatlas.marker.BT.smoothstone_r=Reverse Smoothstone Battle Tower
-gui.antiqueatlas.marker.BT.netherrack=Netherrack Battle Tower
-gui.antiqueatlas.marker.BT.netherrack_r=Reverse Netherrack Battle Tower
-gui.antiqueatlas.marker.BT.jungle=Jungle Battle Tower
-gui.antiqueatlas.marker.BT.jungle_r=Reverse Jungle Battle Tower
+gui.aaam.marker.BT.null=Null Battle Tower
+gui.aaam.marker.BT.null_r=Reverse Null Battle Tower
+gui.aaam.marker.BT.cobblestone=Cobblestone Battle Tower
+gui.aaam.marker.BT.cobblestone_r=Reverse Cobblestone Battle Tower
+gui.aaam.marker.BT.cobblestonemossy=Cobblestone Mossy Battle Tower
+gui.aaam.marker.BT.cobblestonemossy_r=Reverse Cobblestone Mossy Battle Tower
+gui.aaam.marker.BT.sandstone=Sandstone Battle Tower
+gui.aaam.marker.BT.sandstone_r=Reverse Sandstone Battle Tower
+gui.aaam.marker.BT.ice=Ice Battle Tower
+gui.aaam.marker.BT.ice_r=Reverse Ice Battle Tower
+gui.aaam.marker.BT.smoothstone=Smoothstone Battle Tower
+gui.aaam.marker.BT.smoothstone_r=Reverse Smoothstone Battle Tower
+gui.aaam.marker.BT.netherrack=Netherrack Battle Tower
+gui.aaam.marker.BT.netherrack_r=Reverse Netherrack Battle Tower
+gui.aaam.marker.BT.jungle=Jungle Battle Tower
+gui.aaam.marker.BT.jungle_r=Reverse Jungle Battle Tower

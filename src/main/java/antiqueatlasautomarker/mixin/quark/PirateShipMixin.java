@@ -19,10 +19,18 @@ public class PirateShipMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/structure/template/Template;addBlocksToWorld(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/gen/structure/template/PlacementSettings;)V")
     )
     private static void markPirateShip(WorldServer world, Random random, BlockPos pos, CallbackInfo ci){
+        AutoMarkSetting setting = AutoMarkSetting.get("quarkPirateShip");
+        if(setting == null || !setting.enabled) return;
+
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "gui.aaam.marker.quarkPirateShip";
+
         StructureMarkersDataHandler.markStructure(
                 world,
                 pos,
-                AutoMarkSetting.get("quarkPirateShip")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

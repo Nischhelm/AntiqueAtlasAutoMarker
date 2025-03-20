@@ -16,10 +16,16 @@ import java.util.Random;
 public class WorldGenLightningDragonRoostsMixin {
     @Inject(method = "generate", at = @At("HEAD"))
     void markLightningDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
+        AutoMarkSetting setting = AutoMarkSetting.get("lightningDragon");
+        if(setting == null || !setting.enabled) return;
+        String usedLabel = setting.label;
+        if(usedLabel.equals("DEFAULT")) usedLabel = "entity.lightningdragon.name";
         StructureMarkersDataHandler.markStructure(
                 worldIn,
                 position,
-                AutoMarkSetting.get("lightningDragon")
+                setting.type,
+                usedLabel,
+                setting.context
         );
     }
 }

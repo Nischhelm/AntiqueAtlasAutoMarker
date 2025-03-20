@@ -39,7 +39,7 @@ public class LangKeyFix {
             remap = false
     )
     private boolean dontCheckAfterwards(String instance, Object o, Operation<Boolean> original){
-        //No need to check if the translated text is still the same as before, as we use I18n.  hasKey
+        //No need to check if the translated text is still the same as before, as we use I18n.hasKey
         return false;
     }
 }

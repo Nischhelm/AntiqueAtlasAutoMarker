@@ -25,12 +25,9 @@ public class AutoMarkSetting {
         return autoMarkSettings.get(name);
     }
     public static void init(){
-        List<String> bothConfigs = new ArrayList<>();
-        bothConfigs.addAll(Arrays.asList(ConfigHandler.structureMarkers));
-        bothConfigs.addAll(Arrays.asList(ConfigHandler.interactionMarkers));
-        bothConfigs.addAll(Arrays.stream(ConfigHandler.ruinsMarkers).map(s -> "ruins_"+s).collect(Collectors.toList())); //adding "ruins_" in front of each context
+        List<String> ruinsConfigs = Arrays.stream(ConfigHandler.ruins.ruinsMarkers).map(s -> "ruins_" + s).collect(Collectors.toList()); //adding "ruins_" in front of each context
 
-        for(String s : bothConfigs){
+        for(String s : ruinsConfigs){
             String[] split = s.split(";");
             if(split.length != 4) continue;
             try {
@@ -57,7 +54,7 @@ public class AutoMarkSetting {
      * This can also be done without registering a new context here, but will force clients to use the marker settings the event uses
      */
     public static void registerAutoMarkSetting(String context, boolean enabled, String label, String type){
-        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Registering marker {} {} {} {}", context, enabled, label, type);
+        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Registering marker {} {} {} {}", context, enabled, label, type);
         autoMarkSettings.put(context,
                 new AutoMarkSetting(
                         enabled,

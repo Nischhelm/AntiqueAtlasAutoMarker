@@ -4,31 +4,30 @@ antiqueatlasautomarker.general.interactionmarkers=Auto Markers on player interac
 antiqueatlasautomarker.general.ruinsmarkers=Ruins Structure Markers
 antiqueatlasautomarker.general.structuremarkers=Auto marked structures - needs AAAM on server
 
-# Marker labels, only uncomment for non-default lang files
-# However, recommended is to use the config file lang key setting instead, to allow players to manually change how the structure marker is displayed for them
-#gui.aaam.marker.wildWaystone=Wild Waystone
-#gui.aaam.marker.betterMineshaft=Mineshaft
-#gui.aaam.marker.dungeons2=Dungeon2
-#gui.aaam.marker.quarkPirateShip=Pirates
+# Marker labels
+gui.aaam.marker.wildWaystone=Wild Waystone
+gui.aaam.marker.betterMineshaft=Mineshaft
+gui.aaam.marker.dungeons2=Dungeon2
+gui.aaam.marker.quarkPirateShip=Pirates
 
-#gui.aaam.marker.Tower-ruined-short=Ruined BT Short
-#gui.aaam.marker.Tower-edit=Ruined BT
-#gui.aaam.marker.TowerEasy=Ruined BT
-#gui.aaam.marker.TowerMedium=Ruined BT
-#gui.aaam.marker.TowerHard=Ruined BT
-#gui.aaam.marker.ZombieHut=Two Zombie Spawners
-#gui.aaam.marker.SkyCastle=Sky Castle
-#gui.aaam.marker.UnderwaterBase=Underwater Base
-#gui.aaam.marker.Floater=Floater
-#gui.aaam.marker.PirateShip=XP Ship
-#gui.aaam.marker.StoneHouseM=Small Starter House
-#gui.aaam.marker.PortalShrine=Nether Portal
-#gui.aaam.marker.GraveyardHaunted=Graveyard
-#gui.aaam.marker.GateUnderGlass=Nether Portal
-#gui.aaam.marker.Mausoleum=Eight Zombie Spawners
-#gui.aaam.marker.ArrowTrapTomb=Simple Dungeon Loot
-#gui.aaam.marker.SnowCastleSpire=Blaze Spawners
-#gui.aaam.marker.NetherShrine=Nether Portal
+gui.aaam.marker.Tower-ruined-short=Ruined BT Short
+gui.aaam.marker.Tower-edit=Ruined BT
+gui.aaam.marker.TowerEasy=Ruined BT
+gui.aaam.marker.TowerMedium=Ruined BT
+gui.aaam.marker.TowerHard=Ruined BT
+gui.aaam.marker.ZombieHut=Two Zombie Spawners
+gui.aaam.marker.SkyCastle=Sky Castle
+gui.aaam.marker.UnderwaterBase=Underwater Base
+gui.aaam.marker.Floater=Floater
+gui.aaam.marker.PirateShip=XP Ship
+gui.aaam.marker.StoneHouseM=Small Starter House
+gui.aaam.marker.PortalShrine=Nether Portal
+gui.aaam.marker.GraveyardHaunted=Graveyard
+gui.aaam.marker.GateUnderGlass=Nether Portal
+gui.aaam.marker.Mausoleum=Eight Zombie Spawners
+gui.aaam.marker.ArrowTrapTomb=Simple Dungeon Loot
+gui.aaam.marker.SnowCastleSpire=Blaze Spawners
+gui.aaam.marker.NetherShrine=Nether Portal
 
 # Doomlike Dungeons.
 # Themes names are the file names in /config/DLDungeonsJBG/themes

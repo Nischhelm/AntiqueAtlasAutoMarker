@@ -13,7 +13,7 @@ public class CustomPositionMarkersOnWorldLoad {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void markCustomPositionsOnWorldLoad(WorldEvent.Load event) {
         if (!event.getWorld().isRemote && event.getWorld().provider.getDimension() == 0) {
-            for(String s : ConfigHandler.customPositionMarkers){
+            for(String s : ConfigHandler.customPosition.customPositionMarkers){
                 try {
                     //Read config line
                     String[] split = s.split(";");

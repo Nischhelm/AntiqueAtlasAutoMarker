@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.mixin.vanilla;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
 import antiqueatlasautomarker.util.EnchantmentOffer;
 import antiqueatlasautomarker.util.EnchantmentUtil;
@@ -39,8 +40,7 @@ public abstract class NetHandlerPlayClientMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/IMerchant;setRecipes(Lnet/minecraft/village/MerchantRecipeList;)V")
     )
     public void onMerchantTradeOffers(SPacketCustomPayload packetIn, CallbackInfo ci, @Local MerchantRecipeList tradeList, @Local IMerchant merchant) {
-        AutoMarkSetting markSetting = AutoMarkSetting.get("enchantmentTrade");
-        if (markSetting == null || !markSetting.enabled) return;
+        if (!ConfigHandler.enchantments.enabled) return;
 
         EntityPlayer player = this.client.player; //bruh
         if (player == null) return;

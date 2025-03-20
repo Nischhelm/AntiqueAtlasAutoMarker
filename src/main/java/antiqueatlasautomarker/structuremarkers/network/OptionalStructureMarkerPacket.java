@@ -89,7 +89,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
         AddedStructureMarkersPacket updatePacket = new AddedStructureMarkersPacket(atlasID, player.world.provider.getDimension());
         int addedMarkerCount = 0;
 
-        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Receiving {} structure markers for atlas #{}", markersByType.size(), atlasID);
+        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Receiving {} structure markers for atlas #{}", markersByType.size(), atlasID);
 
         for (Marker marker : markersByType.values()) {
 
@@ -101,14 +101,13 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             String serverType = context_type[1];
             String serverLabel = marker.getLabel();
 
-            if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Trying to add marker {} {} {}", context, serverLabel, serverType);
+            if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Trying to add marker {} {} {}", context, serverLabel, serverType);
 
             AutoMarkSetting clientSetting;
 
             //AARC compat
             if(ModCompat.isAARCLoaded() && context.startsWith("AARCAddon")) {
-                AutoMarkSetting aarcSetting = AutoMarkSetting.get("AARCAddon");
-                if (aarcSetting == null || !aarcSetting.enabled) continue;
+                if(!ConfigHandler.aarcaddon.enabled) continue;
                 clientSetting = AARCCompat.getAARCSetting(context);
             }
 
@@ -116,8 +115,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             else if(context.startsWith("aa_")) clientSetting = new AutoMarkSetting(context.equals("aa_global") || SettingsConfig.gameplay.autoVillageMarkers, "DEFAULT", "DEFAULT", context);
 
             else if(context.startsWith("ruins_")){
-                AutoMarkSetting ruinsSetting = AutoMarkSetting.get("ruins");
-                if(ruinsSetting == null || !ruinsSetting.enabled) continue;
+                if(!ConfigHandler.ruins.enabled) continue;
                 clientSetting = AutoMarkSetting.get(context);
             }
 
@@ -132,7 +130,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             //AAAM base behavior, also for ruins
             else clientSetting = AutoMarkSetting.get(context);
 
-            if(ConfigHandler.doDebugLogs) {
+            if(ConfigHandler.internal.doDebugLogs) {
                 if (clientSetting == null) AntiqueAtlasAutoMarker.LOGGER.info("Client setting for marker is null");
                 else AntiqueAtlasAutoMarker.LOGGER.info("Found client setting for marker {} {} {} {}", clientSetting.enabled, clientSetting.context, clientSetting.label, clientSetting.type);
             }
@@ -140,7 +138,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             //Check if client has a config for this and whether its enabled
             if(clientSetting != null && clientSetting.enabled) {
                 //Fire event if config is enabled and check if any mod canceled it
-                if(ConfigHandler.fireReceivedMarkerEvent && !MinecraftForge.EVENT_BUS.post(new ReceivedStructureMarkerEvent(player, marker, context))) {
+                if(ConfigHandler.internal.fireReceivedMarkerEvent && !MinecraftForge.EVENT_BUS.post(new ReceivedStructureMarkerEvent(player, marker, context))) {
                     String clientType = clientSetting.type.equals("DEFAULT") ? serverType : clientSetting.type;
                     String clientLabel = clientSetting.label.equals("DEFAULT") ? serverLabel : clientSetting.label;
 
@@ -155,7 +153,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             }
         }
 
-        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Added {} new structure markers", addedMarkerCount);
+        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Added {} new structure markers", addedMarkerCount);
 
         //Send the new Markers back to the server
         if(addedMarkerCount > 0)

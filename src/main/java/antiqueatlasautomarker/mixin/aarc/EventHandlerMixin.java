@@ -2,6 +2,7 @@ package antiqueatlasautomarker.mixin.aarc;
 
 import aarcaddon.handlers.EventHandler;
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.api.MarkerAPI;
@@ -21,13 +22,9 @@ public class EventHandlerMixin {
             remap = false
     )
     private Marker aaam_replaceAARCglobalMarkerWithLocalMarker(MarkerAPI instance, @Nonnull World world, boolean visibleAhead, String markerType, String label, int x, int z, @Local(ordinal = 0) String structureName) {
-        AutoMarkSetting setting = AutoMarkSetting.get("AARCAddon");
-        if (setting != null && setting.enabled) {
+        if (ConfigHandler.aarcaddon.enabled) {
             //Context AARCAddon gets $structureName appended in order to use client settings
-            /*if(!markerType.contains(":"))
-                markerType = "antiqueatlas:" + markerType;*/
-            StructureMarkersDataHandler.markStructure(world, x, z, markerType, label, setting.context+"$"+structureName);
-            return null; //return value is unused in AARC
+            return StructureMarkersDataHandler.markStructure(world, x, z, markerType, label, "AARCAddon$"+structureName);
         } else
             //Default behavior
             return instance.putGlobalMarker(world, visibleAhead, markerType, label, x, z);

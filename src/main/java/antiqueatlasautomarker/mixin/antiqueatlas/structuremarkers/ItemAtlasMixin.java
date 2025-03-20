@@ -39,7 +39,7 @@ public abstract class ItemAtlasMixin {
             OptionalStructureMarkerPacket packet = new OptionalStructureMarkerPacket(stack.getItemDamage(), player.dimension);
             for (Marker m : newMarkers)
                 packet.putMarker(m);
-            if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Sending {} structure markers",newMarkers.size());
+            if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Sending {} structure markers",newMarkers.size());
             if(ConfigHandler.overhaul.sendToAllHolding)
                 CustomPacketDispatcher.sendToAllHoldingAtlas(stack.getItemDamage(), packet);
             else

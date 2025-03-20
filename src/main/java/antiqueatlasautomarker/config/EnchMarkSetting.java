@@ -28,10 +28,10 @@ public class EnchMarkSetting {
     }
 
     public static void init() {
-        if(ConfigHandler.enchantmentsToMark.length == 1 && ConfigHandler.enchantmentsToMark[0].equals("ALL"))
+        if(ConfigHandler.enchantments.enchantmentsToMark.length == 1 && ConfigHandler.enchantments.enchantmentsToMark[0].equals("ALL"))
             acceptAll = true;
         else {
-            for (String s : ConfigHandler.enchantmentsToMark) {
+            for (String s : ConfigHandler.enchantments.enchantmentsToMark) {
                 String[] split = s.split(";");
                 if (split.length < 1 || split.length > 3) continue;
                 try {

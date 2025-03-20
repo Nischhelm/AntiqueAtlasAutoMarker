@@ -2,6 +2,7 @@ package antiqueatlasautomarker.mixin.waystones;
 
 import antiqueatlasautomarker.compat.WaystoneUtil;
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.ConfigHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.api.AtlasAPI;
 import net.blay09.mods.waystones.block.BlockWaystone;
@@ -27,17 +28,16 @@ public abstract class BlockWaystoneMixin {
             remap = false
     )
     private void aaam_markActivatedWaystone(Args args, @Local(argsOnly = true) EntityPlayer player, @Local(argsOnly = true) World world) {
-        AutoMarkSetting setting = AutoMarkSetting.get("activatedWaystone");
-        if (setting == null || !setting.enabled) return;
+        if (!ConfigHandler.waystones.enabled) return;
 
         String waystoneName = args.get(0);
         BlockPos waystonePos = args.get(1);
 
-        String label = setting.label.equals("DEFAULT") ? waystoneName : setting.label;
+        String label = ConfigHandler.waystones.label.equals("DEFAULT") ? waystoneName : ConfigHandler.waystones.label;
 
         //Search for atlases in player inventory and mark waystone
         for (int atlasID : AtlasAPI.getPlayerAtlases(player))
-            AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, setting.type, label, waystonePos.getX(), waystonePos.getZ());
+            AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, ConfigHandler.waystones.marker, label, waystonePos.getX(), waystonePos.getZ());
     }
 
     @Inject(

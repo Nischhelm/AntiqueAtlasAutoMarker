@@ -75,7 +75,7 @@ public class AddedStructureMarkersPacket extends AbstractMessage.AbstractServerM
      */
     @Override
     protected void process(EntityPlayer player, Side side) {
-        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Server received {} new structure markers for atlas #{}", markersByType.size(), atlasID);
+        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Server received {} new structure markers for atlas #{}", markersByType.size(), atlasID);
         MarkersData markersData = AntiqueAtlasMod.markersData.getMarkersData(atlasID, player.getEntityWorld());
         for (Marker marker : markersByType.values()) {
             markersData.loadMarker(marker);

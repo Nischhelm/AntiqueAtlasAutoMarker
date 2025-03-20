@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.util;
 
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.marker.Marker;
@@ -12,8 +13,7 @@ import java.util.stream.Collectors;
 
 public class EnchantmentUtil {
     public static void markLibrarian(EntityPlayer player, BlockPos villagerPos, String newLabel) {
-        AutoMarkSetting setting = AutoMarkSetting.get("enchantmentTrade");
-        if(setting == null || !setting.enabled) return;
+        if(!ConfigHandler.enchantments.enabled) return;
 
         for (int atlasID : AtlasAPI.getPlayerAtlases(player)) {
             //Get all enchantment markers around librarian (+-64 blocks) in current atlas
@@ -23,7 +23,7 @@ public class EnchantmentUtil {
                     .getAllMarkers()
                     .stream()
                     .filter(marker -> Math.abs(marker.getX() - villagerPos.getX()) < 64 && Math.abs(marker.getZ() - villagerPos.getZ()) < 64)
-                    .filter(marker -> marker.getType().equals(setting.type))
+                    .filter(marker -> marker.getType().equals(ConfigHandler.enchantments.marker))
                     .collect(Collectors.toList());
 
             //Remove old librarian markers
@@ -33,7 +33,7 @@ public class EnchantmentUtil {
                     AtlasAPI.getMarkerAPI().deleteMarker(player.world, atlasID, marker.getId());
             }
             //Put new librarian marker
-            AtlasAPI.getMarkerAPI().putMarker(player.world, false, atlasID, setting.type, newLabel, villagerPos.getX(), villagerPos.getZ());
+            AtlasAPI.getMarkerAPI().putMarker(player.world, false, atlasID, ConfigHandler.enchantments.marker, newLabel, villagerPos.getX(), villagerPos.getZ());
         }
     }
 

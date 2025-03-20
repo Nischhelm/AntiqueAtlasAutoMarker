@@ -23,7 +23,7 @@ public abstract class LoadDuplicatedIdDebug {
             remap = false
     )
     private void debugMsg(Marker marker, CallbackInfoReturnable<Marker> cir){
-        if(ConfigHandler.doDebugLogs){
+        if(ConfigHandler.internal.doDebugLogs){
             boolean alreadyExists = this.idMap.containsKey(marker.getId());
             AntiqueAtlasAutoMarker.LOGGER.info("Loading Marker into atlas, marker id {}, already exists {}", marker.getId(), alreadyExists);
             if(alreadyExists ) AntiqueAtlasAutoMarker.LOGGER.info("Existing marker is {}", this.idMap.get(marker.getId()));

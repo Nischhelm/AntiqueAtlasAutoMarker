@@ -37,7 +37,7 @@ public class StructureMarkersDataHandler {
 
     public static Marker markStructure(@Nonnull World world, int x, int z, String markerType, String markerName, String context, int... providedDimension) {
         if(world.isRemote){
-            if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Trying to access structure marker data from clientside! context {}",context);
+            if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Trying to access structure marker data from clientside! context {}",context);
             return null;
         }
         MarkersData data = getData(world);
@@ -60,7 +60,7 @@ public class StructureMarkersDataHandler {
             }
         }
 
-        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Marking Structure at {},{} with marker {} {} {}, already exists {}",x,z,context, markerName, markerType, hasMarkerAlready);
+        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Marking Structure at {},{} with marker {} {} {}, already exists {}",x,z,context, markerName, markerType, hasMarkerAlready);
 
         if (!hasMarkerAlready)
             //Use context appended at type, client overrides if not AARC and DEFAULT
@@ -117,7 +117,7 @@ public class StructureMarkersDataHandler {
                 List<Marker> structureMarkers = markersInDimension.getMarkersAtChunk(bigChunkX, bigChunkZ);
                 if (structureMarkers == null) continue;
 
-                if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Found Markers to send in bigchunk {},{} count {}",bigChunkX, bigChunkZ, structureMarkers.size());
+                if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Found Markers to send in bigchunk {},{} count {}",bigChunkX, bigChunkZ, structureMarkers.size());
 
 
                 List<Marker> existingMarkers = atlasMarkers.getMarkersAtChunk(dimension, bigChunkX, bigChunkZ);
@@ -126,7 +126,7 @@ public class StructureMarkersDataHandler {
                     if (existingMarkers == null || !listContainsMarker(existingMarkers, marker))
                         //Check if that marker has been deleted on players atlas
                         if(!((IDeletedMarkerList) atlasMarkers).markerIsDeleted(-marker.getId())) {
-                            if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Adding marker to to-send list {}",marker);
+                            if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Adding marker to to-send list {}",marker);
                             updatedMarkers.add(marker);
                         }
                 }
@@ -165,7 +165,7 @@ public class StructureMarkersDataHandler {
             .filter(marker -> Math.abs(marker.getX() - coords.getX()) <= radius && Math.abs(marker.getZ() - coords.getZ()) <= radius)
             .collect(Collectors.toList());
 
-        if(ConfigHandler.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Removing {} structure markers", markersHere.size());
+        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Removing {} structure markers", markersHere.size());
 
         markersHere.forEach(marker -> getData(world).removeMarker(marker.getId()));
     }

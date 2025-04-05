@@ -70,6 +70,10 @@ public class ConfigHandler {
 	@Config.Name("Antique Atlas Overhaul")
 	public static AAOverhaulConfig overhaul = new AAOverhaulConfig();
 
+	@Config.Comment("Structure Marker Config - Some mods add their structs to this list as well")
+	@Config.Name("Structures")
+	public static StructuresConfig vanillaStructs = new StructuresConfig();
+
 	@Mod.EventBusSubscriber(modid = AntiqueAtlasAutoMarker.MODID)
 	private static class EventHandler{
 

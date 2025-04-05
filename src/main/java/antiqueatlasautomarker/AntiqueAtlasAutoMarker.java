@@ -7,11 +7,14 @@ import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
 import antiqueatlasautomarker.util.PlayerLogoutHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 @Mod(
         modid = AntiqueAtlasAutoMarker.MODID,
@@ -22,13 +25,17 @@ import org.apache.logging.log4j.Logger;
 )
 public class AntiqueAtlasAutoMarker {
     public static final String MODID = "antiqueatlasautomarker";
-    public static final String VERSION = "1.2.3";
+    public static final String VERSION = "1.2.4";
     public static final String NAME = "AntiqueAtlasAutoMarker";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final boolean isDebugging = false;
+    public static Configuration CONFIG;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        CONFIG = new Configuration(event.getSuggestedConfigurationFile());
+        CONFIG.load();
+
         AutoMarkSetting.init();
         EnchMarkSetting.init();
 
@@ -36,5 +43,10 @@ public class AntiqueAtlasAutoMarker {
         if(isDebugging) MinecraftForge.EVENT_BUS.register(TestAAAMEventHandler.class);
         if(ConfigHandler.overhaul.sendToAllHolding) MinecraftForge.EVENT_BUS.register(PlayerLogoutHandler.class);
         if(Loader.isModLoaded("ruins")) MinecraftForge.EVENT_BUS.register(RuinsHandler.class);
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        ConfigHandler.vanillaStructs.postInit();
     }
 }

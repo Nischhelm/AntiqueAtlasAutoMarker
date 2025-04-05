@@ -25,9 +25,10 @@ public class AutoMarkSetting {
         return autoMarkSettings.get(name);
     }
     public static void init(){
-        List<String> ruinsConfigs = Arrays.stream(ConfigHandler.ruins.ruinsMarkers).map(s -> "ruins_" + s).collect(Collectors.toList()); //adding "ruins_" in front of each context
+        List<String> stringConfigs = Arrays.stream(ConfigHandler.ruins.ruinsMarkers).map(s -> "ruins_" + s).collect(Collectors.toList()); //adding "ruins_" in front of each context
+        stringConfigs.addAll(Arrays.asList(ConfigHandler.vanillaStructs.structureOptions));
 
-        for(String s : ruinsConfigs){
+        for(String s : stringConfigs){
             String[] split = s.split(";");
             if(split.length != 4) continue;
             try {

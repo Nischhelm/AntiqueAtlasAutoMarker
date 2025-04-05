@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
+  "mixins": [
+    "MapGenStructureIOAccessor",
+    "MapGenStructureMixin"
+  ],
   "client": [
     "LocaleMixin",
     "NetHandlerPlayClientMixin"

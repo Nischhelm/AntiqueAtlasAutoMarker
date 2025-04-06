@@ -16,7 +16,7 @@ public class LycanitesConfig {
     @Config.Name("Label")
     public String label = "DEFAULT";
 
-    public LycanitesConfig(){
+    public void preInit(){
         resetSetting();
     }
 

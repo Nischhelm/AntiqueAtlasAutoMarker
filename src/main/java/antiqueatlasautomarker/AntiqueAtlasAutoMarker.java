@@ -3,6 +3,8 @@ package antiqueatlasautomarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
+import antiqueatlasautomarker.config.folders.AAOverhaulConfig;
+import antiqueatlasautomarker.config.folders.BattletowersConfig;
 import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
 import antiqueatlasautomarker.util.PlayerLogoutHandler;
@@ -20,12 +22,12 @@ import org.apache.logging.log4j.Logger;
         modid = AntiqueAtlasAutoMarker.MODID,
         version = AntiqueAtlasAutoMarker.VERSION,
         name = AntiqueAtlasAutoMarker.NAME,
-        dependencies = "required-after:fermiumbooter;required-after:antiqueatlas",
+        dependencies = "required-after:fermiumbooter@[1.2.0,);required-after:antiqueatlas",
         acceptableRemoteVersions = "*"
 )
 public class AntiqueAtlasAutoMarker {
     public static final String MODID = "antiqueatlasautomarker";
-    public static final String VERSION = "1.2.4";
+    public static final String VERSION = "1.2.5";
     public static final String NAME = "AntiqueAtlasAutoMarker";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final boolean isDebugging = false;
@@ -35,6 +37,15 @@ public class AntiqueAtlasAutoMarker {
     public void preInit(FMLPreInitializationEvent event) {
         CONFIG = new Configuration(event.getSuggestedConfigurationFile());
         CONFIG.load();
+
+        ConfigHandler.battletowers.preInit();
+        ConfigHandler.bettermineshafts.preInit();
+        ConfigHandler.doomlike.preInit();
+        ConfigHandler.dungeons2.preInit();
+        ConfigHandler.iceandfire.preInit();
+        ConfigHandler.lycanitesmobs.preInit();
+        ConfigHandler.quark.preInit();
+        ConfigHandler.waystones.preInit();
 
         AutoMarkSetting.init();
         EnchMarkSetting.init();

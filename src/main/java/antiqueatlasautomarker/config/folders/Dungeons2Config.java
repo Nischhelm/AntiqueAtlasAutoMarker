@@ -16,7 +16,7 @@ public class Dungeons2Config {
     @Config.Name("Label")
     public String label = "DEFAULT";
 
-    public Dungeons2Config(){
+    public void preInit(){
         resetSetting();
     }
 

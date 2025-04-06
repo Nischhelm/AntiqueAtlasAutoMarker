@@ -16,7 +16,7 @@ public class BattletowersConfig {
     @Config.Name("Label")
     public String label = "DEFAULT";
 
-    public BattletowersConfig(){
+    public void preInit(){
         resetSetting();
     }
 

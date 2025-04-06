@@ -16,7 +16,7 @@ public class BetterMineshaftConfig {
     @Config.Name("Label")
     public String label = "DEFAULT";
 
-    public BetterMineshaftConfig(){
+    public void preInit(){
         resetSetting();
     }
 

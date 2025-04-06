@@ -16,7 +16,7 @@ public class DoomlikeConfig {
     @Config.Name("Label")
     public String label = "DEFAULT";
 
-    public DoomlikeConfig(){
+    public void preInit(){
         resetSetting();
     }
 

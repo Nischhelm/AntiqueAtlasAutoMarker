@@ -64,7 +64,7 @@ public class IceAndFireConfig {
     @Config.Name("Hydra - Label")
     public String label_hydra = "DEFAULT";
 
-    public IceAndFireConfig(){
+    public void preInit(){
         resetSetting();
     }
 

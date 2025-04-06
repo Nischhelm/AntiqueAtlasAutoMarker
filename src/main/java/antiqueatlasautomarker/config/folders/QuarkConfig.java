@@ -16,7 +16,7 @@ public class QuarkConfig {
     @Config.Name("Pirateship - Label")
     public String label_pirateship = "DEFAULT";
 
-    public QuarkConfig(){
+    public void preInit(){
         resetSetting();
     }
 

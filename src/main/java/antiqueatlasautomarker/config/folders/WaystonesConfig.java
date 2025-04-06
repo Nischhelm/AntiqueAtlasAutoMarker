@@ -36,7 +36,7 @@ public class WaystonesConfig {
     @Config.Name("Wild - Label")
     public String label_wild = "DEFAULT";
 
-    public WaystonesConfig(){
+    public void preInit(){
         resetSetting();
     }
 

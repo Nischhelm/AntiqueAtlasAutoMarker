@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.mixin.vanilla;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
 import antiqueatlasautomarker.util.EnchantmentOffer;

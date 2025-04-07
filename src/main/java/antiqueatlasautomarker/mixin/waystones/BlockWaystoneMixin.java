@@ -1,7 +1,6 @@
 package antiqueatlasautomarker.mixin.waystones;
 
 import antiqueatlasautomarker.compat.WaystoneUtil;
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.api.AtlasAPI;

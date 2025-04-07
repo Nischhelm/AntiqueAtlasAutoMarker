@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.compat;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;

@@ -1,7 +1,6 @@
 package antiqueatlasautomarker.mixin.aarc;
 
 import aarcaddon.handlers.EventHandler;
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.llamalad7.mixinextras.sugar.Local;

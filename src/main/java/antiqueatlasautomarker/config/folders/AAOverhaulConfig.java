@@ -15,6 +15,13 @@ public class AAOverhaulConfig {
     @MixinConfig.CompatHandling(modid = "antiqueatlas")
     public boolean sendToAllHolding = true;
 
+    @Config.Comment("AA doesn't allocate the correct size for some packets which can lead to crashes. This fixes it.")
+    @Config.Name("Fix Crash with Short/IntDimensionUpdatePacket")
+    @Config.RequiresMcRestart
+    @MixinConfig.LateMixin(name = "mixins.aaam.antiqueatlas.overhaul.bytebufcrashfix.json")
+    @MixinConfig.CompatHandling(modid = "antiqueatlas")
+    public boolean byteBufCrashFix = true;
+
     @Config.Comment("Whenever Antique Atlas checks for atlases in a players inventory it forgets to also check the offhand. Set to true to check offhand as well.")
     @Config.Name("Also check player offhand for atlases")
     @Config.RequiresMcRestart

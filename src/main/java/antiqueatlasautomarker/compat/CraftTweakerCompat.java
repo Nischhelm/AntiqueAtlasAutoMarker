@@ -38,10 +38,4 @@ public class CraftTweakerCompat {
         }
         MinecraftForge.EVENT_BUS.post(new MarkStructureEvent(world, x, z, markerType, markerLabel));
     }
-
-    @ZenMethod
-    public static void test() {
-        CraftTweakerAPI.logWarning("AAAM Test");
-        AntiqueAtlasAutoMarker.LOGGER.info("AAAM Test");
-    }
 }

@@ -14,7 +14,9 @@ public class AARCCompat {
     private static AutoMarkSetting getCachedSetting(String structureName){
         if(!cachedAarcSettings.containsKey(structureName)){
             String[] aarcSetting = ConfigHandler.structureDeclarationList.get(structureName);
-            cachedAarcSettings.put(structureName, new AutoMarkSetting(true, aarcSetting[2],aarcSetting[1],""));
+            String type = aarcSetting[1];
+            if(!type.contains(":")) type = "antiqueatlas:" + type;
+            cachedAarcSettings.put(structureName, new AutoMarkSetting(true, aarcSetting[2],type,""));
         }
         return cachedAarcSettings.get(structureName);
     }

@@ -37,48 +37,48 @@ public abstract class GuiAtlasMixin {
     @Shadow(remap = false) @Final private GuiBookmarkButton btnDelMarker;
     @Shadow(remap = false) @Final private GuiBookmarkButton btnShowMarkers;
     @Shadow(remap = false) @Final private GuiBookmarkButton btnMarker;
-    @Unique private DimensionMarkersData waystoneMarkers = null;
-    @Unique private Map<Marker,WaystoneEntry> markerToWaystoneMap = null;
-    @Unique private MapWaystoneSelectionUtil.WarpProperty warpProperty = null;
+    @Unique private DimensionMarkersData aaam$waystoneMarkers = null;
+    @Unique private Map<Marker,WaystoneEntry> aaam$markerToWaystoneMap = null;
+    @Unique private MapWaystoneSelectionUtil.WarpProperty aaam$warpProperty = null;
 
     @WrapOperation(
             method = "updateAtlasData",
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/marker/MarkersData;getMarkersDataInDimension(I)Lhunternif/mc/atlas/marker/DimensionMarkersData;"),
             remap = false
     )
-    private DimensionMarkersData rerouteIfWaystone(MarkersData instance, int dimension, Operation<DimensionMarkersData> original){
+    private DimensionMarkersData aaam_rerouteIfWaystone(MarkersData instance, int dimension, Operation<DimensionMarkersData> original){
         MapWaystoneSelectionUtil.WarpProperty warpProperty = MapWaystoneSelectionUtil.getAndClearThreadLocal();
-        if(warpProperty == null && this.waystoneMarkers == null) return original.call(instance, dimension);
+        if(warpProperty == null && this.aaam$waystoneMarkers == null) return original.call(instance, dimension);
 
-        if(this.waystoneMarkers == null) {
-            this.waystoneMarkers = new DimensionMarkersData(instance, dimension);
-            this.warpProperty = warpProperty;
-            this.markerToWaystoneMap = new HashMap<>();
+        if(this.aaam$waystoneMarkers == null) {
+            this.aaam$waystoneMarkers = new DimensionMarkersData(instance, dimension);
+            this.aaam$warpProperty = warpProperty;
+            this.aaam$markerToWaystoneMap = new HashMap<>();
             this.btnExportPng.setEnabled(false);
             this.btnDelMarker.setEnabled(false);
             this.btnShowMarkers.setEnabled(false);
             this.btnMarker.setEnabled(false);
             MapWaystoneSelectionUtil.setFromWaystone(true);
             int id = 0;
-            boolean costsXp = getCostsXp(warpProperty.mode);
+            boolean costsXp = aaam$getCostsXp(warpProperty.mode);
             EntityPlayerSP player = Minecraft.getMinecraft().player;
             int playerXpLvl = player.experienceLevel;
             for (WaystoneEntry entry : warpProperty.entries)
                 if (entry.getDimensionId() == dimension) {
                     int xpCost = PlayerWaystoneHelper.getTravelCostByDistance(player, entry);
-                    Marker marker = new Marker(id++, "antiqueatlas:waystone", getWaystoneMarkerName(entry, xpCost, playerXpLvl), dimension, entry.getPos().getX(), entry.getPos().getZ(), true);
-                    this.waystoneMarkers.insertMarker(marker);
+                    Marker marker = new Marker(id++, "antiqueatlas:waystone", aaam$getWaystoneMarkerName(entry, costsXp, xpCost, playerXpLvl), dimension, entry.getPos().getX(), entry.getPos().getZ(), true);
+                    this.aaam$waystoneMarkers.insertMarker(marker);
                     if(xpCost <= playerXpLvl || !costsXp)
-                        this.markerToWaystoneMap.put(marker,entry);
+                        this.aaam$markerToWaystoneMap.put(marker,entry);
                 }
         }
-        return this.waystoneMarkers;
+        return this.aaam$waystoneMarkers;
     }
 
     @Unique
-    private static String getWaystoneMarkerName(WaystoneEntry entry, int xpCost, int playerXpLvl){
+    private static String aaam$getWaystoneMarkerName(WaystoneEntry entry, boolean costsXP, int xpCost, int playerXpLvl){
         String s = entry.getName();
-        if(xpCost > 0) {
+        if(xpCost > 0 && costsXP) {
             s+=" (";
             if(xpCost > playerXpLvl) s += TextFormatting.RED;
             else s += TextFormatting.GREEN;
@@ -88,7 +88,7 @@ public abstract class GuiAtlasMixin {
     }
 
     @Unique
-    private static boolean getCostsXp(WarpMode mode){
+    private static boolean aaam$getCostsXp(WarpMode mode){
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         switch (mode) {
             case INVENTORY_BUTTON:
@@ -107,11 +107,11 @@ public abstract class GuiAtlasMixin {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/core/GuiStates;is(Lhunternif/mc/atlas/client/gui/core/GuiStates$IState;)Z", ordinal = 0, remap = false),
             cancellable = true
     )
-    private void teleportToMarker(int mouseX, int mouseY, int mouseState, CallbackInfo ci){
+    private void aaam_teleportToMarker(int mouseX, int mouseY, int mouseState, CallbackInfo ci){
         if(MapWaystoneSelectionUtil.getIsFromWaystone()) {
-            WaystoneEntry entry = markerToWaystoneMap.get(hoveredMarker);
+            WaystoneEntry entry = aaam$markerToWaystoneMap.get(hoveredMarker);
             if (entry != null) {
-                NetworkHandler.channel.sendToServer(new MessageTeleportToWaystone(entry, this.warpProperty.mode, this.warpProperty.hand, this.warpProperty.fromWaystone));
+                NetworkHandler.channel.sendToServer(new MessageTeleportToWaystone(entry, this.aaam$warpProperty.mode, this.aaam$warpProperty.hand, this.aaam$warpProperty.fromWaystone));
                 player.closeScreen();
                 ci.cancel();
             }
@@ -122,10 +122,10 @@ public abstract class GuiAtlasMixin {
             method = "onGuiClosed",
             at = @At("TAIL")
     )
-    private void resetGUI(CallbackInfo ci){
-        this.waystoneMarkers = null;
-        this.markerToWaystoneMap = null;
-        this.warpProperty = null;
+    private void aaam_resetGUI(CallbackInfo ci){
+        this.aaam$waystoneMarkers = null;
+        this.aaam$markerToWaystoneMap = null;
+        this.aaam$warpProperty = null;
         this.btnExportPng.setEnabled(true);
         this.btnDelMarker.setEnabled(true);
         this.btnShowMarkers.setEnabled(true);

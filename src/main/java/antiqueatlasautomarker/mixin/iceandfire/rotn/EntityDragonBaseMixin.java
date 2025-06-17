@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityDragonBase.class)
 public abstract class EntityDragonBaseMixin extends EntityLivingBase {
+    @SuppressWarnings("target")
     @Shadow(remap = false) public HomePosition homePos;
 
     public EntityDragonBaseMixin(World worldIn) {

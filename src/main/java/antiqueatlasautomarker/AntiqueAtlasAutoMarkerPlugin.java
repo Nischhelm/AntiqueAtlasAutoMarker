@@ -18,6 +18,8 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 		FermiumRegistryAPI.registerAnnotatedMixinConfig(ConfigHandler.class, null);
 
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json", () -> Loader.isModLoaded("antiqueatlas"));
+
 		//Vanilla
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
 		//Antique Atlas Structure Markers

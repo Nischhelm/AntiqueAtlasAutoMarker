@@ -2,13 +2,14 @@ package antiqueatlasautomarker.config;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.folders.*;
+import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Config(modid = AntiqueAtlasAutoMarker.MODID, category = AntiqueAtlasAutoMarker.MODID)
+@Config(modid = AntiqueAtlasAutoMarker.MODID)
 public class ConfigHandler {
 	@Config.Comment("Battletowers Marker Config")
 	@Config.Name("Battletowers")
@@ -68,6 +69,7 @@ public class ConfigHandler {
 
 	@Config.Comment("Overhaul Antique Atlas")
 	@Config.Name("Antique Atlas Overhaul")
+	@MixinConfig.SubInstance
 	public static AAOverhaulConfig overhaul = new AAOverhaulConfig();
 
 	@Config.Comment("Structure Marker Config - Some mods add their structs to this list as well")

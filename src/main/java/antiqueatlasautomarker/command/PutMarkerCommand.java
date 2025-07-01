@@ -2,14 +2,12 @@ package antiqueatlasautomarker.command;
 
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.registry.MarkerRegistry;
-import hunternif.mc.atlas.registry.MarkerType;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -39,26 +37,26 @@ public class PutMarkerCommand implements ICommand {
 
     @Override
     public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, @Nonnull String[] args) throws CommandException {
+        if(!(sender instanceof EntityPlayer)) return;
         EntityPlayer player = (EntityPlayer) sender;
         if (args.length < 5) throw new CommandException("commands.aaam.invalidusage");
 
-        MarkerType markerType = MarkerRegistry.find(args[3]);
-        if (markerType == null) throw new CommandException("commands.aaam.typenotfound");
-
         int x = Integer.parseInt(args[1]);
         int z = Integer.parseInt(args[2]);
+
+        String type = args[3];
 
         StringBuilder label = new StringBuilder(args[4]);
         for (int i = 5; i < args.length; i++) label.append(" ").append(args[i]);
 
         AtlasAPI.getPlayerAtlases(player).forEach(atlasId ->
-                AtlasAPI.getMarkerAPI().putMarker(player.world, true, atlasId, markerType, label.toString(), x, z)
+                AtlasAPI.getMarkerAPI().putMarker(player.world, true, atlasId, type, label.toString(), x, z)
         );
     }
 
     @Override
-    public boolean checkPermission(@Nonnull MinecraftServer server, ICommandSender sender) {
-        return sender.canUseCommand(0, getName());
+    public boolean checkPermission(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender) {
+        return true;
     }
 
     @Override

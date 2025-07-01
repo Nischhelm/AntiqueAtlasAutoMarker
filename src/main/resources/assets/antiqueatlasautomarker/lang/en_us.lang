@@ -1,3 +1,6 @@
+# Keys
+key.aaam.librarian=Mark Whiteshirts
+
 # Config pages
 antiqueatlasautomarker.general.enchantmentstomark=Enchantments Trades to Mark
 antiqueatlasautomarker.general.interactionmarkers=Auto Markers on player interaction
@@ -73,3 +76,7 @@ gui.aaam.marker.BT.netherrack=Netherrack Battle Tower
 gui.aaam.marker.BT.netherrack_r=Reverse Netherrack Battle Tower
 gui.aaam.marker.BT.jungle=Jungle Battle Tower
 gui.aaam.marker.BT.jungle_r=Reverse Jungle Battle Tower
+
+# Commands
+commands.aaam.invalidusage=Invalid usage. Use /help aaam to see usage
+commands.aaam.typenotfound=Invalid Marker Type. Use TAB to autocomplete

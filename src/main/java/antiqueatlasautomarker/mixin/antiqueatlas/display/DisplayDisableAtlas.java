@@ -90,7 +90,6 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
             if (gotEnabled) aaam$disabledMarkers.remove(markerTypeName);
             else aaam$disabledMarkers.add(markerTypeName);
         }
-        sendChatMessage(String.join(" ", aaam$disabledMarkers));
     }
 
     @WrapOperation(

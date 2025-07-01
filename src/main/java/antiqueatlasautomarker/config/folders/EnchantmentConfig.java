@@ -97,4 +97,16 @@ public class EnchantmentConfig {
             "charm:magnetic",
             "grapplemod:doublejumpenchantment"
     };
+
+    @Config.Comment("Clicking a specified key will mark all the whiteshirts in the players loaded area in their atlases")
+    @Config.Name("Enable Librarian Key")
+    public boolean enableLibrarianKey = true;
+
+    @Config.Comment("Marker to use for unchecked whiteshirts")
+    @Config.Name("Librarian Key Marker")
+    public String librarianKeyMarker = "antiqueatlas:anvil";
+
+    @Config.Comment("Label to use for unchecked whiteshirts")
+    @Config.Name("Librarian Key Label")
+    public String librarianKeyLabel = "Whiteshirt";
 }

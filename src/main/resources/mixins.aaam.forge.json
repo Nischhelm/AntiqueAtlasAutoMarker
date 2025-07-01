@@ -5,12 +5,13 @@
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
-  "client": [
-    "antiqueatlas.mapselection.GuiAtlasMixin",
-    "antiqueatlas.mapselection.GuiBookmarkButtonMixin",
-    "waystones.mapselection.GuiWaystoneListMixin"
+  "mixins": [
+    "ConfigCategoryMixin"
   ],
   "injectors": {
     "maxShiftBy": 10
-  }
+  },
+  "client": [
+    "GuiConfigMixin"
+  ]
 }

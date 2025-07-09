@@ -69,7 +69,6 @@ public class ConfigHandler {
 
 	@Config.Comment("Overhaul Antique Atlas")
 	@Config.Name("Antique Atlas Overhaul")
-	@MixinConfig.SubInstance
 	public static AAOverhaulConfig overhaul = new AAOverhaulConfig();
 
 	@Config.Comment("Structure Marker Config - Some mods add their structs to this list as well")

@@ -138,7 +138,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             //Check if client has a config for this and whether its enabled
             if(clientSetting != null && clientSetting.enabled) {
                 //Fire event if config is enabled and check if any mod canceled it
-                if(!ConfigHandler.internal.fireReceivedMarkerEvent || MinecraftForge.EVENT_BUS.post(new ReceivedStructureMarkerEvent(player, marker, context))) {
+                if(!ConfigHandler.internal.fireReceivedMarkerEvent || !MinecraftForge.EVENT_BUS.post(new ReceivedStructureMarkerEvent(player, marker, context))) {
                     String clientType = clientSetting.type.equals("DEFAULT") ? serverType : clientSetting.type;
                     String clientLabel = clientSetting.label.equals("DEFAULT") ? serverLabel : clientSetting.label;
 

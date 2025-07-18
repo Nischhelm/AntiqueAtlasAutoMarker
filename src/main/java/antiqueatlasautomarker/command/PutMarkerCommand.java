@@ -41,8 +41,8 @@ public class PutMarkerCommand implements ICommand {
         EntityPlayer player = (EntityPlayer) sender;
         if (args.length < 5) throw new CommandException("commands.aaam.invalidusage");
 
-        int x = Integer.parseInt(args[1]);
-        int z = Integer.parseInt(args[2]);
+        int x = args[1].equals("~") ? player.getPosition().getX() : Integer.parseInt(args[1]);
+        int z = args[2].equals("~") ? sender.getPosition().getZ() : Integer.parseInt(args[2]);
 
         String type = args[3];
 
@@ -66,11 +66,9 @@ public class PutMarkerCommand implements ICommand {
         if (args.length == 1) {
             completions.add("putmarker");
             //return CommandBase.getListOfStringsMatchingLastWord(args, completions); //only needed once there's multiple commands
-        } else if (args.length == 2 || args.length == 3){
-            EntityPlayer player = (EntityPlayer) sender;
-            if(args.length == 2) completions.add(""+player.getPosition().getX());
-            if(args.length == 3) completions.add(""+player.getPosition().getZ());
-        } else if(args.length == 4) {
+        } else if (args.length == 2 || args.length == 3)
+            completions.add("~");
+        else if(args.length == 4) {
             //All possible marker types
             completions.addAll(MarkerRegistry.getValues().stream()
                     .map(m -> {

@@ -22,9 +22,6 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		//Antique Atlas Structure Markers
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json", () -> Loader.isModLoaded("antiqueatlas"));
 
-		//Antique Atlas Waystones Map Selection
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.mapselect.json", () -> Loader.isModLoaded("antiqueatlas") && Loader.isModLoaded("waystones"));
-
 		//Waystones
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.waystones.json", () -> Loader.isModLoaded("waystones"));
 

@@ -12,9 +12,7 @@ import java.util.List;
 public class StructuresConfig {
     @Config.Comment("Pattern: structureName; enabled; marker label; marker type. Automatically fills with entries after restart.")
     @Config.Name("Structure Markers")
-    public String[] structureOptions = {
-            ""
-    };
+    public String[] structureOptions = {};
 
     public void postInit(){
         //gather all registered structures and put them in the config list

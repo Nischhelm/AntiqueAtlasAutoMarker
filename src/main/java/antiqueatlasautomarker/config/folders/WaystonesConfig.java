@@ -1,8 +1,11 @@
 package antiqueatlasautomarker.config.folders;
 
+import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
+@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class WaystonesConfig {
     @Config.Comment("Set to false to never mark Activated Waystones")
     @Config.Name("Activated - Enabled")
@@ -35,6 +38,15 @@ public class WaystonesConfig {
     @Config.Comment("Mark Wild Waystones with this Label. Use DEFAULT to label the marker with the lang key set in lang file or lang key config.")
     @Config.Name("Wild - Label")
     public String label_wild = "DEFAULT";
+
+    @Config.Comment("Enabling this will show an atlas button in waystone selection screens (when rightclicking a waystone or using a warp scroll). \n" +
+            "Clicking on the button will display all available waystones in the current dimension on the current held atlas (requires having an atlas). Clicking on a waystone marker will tp to it.")
+    @Config.Name("Allow selecting waystone on map")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.mapselect.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    @MixinConfig.CompatHandling(modid = "waystones", desired = true)
+    public boolean disableSpecificMarkers = true;
 
     public void preInit(){
         resetSetting();

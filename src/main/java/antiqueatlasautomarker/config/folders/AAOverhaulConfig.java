@@ -51,4 +51,12 @@ public class AAOverhaulConfig {
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.markerpacketchunking.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean markerPacketChunking = true;
+
+    @Config.Comment("Will allow to hide specific marker types when clicking on \"Hide markers\" in Atlas GUI. \n" +
+            "Shift-click a marker icon to only show that one or disable all markers except for it.")
+    @Config.Name("Allow hiding specific markers")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    public boolean disableSpecificMarkers = true;
 }

@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
 import antiqueatlasautomarker.client.GuiHideMarkerTypeSelect;
+import antiqueatlasautomarker.util.MapWaystoneSelectionUtil;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -55,9 +56,9 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiAtlas;renderMarker(Lhunternif/mc/atlas/marker/Marker;D)V", remap = false)
     )
     private boolean aaam_dontShowDisabledMarkers(GuiAtlas instance, Marker marker, double scale){
-        return marker != null && !aaam$disabledMarkers.contains(marker.getType());
+        return marker != null && (MapWaystoneSelectionUtil.getIsFromWaystone() || !aaam$disabledMarkers.contains(marker.getType()));
     }
-
+//
     @WrapOperation(
             method = "<init>",
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiBookmarkButton;addListener(Lhunternif/mc/atlas/client/gui/core/IButtonListener;)V", ordinal = 3, remap = false)

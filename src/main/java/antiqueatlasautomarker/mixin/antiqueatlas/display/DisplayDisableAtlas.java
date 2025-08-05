@@ -61,7 +61,8 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
 //
     @WrapOperation(
             method = "<init>",
-            at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiBookmarkButton;addListener(Lhunternif/mc/atlas/client/gui/core/IButtonListener;)V", ordinal = 3, remap = false)
+            at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiBookmarkButton;addListener(Lhunternif/mc/atlas/client/gui/core/IButtonListener;)V", ordinal = 3),
+            remap = false
     )
     private void aaam_changeHideBehavior(GuiBookmarkButton instance, IButtonListener<GuiBookmarkButton> iButtonListener, Operation<Void> original){
         original.call(instance, (IButtonListener<GuiBookmarkButton>) guiBookmarkButton -> {

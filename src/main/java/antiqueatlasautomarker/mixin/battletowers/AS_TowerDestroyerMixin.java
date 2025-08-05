@@ -14,7 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class AS_TowerDestroyerMixin {
     @Inject(
             method = "<init>",
-            at = @At("TAIL")
+            at = @At("TAIL"),
+            remap = false
     )
     private void removeMarker(World world, BlockPos coords, long time, Entity golemkiller, CallbackInfo ci){
         StructureMarkersDataHandler.removeStructureMarker(world, "battleTower",coords, 1);

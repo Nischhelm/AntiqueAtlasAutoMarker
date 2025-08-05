@@ -59,4 +59,11 @@ public class AAOverhaulConfig {
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean disableSpecificMarkers = true;
+
+    @Config.Comment("When putting a new marker on your atlas, will render the marker types to select from in a 7x3 box that scrolls vetically instead of a horizontal scroll area.")
+    @Config.Name("Scroll Marker Types Vertically")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.selectmarkersvertically.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    public boolean verticalScrolling = true;
 }

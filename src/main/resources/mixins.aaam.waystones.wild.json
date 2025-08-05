@@ -1,13 +1,12 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.vanilla",
+  "package": "antiqueatlasautomarker.mixin.waystones",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
-  "client": [
-    "LocaleMixin",
-    "NetHandlerPlayClientMixin"
+  "mixins": [
+    "LegacyWorldGenMixin"
   ],
   "injectors": {
     "maxShiftBy": 10

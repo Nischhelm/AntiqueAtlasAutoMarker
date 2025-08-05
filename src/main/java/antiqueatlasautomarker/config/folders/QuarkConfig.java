@@ -1,11 +1,18 @@
 package antiqueatlasautomarker.config.folders;
 
+import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
+@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class QuarkConfig {
     @Config.Comment("Set to false to never mark Pirateships")
     @Config.Name("Pirateship - Enabled")
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.quark.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "quark", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    @Config.RequiresMcRestart
     public boolean enabled_pirateship = true;
 
     @Config.Comment("Mark Pirateships with this Marker Type")

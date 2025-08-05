@@ -1,11 +1,18 @@
 package antiqueatlasautomarker.config.folders;
 
+import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
+@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class DoomlikeConfig {
     @Config.Comment("Set to false to never mark Doomlike Dungeons")
     @Config.Name("Enabled")
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.doomlikedungeons.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "dldungeonsjbg", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    @Config.RequiresMcRestart
     public boolean enabled = true;
 
     @Config.Comment("Mark Doomlike Dungeons with this Marker Type")

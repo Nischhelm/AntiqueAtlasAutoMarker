@@ -1,11 +1,18 @@
 package antiqueatlasautomarker.config.folders;
 
+import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
+import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
+@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class LycanitesConfig {
     @Config.Comment("Set to false to never mark Lycanites Dungeons")
     @Config.Name("Enabled")
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.lycanitesmobs.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "lycanitesmobs", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    @Config.RequiresMcRestart
     public boolean enabled = true;
 
     @Config.Comment("Mark Lycanites Dungeons with this Marker Type")

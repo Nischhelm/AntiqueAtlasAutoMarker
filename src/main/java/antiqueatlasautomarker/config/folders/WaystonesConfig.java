@@ -9,6 +9,10 @@ import net.minecraftforge.common.config.Config;
 public class WaystonesConfig {
     @Config.Comment("Set to false to never mark Activated Waystones")
     @Config.Name("Activated - Enabled")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.waystones.activated.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "waystones", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean enabled = true;
 
     @Config.Comment("Mark Activated Waystones with this Marker Type")
@@ -29,7 +33,11 @@ public class WaystonesConfig {
 
     @Config.Comment("Set to false to never mark Wild Waystones")
     @Config.Name("Wild - Enabled")
-    public boolean enabled_wild = true;
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.waystones.wild.json", defaultValue = false)
+    @MixinConfig.CompatHandling(modid = "waystones", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    public boolean enabled_wild = false;
 
     @Config.Comment("Mark Wild Waystones with this Marker Type")
     @Config.Name("Wild - Marker")
@@ -44,8 +52,8 @@ public class WaystonesConfig {
     @Config.Name("Allow selecting waystone on map")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.mapselect.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "waystones", desired = true, warnIngame = false)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
-    @MixinConfig.CompatHandling(modid = "waystones", desired = true)
     public boolean disableSpecificMarkers = true;
 
     public void preInit(){

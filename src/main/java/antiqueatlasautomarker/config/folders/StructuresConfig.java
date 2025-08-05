@@ -3,18 +3,29 @@ package antiqueatlasautomarker.config.folders;
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.mixin.vanilla.MapGenStructureIOAccessor;
+import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class StructuresConfig {
+    @Config.Comment("Toggle to fully disable vanilla structure marker system")
+    @Config.Name("Enabled")
+    @MixinConfig.MixinToggle(earlyMixin = "mixins.aaam.vanilla.structures.json", defaultValue = false)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    @Config.RequiresMcRestart
+    public boolean enabled = false;
+
     @Config.Comment("Pattern: structureName; enabled; marker label; marker type. Automatically fills with entries after restart.")
     @Config.Name("Structure Markers")
     public String[] structureOptions = {};
 
     public void postInit(){
+        if(!enabled) return;
+
         //gather all registered structures and put them in the config list
         int nStructs = structureOptions.length;
         List<String> toAdd = new ArrayList<>(Arrays.asList(structureOptions));

@@ -3,6 +3,7 @@ plugins {
     id 'idea'
     id 'net.minecraftforge.gradle' version "${forge_gradle_version}"
     id 'org.spongepowered.mixin' version "${mixin_gradle_version}"
+    id 'wtf.gofancy.fancygradle' version "${fancy_gradle_version}"
 }
 
 version = mod_version
@@ -16,7 +17,7 @@ minecraft {
 
     runs {
         client {
-            args "--username=InDev"
+            args "--username=Nischhelm"
 
             jvmArg "-Dfml.coreMods.load=${mixin_loader_class}"
             jvmArg "-Dmixin.hotSwap=true"
@@ -50,39 +51,48 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    implementation "org.spongepowered:mixin:${mixin_version}"
+    compileOnly "org.spongepowered:mixin:${mixin_version}"
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-    implementation "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
+    compileOnly "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
     annotationProcessor "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
 
     implementation fg.deobf("curse.maven:fermiumbooter-${fermiumbooter_version}")
-    implementation fg.deobf("curse.maven:waystones-${waystones_version}")
-    implementation fg.deobf("curse.maven:antique-atlas-${antiqueatlas_version}")
-    implementation fg.deobf("curse.maven:aarc-${aarc_version}")
+    compileOnly fg.deobf("curse.maven:waystones-${waystones_version}")
+    compileOnly fg.deobf("curse.maven:antique-atlas-${antiqueatlas_version}")
+    compileOnly fg.deobf("curse.maven:aarc-${aarc_version}")
 
     //Bruh
-    implementation fg.deobf("curse.maven:iceandfire-${iceandfire_version}")
-    implementation fg.deobf("curse.maven:iceandfire-rlcraft-${iceandfirerl_version}")
-    implementation fg.deobf("curse.maven:iceandfire-rotn-${iceandfirerotn_version}")
-    implementation fg.deobf("curse.maven:llibrary-${llibrary_version}")
+    compileOnly fg.deobf("curse.maven:iceandfire-${iceandfire_version}")
+    compileOnly fg.deobf("curse.maven:iceandfire-rlcraft-${iceandfirerl_version}")
+    compileOnly fg.deobf("curse.maven:iceandfire-rotn-${iceandfirerotn_version}")
+    compileOnly fg.deobf("curse.maven:llibrary-${llibrary_version}")
 
     //Dungeons
-    implementation fg.deobf("curse.maven:dungeons2-${dungeons2_version}")
-    implementation fg.deobf("curse.maven:gottschcore-${gottschcore_version}")
-    implementation fg.deobf("curse.maven:yungs-better-mineshafts-forge-${bettermineshafts_version}")
-    implementation fg.deobf("curse.maven:ruins-${ruins_version}")
-    implementation fg.deobf("curse.maven:lycanitesmobs-${lycanites_version}")
-    implementation fg.deobf("curse.maven:doomlikedungeons-${doomlikedungeons_version}")
-    implementation fg.deobf("curse.maven:fnars-roguelike-dungeons-${fnarsroguelikedungeons_version}")
-    implementation fg.deobf("curse.maven:atomicstrykers-battle-towers-${battletowers_version}")
-    implementation fg.deobf("curse.maven:quark-${quark_version}")
-    //implementation fg.deobf("curse.maven:roguelike-dungeons-${roguelikedungeons_version}")
+    compileOnly fg.deobf("curse.maven:dungeons2-${dungeons2_version}")
+    compileOnly fg.deobf("curse.maven:gottschcore-${gottschcore_version}")
+    compileOnly fg.deobf("curse.maven:yungs-better-mineshafts-forge-${bettermineshafts_version}")
+    compileOnly fg.deobf("curse.maven:ruins-${ruins_version}")
+    compileOnly fg.deobf("curse.maven:lycanitesmobs-${lycanites_version}")
+    compileOnly fg.deobf("curse.maven:doomlikedungeons-${doomlikedungeons_version}")
+    compileOnly fg.deobf("curse.maven:fnars-roguelike-dungeons-${fnarsroguelikedungeons_version}")
+    compileOnly fg.deobf("curse.maven:atomicstrykers-battle-towers-${battletowers_version}")
+    compileOnly fg.deobf("curse.maven:quark-${quark_version}")
+    //compileOnly fg.deobf("curse.maven:roguelike-dungeons-${roguelikedungeons_version}")
 
-    implementation "libs:CraftTweaker2-${ct_version}"
+    compileOnly "libs:CraftTweaker2-${ct_version}"
 }
 
 mixin {
     add sourceSets.main, "mixins.${mod_id}.refmap.json"
+}
+
+fancyGradle {
+    patches {
+        resources
+        coremods
+        asm
+        mergetool
+    }
 }
 
 processResources {
@@ -104,19 +114,37 @@ processResources {
 
 jar {
     manifest {
-        attributes([
-                'Specification-Title'     : mod_name,
-                'Specification-Vendor'    : mod_author,
-                'Specification-Version'   : '1',
-                'Implementation-Title'    : mod_name,
-                'Implementation-Vendor'   : mod_author,
-                'Implementation-Version'  : mod_version,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'FMLCorePlugin': mixin_loader_class,
-                'FMLCorePluginContainsFMLMod': 'true',
-                'ForceLoadAsMod': 'true', //Comment out in dev environment, uncomment for building
-                'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker'
-        ])
+        def attr = [:]
+        attr['Specification-Title']         = mod_name
+        attr['Specification-Vendor']        = mod_author
+        attr['Specification-Version']       = '1'
+        attr['Implementation-Title']        = mod_name
+        attr['Implementation-Vendor']       = mod_author
+        attr['Implementation-Version']      = mod_version
+        attr['Implementation-Timestamp']    = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        attr['FMLCorePlugin']               = mixin_loader_class
+        attr['FMLCorePluginContainsFMLMod'] = 'true'
+        attr['TweakClass']                  = 'org.spongepowered.asm.launch.MixinTweaker'
+        attr['ForceLoadAsMod'] = "true"
+
+        def currentTasks = gradle.startParameter.taskNames
+        if (currentTasks[0] == 'build' || currentTasks[0] == 'assemble')
+            attr['ForceLoadAsMod'] = "true"
+        attributes(attr)
+    }
+}
+
+tasks.register("copyReobfJar", Copy) {
+    dependsOn("reobfJar")
+
+    from(layout.buildDirectory.file("reobfJar/output.jar"))
+    into(layout.projectDirectory.dir("run/mods"))
+    rename("output.jar", "${mod_name}-${mod_version}.jar")
+}
+
+afterEvaluate {
+    tasks.matching { it.name.startsWith("reobfJar") }.configureEach {
+        finalizedBy("copyReobfJar")
     }
 }
 

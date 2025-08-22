@@ -12,7 +12,7 @@ import java.util.List;
 
 @MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class StructuresConfig {
-    @Config.Comment("Toggle to fully disable vanilla structure marker system")
+    @Config.Comment("Set to false to fully disable vanilla structure marker system")
     @Config.Name("Enabled")
     @MixinConfig.MixinToggle(earlyMixin = "mixins.aaam.vanilla.structures.json", defaultValue = false)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)

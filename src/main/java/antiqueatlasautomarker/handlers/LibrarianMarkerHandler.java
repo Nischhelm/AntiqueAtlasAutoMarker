@@ -51,7 +51,7 @@ public class LibrarianMarkerHandler {
                         .filter(marker -> marker.getLabel().equals(ConfigHandler.enchantments.librarianKeyLabel))
                         .forEach(marker -> AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId()));
 
-                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, "antiqueatlas:anvil", "Whiteshirt", villX, villZ);
+                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, ConfigHandler.enchantments.librarianKeyMarker, ConfigHandler.enchantments.librarianKeyLabel, villX, villZ);
             }
         }
     }

@@ -1,5 +1,6 @@
 package antiqueatlasautomarker;
 
+import antiqueatlasautomarker.client.KeyHandler;
 import antiqueatlasautomarker.command.PutMarkerCommand;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
@@ -63,8 +64,12 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
-        if(ConfigHandler.enchantments.enableLibrarianKey && event.getSide().equals(Side.CLIENT))
-            LibrarianMarkerHandler.initKeybind();
+        if(event.getSide().equals(Side.CLIENT)) {
+            if(ConfigHandler.enchantments.enableLibrarianKey)
+                LibrarianMarkerHandler.initKeybind();
+            if(ConfigHandler.overhaul.basicKeybindings)
+                KeyHandler.initKeybind();
+        }
     }
 
     @Mod.EventHandler

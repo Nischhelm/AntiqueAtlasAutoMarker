@@ -66,4 +66,11 @@ public class AAOverhaulConfig {
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.selectmarkersvertically.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean verticalScrolling = true;
+
+    @Config.Comment("Enable setting keybindings for the Add, Delete, and Hide/Show Marker buttons. This also removes the mouse position reset behavior of the delete marker button.")
+    @Config.Name("Keybindings for Buttons")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.atlasbasickeybinds.json", defaultValue = true)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    public boolean basicKeybindings = true;
 }

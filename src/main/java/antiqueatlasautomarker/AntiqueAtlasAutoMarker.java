@@ -4,6 +4,7 @@ import antiqueatlasautomarker.command.PutMarkerCommand;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
+import antiqueatlasautomarker.custombiometiles.BetterEndBiomes;
 import antiqueatlasautomarker.handlers.LibrarianMarkerHandler;
 import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
@@ -70,6 +71,8 @@ public class AntiqueAtlasAutoMarker {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ConfigHandler.vanillaStructs.postInit();
+
+        if(Loader.isModLoaded("betterendforge")) BetterEndBiomes.postInit();
     }
 
     @Mod.EventHandler

@@ -22,6 +22,8 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json", () -> Loader.isModLoaded("antiqueatlas")); //TODO add toggle
 
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.betterend.json", () -> Loader.isModLoaded("antiqueatlas") && Loader.isModLoaded("betterendforge")); //TODO add toggle
+
 		//Ice and Fire
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrotn.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN);
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrl.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.RLCRAFT);

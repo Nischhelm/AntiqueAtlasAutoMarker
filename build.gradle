@@ -79,6 +79,9 @@ dependencies {
     compileOnly fg.deobf("curse.maven:quark-${quark_version}")
     //compileOnly fg.deobf("curse.maven:roguelike-dungeons-${roguelikedungeons_version}")
 
+    //Tiles
+    compileOnly fg.deobf("curse.maven:betterendforge-backport-${betterend_version}")
+
     compileOnly "libs:CraftTweaker2-${ct_version}"
 }
 

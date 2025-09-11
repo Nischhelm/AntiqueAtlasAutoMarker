@@ -66,4 +66,7 @@ public class AAOverhaulConfig {
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.selectmarkersvertically.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean verticalScrolling = true;
+
+    @Config.Name("Biome to Tile Config")
+    public BiomeTileConfig tileConfig = new BiomeTileConfig();
 }

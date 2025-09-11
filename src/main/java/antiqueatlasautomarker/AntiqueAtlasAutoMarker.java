@@ -4,6 +4,7 @@ import antiqueatlasautomarker.command.PutMarkerCommand;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
+import antiqueatlasautomarker.config.folders.BiomeTileConfig;
 import antiqueatlasautomarker.custombiometiles.BetterEndBiomes;
 import antiqueatlasautomarker.handlers.LibrarianMarkerHandler;
 import antiqueatlasautomarker.handlers.RuinsHandler;
@@ -20,7 +21,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 @Mod(
         modid = AntiqueAtlasAutoMarker.MODID,
@@ -54,6 +54,8 @@ public class AntiqueAtlasAutoMarker {
         AutoMarkSetting.init();
         EnchMarkSetting.init();
 
+        BiomeTileConfig.init();
+
         //Just for event testing purposes
         if(isDebugging) MinecraftForge.EVENT_BUS.register(TestAAAMEventHandler.class);
 
@@ -71,6 +73,8 @@ public class AntiqueAtlasAutoMarker {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         ConfigHandler.vanillaStructs.postInit();
+
+        BiomeTileConfig.reset(); //Rules are only needed during startup
 
         if(Loader.isModLoaded("betterendforge")) BetterEndBiomes.postInit();
     }

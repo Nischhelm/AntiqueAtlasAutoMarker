@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.biometiles",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  },
+  "client": [
+    "AutomaticTextureSetRules"
+  ]
+}

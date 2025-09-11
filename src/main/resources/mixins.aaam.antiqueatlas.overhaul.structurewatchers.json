@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.overhaul.structurewatcher",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "MapGenStructureMixin",
+    "StructureWatcherFortressAccessor",
+    "StructureWatcherFortressMixin",
+    "StructureWatcherGenericAccessor",
+    "StructureWatcherGenericMixin",
+    "StructureWatcherMixin",
+    "StructureWatcherVillageAccessor",
+    "StructureWatcherVillageMixin"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

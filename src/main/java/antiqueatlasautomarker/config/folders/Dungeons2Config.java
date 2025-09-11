@@ -8,7 +8,7 @@ import net.minecraftforge.common.config.Config;
 @MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class Dungeons2Config {
     @Config.Comment("Set to false to never mark Dungeons2 Dungeons")
-    @Config.Name("Enabled")
+    @Config.Name("DG2 Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.dungeons2.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "dungeons2", desired = true, warnIngame = false)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)

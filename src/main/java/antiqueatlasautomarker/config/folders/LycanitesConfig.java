@@ -8,7 +8,7 @@ import net.minecraftforge.common.config.Config;
 @MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class LycanitesConfig {
     @Config.Comment("Set to false to never mark Lycanites Dungeons")
-    @Config.Name("Enabled")
+    @Config.Name("LM Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.lycanitesmobs.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "lycanitesmobs", desired = true, warnIngame = false)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)

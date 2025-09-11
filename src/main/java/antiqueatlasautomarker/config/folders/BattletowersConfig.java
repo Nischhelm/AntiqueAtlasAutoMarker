@@ -8,7 +8,7 @@ import net.minecraftforge.common.config.Config;
 @MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class BattletowersConfig {
     @Config.Comment("Set to false to never mark Battletowers")
-    @Config.Name("Enabled")
+    @Config.Name("BT Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.battletowers.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "battletowers", desired = true, warnIngame = false)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)

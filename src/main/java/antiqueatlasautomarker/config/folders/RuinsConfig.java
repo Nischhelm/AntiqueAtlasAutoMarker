@@ -4,7 +4,7 @@ import net.minecraftforge.common.config.Config;
 
 public class RuinsConfig {
     @Config.Comment("Set to false to never mark Ruins structures")
-    @Config.Name("Enabled")
+    @Config.Name("Ruins Enabled")
     public boolean enabled = true;
 
     @Config.Comment("Pattern: ruinsName; enabled; marker label; marker type. DEFAULT uses the corresponding lang key set in lang file or in the lang key config")

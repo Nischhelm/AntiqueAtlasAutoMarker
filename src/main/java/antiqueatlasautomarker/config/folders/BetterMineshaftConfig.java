@@ -7,8 +7,8 @@ import net.minecraftforge.common.config.Config;
 
 @MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class BetterMineshaftConfig {
-    @Config.Comment("Set to false to never mark Better Mineshafts")
-    @Config.Name("Enabled")
+    @Config.Comment("Set to false to never mark Yungs Better Mineshafts")
+    @Config.Name("YBM Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.bettermineshafts.json", defaultValue = false)
     @MixinConfig.CompatHandling(modid = "bettermineshafts", desired = true, warnIngame = false)
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)

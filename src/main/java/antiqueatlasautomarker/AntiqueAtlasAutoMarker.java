@@ -1,11 +1,12 @@
 package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.command.PutMarkerCommand;
+import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
 import antiqueatlasautomarker.config.folders.BiomeTileConfig;
-import antiqueatlasautomarker.custombiometiles.BetterEndBiomes;
+import antiqueatlasautomarker.custombiometiles.*;
 import antiqueatlasautomarker.handlers.LibrarianMarkerHandler;
 import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
@@ -76,7 +77,11 @@ public class AntiqueAtlasAutoMarker {
 
         BiomeTileConfig.reset(); //Rules are only needed during startup
 
-        if(Loader.isModLoaded("betterendforge")) BetterEndBiomes.postInit();
+        if(Loader.isModLoaded("betterendforge") && Loader.isModLoaded("netherapi")) BetterEndCompat.registerTiles();
+        if(Loader.isModLoaded("betternether") && Loader.isModLoaded("netherapi")) BetterNetherCompat.registerTiles();
+        if(Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
+        if(Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
+        if(ModCompat.isOTGLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
     }
 
     @Mod.EventHandler

@@ -1,6 +1,7 @@
 package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.compat.IceAndFireUtil;
+import antiqueatlasautomarker.compat.ModCompat;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
@@ -18,13 +19,13 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
 		//FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.forge.json");
 		//Antique Atlas Structure Markers
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json", () -> Loader.isModLoaded("antiqueatlas"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json", ModCompat::isAntiqueAtlasLoaded);
 
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json", () -> Loader.isModLoaded("antiqueatlas")); //TODO add toggle
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json", ModCompat::isAntiqueAtlasLoaded); //TODO add toggle
 
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.autobiomerules.json", () -> Loader.isModLoaded("antiqueatlas")); //TODO: only if list not empty?
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.autobiomerules.json", ModCompat::isAntiqueAtlasLoaded); //TODO: only if list not empty?
 
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.betterend.json", () -> Loader.isModLoaded("antiqueatlas") && Loader.isModLoaded("betterendforge")); //TODO add toggle
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.betterend.json", () -> ModCompat.isAntiqueAtlasLoaded() && Loader.isModLoaded("betterendforge")); //TODO add toggle
 
 		//Ice and Fire
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrotn.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN);

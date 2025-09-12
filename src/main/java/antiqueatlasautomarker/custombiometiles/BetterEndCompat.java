@@ -7,8 +7,8 @@ import hunternif.mc.atlas.client.TextureSet;
 import mod.beethoven92.betterendforge.common.init.ModBiomes;
 import net.minecraft.util.ResourceLocation;
 
-public class BetterEndBiomes {
-    public static void postInit(){
+public class BetterEndCompat {
+    public static void registerTiles(){
         TileAPI api = AtlasAPI.getTileAPI();
 
         TextureSet chorusForest = new TextureSet("BE_CHORUS_FOREST", tileLoc("chorusforest"), tileLoc("chorusforest2"));
@@ -49,6 +49,6 @@ public class BetterEndBiomes {
     }
 
     private static ResourceLocation tileLoc(String tileName){
-        return new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/betterend/"+tileName+".png");
+        return new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/betterend/"+tileName+".png");
     }
 }

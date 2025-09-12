@@ -1,0 +1,9 @@
+These textures were made by MinecraftForum user Golrith and shared on March 17 2015 on the Antique Atlas thread:
+    https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/1292324-antique-atlas?page=14
+As well as being featured on the Antique Atlas curseforge project by kenkron in 2017 after the old dropbox links on the minecraftforum thread stopped working
+    https://www.curseforge.com/minecraft/mc-mods/antique-atlas/files/2423346
+For temporal context, in March 2015 (10 years ago when writing this file)
+- newest Minecraft version was 1.8.2, but a lot of people were still playing 1.7.2
+- newest AntiqueAtlas version was 4.2.2
+- newest BOP version was 3.0.0.1099 for mc 1.8, 2.1.0.1067 for mc 1.7. Since then, a lot of biomes have been added and removed
+- newest Thaumcraft version was 4.2.3.5 for mc 1.7

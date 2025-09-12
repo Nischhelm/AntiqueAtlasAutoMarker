@@ -45,7 +45,9 @@ minecraft {
 
 repositories {
     flatDir { dirs 'libs' }
+    maven { url = "https://api.modrinth.com/maven" }
     maven { url = 'https://www.cursemaven.com' }
+    maven { url = 'https://maven.blamejared.com' }
 }
 
 dependencies {
@@ -81,8 +83,15 @@ dependencies {
 
     //Tiles
     compileOnly fg.deobf("curse.maven:betterendforge-backport-${betterend_version}")
+    compileOnly fg.deobf("curse.maven:open-terrain-generator-${otg_version}")
+    compileOnly fg.deobf("curse.maven:traverse-reforged-${traverse_version}")
+    compileOnly fg.deobf("curse.maven:defiledlands-${defiledlands_version}")
+    implementation fg.deobf("curse.maven:betternether-${betternether_version}")
+    compileOnly fg.deobf("maven.modrinth:nether-api:${netherapi_version}")
 
-    compileOnly "libs:CraftTweaker2-${ct_version}"
+    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-${crafttweaker_version}")
+    compileOnly fg.deobf("CraftTweaker2:ZenScript:${zs_version}")
+    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-API:${zs_version}")
 }
 
 mixin {

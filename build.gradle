@@ -86,7 +86,9 @@ dependencies {
     compileOnly fg.deobf("curse.maven:open-terrain-generator-${otg_version}")
     compileOnly fg.deobf("curse.maven:traverse-reforged-${traverse_version}")
     compileOnly fg.deobf("curse.maven:defiledlands-${defiledlands_version}")
-    implementation fg.deobf("curse.maven:betternether-${betternether_version}")
+    compileOnly fg.deobf("curse.maven:betternether-${betternether_version}")
+    compileOnly fg.deobf("curse.maven:thaumcraft-${thaumcraft_version}")
+    implementation "curse.maven:biomes-o-plenty-${bop_version}"
     compileOnly fg.deobf("maven.modrinth:nether-api:${netherapi_version}")
 
     compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-${crafttweaker_version}")

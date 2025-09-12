@@ -81,6 +81,8 @@ public class AntiqueAtlasAutoMarker {
         if(Loader.isModLoaded("betternether") && Loader.isModLoaded("netherapi")) BetterNetherCompat.registerTiles();
         if(Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
         if(Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
+        if(Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
+        if(Loader.isModLoaded("bop")) BiomesOPlentyCompat.registerTiles();
         if(ModCompat.isOTGLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
     }
 

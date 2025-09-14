@@ -108,6 +108,12 @@ public class BiomeTileConfig {
     @Config.RequiresMcRestart
     public boolean useColorisedThaumcraftTiles = true;
 
+    @Config.Comment("Will apply colorised vanilla tiles by either \"Artsy\", \"Golrith\" or \"Both\", which prioritises Golrith as that set has missing tiles for various biomes for which Artsy textures are used. By Golrith (2015) and Artsy (2021).\n" +
+            "Leave empty to disable.")
+    @Config.Name("Use Colorised Vanilla Tiles")
+    @Config.RequiresMcRestart
+    public String useColorisedVanillaTiles = "Artsy";
+
     public static void init() {
         for (String configLine : ConfigHandler.overhaul.tileConfig.automaticTypeRules)
             new TextureSetRule(configLine);

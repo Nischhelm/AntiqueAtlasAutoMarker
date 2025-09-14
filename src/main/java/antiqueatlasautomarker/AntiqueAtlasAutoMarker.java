@@ -56,6 +56,7 @@ public class AntiqueAtlasAutoMarker {
         EnchMarkSetting.init();
 
         BiomeTileConfig.init();
+        if(!ConfigHandler.overhaul.tileConfig.useColorisedVanillaTiles.isEmpty()) ColorizedVanillaBiomes.registerTiles();
 
         //Just for event testing purposes
         if(isDebugging) MinecraftForge.EVENT_BUS.register(TestAAAMEventHandler.class);

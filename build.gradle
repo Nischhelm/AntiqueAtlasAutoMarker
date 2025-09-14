@@ -88,7 +88,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:defiledlands-${defiledlands_version}")
     compileOnly fg.deobf("curse.maven:betternether-${betternether_version}")
     compileOnly fg.deobf("curse.maven:thaumcraft-${thaumcraft_version}")
-    implementation "curse.maven:biomes-o-plenty-${bop_version}"
+    compileOnly fg.deobf("curse.maven:biomes-o-plenty-${bop_version}")
     compileOnly fg.deobf("maven.modrinth:nether-api:${netherapi_version}")
 
     compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-${crafttweaker_version}")

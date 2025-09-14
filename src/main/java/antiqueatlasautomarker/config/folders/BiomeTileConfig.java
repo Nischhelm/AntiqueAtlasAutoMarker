@@ -64,6 +64,15 @@ public class BiomeTileConfig {
             "HILLS = HILLS"
     };
 
+    @Config.Comment("Define custom village tiles for custom village components here. \n" +
+            "Pattern: componentName, textureSetName, priority\n" +
+            "Component Names can be found in saves/yourworld/data/Village.dat in entries called \"id\"\n" +
+            "This also allows Recurrent Complex village components, use their \"RcSId\"\n" +
+            "Waystone Id is \"waystones:village_waystone\"")
+    @Config.Name("Custom Village Tiles")
+    @Config.RequiresMcRestart
+    public String[] customVillageTiles = {};
+
     public static void init() {
         for (String configLine : ConfigHandler.overhaul.tileConfig.automaticTypeRules)
             new TextureSetRule(configLine);

@@ -10,10 +10,6 @@ import net.minecraft.util.ResourceLocation;
 public class BiomesOPlentyCompat {
     public static void registerTiles(){
         //TODO: what about BOP nether biomes
-        //TODO: iceandfire:glacier should get the same alps
-        //TODO: i&f snow villages could get a watcher+tiles
-        //TODO: dragon roost watcher+tiles
-        //TODO: ocean monument tile maybe
 
         TileAPI api = AtlasAPI.getTileAPI();
 

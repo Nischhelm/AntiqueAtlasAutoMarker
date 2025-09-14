@@ -77,13 +77,13 @@ public class AntiqueAtlasAutoMarker {
 
         BiomeTileConfig.reset(); //Rules are only needed during startup
 
-        if(Loader.isModLoaded("betterendforge") && Loader.isModLoaded("netherapi")) BetterEndCompat.registerTiles();
-        if(Loader.isModLoaded("betternether") && Loader.isModLoaded("netherapi")) BetterNetherCompat.registerTiles();
-        if(Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
-        if(Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
-        if(Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
-        if(Loader.isModLoaded("biomesoplenty")) BiomesOPlentyCompat.registerTiles();
-        if(ModCompat.isOTGLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && Loader.isModLoaded("betterendforge") && Loader.isModLoaded("netherapi")) BetterEndCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("netherapi")) BetterNetherCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedBOPTiles && Loader.isModLoaded("biomesoplenty")) BiomesOPlentyCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedDregoraTiles && ModCompat.isOTGLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
     }
 
     @Mod.EventHandler

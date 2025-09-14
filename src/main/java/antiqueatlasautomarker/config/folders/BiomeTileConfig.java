@@ -73,6 +73,41 @@ public class BiomeTileConfig {
     @Config.RequiresMcRestart
     public String[] customVillageTiles = {};
 
+    @Config.Comment("Will only apply if BetterEnd Backport and NetherAPI are present. By Artsy (2025), slightly modified by Nischhelm.")
+    @Config.Name("Use Colorised BetterEnd Tiles")
+    @Config.RequiresMcRestart
+    public boolean useColorisedBetterEndTiles = true;
+
+//    @Config.Comment("Will only apply if BetterNether and NetherAPI are present. Not made yet.")
+//    @Config.Name("Use Colorised BetterNether Tiles")
+//    @Config.RequiresMcRestart
+    public boolean useColorisedBetterNetherTiles = true;
+
+//    @Config.Comment("Will only apply if DregoraRL and OTG are present. Not made yet.")
+//    @Config.Name("Use Colorised Dregora Tiles")
+//    @Config.RequiresMcRestart
+    public boolean useColorisedDregoraTiles = true;
+
+    @Config.Comment("Will only apply if DefiledLands is present. By Artsy (2021), modified original tiles by AA.")
+    @Config.Name("Use Colorised DefiledLands Tiles")
+    @Config.RequiresMcRestart
+    public boolean useColorisedDefiledLandsTiles = true;
+
+    @Config.Comment("Will only apply if Traverse is present. By Artsy (2021), modified original tiles by AA.")
+    @Config.Name("Use Colorised Traverse Tiles")
+    @Config.RequiresMcRestart
+    public boolean useColorisedTraverseTiles = true;
+
+    @Config.Comment("Will only apply if Biomes'O'Plenty is present. Mostly by Golrith (2015), currently being edited by Nischhelm.")
+    @Config.Name("Use Colorised BOP Tiles")
+    @Config.RequiresMcRestart
+    public boolean useColorisedBOPTiles = true;
+
+    @Config.Comment("Will only apply if Thaumcraft is present. By Golrith (2015).")
+    @Config.Name("Use Colorised Thaumcraft Tiles")
+    @Config.RequiresMcRestart
+    public boolean useColorisedThaumcraftTiles = true;
+
     public static void init() {
         for (String configLine : ConfigHandler.overhaul.tileConfig.automaticTypeRules)
             new TextureSetRule(configLine);

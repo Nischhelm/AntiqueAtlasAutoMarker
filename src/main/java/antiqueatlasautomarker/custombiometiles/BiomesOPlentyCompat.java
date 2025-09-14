@@ -9,40 +9,72 @@ import net.minecraft.util.ResourceLocation;
 
 public class BiomesOPlentyCompat {
     public static void registerTiles(){
+        //TODO: what about BOP nether biomes
+        //TODO: iceandfire:glacier should get the same alps
+        //TODO: i&f snow villages could get a watcher+tiles
+        //TODO: dragon roost watcher+tiles
+        //TODO: ocean monument tile maybe
+
         TileAPI api = AtlasAPI.getTileAPI();
 
         //why so many biomes :sob:
+        //TODO: could use a variant, also a bit stripey
         TextureSet bambooForest = new TextureSet("BOP_BAMBOO", tileLoc("bop_bamboo"));
+        //FINE
         TextureSet bayou = new TextureSet("BOP_BAYOU", tileLoc("bop_bayou1"), tileLoc("bop_bayou2"), tileLoc("bop_bayou3"));
+        //TODO: COLOR is wrong, missing mushrooms, trees should be max some stumps
         TextureSet bog = new TextureSet("BOP_BOG", tileLoc("bop_bog"));
+        //TODO: color doesnt fit, birch trees are more orange
         TextureSet borealForest = new TextureSet("BOP_BOR_FOREST", tileLoc("bop_bor_forest"));
+        //could use a variant, is less dense ingame
         TextureSet cherryBlossomGrove = new TextureSet("BOP_CHERRY", tileLoc("bop_cherry"));
+        //TODO: seems more chaotic + plateau above + greenish above + steep
         TextureSet crag = new TextureSet("BOP_CRAG", tileLoc("bop_crag"));
-        TextureSet deadForest = new TextureSet("BOP_DEAD_FOREST", tileLoc("bop_dead_forest"), tileLoc("bop_dead_forest2")); //TODO: working on that still...
+        //TODO: working on that still... too dense on map, needs a variant
+        TextureSet deadForest = new TextureSet("BOP_DEAD_FOREST", tileLoc("bop_dead_forest"));
+        //TODO: good color, could use a variant tho
         TextureSet fen = new TextureSet("BOP_FEN", tileLoc("bop_fen"));
+        //TODO: way too sparse, missing bushes
         TextureSet flowerField = new TextureSet("BOP_FLOWERFIELD", tileLoc("bop_flowerfield"));
-        TextureSet fungiForest = new TextureSet("BOP_FUNGIFOREST", tileLoc("bop_fungiforest"));
+        //kinda fineish - could be more pointy, trees are more stick-like than bushy
         TextureSet grove = new TextureSet("BOP_GROVE", tileLoc("bop_grove1"), tileLoc("bop_grove2"));
+        //TODO: i guess it could be fine but its actually way less pointy, also whats that double line about
         TextureSet highland = new TextureSet("BOP_HIGHLAND", tileLoc("bop_highland"));
+        //this is perfect
         TextureSet lavenderFields = new TextureSet("BOP_LAVFIELDS", tileLoc("bop_lavfields1"), tileLoc("bop_lavfields2"), tileLoc("bop_lavfields3"));
+        //this is fine, could stitch to water, mutually
         TextureSet lushSwamp = new TextureSet("BOP_LUSHSWAMP", tileLoc("bop_lushswamp1"), tileLoc("bop_lushswamp2"), tileLoc("bop_lushswamp3"), tileLoc("bop_lushswamp4"));
+        //TODO: maple woods are more brown, 0x7C3131
         TextureSet mapleWoods = new TextureSet("BOP_MAPLE", tileLoc("bop_maple1"), tileLoc("bop_maple2"));
-        TextureSet marsh = new TextureSet("BOP_MARSH", tileLoc("bop_marsh1"), tileLoc("bop_marsh2"), tileLoc("bop_marsh3"));
+        //with this stitching its great
+        TextureSet marsh = new TextureSet("BOP_MARSH", tileLoc("bop_marsh1"), tileLoc("bop_marsh2"), tileLoc("bop_marsh3")).stitchTo(TextureSet.WATER);
+        //TODO: in theory good but too much going on, reduce
         TextureSet moor = new TextureSet("BOP_MOOR", tileLoc("bop_moor"));
+        //this looks good, it could use a variant
         TextureSet mysticGrove = new TextureSet("BOP_MYSTICAL", tileLoc("bop_mystical"));
+        //this is fine, could use some red cactus/bramble, could be more foggy
         TextureSet ominousWoods = new TextureSet("BOP_OMNIOUS", tileLoc("bop_omnious1"), tileLoc("bop_omnious2"));
+        //TODO: why red apples, there are no red apples. have been removed in 1.8, now white flower
         TextureSet orchard = new TextureSet("BOP_ORCHARD", tileLoc("bop_orchard1"), tileLoc("bop_orchard2"));
+        //TODO: this is kinda fine, but its way more orange ingame, also has cacti
         TextureSet outback = new TextureSet("BOP_OUTBACK", tileLoc("bop_outback1"), tileLoc("bop_outback2"), tileLoc("bop_outback3"), tileLoc("bop_outback4"), tileLoc("bop_outback5"), tileLoc("bop_outback6"));
+        //TODO: theres variant issues fml, also could show the more red-brown color of some of the trees
         TextureSet seasonalForest = new TextureSet("BOP_SEASONAL", tileLoc("bop_seasonal1"), tileLoc("bop_seasonal2"), tileLoc("bop_seasonal3"));
         TextureSet shield = new TextureSet("BOP_SHIELD", tileLoc("bop_shield"));
+        //this is fine, could show more allium flowers but its really fine
         TextureSet shrubland = new TextureSet("BOP_SHRUBLAND", tileLoc("bop_shrubland"));
+        //TODO: this really needs a variant
         TextureSet tropicalIsland = new TextureSet("BOP_TROPICS", tileLoc("bop_tropics"));
+        //TODO: this looks fully different now bc its using mahagony
         TextureSet tropicalRainforest = tropicalIsland; //TODO
+        //TODO: biome looks like shit, tiles are fine, could use a variant without red top
         TextureSet volcanicIsland = new TextureSet("BOP_VOLCANIC", tileLoc("bop_volcanic"));
+        //TODO: biome looks like shit, tiles are fine, could use a variant, without whatever the gray shit is
         TextureSet wasteland = new TextureSet("BOP_WASTELAND", tileLoc("bop_wasteland"));
+        //GOOD
         TextureSet wetland = new TextureSet("BOP_WETLAND", tileLoc("bop_wetland1"), tileLoc("bop_wetland2"), tileLoc("bop_wetland3"));
 
-        //TODO bop biomes without a texutreset
+        //TODO bop biomes without a textureset
         TextureSet alps = TextureSet.MOUNTAINS_NAKED;
         TextureSet alps_foothills = TextureSet.SNOW_PINES;
         TextureSet brushland = TextureSet.SAVANNA;
@@ -50,7 +82,6 @@ public class BiomesOPlentyCompat {
         TextureSet cold_desert = TextureSet.PLAINS;
         TextureSet coniferous_forest = TextureSet.PINES;
         TextureSet coral_reef = TextureSet.WATER; //TODO
-        TextureSet corrupted_sands = TextureSet.PLAINS;
         TextureSet dead_swamp = TextureSet.SWAMP;
         TextureSet eucalyptus_forest = TextureSet.JUNGLE; //TODO
         TextureSet flower_island = TextureSet.WATER; //TODO
@@ -66,7 +97,6 @@ public class BiomesOPlentyCompat {
         TextureSet origin_island = TextureSet.SWAMP; //TODO
         TextureSet overgrown_cliffs = TextureSet.JUNGLE_CLIFFS;
         TextureSet pasture = TextureSet.PLAINS;
-        TextureSet phantasmagoric_inferno = TextureSet.DESERT;
         TextureSet prairie = TextureSet.PLAINS;
         TextureSet quagmire = TextureSet.SWAMP;
         TextureSet rainforest = TextureSet.JUNGLE_HILLS;
@@ -79,8 +109,6 @@ public class BiomesOPlentyCompat {
         TextureSet steppe = TextureSet.PLAINS;
         TextureSet temperate_rainforest = TextureSet.DENSE_FOREST;
         TextureSet tundra = TextureSet.SNOW;
-        TextureSet undergarden = TextureSet.PLAINS;
-        TextureSet visceral_heap = TextureSet.PLAINS;
         TextureSet white_beach = TextureSet.SHORE;
         TextureSet woodland = TextureSet.DENSE_FOREST;
         TextureSet xeric_shrubland = TextureSet.SAVANNA;
@@ -97,7 +125,6 @@ public class BiomesOPlentyCompat {
         BOPBiomes.cold_desert.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, cold_desert));
         BOPBiomes.coniferous_forest.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, coniferous_forest));
         BOPBiomes.coral_reef.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, coral_reef));
-        BOPBiomes.corrupted_sands.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, corrupted_sands));
         BOPBiomes.crag.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, crag));
         BOPBiomes.dead_forest.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, deadForest));
         BOPBiomes.dead_swamp.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, dead_swamp));
@@ -105,7 +132,6 @@ public class BiomesOPlentyCompat {
         BOPBiomes.fen.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, fen));
         BOPBiomes.flower_field.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, flowerField));
         BOPBiomes.flower_island.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, flower_island));
-        BOPBiomes.fungi_forest.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, fungiForest));
         BOPBiomes.glacier.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, glacier));
         BOPBiomes.grassland.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, grassland));
         BOPBiomes.gravel_beach.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, gravel_beach));
@@ -129,7 +155,6 @@ public class BiomesOPlentyCompat {
         BOPBiomes.outback.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, outback));
         BOPBiomes.overgrown_cliffs.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, overgrown_cliffs));
         BOPBiomes.pasture.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, pasture));
-        BOPBiomes.phantasmagoric_inferno.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, phantasmagoric_inferno));
         BOPBiomes.prairie.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, prairie));
         BOPBiomes.quagmire.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, quagmire));
         BOPBiomes.rainforest.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, rainforest));
@@ -147,14 +172,28 @@ public class BiomesOPlentyCompat {
         BOPBiomes.tropical_island.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, tropicalIsland));
         BOPBiomes.tropical_rainforest.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, tropicalRainforest));
         BOPBiomes.tundra.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, tundra));
-        BOPBiomes.undergarden.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, undergarden));
-        BOPBiomes.visceral_heap.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, visceral_heap));
         BOPBiomes.volcanic_island.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, volcanicIsland));
         BOPBiomes.wasteland.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, wasteland));
         BOPBiomes.wetland.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, wetland));
         BOPBiomes.white_beach.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, white_beach));
         BOPBiomes.woodland.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, woodland));
         BOPBiomes.xeric_shrubland.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, xeric_shrubland));
+
+        //NETHER BIOMES
+
+        TextureSet corrupted_sands = TextureSet.PLAINS;
+        //TODO: this is not actually a forest but a nether biome
+        TextureSet fungiForest = new TextureSet("BOP_FUNGIFOREST", tileLoc("bop_fungiforest"));
+        TextureSet phantasmagoric_inferno = TextureSet.DESERT;
+        TextureSet undergarden = TextureSet.PLAINS;
+        TextureSet visceral_heap = TextureSet.PLAINS;
+
+        BOPBiomes.corrupted_sands.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, corrupted_sands));
+        BOPBiomes.fungi_forest.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, fungiForest));
+        BOPBiomes.phantasmagoric_inferno.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, phantasmagoric_inferno));
+        BOPBiomes.undergarden.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, undergarden));
+        BOPBiomes.visceral_heap.toJavaUtil().ifPresent(b -> api.setBiomeTexture(b, visceral_heap));
+
     }
 
     private static ResourceLocation tileLoc(String tileName){

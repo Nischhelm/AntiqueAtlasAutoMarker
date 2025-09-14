@@ -15,7 +15,7 @@
     "structuremarkers.PacketDispatcherMixin",
     "structuremarkers.StructureWatcherGenericMixin",
     "structuremarkers.StructureWatcherVillageMixin",
-    "biometiles.TextureSetAccessor"
+    "biometiles.ColorisedVanillaTextures"
   ],
   "injectors": {
     "maxShiftBy": 10

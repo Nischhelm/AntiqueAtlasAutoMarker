@@ -6,7 +6,8 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
-    "CustomEndBiomesWithVoid"
+    "CustomEndBiomesWithVoid",
+    "CustomNetherBiomesWithLava"
   ],
   "injectors": {
     "maxShiftBy": 10

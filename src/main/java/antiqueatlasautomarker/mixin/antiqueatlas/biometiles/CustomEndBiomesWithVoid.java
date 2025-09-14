@@ -6,13 +6,11 @@ import hunternif.mc.atlas.core.BiomeDetectorEnd;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.Chunk;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Debug(export = true)
 @Mixin(BiomeDetectorEnd.class)
 public abstract class CustomEndBiomesWithVoid {
     @Inject(

@@ -77,8 +77,8 @@ public class AntiqueAtlasAutoMarker {
 
         BiomeTileConfig.reset(); //Rules are only needed during startup
 
-        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && Loader.isModLoaded("betterendforge") && Loader.isModLoaded("netherapi")) BetterEndCompat.registerTiles();
-        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("netherapi")) BetterNetherCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && Loader.isModLoaded("betterendforge") && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
+        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
         if(ConfigHandler.overhaul.tileConfig.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
         if(ConfigHandler.overhaul.tileConfig.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
         if(ConfigHandler.overhaul.tileConfig.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();

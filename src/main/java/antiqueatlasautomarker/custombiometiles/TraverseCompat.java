@@ -6,10 +6,11 @@ import hunternif.mc.atlas.api.TileAPI;
 import hunternif.mc.atlas.client.TextureSet;
 import hunternif.mc.atlas.client.Textures;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 import prospector.traverse.world.TraverseWorld;
 
 public class TraverseCompat {
-    public static void registerTiles(){
+    public static void registerTiles() {
         TileAPI api = AtlasAPI.getTileAPI();
 
         TextureSet autumnHills = new TextureSet("T_AUTUMN_HILLS", tileLoc("t_autumn_forest_hills"), tileLoc("t_autumn_forest_hills2"), tileLoc("t_autumn_forest_hills3"));
@@ -19,30 +20,56 @@ public class TraverseCompat {
         TextureSet redDesert = new TextureSet("T_RED_DESERT", tileLoc("t_red_sand"), tileLoc("t_red_sand2"), tileLoc("t_red_sand3"));
         TextureSet rockyPlateau = new TextureSet("T_ROCKY_PLATEAU", Textures.TILE_PLATEAU_GRASS, Textures.TILE_PLATEAU_GRASS2, Textures.TILE_PLATEAU_GRASS3, Textures.TILE_PLATEAU_TREES, Textures.TILE_PLATEAU_TREES_LOW);
 
-        api.setBiomeTexture(TraverseWorld.aridHighlandBiome, TextureSet.MOUNTAINS_NAKED);
-        api.setBiomeTexture(TraverseWorld.autumnalWoodedHillsBiome, autumnHills);
-        api.setBiomeTexture(TraverseWorld.autumnalWoodsBiome, autumnWoods);
-        api.setBiomeTexture(TraverseWorld.badlandsBiome, TextureSet.MOUNTAINS_NAKED);
-        api.setBiomeTexture(TraverseWorld.birchForestedHillsBiome, TextureSet.BIRCH_HILLS);
-        api.setBiomeTexture(TraverseWorld.canyonBiome, canyon);
-        api.setBiomeTexture(TraverseWorld.cliffsBiome, TextureSet.MOUNTAINS_NAKED);
-        api.setBiomeTexture(TraverseWorld.cragCliffsBiome, crag);
-        api.setBiomeTexture(TraverseWorld.desertShrublandBiome, TextureSet.PLAINS);
-        api.setBiomeTexture(TraverseWorld.forestedHillsBiome, TextureSet.FOREST_HILLS);
-        api.setBiomeTexture(TraverseWorld.glacierBiome, TextureSet.SNOW_HILLS);
-        api.setBiomeTexture(TraverseWorld.glacierSpikesBiome, TextureSet.ICE_SPIKES);
-        api.setBiomeTexture(TraverseWorld.lushSwampBiome, TextureSet.SWAMP);
-        api.setBiomeTexture(TraverseWorld.lushHillsBiome, TextureSet.FOREST_HILLS);
-        api.setBiomeTexture(TraverseWorld.meadowBiome, TextureSet.FOREST_FLOWERS);
-        api.setBiomeTexture(TraverseWorld.miniJungleBiome, TextureSet.JUNGLE);
-        api.setBiomeTexture(TraverseWorld.mountainousDesertBiome, TextureSet.DESERT_HILLS);
-        api.setBiomeTexture(TraverseWorld.redDesertBiome, redDesert);
-        api.setBiomeTexture(TraverseWorld.rockyPlainsBiome, TextureSet.HILLS);
-        api.setBiomeTexture(TraverseWorld.rockyPlateauBiome, rockyPlateau);
-        api.setBiomeTexture(TraverseWorld.snowyConiferousForestBiome, TextureSet.PINES);
-        api.setBiomeTexture(TraverseWorld.temperateRainforestBiome, TextureSet.PINES);
-        api.setBiomeTexture(TraverseWorld.thicketBiome, TextureSet.DENSE_FOREST);
-        api.setBiomeTexture(TraverseWorld.woodlandsBiome, TextureSet.FOREST);
+        /* TODO:
+        * aridHighlandBiome
+        * badlandsBiome
+        * birchForestedHillsBiome
+        * cliffsBiome
+        * desertShrublandBiome
+        * forestedHillsBiome
+        * glacierBiome
+        * glacierSpikesBiome
+        * lushSwampBiome
+        * lushHillsBiome
+        * meadowBiome
+        * miniJungleBiome
+        * mountainousDesertBiome
+        * rockyPlainsBiome
+        * snowyConiferousForestBiome
+        * temperateRainforestBiome
+        * thicketBiome
+        * woodlandsBiome
+        */
+
+        registerTexture(api, TraverseWorld.aridHighlandBiome, TextureSet.MOUNTAINS_NAKED);
+        registerTexture(api, TraverseWorld.autumnalWoodedHillsBiome, autumnHills);
+        registerTexture(api, TraverseWorld.autumnalWoodsBiome, autumnWoods);
+        registerTexture(api, TraverseWorld.badlandsBiome, TextureSet.MOUNTAINS_NAKED);
+        registerTexture(api, TraverseWorld.birchForestedHillsBiome, TextureSet.BIRCH_HILLS);
+        registerTexture(api, TraverseWorld.canyonBiome, canyon);
+        registerTexture(api, TraverseWorld.cliffsBiome, TextureSet.MOUNTAINS_NAKED);
+        registerTexture(api, TraverseWorld.cragCliffsBiome, crag);
+        registerTexture(api, TraverseWorld.desertShrublandBiome, TextureSet.PLAINS);
+        registerTexture(api, TraverseWorld.forestedHillsBiome, TextureSet.FOREST_HILLS);
+        registerTexture(api, TraverseWorld.glacierBiome, TextureSet.SNOW_HILLS);
+        registerTexture(api, TraverseWorld.glacierSpikesBiome, TextureSet.ICE_SPIKES);
+        registerTexture(api, TraverseWorld.lushSwampBiome, TextureSet.SWAMP);
+        registerTexture(api, TraverseWorld.lushHillsBiome, TextureSet.FOREST_HILLS);
+        registerTexture(api, TraverseWorld.meadowBiome, TextureSet.FOREST_FLOWERS);
+        registerTexture(api, TraverseWorld.miniJungleBiome, TextureSet.JUNGLE);
+        registerTexture(api, TraverseWorld.mountainousDesertBiome, TextureSet.DESERT_HILLS);
+        registerTexture(api, TraverseWorld.redDesertBiome, redDesert);
+        registerTexture(api, TraverseWorld.rockyPlainsBiome, TextureSet.HILLS);
+        registerTexture(api, TraverseWorld.rockyPlateauBiome, rockyPlateau);
+        registerTexture(api, TraverseWorld.snowyConiferousForestBiome, TextureSet.PINES);
+        registerTexture(api, TraverseWorld.temperateRainforestBiome, TextureSet.PINES);
+        registerTexture(api, TraverseWorld.thicketBiome, TextureSet.DENSE_FOREST);
+        registerTexture(api, TraverseWorld.woodlandsBiome, TextureSet.FOREST);
+    }
+    
+    private static void registerTexture(TileAPI api, Biome biome, TextureSet texture){
+        if(biome != null && TraverseWorld.biomeList.stream().anyMatch(entry -> entry.getBiome() == biome))
+            api.setBiomeTexture(biome, texture);
     }
 
     private static ResourceLocation tileLoc(String tileName){

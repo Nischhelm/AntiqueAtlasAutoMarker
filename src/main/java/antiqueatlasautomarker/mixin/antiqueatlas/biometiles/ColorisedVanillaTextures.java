@@ -267,11 +267,6 @@ public abstract class ColorisedVanillaTextures {
             aaam$artsyTextures.add("lava2.png");
             aaam$artsyTextures.add("lava_shore.png");
             aaam$artsyTextures.add("lava_shore2.png");
-            aaam$artsyTextures.add("end_void.png");
-            aaam$artsyTextures.add("end_island.png");
-            aaam$artsyTextures.add("end_island2.png");
-            aaam$artsyTextures.add("end_island_plants.png");
-            aaam$artsyTextures.add("end_island_plants2.png");
             aaam$artsyTextures.add("house.png");
             aaam$artsyTextures.add("fence.png");
             aaam$artsyTextures.add("library.png");

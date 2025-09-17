@@ -103,7 +103,7 @@ public abstract class CustomNetherBiomesWithLava {
         event.setCountAndIdFor("lava", ExtTileIdMap.instance().getPseudoBiomeID("lava"), lavaOccurences);
         event.setCountAndIdFor("ground", ExtTileIdMap.instance().getPseudoBiomeID("lavaShore"), groundOccurences);
         event.setCountAndIdFor("wall", hellId, biomeOccurrences[hellId]);
-        event.setCountAndIdFor("biome", maxBiomeId.get(), biomeOccurrences[maxBiomeId.get()]);
+        event.setCountAndIdFor("biome", maxBiomeId.get(), maxBiomeId.get() >= 0 ? biomeOccurrences[maxBiomeId.get()] : 0);
 
         MinecraftForge.EVENT_BUS.post(event);
         return event.getChosenBiomeId();

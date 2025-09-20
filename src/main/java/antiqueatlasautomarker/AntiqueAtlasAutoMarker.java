@@ -55,7 +55,7 @@ public class AntiqueAtlasAutoMarker {
         AutoMarkSetting.init();
         EnchMarkSetting.init();
 
-        BiomeTileConfig.init();
+        if(event.getSide() == Side.CLIENT) BiomeTileConfig.init();
 
         //Just for event testing purposes
         if(isDebugging) MinecraftForge.EVENT_BUS.register(TestAAAMEventHandler.class);
@@ -75,15 +75,17 @@ public class AntiqueAtlasAutoMarker {
     public void postInit(FMLPostInitializationEvent event) {
         ConfigHandler.vanillaStructs.postInit();
 
-        BiomeTileConfig.reset(); //Rules are only needed during startup
+        if(event.getSide() == Side.CLIENT) {
+            BiomeTileConfig.reset(); //Rules are only needed during startup
 
-        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && Loader.isModLoaded("betterendforge") && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
-        if(ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
-        if(ConfigHandler.overhaul.tileConfig.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
-        if(ConfigHandler.overhaul.tileConfig.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
-        if(ConfigHandler.overhaul.tileConfig.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
-        if(ConfigHandler.overhaul.tileConfig.useColorisedBOPTiles && Loader.isModLoaded("biomesoplenty")) BiomesOPlentyCompat.registerTiles();
-        if(ConfigHandler.overhaul.tileConfig.useColorisedDregoraTiles && ModCompat.isOTGLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && Loader.isModLoaded("betterendforge") && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedBOPTiles && Loader.isModLoaded("biomesoplenty")) BiomesOPlentyCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedDregoraTiles && ModCompat.isOTGLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
+        }
     }
 
     @Mod.EventHandler

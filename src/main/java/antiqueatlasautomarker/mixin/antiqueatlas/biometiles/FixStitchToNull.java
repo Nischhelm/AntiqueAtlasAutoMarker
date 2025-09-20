@@ -7,13 +7,11 @@ import hunternif.mc.atlas.client.BiomeTextureMap;
 import hunternif.mc.atlas.client.TextureSet;
 import hunternif.mc.atlas.client.TileRenderIterator;
 import hunternif.mc.atlas.core.Tile;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Debug(export = true)
 @Mixin(TileRenderIterator.class)
-public abstract class TileRenderIteratorMixin {
+public abstract class FixStitchToNull {
 
     @WrapOperation(
             method = {"shouldStitchTo", "shouldStitchToHorizontally", "shouldStitchToVertically"},
@@ -21,7 +19,6 @@ public abstract class TileRenderIteratorMixin {
             remap = false
     )
     private static TextureSet aaam_makeVoidStitchToNull(BiomeTextureMap instance, Tile tile, Operation<TextureSet> original, Tile tileFrom, Tile tileTo, @Local TextureSet setFrom){
-        //return tile == null ? null : original.call(instance, tile);
-        return original.call(instance, tile);
+        return tile == null ? null : original.call(instance, tile);
     }
 }

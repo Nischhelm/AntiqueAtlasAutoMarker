@@ -114,6 +114,17 @@ public class BiomeTileConfig {
     public EnumTextureSetArtist useColorisedVanillaTiles = EnumTextureSetArtist.ARTSY;
     public enum EnumTextureSetArtist{ ARTSY, GOLRITH, BOTH, NONE}
 
+    @Config.Comment("Stitching to null (undiscovered chunks) was meant to exist in Antique Atlas but never correctly implemented. AAAM fixes it. \n" +
+            "Add texture set names here to make them stitch to null.\n" +
+            "By default, AA has ROCK_SHORE and LAVA_SHORE stitch to null (without that doing anything).")
+    @Config.Name("TextureSets stitch to null")
+    @Config.RequiresMcRestart
+    public String[] stitchToNullSets = {
+            "END_VOID",
+            "LAVA_SHORE",
+            "LAVA"
+    };
+
     public static void init() {
         for (String configLine : ConfigHandler.overhaul.tileConfig.automaticTypeRules)
             new TextureSetRule(configLine);

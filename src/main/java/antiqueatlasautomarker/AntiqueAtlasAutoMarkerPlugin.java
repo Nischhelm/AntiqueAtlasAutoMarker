@@ -23,7 +23,8 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json", ModCompat::isAntiqueAtlasLoaded); //TODO add toggle
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json", ModCompat::isAntiqueAtlasLoaded); //TODO add toggle
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.autobiomerules.json", ModCompat::isAntiqueAtlasLoaded); //TODO: only if list not empty?
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", ModCompat::isAntiqueAtlasLoaded); //TODO: only if list not empty?
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", ModCompat::isAntiqueAtlasLoaded); //TODO: only if list not empty?
 
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.betterend.json", () -> ModCompat.isAntiqueAtlasLoaded() && Loader.isModLoaded("betterendforge")); //TODO add toggle
 

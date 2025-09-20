@@ -32,7 +32,7 @@ import org.apache.logging.log4j.Logger;
 )
 public class AntiqueAtlasAutoMarker {
     public static final String MODID = "antiqueatlasautomarker";
-    public static final String VERSION = "1.4.0";
+    public static final String VERSION = "1.4.1";
     public static final String NAME = "AntiqueAtlasAutoMarker";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final boolean isDebugging = false;
@@ -78,13 +78,13 @@ public class AntiqueAtlasAutoMarker {
         if(event.getSide() == Side.CLIENT) {
             BiomeTileConfig.reset(); //Rules are only needed during startup
 
-            if (ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && Loader.isModLoaded("betterendforge") && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && ModCompat.betterEnd.isLoaded() && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedBOPTiles && Loader.isModLoaded("biomesoplenty")) BiomesOPlentyCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedDregoraTiles && ModCompat.isOTGLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedBOPTiles && ModCompat.biomesOPlenty.isLoaded()) BiomesOPlentyCompat.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.useColorisedDregoraTiles && ModCompat.otg.isLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
         }
     }
 

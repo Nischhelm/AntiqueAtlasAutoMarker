@@ -8,9 +8,7 @@
   "mixins": [
     "BiomeDetectorBaseEvent",
     "CustomEndBiomesWithVoid",
-    "CustomNetherBiomesWithLava",
-    "TextureSetMixin",
-    "TileRenderIteratorMixin"
+    "CustomNetherBiomesWithLava"
   ],
   "injectors": {
     "maxShiftBy": 10

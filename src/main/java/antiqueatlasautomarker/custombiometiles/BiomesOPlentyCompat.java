@@ -6,8 +6,14 @@ import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.api.TileAPI;
 import hunternif.mc.atlas.client.TextureSet;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 
 public class BiomesOPlentyCompat {
+
+    public static Biome getMarshBiome(){
+        return BOPBiomes.marsh.isPresent() ? BOPBiomes.marsh.get() : null;
+    }
+
     public static void registerTiles(){
         //TODO: what about BOP nether biomes
 

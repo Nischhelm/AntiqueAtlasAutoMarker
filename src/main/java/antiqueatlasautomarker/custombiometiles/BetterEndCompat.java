@@ -8,9 +8,14 @@ import hunternif.mc.atlas.client.Textures;
 import hunternif.mc.atlas.ext.ExtTileIdMap;
 import mod.beethoven92.betterendforge.common.init.ModBiomes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 
 public class BetterEndCompat {
     public static int BE_ICE_STARFIELD_VOID;
+
+    public static Biome getIceStarfieldBiome(){
+        return ModBiomes.ICE_STARFIELD.getBiome();
+    }
 
     public static void registerTiles(){
         TileAPI api = AtlasAPI.getTileAPI();

@@ -19,13 +19,13 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
 		//FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.forge.json");
 		//Antique Atlas Structure Markers
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json", ModCompat::isAntiqueAtlasLoaded);
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json", ModCompat.antiqueAtlas::isLoaded);
 
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json", ModCompat::isAntiqueAtlasLoaded); //TODO add toggle
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json", ModCompat::isAntiqueAtlasLoaded); //TODO add toggle
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", ModCompat::isAntiqueAtlasLoaded); //TODO: only if list not empty?
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", ModCompat::isAntiqueAtlasLoaded); //TODO: only if list not empty?
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.custom_nether_end_biomes.json", ModCompat::isAntiqueAtlasLoaded); //TODO add toggle
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json", ModCompat.antiqueAtlas::isLoaded); //TODO add toggle
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json", ModCompat.antiqueAtlas::isLoaded); //TODO add toggle
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", ModCompat.antiqueAtlas::isLoaded); //TODO: only if list not empty?
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", ModCompat.antiqueAtlas::isLoaded); //TODO: only if list not empty?
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.custom_nether_end_biomes.json", ModCompat.antiqueAtlas::isLoaded); //TODO add toggle
 
 		//Ice and Fire
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrotn.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN);

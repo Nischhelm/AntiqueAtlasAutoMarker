@@ -48,7 +48,7 @@ public abstract class MapGenStructureMixin {
     private NBTTagCompound aaam_invokeStructureWatchers(NBTTagCompound tags, @Local(argsOnly = true) StructureStart start){
         if(!this.aaam$isInCorrectChunk || this.aaam$savedWorld == null) return tags;
         MapGenStructure structGen = (MapGenStructure) (Object) this;
-        if(structGen instanceof MapGenVillage || (ModCompat.isOTGLoaded() && OpenTerrainGeneratorCompat.isOTGVillage(structGen)))
+        if(structGen instanceof MapGenVillage || (ModCompat.otg.isLoaded() && OpenTerrainGeneratorCompat.isOTGVillage(structGen)))
             ((StructureWatcherVillageAccessor )StructureWatcherReference.villageWatcher).invokeVisitVillage(this.aaam$savedWorld, tags);
         else if(structGen instanceof MapGenNetherBridge)
             ((StructureWatcherFortressAccessor) StructureWatcherReference.fortressWatcher).invokeVisitFortress(this.aaam$savedWorld, tags);

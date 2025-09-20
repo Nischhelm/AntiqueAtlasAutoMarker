@@ -41,10 +41,15 @@ public abstract class BiomeDetectorBaseEvent {
         event.setCountAndIdFor("lava", ExtTileIdMap.instance().getPseudoBiomeID("lava"), lavaOccurences);
         event.setCountAndIdFor("water", waterPoolBiomeID, biomeOccurrences.getOrDefault(waterPoolBiomeID, 0));
         event.setCountAndIdFor("ravine", ExtTileIdMap.instance().getPseudoBiomeID("ravine"), ravineOccurences);
-        if(meanBiomeId == waterPoolBiomeID){
+        if(meanBiomeId == waterPoolBiomeID && biomeOccurrences.size() > 1){
             //Special case since water is its own biome
-            meanBiomeId = biomeOccurrences.entrySet().stream().filter(entry -> entry.getKey() != waterPoolBiomeID).max(Comparator.comparingInt(Map.Entry::getValue)).get().getKey();
-            meanBiomeOccurrences = biomeOccurrences.get(meanBiomeId);
+            int maxval = 0;
+            for(Map.Entry<Integer, Integer> entry : biomeOccurrences.entrySet()){
+                if(entry.getKey() != waterPoolBiomeID && entry.getValue() > maxval){
+                    meanBiomeId = entry.getKey();
+                    maxval = entry.getValue();
+                }
+            }
         }
         event.setCountAndIdFor("biome", meanBiomeId, meanBiomeOccurrences);
 

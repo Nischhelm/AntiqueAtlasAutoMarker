@@ -7,7 +7,9 @@
   "minVersion": "0.8",
   "mixins": [
     "structuremarkers.DeleteMarkerPacketMixin",
-    "structuremarkers.DimensionMarkersDataMixin",
+    "structuremarkers.custompositions.DimensionMarkersDataMixin",
+    "structuremarkers.custompositions.CustomPosMarker",
+    "structuremarkers.custompositions.SaveLoadCustomPosMarkers",
     "structuremarkers.ItemAtlasMixin",
     "structuremarkers.MarkerApiImpllMixin",
     "structuremarkers.MarkerMixin",

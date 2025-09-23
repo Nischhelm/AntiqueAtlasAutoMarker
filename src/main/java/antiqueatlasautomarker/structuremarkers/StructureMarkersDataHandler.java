@@ -49,7 +49,17 @@ public class StructureMarkersDataHandler {
         //Only for stupid things like doomlike dungeons generating the same dungeon multiple times bruh
         //Server side only comparison, so it's fine with clientside deletions/overrides
         boolean hasMarkerAlready = false;
-        List<Marker> markersHere = data.getMarkersAtChunk(dimension, (x >> 4) / MarkersData.CHUNK_STEP, (z >> 4) / MarkersData.CHUNK_STEP);
+
+        int checkPosX, checkPosZ;
+        if(CustomPosition.isEmpty()){
+            checkPosX = (x >> 4) / MarkersData.CHUNK_STEP;
+            checkPosZ = (z >> 4) / MarkersData.CHUNK_STEP;
+        } else {
+            checkPosX = CustomPosition.get().bigChunkX;
+            checkPosZ = CustomPosition.get().bigChunkZ;
+        }
+
+        List<Marker> markersHere = data.getMarkersAtChunk(dimension, checkPosX, checkPosZ);
         if(markersHere != null) {
             for (Marker marker : markersHere) {
                 if (marker.getX() != x) continue;
@@ -86,7 +96,9 @@ public class StructureMarkersDataHandler {
         //set threadLocal to position where the custom marker would get discovered
         CustomPosition.set(xDiscover, zDiscover);
         //The actual marker position is where the marker will appear in the atlas
-        return markStructure(world, x, z, markerType, markerName, "customPos", dim);
+        Marker createdMarker = markStructure(world, x, z, markerType, markerName, "customPos", dim);
+        CustomPosition.clear();
+        return createdMarker;
     }
 
     public static ArrayList<Marker> updateMarkersAroundPlayer(EntityPlayer player, MarkersData atlasMarkers) {

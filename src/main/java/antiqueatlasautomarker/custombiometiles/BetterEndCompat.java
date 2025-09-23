@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.custombiometiles;
 
+import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.api.TileAPI;
@@ -41,26 +42,31 @@ public class BetterEndCompat {
         TextureSet umbraValley = new TextureSet("BE_UMBRA_VALLEY", tileLoc("umbra_valley"), tileLoc("umbra_valley2"));
         TextureSet umbrellaJungle = new TextureSet("BE_UMBRELLA_JUNGLE", tileLoc("umbrellajungle"));
 
-        api.setBiomeTexture(ModBiomes.AMBER_LAND.getBiome(), amberLand);
-        api.setBiomeTexture(ModBiomes.BLOSSOMING_SPIRES.getBiome(), blossomingSpires);
-        api.setBiomeTexture(ModBiomes.CHORUS_FOREST.getBiome(), chorusForest);
-        api.setBiomeTexture(ModBiomes.CRYSTAL_MOUNTAINS.getBiome(), crystalMountains);
-        api.setBiomeTexture(ModBiomes.DRAGON_GRAVEYARDS.getBiome(), dragonGraveyard);
-        api.setBiomeTexture(ModBiomes.DRY_SHRUBLAND.getBiome(), dryShrubland);
-        api.setBiomeTexture(ModBiomes.DUST_WASTELANDS.getBiome(), dustWastelands);
-        api.setBiomeTexture(ModBiomes.GLOWING_GRASSLANDS.getBiome(), glowingGrasslands);
-        api.setBiomeTexture(ModBiomes.FOGGY_MUSHROOMLAND.getBiome(), foggyMushroomland);
-        api.setBiomeTexture(ModBiomes.ICE_STARFIELD.getBiome(), iceStarfield);
+        registerTextureIfPresent(api, ModBiomes.AMBER_LAND.getBiome(), amberLand);
+        registerTextureIfPresent(api, ModBiomes.BLOSSOMING_SPIRES.getBiome(), blossomingSpires);
+        registerTextureIfPresent(api, ModBiomes.CHORUS_FOREST.getBiome(), chorusForest);
+        registerTextureIfPresent(api, ModBiomes.CRYSTAL_MOUNTAINS.getBiome(), crystalMountains);
+        registerTextureIfPresent(api, ModBiomes.DRAGON_GRAVEYARDS.getBiome(), dragonGraveyard);
+        registerTextureIfPresent(api, ModBiomes.DRY_SHRUBLAND.getBiome(), dryShrubland);
+        registerTextureIfPresent(api, ModBiomes.DUST_WASTELANDS.getBiome(), dustWastelands);
+        registerTextureIfPresent(api, ModBiomes.GLOWING_GRASSLANDS.getBiome(), glowingGrasslands);
+        registerTextureIfPresent(api, ModBiomes.FOGGY_MUSHROOMLAND.getBiome(), foggyMushroomland);
+        registerTextureIfPresent(api, ModBiomes.ICE_STARFIELD.getBiome(), iceStarfield);
         BE_ICE_STARFIELD_VOID = registerCustomVoidTexture(api, iceStarfieldVoid);
-        api.setBiomeTexture(ModBiomes.LANTERN_WOODS.getBiome(), lanternWoods);
-        api.setBiomeTexture(ModBiomes.MEGALAKE.getBiome(), megalake);
-        api.setBiomeTexture(ModBiomes.MEGALAKE_GROVE.getBiome(), megalakeGrove);
-        api.setBiomeTexture(ModBiomes.NEON_OASIS.getBiome(), neonOasis);
-        api.setBiomeTexture(ModBiomes.PAINTED_MOUNTAINS.getBiome(), paintedMountains);
-        api.setBiomeTexture(ModBiomes.SHADOW_FOREST.getBiome(), shadowForest);
-        api.setBiomeTexture(ModBiomes.SULPHUR_SPRINGS.getBiome(), sulphurSprings);
-        api.setBiomeTexture(ModBiomes.UMBRA_VALLEY.getBiome(), umbraValley);
-        api.setBiomeTexture(ModBiomes.UMBRELLA_JUNGLE.getBiome(), umbrellaJungle);
+        registerTextureIfPresent(api, ModBiomes.LANTERN_WOODS.getBiome(), lanternWoods);
+        registerTextureIfPresent(api, ModBiomes.MEGALAKE.getBiome(), megalake);
+        registerTextureIfPresent(api, ModBiomes.MEGALAKE_GROVE.getBiome(), megalakeGrove);
+        registerTextureIfPresent(api, ModBiomes.NEON_OASIS.getBiome(), neonOasis);
+        registerTextureIfPresent(api, ModBiomes.PAINTED_MOUNTAINS.getBiome(), paintedMountains);
+        registerTextureIfPresent(api, ModBiomes.SHADOW_FOREST.getBiome(), shadowForest);
+        registerTextureIfPresent(api, ModBiomes.SULPHUR_SPRINGS.getBiome(), sulphurSprings);
+        registerTextureIfPresent(api, ModBiomes.UMBRA_VALLEY.getBiome(), umbraValley);
+        registerTextureIfPresent(api, ModBiomes.UMBRELLA_JUNGLE.getBiome(), umbrellaJungle);
+    }
+
+    private static void registerTextureIfPresent(TileAPI api, Biome biome, TextureSet texture){
+        //disabled BetterEnd biomes have a null registryName
+        if(biome.getRegistryName() != null) api.setBiomeTexture(biome, texture);
     }
 
     private static int registerCustomVoidTexture(TileAPI api, TextureSet set){

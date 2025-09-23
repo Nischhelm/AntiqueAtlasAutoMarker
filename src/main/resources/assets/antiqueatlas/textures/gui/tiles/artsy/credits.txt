@@ -1,4 +1,5 @@
 The textures for vanilla, DefiledLands and Traverse Reforged were first released in RLCraft 2.9 (Dec 2021).
 They were created by Artsy, even though he said he doesn't remember if he worked off of some other colorised texture set.
 
-The textures for Better End Backport were created by Artsy and edited by me (Nischhelm) in 2025.
+The textures for Better End Backport were created by Artsy in 2025. Some were edited and expanded upon by me (Nischhelm)
+Same for Better Nether, only that i didnt edit anything about them

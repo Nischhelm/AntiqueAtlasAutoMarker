@@ -1,109 +1,86 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.biometiles;
 
+import antiqueatlasautomarker.custombiometiles.NetherTiles;
 import antiqueatlasautomarker.event.BiomeDetectorEvent;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
+import hunternif.mc.atlas.core.BiomeDetectorBase;
 import hunternif.mc.atlas.core.BiomeDetectorNether;
 import hunternif.mc.atlas.ext.ExtTileIdMap;
-import net.minecraft.block.Block;
+import hunternif.mc.atlas.util.ByteUtil;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.*;
 
+import java.lang.reflect.InvocationTargetException;
+
+/**
+ * this whole class only makes sense with NetherTiles.registerTiles(), otherwise texture for Hell biome is CAVE_WALLS
+ */
 @Mixin(BiomeDetectorNether.class)
-public abstract class CustomNetherBiomesWithLava {
-    @Shadow(remap = false) @Final private static int priorityLava;
+public abstract class CustomNetherBiomesWithLava extends BiomeDetectorBase {
     @Shadow(remap = false) @Final private static int airProbeLevel;
     @Shadow(remap = false) @Final private static int lavaSeaLevel;
+    @Unique private static final int aaam$priorityBiome = 3;
+    @Unique private static final int aaam$priorityLava = 4;
+    @Unique private static final int aaam$priorityWall = 4;
 
-    @ModifyExpressionValue(
-            method = "getBiomeID",
-            at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/core/BiomeDetectorNether;priorityForBiome(Lnet/minecraft/world/biome/Biome;)I"),
-            remap = false
-    )
-    private int aaam_countVoidForCustomEndBiomes(
-            int original,
-            Chunk chunk, //target method param
-            @Local(name = "groundOccurences") LocalIntRef groundOccurences,
-            @Local(name = "lavaOccurences") LocalIntRef lavaOccurences,
-            @Local(name = "hellID") int hellID,
-            @Local(name = "biomeOccurrences") int[] biomeOccurrences,
-            @Local(name = "x") int x,
-            @Local(name = "z") int z
-    ){
-        Block netherBlock = chunk.getBlockState(x, lavaSeaLevel, z).getBlock();
-        if (netherBlock == Blocks.LAVA) {
-            lavaOccurences.set(lavaOccurences.get() + priorityLava);
-            return 0;
-        } else {
-            netherBlock = chunk.getBlockState(x, airProbeLevel, z).getBlock();
-            if (netherBlock == Blocks.AIR){
-                groundOccurences.set(groundOccurences.get() + original * 2); //count ground = not lava & not in wall
-                return original; //count the actual modded nether biome if we're not in a wall
-            }
-            else {
-                biomeOccurrences[hellID]++; //count cave walls which is registered for Hell biome for whatever reason
-                return 0; //don't show custom biome if in a wall
+    /**
+     * @author Nischhelm
+     * @reason wall and biome mixed up makes this really funky
+     */
+    @Overwrite(remap = false)
+    public int getBiomeID(Chunk chunk) {
+        int biomesCount = Biome.REGISTRY.getKeys().size();
+        int[] chunkBiomes;
+        try {
+            chunkBiomes = ByteUtil.unsignedByteToIntArray(biomeArrayMethod.invoke(chunk));
+        }
+        catch (IllegalAccessException | InvocationTargetException e) { throw new RuntimeException(e); }
+
+        int[] biomeOccurrences = new int[biomesCount];
+
+        int lavaOccurrences = 0;
+        int wallOccurrences = 0;
+
+        int hellID = Biome.getIdForBiome(Biomes.HELL);
+
+        for (int x = 0; x < 16; x++) {
+            for (int z = 0; z < 16; z++) {
+                int biomeID = chunkBiomes[x << 4 | z];
+
+                if (chunk.getBlockState(x, lavaSeaLevel, z).getBlock() == Blocks.LAVA)
+                    lavaOccurrences += aaam$priorityLava;
+                if (chunk.getBlockState(x, airProbeLevel, z).getBlock() != Blocks.AIR)
+                    wallOccurrences += aaam$priorityWall;
+
+                if(biomeID == hellID || biomeID >= 0 && biomeID < biomesCount && Biome.getBiomeForId(biomeID) != null)
+                    biomeOccurrences[biomeID] += aaam$priorityBiome;
             }
         }
-    }
 
-    @ModifyExpressionValue(
-            method = "getBiomeID",
-            at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/ext/ExtTileIdMap;getPseudoBiomeID(Ljava/lang/String;)I", ordinal = 1),
-            remap = false
-    )
-    private int aaam_countLavaForCustomNetherBiomes(
-            int original,
-            @Local(name = "meanBiomeId") int meanBiomeId,
-            @Local(name = "hellID") int hellID
-    ){
-        if(meanBiomeId == hellID) return original;
-        return meanBiomeId;
-    }
+        int meanBiomeId = NOT_FOUND;
+        int meanBiomeOccurences = 0;
+        for (int i = 0; i < biomeOccurrences.length; i++) {
+            if (biomeOccurrences[i] > meanBiomeOccurences) {
+                meanBiomeId = i;
+                meanBiomeOccurences = biomeOccurrences[i];
+            }
+        }
 
-    @ModifyVariable(
-            method = "getBiomeID",
-            at = @At(value = "LOAD", ordinal = 1),
-            name = "meanBiomeOccurences",
-            remap = false
-    )
-    private int aaam_storeMaxBiomeId(
-            int value,
-            @Local(name = "meanBiomeId") int meanBiomeId,
-            @Share("maxBiomeId") LocalIntRef maxBiomeId
-    ){
-        maxBiomeId.set(meanBiomeId);
-        return value;
-    }
+        int retValue = meanBiomeId;
 
-    @ModifyReturnValue(
-            method = "getBiomeID",
-            at = @At("RETURN"),
-            remap = false
-    )
-    private int aaam_useEventToModifyReturnValue(
-            int original,
-            Chunk chunk,
-            @Local(name = "lavaOccurences") int lavaOccurences,
-            @Local(name = "groundOccurences") int groundOccurences,
-            @Local(name = "biomeOccurrences") int[] biomeOccurrences,
-            @Local(name = "hellID") int hellId,
-            @Share("maxBiomeId") LocalIntRef maxBiomeId
-    ){
-        BiomeDetectorEvent event = new BiomeDetectorEvent(chunk, original);
-        event.setCountAndIdFor("lava", ExtTileIdMap.instance().getPseudoBiomeID("lava"), lavaOccurences);
-        event.setCountAndIdFor("ground", ExtTileIdMap.instance().getPseudoBiomeID("lavaShore"), groundOccurences);
-        event.setCountAndIdFor("wall", hellId, biomeOccurrences[hellId]);
-        event.setCountAndIdFor("biome", maxBiomeId.get(), maxBiomeId.get() >= 0 ? biomeOccurrences[maxBiomeId.get()] : 0);
+        int lavaId = ExtTileIdMap.instance().getPseudoBiomeID(ExtTileIdMap.TILE_LAVA);
+        if(wallOccurrences > lavaOccurrences && wallOccurrences >= meanBiomeOccurences) //mostly wall
+            retValue = NetherTiles.WALL;
+        else if(lavaOccurrences >= meanBiomeOccurences) //mostly lava
+            retValue = lavaId;
+
+        BiomeDetectorEvent event = new BiomeDetectorEvent(chunk, retValue);
+        event.setCountAndIdFor("lava", lavaId, lavaOccurrences);
+        event.setCountAndIdFor("wall", NetherTiles.WALL, wallOccurrences);
+        event.setCountAndIdFor("biome", meanBiomeId, meanBiomeOccurences);
 
         MinecraftForge.EVENT_BUS.post(event);
         return event.getChosenBiomeId();

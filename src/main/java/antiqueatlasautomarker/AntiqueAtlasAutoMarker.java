@@ -78,6 +78,7 @@ public class AntiqueAtlasAutoMarker {
         if(event.getSide() == Side.CLIENT) {
             BiomeTileConfig.reset(); //Rules are only needed during startup
 
+            NetherTiles.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && ModCompat.betterEnd.isLoaded() && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();

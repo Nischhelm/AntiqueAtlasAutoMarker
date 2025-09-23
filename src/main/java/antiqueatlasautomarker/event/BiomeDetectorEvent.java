@@ -13,10 +13,10 @@ import java.util.Set;
  * Used to change what TextureSet tile to use for a specific chunk. Negative chosenBiomeIds signify ExtTiles
  * counts has various counts that were used to determine what tile to use.
  *  - Overworld: ravine, lava, water, biome
- *  - Nether: lava, wall, ground, biome
+ *  - Nether: lava, wall, biome
  *  - End: void, endstone, chorus, biome
  * Where "biome" always stores the biome id of the biome that is most common in that chunk
- * Nether is weird where it specifically sees "wall" as Hell biome, while ground is custom biome or lava shore
+ * Nether shows LAVA when there's mostly lava at y=31 and CAVE_WALLS (wall) when there's mostly full blocks (not air) at y=50
  * In The End in custom biomes "chorus" and "endstone" will always be 0
  */
 public class BiomeDetectorEvent extends ChunkEvent {

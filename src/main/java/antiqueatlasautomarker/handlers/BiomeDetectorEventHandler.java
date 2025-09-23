@@ -4,6 +4,7 @@ import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.custombiometiles.BetterEndCompat;
 import antiqueatlasautomarker.custombiometiles.BiomesOPlentyCompat;
 import antiqueatlasautomarker.event.BiomeDetectorEvent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -25,6 +26,14 @@ public class BiomeDetectorEventHandler {
                             event.setChosenBiomeId(event.getIdFor("biome")); //give biome 1.5x priority to reduce actual ponds
                     }
                 }
+                break;
+            case -1:
+                event.getWorld().playerEntities.stream()
+                        .filter(player -> event.getChunk().isAtLocation(player.chunkCoordX, player.chunkCoordZ))
+                        .forEach(player -> {
+                            player.sendMessage(new TextComponentString("Chunk " + event.getChunk().getPos() + " chosen is "+ event.getChosenBiomeId()));
+                            event.getCountTypes().forEach(type -> player.sendMessage(new TextComponentString(type + " " + event.getIdFor(type) + " " + event.getCountFor(type))));
+                        });
                 break;
         }
         //TODO: blacklist for biomes that should ignore ravines / use their own ravine texture

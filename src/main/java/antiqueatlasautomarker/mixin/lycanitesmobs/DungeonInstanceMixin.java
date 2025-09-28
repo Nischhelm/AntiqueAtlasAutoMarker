@@ -34,29 +34,24 @@ public class DungeonInstanceMixin {
 
     @Shadow(remap = false) public DungeonSchematic schematic;
     @Shadow(remap = false) public BlockPos originPos;
+    @Shadow(remap = false) public int chunksBuilt;
 
-    @Inject(
-            method = "buildChunk",
-            at = @At(value = "FIELD", target = "Lcom/lycanitesmobs/core/dungeon/instance/DungeonInstance;complete:Z", ordinal = 1),
-            remap = false
-    )
-    private void markLycaDungeon(World world, ChunkPos chunkPos, CallbackInfo ci){
-        AutoMarkSetting setting = AutoMarkSetting.get("lycanite");
-
-        if(setting != null && setting.enabled) {
-            String label = setting.label;
-            if(label.equals("DEFAULT")) {
-                label = this.schematic.name;
-                if (aaam$lycaDungeonNames.containsKey(label))
-                    label = aaam$lycaDungeonNames.get(label);
+    @Inject(method = "buildChunk", at = @At("HEAD"), remap = false)
+    private void aaam$markLycanitesDungeon(World world, ChunkPos chunkPos, CallbackInfo ci) {
+        if (this.chunksBuilt == 0) {
+            AutoMarkSetting setting = AutoMarkSetting.get("lycanite");
+            if (setting != null && setting.enabled) {
+                String label = setting.label;
+                if ("DEFAULT".equals(label)) {
+                    label = this.schematic.name;
+                    if (aaam$lycaDungeonNames.containsKey(label)) {
+                        label = aaam$lycaDungeonNames.get(label);
+                    }
+                }
+                StructureMarkersDataHandler.markStructure(world, this.originPos, setting.type, label, setting.context);
+                System.out.println("[AAAM] Marked Lycanites dungeon: " + label + " at " + this.originPos);
             }
-            StructureMarkersDataHandler.markStructure(
-                    world,
-                    originPos,
-                    setting.type,
-                    label,
-                    setting.context
-            );
         }
     }
+   
 }

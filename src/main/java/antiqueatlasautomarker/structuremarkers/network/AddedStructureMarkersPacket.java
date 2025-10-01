@@ -45,7 +45,7 @@ public class AddedStructureMarkersPacket extends AbstractMessage.AbstractServerM
             String type = ByteBufUtils.readUTF8String(buffer);
             int markersLength = buffer.readVarInt();
             for (int j = 0; j < markersLength; j++) {
-                Marker marker = new Marker(buffer.readVarInt(), type, ByteBufUtils.readUTF8String(buffer), dimension, buffer.readInt(), buffer.readInt(), false);
+                Marker marker = new Marker(buffer.readVarInt(), type, ByteBufUtils.readUTF8String(buffer), dimension, buffer.readInt(), buffer.readInt(), buffer.readBoolean());
                 markersByType.put(type, marker);
             }
         }
@@ -66,6 +66,7 @@ public class AddedStructureMarkersPacket extends AbstractMessage.AbstractServerM
                 ByteBufUtils.writeUTF8String(buffer, marker.getLabel());
                 buffer.writeInt(marker.getX());
                 buffer.writeInt(marker.getZ());
+                buffer.writeBoolean(marker.isVisibleAhead());
             }
         }
     }

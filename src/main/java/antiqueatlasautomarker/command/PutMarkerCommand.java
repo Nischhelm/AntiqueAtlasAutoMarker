@@ -44,7 +44,7 @@ public class PutMarkerCommand implements ICommand {
         int x = args[1].equals("~") ? player.getPosition().getX() : Integer.parseInt(args[1]);
         int z = args[2].equals("~") ? sender.getPosition().getZ() : Integer.parseInt(args[2]);
 
-        String type = args[3];
+        String type = args[3].contains(":") ? args[3] : "antiqueatlas:" + args[3];
 
         StringBuilder label = new StringBuilder(args[4]);
         for (int i = 5; i < args.length; i++) label.append(" ").append(args[i]);

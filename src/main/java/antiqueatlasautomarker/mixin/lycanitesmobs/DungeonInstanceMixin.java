@@ -38,20 +38,25 @@ public class DungeonInstanceMixin {
 
     @Inject(method = "buildChunk", at = @At("HEAD"), remap = false)
     private void aaam$markLycanitesDungeon(World world, ChunkPos chunkPos, CallbackInfo ci) {
-        if (this.chunksBuilt == 0) {
-            AutoMarkSetting setting = AutoMarkSetting.get("lycanite");
-            if (setting != null && setting.enabled) {
-                String label = setting.label;
-                if ("DEFAULT".equals(label)) {
-                    label = this.schematic.name;
-                    if (aaam$lycaDungeonNames.containsKey(label)) {
-                        label = aaam$lycaDungeonNames.get(label);
-                    }
+        if (this.chunksBuilt != 0) return;
+        AutoMarkSetting setting = AutoMarkSetting.get("lycanite");
+        if (setting != null && setting.enabled) {
+            String label = setting.label;
+            if ("DEFAULT".equals(label)) {
+                label = this.schematic.name;
+                if (aaam$lycaDungeonNames.containsKey(label)) {
+                    label = aaam$lycaDungeonNames.get(label);
                 }
-                StructureMarkersDataHandler.markStructure(world, this.originPos, setting.type, label, setting.context);
-                System.out.println("[AAAM] Marked Lycanites dungeon: " + label + " at " + this.originPos);
             }
+            StructureMarkersDataHandler.markStructure(
+                    world,
+                    this.originPos,
+                    setting.type,
+                    label,
+                    setting.context
+            );
         }
+
     }
    
 }

@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Slice;
 
-import java.util.Comparator;
 import java.util.Map;
 
 @Mixin(BiomeDetectorBase.class)
@@ -48,6 +47,7 @@ public abstract class BiomeDetectorBaseEvent {
                 if(entry.getKey() != waterPoolBiomeID && entry.getValue() > maxval){
                     meanBiomeId = entry.getKey();
                     maxval = entry.getValue();
+                    meanBiomeOccurrences = maxval;
                 }
             }
         }

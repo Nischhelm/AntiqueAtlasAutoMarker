@@ -5,24 +5,25 @@ import antiqueatlasautomarker.custombiometiles.BetterEndCompat;
 import antiqueatlasautomarker.custombiometiles.BiomesOPlentyCompat;
 import antiqueatlasautomarker.event.BiomeDetectorEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class BiomeDetectorEventHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onBiomeDetected(BiomeDetectorEvent event){
         switch (event.getDimension()){
             case 1:
                 if(ModCompat.betterEnd.isLoaded()) {
-                    if (event.getChosenBiomeId() == event.getIdFor("void") && event.getMainBiome() == BetterEndCompat.getIceStarfieldBiome())
+                    if (event.getChosenType().equals("void") && event.getMainBiome() == BetterEndCompat.getIceStarfieldBiome())
                         event.setChosenBiomeId(BetterEndCompat.BE_ICE_STARFIELD_VOID);
                 }
                 break;
             case 0:
                 if(ModCompat.biomesOPlenty.isLoaded()) {
-                    if (event.getChosenBiomeId() == event.getIdFor("water") && event.getMainBiome() == BiomesOPlentyCompat.getMarshBiome()) {
+                    if (event.getChosenType().equals("water") && event.getMainBiome() == BiomesOPlentyCompat.getMarshBiome()) {
                         if (event.getCountFor("water") * 2 <= event.getCountFor("biome") * 3)
-                            event.setChosenBiomeId(event.getIdFor("biome")); //give biome 1.5x priority to reduce actual ponds
+                            event.setChosenType("biome"); //give biome 1.5x priority to reduce actual ponds
                     }
                 }
                 break;

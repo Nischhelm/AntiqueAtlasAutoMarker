@@ -2,6 +2,7 @@ package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.command.PutMarkerCommand;
 import antiqueatlasautomarker.compat.ModCompat;
+import antiqueatlasautomarker.compat.crafttweaker.CT_BiomeDetectorEvent;
 import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
@@ -63,6 +64,7 @@ public class AntiqueAtlasAutoMarker {
         if(ConfigHandler.overhaul.sendToAllHolding) MinecraftForge.EVENT_BUS.register(PlayerLogoutHandler.class);
         if(ConfigHandler.enchantments.enableLibrarianKey && event.getSide().equals(Side.CLIENT)) MinecraftForge.EVENT_BUS.register(LibrarianMarkerHandler.class);
         if(Loader.isModLoaded("ruins")) MinecraftForge.EVENT_BUS.register(RuinsHandler.class);
+        if(Loader.isModLoaded("crafttweaker")) MinecraftForge.EVENT_BUS.register(CT_BiomeDetectorEvent.CT_EventForwarder.class);
     }
 
     @Mod.EventHandler

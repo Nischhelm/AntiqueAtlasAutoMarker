@@ -25,9 +25,9 @@ public class BiomeDetectorEvent extends ChunkEvent {
     private Biome mainBiome = null;
     private final int dimension;
     private int chosenBiomeId;
+    private String chosenType;
 
     //TODO similar event for structurewatcher
-    //TODO CT compat
 
     public BiomeDetectorEvent(Chunk chunk, int chosenBiomeId) {
         super(chunk);
@@ -39,15 +39,41 @@ public class BiomeDetectorEvent extends ChunkEvent {
         ids.put(type, tileId);
         counts.put(type, count);
         if(type.equals("biome") && tileId >= 0) this.mainBiome = Biome.getBiomeForId(tileId);
+        if(tileId == this.chosenBiomeId) this.chosenType = type;
     }
 
     public void setChosenBiomeId(int id) {
-        if(id != ExtTileIdMap.NOT_FOUND)
+        if(id != ExtTileIdMap.NOT_FOUND) {
             this.chosenBiomeId = id;
+            if (id >= 0) this.chosenType = "biome";
+            else {
+                if (this.ids.containsValue(id)) {
+                    for (Map.Entry<String, Integer> entry : this.counts.entrySet())
+                        if (entry.getValue() == id) {
+                            this.chosenType = entry.getKey();
+                            return;
+                        }
+                }
+                this.chosenType = "custom";
+            }
+        }
     }
 
     public int getChosenBiomeId() {
         return this.chosenBiomeId;
+    }
+
+    public boolean setChosenType(String type){
+        if(this.counts.containsKey(type)) {
+            this.chosenType = type;
+            this.chosenBiomeId = this.ids.get(type);
+            return true;
+        }
+        return false;
+    }
+
+    public String getChosenType() {
+        return chosenType;
     }
 
     public Biome getMainBiome() {

@@ -129,9 +129,6 @@ public class BiomeTileConfig {
         for (String configLine : ConfigHandler.overhaul.tileConfig.automaticTypeRules)
             new TextureSetRule(configLine);
     }
-    public static void reset(){
-        allRules.clear();
-    }
     private static final List<TextureSetRule> allRules = new ArrayList<>();
     public static TextureSet getTextureSet(Set<BiomeDictionary.Type> types){
         for(TextureSetRule rule : allRules)

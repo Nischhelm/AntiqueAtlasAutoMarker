@@ -67,6 +67,13 @@ public class AAOverhaulConfig {
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean verticalScrolling = true;
 
+    @Config.Comment("The area around a player is always scanned to check if anything has changed on the atlas. This happens both on server and on client and is somewhat computation-heavy. It looks slightly smoother if it's enabled on the client, but otherwise there is no reason to do it on the client. Set to true to save some Milliwatt.")
+    @Config.Name("Disable Client Atlas Scanning")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.updateclient.json", defaultValue = false)
+    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
+    public boolean dontUpdateOnCLient = false;
+
     @Config.Name("Biome to Tile Config")
     public BiomeTileConfig tileConfig = new BiomeTileConfig();
 }

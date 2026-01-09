@@ -10,7 +10,7 @@ public class BattletowersConfig {
     @Config.Comment("Set to false to never mark Battletowers")
     @Config.Name("BT Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.battletowers.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "battletowers", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "battletowers", desired = true, warnIngame = false, reason = "No issue, auto disabled")
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     @Config.RequiresMcRestart
     public boolean enabled = true;

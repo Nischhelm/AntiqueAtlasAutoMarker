@@ -10,7 +10,7 @@ public class BetterMineshaftConfig {
     @Config.Comment("Set to false to never mark Yungs Better Mineshafts")
     @Config.Name("YBM Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.bettermineshafts.json", defaultValue = false)
-    @MixinConfig.CompatHandling(modid = "bettermineshafts", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "bettermineshafts", desired = true, warnIngame = false, reason = "No issue, auto disabled")
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     @Config.RequiresMcRestart
     public boolean enabled = false;

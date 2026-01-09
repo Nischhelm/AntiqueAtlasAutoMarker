@@ -10,7 +10,7 @@ public class LycanitesConfig {
     @Config.Comment("Set to false to never mark Lycanites Dungeons")
     @Config.Name("LM Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.lycanitesmobs.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "lycanitesmobs", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "lycanitesmobs", desired = true, warnIngame = false, reason = "No issue, auto disabled")
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     @Config.RequiresMcRestart
     public boolean enabled = true;

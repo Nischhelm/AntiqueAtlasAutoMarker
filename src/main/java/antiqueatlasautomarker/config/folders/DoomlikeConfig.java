@@ -10,7 +10,7 @@ public class DoomlikeConfig {
     @Config.Comment("Set to false to never mark Doomlike Dungeons")
     @Config.Name("DLD Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.doomlikedungeons.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "dldungeonsjbg", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "dldungeonsjbg", desired = true, warnIngame = false, reason = "No issue, auto disabled")
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     @Config.RequiresMcRestart
     public boolean enabled = true;

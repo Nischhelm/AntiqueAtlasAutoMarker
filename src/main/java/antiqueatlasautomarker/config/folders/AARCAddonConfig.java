@@ -10,7 +10,7 @@ public class AARCAddonConfig {
             "Warning: turning this off will have serious side effects on the structure markers in your atlases")
     @Config.Name("AARC Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.aarc.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "aarcaddon", desired = true, warnIngame = false)
+    @MixinConfig.CompatHandling(modid = "aarcaddon", desired = true, warnIngame = false, reason = "No issue, auto disabled")
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     @Config.RequiresMcRestart
     public boolean enabled = true;

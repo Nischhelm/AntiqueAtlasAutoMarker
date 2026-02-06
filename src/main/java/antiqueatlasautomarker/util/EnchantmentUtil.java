@@ -21,6 +21,7 @@ public class EnchantmentUtil {
                     .getMarkersDataInDimension(player.world.provider.getDimension())
                     .getAllMarkers()
                     .stream()
+                    //TODO: this filter sucks
                     .filter(marker -> Math.abs(marker.getX() - villagerPos.getX()) < 64 && Math.abs(marker.getZ() - villagerPos.getZ()) < 64)
                     .filter(marker -> marker.getType().equals(ConfigHandler.enchantments.marker))
                     .collect(Collectors.toList());

@@ -2,6 +2,7 @@ package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
 import antiqueatlasautomarker.client.GuiHideMarkerTypeSelect;
 import antiqueatlasautomarker.util.MapWaystoneSelectionUtil;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -15,19 +16,25 @@ import hunternif.mc.atlas.client.gui.core.IButtonListener;
 import hunternif.mc.atlas.marker.Marker;
 import hunternif.mc.atlas.registry.MarkerRegistry;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Mixin(GuiAtlas.class)
 public abstract class DisplayDisableAtlas extends GuiComponent {
+    @Shadow(remap = false) @Final private static int MAP_HEIGHT;
+    @Shadow(remap = false) @Final private static int MAP_WIDTH;
     @Shadow(remap = false) private ItemStack stack;
     @Shadow(remap = false) private GuiComponentButton selectedButton;
     @Shadow(remap = false) @Final private GuiBookmarkButton btnShowMarkers;
@@ -40,16 +47,43 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
     @Unique private final GuiStates.IState DISABLING_MARKERS = new GuiStates.SimpleState() {
         @Override public void onEnterState() {
             btnShowMarkers.setSelected(false); //don't ask me why
+            aaam$searchBar.setEnabled(true);
+            aaam$searchBar.setVisible(true);
             addChild(aaam$markerTypeHider);
         }
         @Override public void onExitState() {
             btnShowMarkers.setSelected(false); //don't ask me why
+            aaam$searchBar.setEnabled(false);
+            aaam$searchBar.setVisible(false);
             aaam$markerTypeHider.close();
         }
     };
 
     @Unique private static final List<String> aaam$disabledMarkers = new ArrayList<>();
     @Unique private final GuiHideMarkerTypeSelect aaam$markerTypeHider = new GuiHideMarkerTypeSelect(aaam$disabledMarkers);
+
+    @Unique
+    private static final int SEARCH_FIELD_ID = 0;
+    @Unique
+    private GuiTextField aaam$searchBar;
+
+    @Inject(
+            method = "initGui",
+            at = @At("TAIL")
+    )
+    private void aaam_initLabelSearch(CallbackInfo ci) {
+        this.aaam$searchBar = new GuiTextField(
+                SEARCH_FIELD_ID,
+                this.fontRenderer,
+                (this.width - MAP_WIDTH) / 2,
+                ((this.height - MAP_HEIGHT) / 2) + 4,
+                MAP_WIDTH / 3,
+                this.fontRenderer.FONT_HEIGHT + 3
+        );
+        this.aaam$searchBar.setEnabled(false);
+        this.aaam$searchBar.setVisible(false);
+        this.aaam$searchBar.setTextColor(0xFFFFFF);
+    }
 
     @WrapWithCondition(
             method = "drawScreen",
@@ -58,7 +92,23 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
     private boolean aaam_dontShowDisabledMarkers(GuiAtlas instance, Marker marker, double scale){
         return marker != null && (MapWaystoneSelectionUtil.getIsFromWaystone() || !aaam$disabledMarkers.contains(marker.getType()));
     }
-//
+
+    @WrapWithCondition(
+            method = "drawScreen",
+            at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiAtlas;renderMarker(Lhunternif/mc/atlas/marker/Marker;D)V", remap = false)
+    )
+    private boolean aaam_filterLabelSearch(GuiAtlas instance, Marker marker, double scale) {
+        return marker != null && (aaam$searchBar.getText().isEmpty() || marker.getLocalizedLabel().contains(aaam$searchBar.getText()));
+    }
+
+    @Inject(
+            method = "drawScreen",
+            at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/core/GuiComponent;drawScreen(IIF)V")
+    )
+    private void aaam_drawLabelSearch(CallbackInfo ci) {
+        this.aaam$searchBar.drawTextBox();
+    }
+
     @WrapOperation(
             method = "<init>",
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiBookmarkButton;addListener(Lhunternif/mc/atlas/client/gui/core/IButtonListener;)V", ordinal = 3),
@@ -100,5 +150,29 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
     )
     private boolean aaam_alsoDontReturntoNORMALIfDisabling(GuiStates state, GuiStates.IState hidingMarkersState, Operation<Boolean> original){
         return original.call(state, hidingMarkersState) || state.is(DISABLING_MARKERS);
+    }
+
+    @Inject(
+            method = "mouseClicked",
+            at = @At("TAIL")
+    )
+    private void aaam_clickLabelSearch(int mouseX, int mouseY, int mouseState, CallbackInfo ci){
+        this.aaam$searchBar.mouseClicked(mouseX, mouseY, mouseState);
+    }
+
+    @ModifyExpressionValue(
+            method = "handleKeyboardInput",
+            at = @At(value = "INVOKE", target = "Lorg/lwjgl/input/Keyboard;getEventKeyState()Z", remap = false)
+    )
+    private boolean aaam_focusKeyboardOnSearch(boolean original){
+        if(state.is(DISABLING_MARKERS)) return original && !this.aaam$searchBar.isFocused();
+        return original;
+    }
+
+    @Unique
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        super.keyTyped(typedChar, keyCode);
+        this.aaam$searchBar.textboxKeyTyped(typedChar, keyCode);
     }
 }

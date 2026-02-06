@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mixin(GuiAtlas.class)
-public abstract class DisplayDisableAtlas extends GuiComponent {
+public abstract class FilterMarkersByTypeAndLabel extends GuiComponent {
     @Shadow(remap = false) @Final private static int MAP_HEIGHT;
     @Shadow(remap = false) @Final private static int MAP_WIDTH;
     @Shadow(remap = false) private ItemStack stack;

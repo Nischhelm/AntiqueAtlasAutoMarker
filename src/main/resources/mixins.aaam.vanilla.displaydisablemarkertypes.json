@@ -5,14 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
-  "mixins": [
-    "FilterMarkersByTypeAndLabel"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  },
   "client": [
-    "GuiToggleButtonAccessor",
-    "GuiToggleButtonMixin"
+    "GuiTextFieldMixin"
   ]
 }

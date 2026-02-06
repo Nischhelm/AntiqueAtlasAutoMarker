@@ -65,7 +65,11 @@ public class AAOverhaulConfig {
             "Also provides a searchbar to filter shown markers by their labels")
     @Config.Name("Allow hiding specific markers")
     @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json", defaultValue = true)
+    @MixinConfig.MixinToggle(
+            earlyMixin = "mixins.aaam.vanilla.displaydisablemarkertypes.json",
+            lateMixin = "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json",
+            defaultValue = true
+    )
     public boolean disableSpecificMarkers = true;
 
     @Config.Comment("When putting a new marker on your atlas, will render the marker types to select from in a 7x3 box that scrolls vetically instead of a horizontal scroll area.")

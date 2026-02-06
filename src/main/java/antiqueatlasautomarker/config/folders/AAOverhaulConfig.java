@@ -14,21 +14,18 @@ public class AAOverhaulConfig {
     @Config.Name("Only send to all holding the atlas")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.sendtoallholding.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean sendToAllHolding = true;
 
     @Config.Comment("AA doesn't allocate the correct size for some packets which can lead to crashes. This fixes it.")
     @Config.Name("Fix Crash with Short/IntDimensionUpdatePacket")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.bytebufcrashfix.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean byteBufCrashFix = true;
 
     @Config.Comment("Whenever Antique Atlas checks for atlases in a players inventory it forgets to also check the offhand. Set to true to check offhand as well.")
     @Config.Name("Also check player offhand for atlases")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.offhand.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean checkOffhand = true;
 
     @Config.Comment({
@@ -43,28 +40,24 @@ public class AAOverhaulConfig {
     @Config.Name("Add Atlas Keybinds and Buttons")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.keybinds.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean addKeybinds = true;
 
     @Config.Comment("Antique Atlas uses a questionable regex to check if a marker label is a lang key (not allowing numbers for example), instead of using I18n.hasKey. It also only allows one parameter for parameterised lang keys. Both get fixed by this.")
     @Config.Name("Fix Atlas Marker Lang Keys")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.langkey.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean fixLangKeys = true;
 
     @Config.Comment("When combining atlases, the stack size of the output slot is not set correctly, resulting in a dupe. This fixes it.")
     @Config.Name("Fix Atlas Combining Recipe Dupe")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.recipedupe.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean fixCombiningRecipe = true;
 
     @Config.Comment("Markers data is sent in one packet per dimension, which can get really large and lag the server. Keep this enabled to send the markers in chunks of 100 markers per packet to reduce lag on player login.")
     @Config.Name("Marker data in smaller packets")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.markerpacketchunking.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean markerPacketChunking = true;
 
     @Config.Comment("Will allow to hide specific marker types when clicking on \"Hide markers\" in Atlas GUI. \n" +
@@ -73,14 +66,12 @@ public class AAOverhaulConfig {
     @Config.Name("Allow hiding specific markers")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean disableSpecificMarkers = true;
 
     @Config.Comment("When putting a new marker on your atlas, will render the marker types to select from in a 7x3 box that scrolls vetically instead of a horizontal scroll area.")
     @Config.Name("Scroll Marker Types Vertically")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.selectmarkersvertically.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean verticalScrolling = true;
 
     @Config.Comment({
@@ -96,7 +87,7 @@ public class AAOverhaulConfig {
             "Set to DISABLE_MIXIN to disable this fix."
     })
     @Config.Name("Atlas Scanning Update Side")
-//    @Config.RequiresMcRestart
+    @Config.RequiresMcRestart
     public UpdateSide updateSide = UpdateSide.SERVER;
     public enum UpdateSide { SERVER, CLIENT, BOTH, DISABLE_MIXIN }
 

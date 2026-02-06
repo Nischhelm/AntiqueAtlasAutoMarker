@@ -11,7 +11,6 @@ public class QuarkConfig {
     @Config.Name("Pirateship - Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.quark.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "quark", desired = true, warnIngame = false, reason = "No issue, auto disabled")
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     @Config.RequiresMcRestart
     public boolean enabled_pirateship = true;
 

@@ -12,7 +12,6 @@ public class WaystonesConfig {
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.waystones.activated.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "waystones", desired = true, warnIngame = false, reason = "No issue, auto disabled")
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean enabled = true;
 
     @Config.Comment("Mark Activated Waystones with this Marker Type")
@@ -36,7 +35,6 @@ public class WaystonesConfig {
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.waystones.wild.json", defaultValue = false)
     @MixinConfig.CompatHandling(modid = "waystones", desired = true, warnIngame = false, reason = "No issue, auto disabled")
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean enabled_wild = false;
 
     @Config.Comment("Mark Wild Waystones with this Marker Type")
@@ -53,7 +51,6 @@ public class WaystonesConfig {
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.mapselect.json", defaultValue = true)
     @MixinConfig.CompatHandling(modid = "waystones", desired = true, warnIngame = false, reason = "No issue, auto disabled")
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean disableSpecificMarkers = true;
 
     public void preInit(){

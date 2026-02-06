@@ -78,9 +78,9 @@ public class BiomeTileConfig {
     @Config.RequiresMcRestart
     public boolean useColorisedBetterEndTiles = true;
 
-//    @Config.Comment("Will only apply if BetterNether and NetherAPI are present. Not made yet.")
-//    @Config.Name("Use Colorised BetterNether Tiles")
-//    @Config.RequiresMcRestart
+    @Config.Comment("Will only apply if BetterNether and NetherAPI are present. Made by Artsy.")
+    @Config.Name("Use Colorised BetterNether Tiles")
+    @Config.RequiresMcRestart
     public boolean useColorisedBetterNetherTiles = true;
 
 //    @Config.Comment("Will only apply if DregoraRL and OTG are present. Not made yet.")
@@ -116,7 +116,7 @@ public class BiomeTileConfig {
 
     @Config.Comment("Stitching to null (undiscovered chunks) was meant to exist in Antique Atlas but never correctly implemented. AAAM fixes it. \n" +
             "Add texture set names here to make them stitch to null.\n" +
-            "By default, AA has ROCK_SHORE and LAVA_SHORE stitch to null (without that doing anything).")
+            "By default, AA meant to have ROCK_SHORE and LAVA_SHORE stitch to null.")
     @Config.Name("TextureSets stitch to null")
     @Config.RequiresMcRestart
     public String[] stitchToNullSets = {

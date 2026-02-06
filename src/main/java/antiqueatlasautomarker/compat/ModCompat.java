@@ -3,7 +3,6 @@ package antiqueatlasautomarker.compat;
 import net.minecraftforge.fml.common.Loader;
 
 public class ModCompat {
-    public static final ModLoaded antiqueAtlas = new ModLoaded("antiqueatlas");
     public static final ModLoaded aarc = new ModLoaded("aarcaddon");
     public static final ModLoaded otg = new ModLoaded("openterraingenerator");
     public static final ModLoaded betterEnd = new ModLoaded("betterendforge");

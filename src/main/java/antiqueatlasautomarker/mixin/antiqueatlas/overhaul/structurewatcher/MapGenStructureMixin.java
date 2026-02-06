@@ -45,7 +45,7 @@ public abstract class MapGenStructureMixin {
             method = "setStructureStart",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/structure/StructureStart;writeStructureComponentsToNBT(II)Lnet/minecraft/nbt/NBTTagCompound;")
     )
-    private NBTTagCompound aaam_invokeStructureWatchers(NBTTagCompound tags, @Local(argsOnly = true) StructureStart start){
+    private NBTTagCompound aaam_invokeStructureWatchers(NBTTagCompound tags){
         if(!this.aaam$isInCorrectChunk || this.aaam$savedWorld == null) return tags;
         MapGenStructure structGen = (MapGenStructure) (Object) this;
         if(structGen instanceof MapGenVillage || (ModCompat.otg.isLoaded() && OpenTerrainGeneratorCompat.isOTGVillage(structGen)))

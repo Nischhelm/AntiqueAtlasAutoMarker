@@ -11,11 +11,11 @@ antiqueatlasautomarker.general.structuremarkers=Auto marked structures - needs A
 # Atlas buttons
 gui.antiqueatlas.copymarker=Share Marker
 gui.antiqueatlas.copymarker.shiftdown=Copy PutMarker command
-gui.antiqueatlas.compareatlas=Compare Two Held
+gui.antiqueatlas.compareatlas=Compare with offhand Atlas
 
 # Atlas actions
 gui.antiqueatlas.defaultlabel=[Marker]
-gui.antiqueatlas.nomarker=No marker selected
+gui.antiqueatlas.nomarker=No shareable marker selected
 gui.antiqueatlas.copymarker.clipboard=[%s] copied to Clipboard
 gui.antiqueatlas.copymarker.packetcommand=§a%s§r shared marker: [%s]
 gui.antiqueatlas.copymarker.packetcommand.hover=Click to receive

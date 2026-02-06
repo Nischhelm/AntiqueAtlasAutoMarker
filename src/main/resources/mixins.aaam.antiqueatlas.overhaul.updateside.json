@@ -6,7 +6,8 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
-    "DontUpdateAtlasOnClient"
+    "AtlasUpdateSide",
+    "UpdateCorrectClientAtlas"
   ],
   "injectors": {
     "maxShiftBy": 10

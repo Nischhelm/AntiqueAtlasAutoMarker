@@ -67,12 +67,22 @@ public class AAOverhaulConfig {
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean verticalScrolling = true;
 
-    @Config.Comment("The area around a player is always scanned to check if anything has changed on the atlas. This happens both on server and on client and is somewhat computation-heavy. It looks slightly smoother if it's enabled on the client, but otherwise there is no reason to do it on the client. Set to true to save some Milliwatt.")
-    @Config.Name("Disable Client Atlas Scanning")
-    @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.updateclient.json", defaultValue = false)
-    @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
-    public boolean dontUpdateOnCLient = false;
+    @Config.Comment({
+            "The area around every player is always scanned to check if anything has changed on the atlas or if theres newly explored chunks.",
+            "By default this happens both on server and on client and is somewhat computation- and network-heavy.",
+            "However, there isn't really a reason to do it on both sides.",
+            "Due to a bug in AA, only the Atlas #0 was actually updated for both sides, all other atlases only updated on the clientside",
+            "That's why shared atlases that arent #0 would not update the other players explored area except for client relogs",
+            "To make shared atlases update the other players tiles, this config is set to SERVER by default.",
+            "Setting to CLIENT will only remove networking overhead, as the server will still scan around the player, just not send to client.",
+            "Setting to BOTH restores the behavior of old atlas #0 for all atlases, but i can't really see any upsides of it during gameplay (might be minimally smoother)",
+            "This fix should also remove rare occurrences of the entries of one atlas bleeding into another of a totally different player",
+            "Set to DISABLE_MIXIN to disable this fix."
+    })
+    @Config.Name("Atlas Scanning Update Side")
+//    @Config.RequiresMcRestart
+    public UpdateSide updateSide = UpdateSide.SERVER;
+    public enum UpdateSide { SERVER, CLIENT, BOTH, DISABLE_MIXIN }
 
     @Config.Name("Biome to Tile Config")
     public BiomeTileConfig tileConfig = new BiomeTileConfig();

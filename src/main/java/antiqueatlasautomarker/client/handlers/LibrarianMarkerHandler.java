@@ -1,36 +1,36 @@
-package antiqueatlasautomarker.handlers;
+package antiqueatlasautomarker.client.handlers;
 
 import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
+import hunternif.mc.atlas.registry.MarkerRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SideOnly(Side.CLIENT)
 public class LibrarianMarkerHandler {
     @SubscribeEvent
     public static void onKeyPressed(InputEvent.KeyInputEvent event){
-        if(!librarianKey.isPressed()) return;
+        if(!librarianKey.isKeyDown() && !librarianKey.isPressed()) return;
 
         EntityPlayer player = Minecraft.getMinecraft().player;
         List<Integer> atlases = AtlasAPI.getPlayerAtlases(player);
         if(atlases.isEmpty()) return;
 
         World world = Minecraft.getMinecraft().world;
+        String markerType = MarkerRegistry.hasKey(ConfigHandler.enchantments.librarianKeyMarker) ? ConfigHandler.enchantments.librarianKeyMarker : "antiqueatlas:red_x_small";
         List<EntityVillager> villagers = world.getLoadedEntityList().stream()
                 .filter(v -> v instanceof EntityVillager)
                 .map(v -> (EntityVillager) v)
@@ -47,11 +47,11 @@ public class LibrarianMarkerHandler {
                         .getAllMarkers()
                         .stream()
                         .filter(marker -> Math.abs(marker.getX() - villX) < 64 && Math.abs(marker.getZ() - villZ) < 64)
-                        .filter(marker -> marker.getType().equals(ConfigHandler.enchantments.librarianKeyMarker))
+                        .filter(marker -> marker.getType().equals(markerType))
                         .filter(marker -> marker.getLabel().equals(ConfigHandler.enchantments.librarianKeyLabel))
                         .forEach(marker -> AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId()));
 
-                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, ConfigHandler.enchantments.librarianKeyMarker, ConfigHandler.enchantments.librarianKeyLabel, villX, villZ);
+                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, markerType, ConfigHandler.enchantments.librarianKeyLabel, villX, villZ);
             }
         }
     }
@@ -61,5 +61,7 @@ public class LibrarianMarkerHandler {
     public static void initKeybind() {
         librarianKey = new KeyBinding("key.aaam.librarian", Keyboard.KEY_NUMPAD4, "key.aaam.librarian");
         ClientRegistry.registerKeyBinding(librarianKey);
+
+        MinecraftForge.EVENT_BUS.register(LibrarianMarkerHandler.class);
     }
 }

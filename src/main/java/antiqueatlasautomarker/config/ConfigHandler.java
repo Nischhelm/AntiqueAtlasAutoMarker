@@ -14,6 +14,10 @@ public class ConfigHandler {
 	@Config.Name("Battletowers")
 	public static BattletowersConfig battletowers = new BattletowersConfig();
 
+	@Config.Comment("Defiled Lands Config")
+	@Config.Name("Defiled Lands")
+	public static DefiledLandsConfig defiledlands = new DefiledLandsConfig();
+
 	@Config.Comment("Doomlike Dungeons Marker Config")
 	@Config.Name("Doomlike Dungeons")
 	public static DoomlikeConfig doomlike = new DoomlikeConfig();

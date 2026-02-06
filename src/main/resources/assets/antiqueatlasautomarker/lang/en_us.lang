@@ -1,6 +1,6 @@
 # Keys
 key.aaam.librarian=Mark Whiteshirts
-key.aaam.goldenbookwrym=Mark Golden Book Wrym
+key.aaam.goldenbookwyrm=Mark Golden Book Wyrm
 
 # Config pages
 antiqueatlasautomarker.general.enchantmentstomark=Enchantments Trades to Mark
@@ -9,15 +9,19 @@ antiqueatlasautomarker.general.ruinsmarkers=Ruins Structure Markers
 antiqueatlasautomarker.general.structuremarkers=Auto marked structures - needs AAAM on server
 
 # Atlas buttons
-gui.antiqueatlas.copymarker=Copy Selected Marker [SHIFT]
-gui.antiqueatlas.compareatlas=Compare Two Held [SHIFT]
+gui.antiqueatlas.copymarker=Share Marker
+gui.antiqueatlas.copymarker.shiftdown=Copy PutMarker command
+gui.antiqueatlas.compareatlas=Compare Two Held
 
 # Atlas actions
 gui.antiqueatlas.defaultlabel=[Marker]
 gui.antiqueatlas.nomarker=No marker selected
 gui.antiqueatlas.copymarker.clipboard=[%s] copied to Clipboard
-gui.antiqueatlas.copymarker.packetcommand=§a%s§r shared from Atlas #%s: [%s]
+gui.antiqueatlas.copymarker.packetcommand=§a%s§r shared marker: [%s]
+gui.antiqueatlas.copymarker.packetcommand.hover=Click to receive
 gui.antiqueatlas.compareatlas.copy=Copied [%s] to Atlas #%s
+gui.antiqueatlas.compareatlas.nouniquemarkers=No unique markers in main atlas!
+gui.antiqueatlas.compareatlas.nooffhandatlas=Hold different atlases in main and offhand. Copied markers go to offhand atlas.
 
 # Marker labels
 gui.aaam.marker.wildWaystone=Wild Waystone
@@ -92,5 +96,8 @@ gui.aaam.marker.BT.jungle_r=Reverse Jungle Battle Tower
 # Commands
 commands.aaam.invalidusage=Invalid usage. Use /help aaam to see usage
 commands.aaam.typenotfound=Invalid Marker Type. Use TAB to autocomplete
-commands.aaam.missingatlas=Unable to find an Atlas in Inventory
-commands.aaam.removemarkers.success=Successfully tried to remove markers
+commands.aaam.missingatlas=No Atlas in inventory
+commands.aaam.removemarkers.success=Removed %d matching markers
+commands.aaam.removemarkers.fail=No matching markers found
+commands.aaam.putmarker.success=Added "%s"
+commands.aaam.putmarker.fail=All Atlases already contain "%s"

@@ -1,6 +1,6 @@
 package antiqueatlasautomarker;
 
-import antiqueatlasautomarker.command.PutMarkerCommand;
+import antiqueatlasautomarker.command.AAAMCommand;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.compat.crafttweaker.CT_BiomeDetectorEvent;
 import antiqueatlasautomarker.config.AutoMarkSetting;
@@ -94,6 +94,6 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void serverInit(FMLServerStartingEvent event) {
-        event.registerServerCommand(new PutMarkerCommand());
+        event.registerServerCommand(new AAAMCommand());
     }
 }

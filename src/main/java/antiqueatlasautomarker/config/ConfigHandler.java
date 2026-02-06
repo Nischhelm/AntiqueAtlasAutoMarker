@@ -14,7 +14,7 @@ public class ConfigHandler {
 	@Config.Name("Battletowers")
 	public static BattletowersConfig battletowers = new BattletowersConfig();
 
-	@Config.Comment("Enchantment Marker Config")
+	@Config.Comment("Defiled Lands Config")
 	@Config.Name("Defiled Lands")
 	public static DefiledLandsConfig defiledlands = new DefiledLandsConfig();
 

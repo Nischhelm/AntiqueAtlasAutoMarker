@@ -19,6 +19,6 @@ public class ClientProxy extends CommonProxy {
     public void init() {
         if(ConfigHandler.overhaul.addKeybinds) KeyHandler.initKeybind();
         if(ConfigHandler.enchantments.enableLibrarianKey) LibrarianMarkerHandler.initKeybind();
-        if(ModCompat.defiledlands.isLoaded()) DefiledLandsKeyHandler.initKeybind();
+        if(ConfigHandler.defiledlands.enabled && ModCompat.defiledlands.isLoaded()) DefiledLandsKeyHandler.initKeybind();
     }
 }

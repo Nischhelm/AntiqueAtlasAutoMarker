@@ -31,13 +31,15 @@ public class AAOverhaulConfig {
     @MixinConfig.CompatHandling(modid = "antiqueatlas", desired = true)
     public boolean checkOffhand = true;
 
-    @Config.Comment("Provides a variety of useful keybinds and buttons:\n" +
-            "\tAdd Marker - Keybind\n" +
-            "\tShow Markers - Keybind\n" +
-            "\tFollow Player - keybind\n" +
-            "\tOpen Atlas - Keybind fixed to be usable with Atlas items.\n" +
-            "\tCopy Marker - Button to select a marker to copy to clipboard or post in chat.\n" +
-            "\tCompare Two Held Atlases - Button for viewing and copying over unique markers.")
+    @Config.Comment({
+            "Provides a variety of useful keybinds and buttons:",
+                "\tAdd Marker - Keybind",
+                "\tShow Markers - Keybind",
+                "\tFollow Player - Keybind",
+                "\tOpen Atlas - Keybind fixed to be usable with Atlas items.",
+                "\tCopy Marker - Button to select a marker to share in chat or copy to clipboard.",
+                "\tCompare Two Held Atlases - Button for viewing and copying over unique markers."
+    })
     @Config.Name("Add Atlas Keybinds and Buttons")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.keybinds.json", defaultValue = true)
@@ -67,7 +69,7 @@ public class AAOverhaulConfig {
 
     @Config.Comment("Will allow to hide specific marker types when clicking on \"Hide markers\" in Atlas GUI. \n" +
             "Shift-click a marker icon to only show that one or disable all markers except for it.\n" +
-            "Provides a search box to filter marker labels, note that some marker use lang keys.")
+            "Also provides a searchbar to filter shown markers by their labels")
     @Config.Name("Allow hiding specific markers")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json", defaultValue = true)

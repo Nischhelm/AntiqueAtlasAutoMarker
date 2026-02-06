@@ -76,9 +76,9 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
                 SEARCH_FIELD_ID,
                 this.fontRenderer,
                 (this.width - MAP_WIDTH) / 2,
-                ((this.height - MAP_HEIGHT) / 2) + (this.fontRenderer.FONT_HEIGHT + 5),
-                MAP_WIDTH,
-                this.fontRenderer.FONT_HEIGHT + 5
+                ((this.height - MAP_HEIGHT) / 2) + 4,
+                MAP_WIDTH / 3,
+                this.fontRenderer.FONT_HEIGHT + 3
         );
         this.aaam$searchBar.setEnabled(false);
         this.aaam$searchBar.setVisible(false);
@@ -98,7 +98,7 @@ public abstract class DisplayDisableAtlas extends GuiComponent {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiAtlas;renderMarker(Lhunternif/mc/atlas/marker/Marker;D)V", remap = false)
     )
     private boolean aaam_filterLabelSearch(GuiAtlas instance, Marker marker, double scale) {
-        return marker != null && (aaam$searchBar.getText().isEmpty() || marker.getLabel().contains(aaam$searchBar.getText()));
+        return marker != null && (aaam$searchBar.getText().isEmpty() || marker.getLocalizedLabel().contains(aaam$searchBar.getText()));
     }
 
     @Inject(

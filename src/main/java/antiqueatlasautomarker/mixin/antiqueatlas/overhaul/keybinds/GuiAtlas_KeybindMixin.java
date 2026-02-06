@@ -20,6 +20,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,6 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuiAtlas.class)
 public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
+    @Unique private static final ResourceLocation COPY_TEXTURE = new ResourceLocation("antiqueatlas:textures/gui/icons/aaam_copyshare.png");
 
     @Shadow(remap = false) private ItemStack stack;
     @Shadow(remap = false) @Final private GuiBookmarkButton btnMarker;
@@ -43,28 +45,22 @@ public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
     @Shadow(remap = false) @Final private GuiStates state;
     @Shadow(remap = false) @Final private GuiStates.IState NORMAL;
 
-    @Shadow (remap = false) @Mutable @Final private GuiStates.IState DELETING_MARKER;
-
-    @Shadow(remap = false) @Final private GuiCursor eraser;
     @Shadow(remap = false) private Marker hoveredMarker;
     @Shadow(remap = false) private EntityPlayer player;
 
-    @Shadow(remap = false) protected abstract int getAtlasID();
+    @Unique private final GuiCursor aaam$copyMarkerCursor = new GuiCursor();
 
-    @Unique
-    private final GuiCursor aaam$copyMarkerCursor = new GuiCursor();
-
-    @Unique
-    private final GuiBookmarkButton aaam$btnCopyMarker = GuiBookmarkButton_Invoker.invokeInit(1, Textures.MARKER_SCROLL, I18n.format("gui.antiqueatlas.copymarker"));
-    @Unique
-    private final GuiStates.IState COPY_MARKER = new GuiStates.IState() {
+    @Unique private final GuiBookmarkButton aaam$btnCopyMarker = GuiBookmarkButton_Invoker.invokeInit(1, COPY_TEXTURE, I18n.format("gui.antiqueatlas.copymarker"));
+    @Unique private final GuiStates.IState COPY_MARKER = new GuiStates.IState() {
         @Override
         public void onEnterState() {
+            mc.mouseHelper.grabMouseCursor();
             addChild(aaam$copyMarkerCursor);
             aaam$btnCopyMarker.setSelected(true);
         }
         @Override
         public void onExitState() {
+            mc.mouseHelper.ungrabMouseCursor();
             removeChild(aaam$copyMarkerCursor);
             aaam$btnCopyMarker.setSelected(false);
         }
@@ -76,20 +72,6 @@ public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
             remap = false
     )
     public void aaam_antiqueAtlasGuiAtlas_initCancelDeleteReset(CallbackInfo ci){
-        // I don't know why it originally needed to grab the mouse cursor, but the behavior is awkward
-        DELETING_MARKER = new GuiStates.IState() {
-            @Override
-            public void onEnterState() {
-                addChild(eraser);
-                btnDelMarker.setSelected(true);
-            }
-            @Override
-            public void onExitState() {
-                removeChild(eraser);
-                btnDelMarker.setSelected(false);
-            }
-        };
-
         this.addChild(aaam$btnCopyMarker).offsetGuiCoords(300, -5);
         this.aaam$btnCopyMarker.addListener(button -> {
             if (this.stack != null || !SettingsConfig.gameplay.itemNeeded) {
@@ -110,7 +92,7 @@ public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
             method = "mouseClicked",
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/core/GuiStates;switchTo(Lhunternif/mc/atlas/client/gui/core/GuiStates$IState;)V", remap = false)
     )
-    private void aaam_antiqueAtlasGuiAtlas_mouseClickedCopyData(GuiStates instance, GuiStates.IState state, Operation<Void> original, @Local(name = "mouseState") int mouseState, @Local boolean isMouseOverMap, @Local(name = "atlasID") int atlasID){
+    private void aaam_antiqueAtlasGuiAtlas_mouseClickedCopyData(GuiStates instance, GuiStates.IState state, Operation<Void> original, @Local(name = "mouseState") int mouseState, @Local(name = "isMouseOverMap") boolean isMouseOverMap){
         if (this.state.is(COPY_MARKER) && isMouseOverMap && mouseState == 0){
             aaam$doCopyMarker(this.hoveredMarker, this.player);
         }
@@ -123,22 +105,17 @@ public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
             method = "handleKeyboardInput",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/settings/KeyBinding;getKeyCode()I", ordinal = 0)
     )
-    public void aaam_antiqueAtlasGuiAtlas_handleKeyboardInputClicksButton(CallbackInfo ci, @Local int key) {
-        if(KeyHandler.addButtonKey.isActiveAndMatches(key)){
-            ((GuiComponentButton_Invoker)this.btnMarker).invokeOnClick();
-        }
-        else if(KeyHandler.deleteButtonKey.isActiveAndMatches(key)){
-            ((GuiComponentButton_Invoker)this.btnDelMarker).invokeOnClick();
-        }
-        else if(KeyHandler.toggleButtonKey.isActiveAndMatches(key)){
-            ((GuiComponentButton_Invoker)this.btnShowMarkers).invokeOnClick();
-        }
-        else if(KeyHandler.toggleFollowPlayer.isActiveAndMatches(key)){
-            ((GuiComponentButton_Invoker)this.btnPosition).invokeOnClick();
-        }
-        else if(KeyHandler.copyMarkerButtonKey.isActiveAndMatches(key)){
-            ((GuiComponentButton_Invoker)this.aaam$btnCopyMarker).invokeOnClick();
-        }
+    public void aaam_antiqueAtlasGuiAtlas_handleKeyboardInputClicksButton(CallbackInfo ci, @Local(name = "key") int key) {
+        if(KeyHandler.addButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnMarker).invokeOnClick();
+        else if(KeyHandler.deleteButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnDelMarker).invokeOnClick();
+        else if(KeyHandler.toggleButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnShowMarkers).invokeOnClick();
+        else if(KeyHandler.toggleFollowPlayer.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnPosition).invokeOnClick();
+        else if(KeyHandler.copyMarkerButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.aaam$btnCopyMarker).invokeOnClick();
+    }
+
+    @Inject(method = "handleKeyboardInput", at = @At("TAIL"))
+    private void aaam_renameCopyBookmarkButton(CallbackInfo ci){
+        ((GuiBookmarkButton_Invoker)this.aaam$btnCopyMarker).invokeSetTitle(I18n.format("gui.antiqueatlas.copymarker" + (GuiScreen.isShiftKeyDown() ? ".shiftdown" : "")));
     }
 
     @Unique
@@ -158,17 +135,15 @@ public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
                 command.append(" ").append(selectedMarker.getLabel());
             }
 
-            if(GuiScreen.isShiftKeyDown()){
+            if(!GuiScreen.isShiftKeyDown()){
                 PacketHandler.instance.sendToServer(new PacketExportPutMarker(
                         atlasPlayer.getName(),
-                        this.getAtlasID(),
                         selectedMarker.getX(),
                         selectedMarker.getZ(),
                         selectedMarker.getType(),
                         selectedMarker.getLabel().isEmpty() ? "_" : selectedMarker.getLabel()
                 ));
-            }
-            else {
+            } else {
                 GuiScreen.setClipboardString(command.toString().replaceAll("§.", ""));
                 atlasPlayer.sendMessage(new TextComponentTranslation("gui.antiqueatlas.copymarker.clipboard", labelForMessage));
             }

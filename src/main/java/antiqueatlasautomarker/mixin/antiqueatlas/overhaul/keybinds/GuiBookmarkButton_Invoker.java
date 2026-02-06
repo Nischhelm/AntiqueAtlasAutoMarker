@@ -11,4 +11,7 @@ public interface GuiBookmarkButton_Invoker {
     static GuiBookmarkButton invokeInit(int colorIndex, ResourceLocation iconTexture, String title) {
         throw new AssertionError();
     }
+
+    @Invoker(value = "setTitle", remap = false)
+    void invokeSetTitle(String title);
 }

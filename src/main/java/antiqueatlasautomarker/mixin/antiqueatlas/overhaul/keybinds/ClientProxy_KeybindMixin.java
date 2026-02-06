@@ -35,6 +35,7 @@ public abstract class ClientProxy_KeybindMixin {
             original.call();
         }
         else {
+            //use hotkey to open held atlas in main or offhand
             ItemStack firstAtlas = null;
             Minecraft mc = Minecraft.getMinecraft();
             for(ItemStack stack : mc.player.inventory.offHandInventory){

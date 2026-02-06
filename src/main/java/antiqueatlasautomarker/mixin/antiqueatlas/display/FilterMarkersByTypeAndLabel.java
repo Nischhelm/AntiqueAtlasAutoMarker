@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
 import antiqueatlasautomarker.client.GuiHideMarkerTypeSelect;
+import antiqueatlasautomarker.util.ISetsBackgroundColor;
 import antiqueatlasautomarker.util.MapWaystoneSelectionUtil;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -62,10 +63,8 @@ public abstract class FilterMarkersByTypeAndLabel extends GuiComponent {
     @Unique private static final List<String> aaam$disabledMarkers = new ArrayList<>();
     @Unique private final GuiHideMarkerTypeSelect aaam$markerTypeHider = new GuiHideMarkerTypeSelect(aaam$disabledMarkers);
 
-    @Unique
-    private static final int SEARCH_FIELD_ID = 0;
-    @Unique
-    private GuiTextField aaam$searchBar;
+    @Unique private static final int SEARCH_FIELD_ID = 0;
+    @Unique private GuiTextField aaam$searchBar;
 
     @Inject(
             method = "initGui",
@@ -80,9 +79,9 @@ public abstract class FilterMarkersByTypeAndLabel extends GuiComponent {
                 MAP_WIDTH / 3,
                 this.fontRenderer.FONT_HEIGHT + 3
         );
+        ((ISetsBackgroundColor) this.aaam$searchBar).aaam$setBackgroundColor(0x64A59372,0x63D0B990);
         this.aaam$searchBar.setEnabled(false);
         this.aaam$searchBar.setVisible(false);
-        this.aaam$searchBar.setTextColor(0xFFFFFF);
     }
 
     @WrapWithCondition(

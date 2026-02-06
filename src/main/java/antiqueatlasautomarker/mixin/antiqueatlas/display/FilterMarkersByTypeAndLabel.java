@@ -30,6 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Mixin(GuiAtlas.class)
@@ -97,7 +98,7 @@ public abstract class FilterMarkersByTypeAndLabel extends GuiComponent {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiAtlas;renderMarker(Lhunternif/mc/atlas/marker/Marker;D)V", remap = false)
     )
     private boolean aaam_filterLabelSearch(GuiAtlas instance, Marker marker, double scale) {
-        return marker != null && (aaam$searchBar.getText().isEmpty() || marker.getLocalizedLabel().contains(aaam$searchBar.getText()));
+        return marker != null && (aaam$searchBar.getText().isEmpty() || marker.getLocalizedLabel().toLowerCase(Locale.ROOT).contains(aaam$searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
     @Inject(

@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.overhaul",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  },
+  "client": [
+    "keybinds.ClientProxy_KeybindMixin",
+    "keybinds.GuiAtlas_CompareAtlasMixin",
+    "keybinds.GuiAtlas_KeybindMixin",
+    "keybinds.GuiBookmarkButton_Invoker",
+    "keybinds.GuiComponentButton_Invoker"
+  ]
+}

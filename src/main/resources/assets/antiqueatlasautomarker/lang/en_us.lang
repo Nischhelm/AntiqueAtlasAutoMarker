@@ -1,11 +1,23 @@
 # Keys
 key.aaam.librarian=Mark Whiteshirts
+key.aaam.goldenbookwrym=Mark Golden Book Wrym
 
 # Config pages
 antiqueatlasautomarker.general.enchantmentstomark=Enchantments Trades to Mark
 antiqueatlasautomarker.general.interactionmarkers=Auto Markers on player interaction
 antiqueatlasautomarker.general.ruinsmarkers=Ruins Structure Markers
 antiqueatlasautomarker.general.structuremarkers=Auto marked structures - needs AAAM on server
+
+# Atlas buttons
+gui.antiqueatlas.copymarker=Copy Selected Marker [SHIFT]
+gui.antiqueatlas.compareatlas=Compare Two Held [SHIFT]
+
+# Atlas actions
+gui.antiqueatlas.defaultlabel=[Marker]
+gui.antiqueatlas.nomarker=No marker selected
+gui.antiqueatlas.copymarker.clipboard=[%s] copied to Clipboard
+gui.antiqueatlas.copymarker.packetcommand=§a%s§r shared from Atlas #%s: [%s]
+gui.antiqueatlas.compareatlas.copy=Copied [%s] to Atlas #%s
 
 # Marker labels
 gui.aaam.marker.wildWaystone=Wild Waystone
@@ -80,3 +92,5 @@ gui.aaam.marker.BT.jungle_r=Reverse Jungle Battle Tower
 # Commands
 commands.aaam.invalidusage=Invalid usage. Use /help aaam to see usage
 commands.aaam.typenotfound=Invalid Marker Type. Use TAB to autocomplete
+commands.aaam.missingatlas=Unable to find an Atlas in Inventory
+commands.aaam.removemarkers.success=Successfully tried to remove markers

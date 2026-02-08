@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.overhaul",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "ShiftDeleteMarkers"
+  ]
+}

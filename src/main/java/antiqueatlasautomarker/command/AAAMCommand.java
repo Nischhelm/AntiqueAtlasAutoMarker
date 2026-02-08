@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.command;
 
+import antiqueatlasautomarker.util.IDeletedMarkerList;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.marker.Marker;
@@ -32,7 +33,7 @@ public class AAAMCommand implements ICommand {
     @Nonnull
     public String getUsage(@Nonnull ICommandSender sender) {
         return "[aaam putmarker x z marker_type marker_label] puts a marker at the specified position in the current dimension for all atlases in inventory\n" +
-               "[aaam removemarkers marker_type range marker_label] removes all matching markers in range in the current dimension for all atlases in inventory";
+               "[aaam removemarkers atlas_id marker_type range marker_label] removes all matching markers in range in the current dimension for specified owned atlas";
     }
 
     @Override
@@ -86,17 +87,18 @@ public class AAAMCommand implements ICommand {
             if (args.length < 2) throw new CommandException("commands.aaam.invalidusage");
 
             String typeToMatch = args[1];
-            final int range;
+            final int range, targetAtlasID;
             try {
-                range = args.length >= 3 ? Integer.parseInt(args[2]) : -1;
+                targetAtlasID = args.length >= 3 ? Integer.parseInt(args[2]) : -1;
+                range = args.length >= 4 ? Integer.parseInt(args[3]) : -1;
             } catch (NumberFormatException e) {
                 throw new CommandException("commands.aaam.invalidusage");
             }
             // cleanup any spaced args
             String labelToMatch;
-            if(args.length >= 4) {
+            if(args.length >= 5) {
                 StringBuilder labelMatch = new StringBuilder();
-                for (int i = 3; i < args.length; i++) labelMatch.append(args[i]).append(" ");
+                for (int i = 4; i < args.length; i++) labelMatch.append(args[i]).append(" ");
                 if (labelMatch.length() == 0) labelMatch.append("*"); //no entry = any
                 else labelMatch.deleteCharAt(labelMatch.length() - 1); //remove last separator
                 labelToMatch = labelMatch.toString();
@@ -105,6 +107,7 @@ public class AAAMCommand implements ICommand {
 
             int removedCount = 0;
             for(int atlasID : atlases) {
+                if(targetAtlasID != -1 && atlasID != targetAtlasID) continue;
                 List<Marker> markersToRemove = AntiqueAtlasMod.markersData
                         .getMarkersData(atlasID, player.world)
                         .getMarkersDataInDimension(player.world.provider.getDimension())
@@ -116,7 +119,16 @@ public class AAAMCommand implements ICommand {
                         .collect(Collectors.toList());
 
                 removedCount += markersToRemove.size();
-                markersToRemove.forEach(marker -> AtlasAPI.getMarkerAPI().deleteMarker(player.world, atlasID, marker.getId()));
+                markersToRemove.forEach(marker -> {
+                    AtlasAPI.getMarkerAPI().deleteMarker(player.world, atlasID, marker.getId());
+
+                    //Also save deleted structure markers to not re-add
+                    if(marker.getId() >= 0) return;
+                    if(marker.isGlobal()) return; //can't remove global markers anyway but just safety check
+                    MarkersData data = AntiqueAtlasMod.markersData.getMarkersData(atlasID, player.getEntityWorld());
+                    if(data == null) return; //shouldn't be necessary, since AA would crash anyway
+                    ((IDeletedMarkerList) data).addDeletedMarker(marker.getId());
+                });
             }
             if(removedCount > 0) sender.sendMessage(new TextComponentTranslation("commands.aaam.removemarkers.success", removedCount));
             else sender.sendMessage(new TextComponentTranslation("commands.aaam.removemarkers.fail"));

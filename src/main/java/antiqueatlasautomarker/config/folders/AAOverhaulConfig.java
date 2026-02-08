@@ -78,6 +78,12 @@ public class AAOverhaulConfig {
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.selectmarkersvertically.json", defaultValue = true)
     public boolean verticalScrolling = true;
 
+    @Config.Comment("Shift clicking on a marker with the eraser tool will offer to delete all matching (type+label) markers. Confirm by clicking on link sent in chat.")
+    @Config.Name("Shift Delete Matching Markers")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.shiftdelete.json", defaultValue = true)
+    public boolean shiftDeleteMarkers = true;
+
     @Config.Comment({
             "The area around every player is always scanned to check if anything has changed on the atlas or if theres newly explored chunks.",
             "By default this happens both on server and on client and is somewhat computation- and network-heavy.",

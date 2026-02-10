@@ -9,6 +9,7 @@ import antiqueatlasautomarker.config.EnchMarkSetting;
 import antiqueatlasautomarker.config.folders.BiomeTileConfig;
 import antiqueatlasautomarker.custombiometiles.*;
 import antiqueatlasautomarker.handlers.RuinsHandler;
+import antiqueatlasautomarker.overhaul.OtherPlayersDataHandler;
 import antiqueatlasautomarker.proxy.CommonProxy;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
 import antiqueatlasautomarker.util.PlayerLogoutHandler;
@@ -73,6 +74,7 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
+        if(ConfigHandler.overhaul.showOtherPlayers) MinecraftForge.EVENT_BUS.register(OtherPlayersDataHandler.INSTANCE);
         PROXY.init();
     }
 

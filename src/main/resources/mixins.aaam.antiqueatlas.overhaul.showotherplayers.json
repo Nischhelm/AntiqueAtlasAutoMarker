@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.display",
+  "refmap": "mixins.antiqueatlasautomarker.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "ItemAtlas_ShowOtherPlayers"
+  ],
+  "client": [
+    "GuiAtlas_ShowOtherPlayers"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}

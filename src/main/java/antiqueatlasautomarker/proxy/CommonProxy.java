@@ -6,7 +6,7 @@ import antiqueatlasautomarker.network.PacketHandler;
 public class CommonProxy {
 
     public void preInit() {
-        PacketHandler.registerMessages(AntiqueAtlasAutoMarker.MODID);
+        PacketHandler.registerMessages("aaam");
     }
 
     public void init() {

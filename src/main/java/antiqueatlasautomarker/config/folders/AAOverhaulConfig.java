@@ -29,6 +29,17 @@ public class AAOverhaulConfig {
     public boolean checkOffhand = true;
 
     @Config.Comment({
+            "Allows players with the same atlases to see each other:",
+            "\tDirectional arrows for players and hover to see names",
+            "\tShow online player list key will swap to rendering player heads",
+            "\tServer manages and provides client player positions"
+    })
+    @Config.Name("Show Position of Other Players")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.showotherplayers.json", defaultValue = true)
+    public boolean showOtherPlayers = true;
+
+    @Config.Comment({
             "Provides a variety of useful keybinds and buttons:",
                 "\tAdd Marker - Keybind",
                 "\tShow Markers - Keybind",

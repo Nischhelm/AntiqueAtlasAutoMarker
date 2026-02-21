@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class UpdateCorrectClientAtlas {
     @Shadow(remap = false) private int atlasID;
 
-    @Inject(method = "<init>(II)V", at = @At("TAIL"))
+    @Inject(method = "<init>(II)V", at = @At("TAIL"), remap = false)
     private void aaam_initAtlasID(int atlasID, int dimension, CallbackInfo ci){
         this.atlasID = atlasID; //so much wasted network over 10 years of AA
     }

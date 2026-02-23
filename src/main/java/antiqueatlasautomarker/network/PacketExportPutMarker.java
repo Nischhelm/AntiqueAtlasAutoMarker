@@ -14,8 +14,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PacketExportPutMarker implements IMessage {
 
@@ -75,7 +73,6 @@ public class PacketExportPutMarker implements IMessage {
         }
     }
 
-    @SideOnly(Side.CLIENT)
     public static class ClientHandler implements IMessageHandler<PacketExportPutMarker, IMessage> {
 
         @Override

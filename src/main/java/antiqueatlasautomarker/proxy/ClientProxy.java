@@ -5,15 +5,8 @@ import antiqueatlasautomarker.client.handlers.LibrarianMarkerHandler;
 import antiqueatlasautomarker.compat.DefiledLandsKeyHandler;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.ConfigHandler;
-import antiqueatlasautomarker.network.PacketHandler;
 
 public class ClientProxy extends CommonProxy {
-
-    @Override
-    public void preInit() {
-        super.preInit();
-        PacketHandler.registerClientMessages();
-    }
 
     @Override
     public void init() {

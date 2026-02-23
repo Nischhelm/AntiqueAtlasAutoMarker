@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.proxy;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.network.PacketHandler;
 
 public class CommonProxy {
@@ -9,6 +8,5 @@ public class CommonProxy {
         PacketHandler.registerMessages("aaam");
     }
 
-    public void init() {
-    }
+    public void init() {}
 }

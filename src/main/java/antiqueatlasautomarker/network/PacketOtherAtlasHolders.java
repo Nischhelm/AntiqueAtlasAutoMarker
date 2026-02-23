@@ -12,8 +12,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
@@ -82,7 +80,6 @@ public class PacketOtherAtlasHolders implements IMessage {
         });
     }
 
-    @SideOnly(Side.CLIENT)
     public static class ClientHandler implements IMessageHandler<PacketOtherAtlasHolders, IMessage> {
 
         @Override

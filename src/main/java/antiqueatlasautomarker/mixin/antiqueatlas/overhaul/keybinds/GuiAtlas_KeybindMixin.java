@@ -106,11 +106,11 @@ public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/settings/KeyBinding;getKeyCode()I", ordinal = 0)
     )
     public void aaam_antiqueAtlasGuiAtlas_handleKeyboardInputClicksButton(CallbackInfo ci, @Local(name = "key") int key) {
-        if(KeyHandler.addButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnMarker).invokeOnClick();
-        else if(KeyHandler.deleteButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnDelMarker).invokeOnClick();
-        else if(KeyHandler.toggleButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnShowMarkers).invokeOnClick();
-        else if(KeyHandler.toggleFollowPlayer.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.btnPosition).invokeOnClick();
-        else if(KeyHandler.copyMarkerButtonKey.isActiveAndMatches(key)) ((GuiComponentButton_Invoker)this.aaam$btnCopyMarker).invokeOnClick();
+        if(KeyHandler.addButtonKey.getKeyCode() == key) ((GuiComponentButton_Invoker)this.btnMarker).invokeOnClick();
+        else if(KeyHandler.deleteButtonKey.getKeyCode() == key) ((GuiComponentButton_Invoker)this.btnDelMarker).invokeOnClick();
+        else if(KeyHandler.toggleButtonKey.getKeyCode() == key) ((GuiComponentButton_Invoker)this.btnShowMarkers).invokeOnClick();
+        else if(KeyHandler.toggleFollowPlayer.getKeyCode() == key) ((GuiComponentButton_Invoker)this.btnPosition).invokeOnClick();
+        else if(KeyHandler.copyMarkerButtonKey.getKeyCode() == key) ((GuiComponentButton_Invoker)this.aaam$btnCopyMarker).invokeOnClick();
     }
 
     @Inject(method = "handleKeyboardInput", at = @At("TAIL"))

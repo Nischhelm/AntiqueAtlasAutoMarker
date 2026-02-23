@@ -31,8 +31,8 @@ public abstract class ShiftDeleteMarkers {
         else {
             String command = "/aaam removemarkers" +
                     " " + hoveredMarker.getType() +
-                    " " + atlasID +
                     " -1" +
+                    " " + atlasID +
                     " " + hoveredMarker.getLabel();
             ITextComponent clickableLink = new TextComponentTranslation(hoveredMarker.getLocalizedLabel());
             clickableLink.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));

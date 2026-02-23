@@ -33,7 +33,7 @@ public class AAAMCommand implements ICommand {
     @Nonnull
     public String getUsage(@Nonnull ICommandSender sender) {
         return "[aaam putmarker x z marker_type marker_label] puts a marker at the specified position in the current dimension for all atlases in inventory\n" +
-               "[aaam removemarkers atlas_id marker_type range marker_label] removes all matching markers in range in the current dimension for specified owned atlas";
+               "[aaam removemarkers marker_type range atlas_id marker_label] removes all matching markers in range in the current dimension for specified owned atlas";
     }
 
     @Override
@@ -89,8 +89,8 @@ public class AAAMCommand implements ICommand {
             String typeToMatch = args[1];
             final int range, targetAtlasID;
             try {
-                targetAtlasID = args.length >= 3 ? Integer.parseInt(args[2]) : -1;
-                range = args.length >= 4 ? Integer.parseInt(args[3]) : -1;
+                range = args.length >= 3 ? Integer.parseInt(args[2]) : -1;
+                targetAtlasID = args.length >= 4 ? Integer.parseInt(args[3]) : -1;
             } catch (NumberFormatException e) {
                 throw new CommandException("commands.aaam.invalidusage");
             }

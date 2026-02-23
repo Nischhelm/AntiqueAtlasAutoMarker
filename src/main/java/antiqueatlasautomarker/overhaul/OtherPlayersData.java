@@ -3,15 +3,15 @@ package antiqueatlasautomarker.overhaul;
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Unique;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-public class OtherPlayersData { // Does not need to save to disk, so not a WorldSavedData
+public class OtherPlayersData { // Does not need to save to disk, so not a WorldSavedData. Clientside only
 
-    @Unique
-    private final Map<UUID, double[]> playerPositions; // xPos, zPos, rotYaw
+    @Unique public final Map<UUID, double[]> playerPositions; // xPos, zPos, rotYaw
 
     public OtherPlayersData(Map<UUID, double[]> playerPositions) {
         this();
@@ -22,21 +22,12 @@ public class OtherPlayersData { // Does not need to save to disk, so not a World
         this.playerPositions = new HashMap<>();
     }
 
-    public void removePlayer(UUID uuid){
-        this.playerPositions.remove(uuid);
-    }
-
-    public Set<UUID> getPlayers() {
-        return this.playerPositions.keySet();
-    }
-
-    public double[] getPlayerPosition(UUID uuid) {
-        return this.playerPositions.getOrDefault(uuid, new double[] { 0, 0, 0 });
-    }
-
-    public void updateVisiblePlayer(EntityPlayer player) {
+    public void updateVisiblePlayer(EntityPlayer player) { //only used for current clientside player
         if (player.isEntityAlive()) {
-            this.playerPositions.put(player.getUniqueID(), new double[] { player.posX, player.posZ, player.rotationYaw });
+            double[] playerData = this.playerPositions.computeIfAbsent(player.getUniqueID(), uuid -> new double[3]);
+            playerData[0] = player.posX;
+            playerData[1] = player.posZ;
+            playerData[2] = player.rotationYaw;
         }
     }
 }

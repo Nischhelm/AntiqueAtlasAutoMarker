@@ -29,10 +29,9 @@ public class AAOverhaulConfig {
     public boolean checkOffhand = true;
 
     @Config.Comment({
-            "Allows players with the same atlases to see each other:",
-            "\tDirectional arrows for players and hover to see names",
-            "\tShow online player list key will swap to rendering player heads",
-            "\tServer manages and provides client player positions"
+            "Displays other players on a shared atlas:",
+            "\tDirectional arrows for players. Hover to see names",
+            "\t\"List Players\" key (TAB) will swap to rendering player heads"
     })
     @Config.Name("Show Position of Other Players")
     @Config.RequiresMcRestart

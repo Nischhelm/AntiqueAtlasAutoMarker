@@ -9,9 +9,7 @@
     "ItemAtlas_ShowOtherPlayers"
   ],
   "client": [
-    "GuiAtlas_ShowOtherPlayers"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+    "GuiAtlas_ShowOtherPlayers",
+    "GuiComponentAccessor"
+  ]
 }

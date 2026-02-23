@@ -16,7 +16,6 @@ public class PacketHandler {
 
     public static void registerMessages() {
         instance.registerMessage(PacketExportPutMarker.ServerHandler.class, PacketExportPutMarker.class, 1, Side.SERVER);
-        instance.registerMessage(PacketOtherAtlasHolders.ServerHandler.class, PacketOtherAtlasHolders.class, 2, Side.SERVER);
     }
 
     @SideOnly(Side.CLIENT)

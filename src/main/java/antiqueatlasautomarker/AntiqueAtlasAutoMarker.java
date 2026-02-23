@@ -74,7 +74,7 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
-        if(ConfigHandler.overhaul.showOtherPlayers) MinecraftForge.EVENT_BUS.register(OtherPlayersDataHandler.INSTANCE);
+        if(ConfigHandler.overhaul.showOtherPlayers && event.getSide() == Side.CLIENT) MinecraftForge.EVENT_BUS.register(OtherPlayersDataHandler.class);
         PROXY.init();
     }
 

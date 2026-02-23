@@ -21,5 +21,6 @@ public class PacketHandler {
     @SideOnly(Side.CLIENT)
     public static void registerClientMessages() {
         instance.registerMessage(PacketExportPutMarker.ClientHandler.class, PacketExportPutMarker.class, 1, Side.CLIENT);
+        instance.registerMessage(PacketOtherAtlasHolders.ClientHandler.class, PacketOtherAtlasHolders.class, 2, Side.CLIENT);
     }
 }

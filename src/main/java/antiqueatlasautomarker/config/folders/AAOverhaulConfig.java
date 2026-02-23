@@ -29,6 +29,16 @@ public class AAOverhaulConfig {
     public boolean checkOffhand = true;
 
     @Config.Comment({
+            "Displays other players on a shared atlas:",
+            "\tDirectional arrows for players. Hover to see names",
+            "\t\"List Players\" key (TAB) will swap to rendering player heads"
+    })
+    @Config.Name("Show Position of Other Players")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.showotherplayers.json", defaultValue = true)
+    public boolean showOtherPlayers = true;
+
+    @Config.Comment({
             "Provides a variety of useful keybinds and buttons:",
                 "\tAdd Marker - Keybind",
                 "\tShow Markers - Keybind",

@@ -1,12 +1,10 @@
-package antiqueatlasautomarker.overhaul;
+package antiqueatlasautomarker.displayotherplayers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Unique;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public class OtherPlayersData { // Does not need to save to disk, so not a WorldSavedData. Clientside only

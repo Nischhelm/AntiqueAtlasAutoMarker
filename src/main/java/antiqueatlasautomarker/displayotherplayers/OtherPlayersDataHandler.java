@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.overhaul;
+package antiqueatlasautomarker.displayotherplayers;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;

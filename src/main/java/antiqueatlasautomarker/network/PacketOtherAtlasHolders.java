@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.network;
 
-import antiqueatlasautomarker.overhaul.OtherPlayersData;
-import antiqueatlasautomarker.overhaul.OtherPlayersDataHandler;
+import antiqueatlasautomarker.displayotherplayers.OtherPlayersData;
+import antiqueatlasautomarker.displayotherplayers.OtherPlayersDataHandler;
 import hunternif.mc.atlas.api.AtlasAPI;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;

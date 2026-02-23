@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
-import antiqueatlasautomarker.overhaul.OtherPlayersData;
-import antiqueatlasautomarker.overhaul.OtherPlayersDataHandler;
+import antiqueatlasautomarker.displayotherplayers.OtherPlayersData;
+import antiqueatlasautomarker.displayotherplayers.OtherPlayersDataHandler;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import hunternif.mc.atlas.SettingsConfig;
 import hunternif.mc.atlas.client.Textures;

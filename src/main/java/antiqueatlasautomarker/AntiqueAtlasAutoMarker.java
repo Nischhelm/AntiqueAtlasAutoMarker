@@ -14,7 +14,6 @@ import antiqueatlasautomarker.proxy.CommonProxy;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
 import antiqueatlasautomarker.util.PlayerLogoutHandler;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -39,15 +38,12 @@ public class AntiqueAtlasAutoMarker {
     public static final String NAME = "AntiqueAtlasAutoMarker";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final boolean isDebugging = false;
-    public static Configuration CONFIG;
 
     @SidedProxy(clientSide = "antiqueatlasautomarker.proxy.ClientProxy", serverSide = "antiqueatlasautomarker.proxy.CommonProxy")
     public static CommonProxy PROXY;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        CONFIG = new Configuration(event.getSuggestedConfigurationFile());
-        CONFIG.load();
 
         ConfigHandler.battletowers.preInit();
         ConfigHandler.bettermineshafts.preInit();

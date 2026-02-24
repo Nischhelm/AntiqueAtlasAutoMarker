@@ -5,6 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
+  "mixins": [
+    "ConfigManagerAccessor"
+  ],
   "client": [
     "LocaleMixin",
     "NetHandlerPlayClientMixin"

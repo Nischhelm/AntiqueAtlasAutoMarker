@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.otg;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.pg85.otg.common.LocalWorld;
 import com.pg85.otg.customobjects.bo3.BO3;
@@ -61,7 +61,7 @@ public abstract class BO3_Mixin implements StructuredCustomObject {
                 :  null;
 
         if(mcWorld != null) {
-            AutoMarkSetting settings;
+            AutoMarkSetting.Data settings;
             if(structure == null) {
                 // Try to get fileName
                 settings = AutoMarkSetting.get(this.name);

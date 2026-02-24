@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.biometiles;
 
 import antiqueatlasautomarker.config.ConfigHandler;
-import antiqueatlasautomarker.config.folders.BiomeTileConfig;
+import antiqueatlasautomarker.config.folders.TileConfig.EnumTextureSetArtist;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.client.Textures;
@@ -22,15 +22,15 @@ public abstract class ColorisedVanillaTextures {
             remap = false
     )
     private static String aaam_swapForColorised(String original, @Local(argsOnly = true) String fileName){
-        BiomeTileConfig.EnumTextureSetArtist config = ConfigHandler.overhaul.tileConfig.useColorisedVanillaTiles;
-        if(config == BiomeTileConfig.EnumTextureSetArtist.NONE) return original;
-        boolean isForBoth = config == BiomeTileConfig.EnumTextureSetArtist.BOTH;
-        if(config == BiomeTileConfig.EnumTextureSetArtist.GOLRITH || isForBoth){
+        EnumTextureSetArtist config = ConfigHandler.tiles.useColorisedVanillaTiles;
+        if(config == EnumTextureSetArtist.NONE) return original;
+        boolean isForBoth = config == EnumTextureSetArtist.BOTH;
+        if(config == EnumTextureSetArtist.GOLRITH || isForBoth){
             aaam$setupLookupSets(false, isForBoth);
             if(aaam$golrithTextures.contains(fileName))
                 return aaam$replacedFileName(fileName, "golrith");
         }
-        if(config == BiomeTileConfig.EnumTextureSetArtist.ARTSY || isForBoth){
+        if(config == EnumTextureSetArtist.ARTSY || isForBoth){
             aaam$setupLookupSets(true, isForBoth);
             if (aaam$artsyTextures.contains(fileName))
                 return aaam$replacedFileName(fileName, "artsy");

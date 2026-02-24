@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import antiqueatlasautomarker.structuremarkers.network.CustomPacketDispatcher;
@@ -39,8 +39,8 @@ public abstract class ItemAtlasMixin {
             OptionalStructureMarkerPacket packet = new OptionalStructureMarkerPacket(stack.getItemDamage(), player.dimension);
             for (Marker m : newMarkers)
                 packet.putMarker(m);
-            if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Sending {} structure markers",newMarkers.size());
-            if(ConfigHandler.overhaul.sendToAllHolding)
+            if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Sending {} structure markers",newMarkers.size());
+            if(ConfigHandler.fixes.sendToAllHolding)
                 CustomPacketDispatcher.sendToAllHoldingAtlas(stack.getItemDamage(), packet);
             else
                 PacketDispatcher.sendToAll(packet);

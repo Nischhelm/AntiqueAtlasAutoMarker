@@ -29,7 +29,7 @@ public class LibrarianMarkerHandler {
         if(atlases.isEmpty()) return;
 
         World world = Minecraft.getMinecraft().world;
-        String markerType = MarkerRegistry.hasKey(ConfigHandler.enchantments.librarianKeyMarker) ? ConfigHandler.enchantments.librarianKeyMarker : "antiqueatlas:red_x_small";
+        String markerType = MarkerRegistry.hasKey(ConfigHandler.automark.enchantments.librarianKey.type) ? ConfigHandler.automark.enchantments.librarianKey.type : "antiqueatlas:red_x_small";
         List<EntityVillager> villagers = world.getLoadedEntityList().stream()
                 .filter(v -> v instanceof EntityVillager)
                 .map(v -> (EntityVillager) v)
@@ -47,10 +47,10 @@ public class LibrarianMarkerHandler {
                         .stream()
                         .filter(marker -> Math.abs(marker.getX() - villX) < 64 && Math.abs(marker.getZ() - villZ) < 64)
                         .filter(marker -> marker.getType().equals(markerType))
-                        .filter(marker -> marker.getLabel().equals(ConfigHandler.enchantments.librarianKeyLabel))
+                        .filter(marker -> marker.getLabel().equals(ConfigHandler.automark.enchantments.librarianKey.label))
                         .forEach(marker -> AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId()));
 
-                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, markerType, ConfigHandler.enchantments.librarianKeyLabel, villX, villZ);
+                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, markerType, ConfigHandler.automark.enchantments.librarianKey.label, villX, villZ);
             }
         }
     }

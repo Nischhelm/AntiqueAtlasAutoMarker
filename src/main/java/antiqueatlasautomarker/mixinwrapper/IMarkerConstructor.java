@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.util;
+package antiqueatlasautomarker.mixinwrapper;
 
 import hunternif.mc.atlas.marker.Marker;
 

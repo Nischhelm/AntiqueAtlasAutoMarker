@@ -1,9 +1,9 @@
 package antiqueatlasautomarker.mixin.vanilla;
 
 import antiqueatlasautomarker.config.ConfigHandler;
-import antiqueatlasautomarker.config.EnchMarkSetting;
-import antiqueatlasautomarker.util.EnchantmentOffer;
-import antiqueatlasautomarker.util.EnchantmentUtil;
+import antiqueatlasautomarker.config.data.EnchMarkSetting;
+import antiqueatlasautomarker.enchantments.EnchantmentOffer;
+import antiqueatlasautomarker.enchantments.EnchantmentUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -39,7 +39,7 @@ public abstract class NetHandlerPlayClientMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/IMerchant;setRecipes(Lnet/minecraft/village/MerchantRecipeList;)V")
     )
     public void onMerchantTradeOffers(SPacketCustomPayload packetIn, CallbackInfo ci, @Local MerchantRecipeList tradeList, @Local IMerchant merchant) {
-        if (!ConfigHandler.enchantments.enabled) return;
+        if (!ConfigHandler.automark.enchantments.enabled) return;
 
         EntityPlayer player = this.client.player; //bruh
         if (player == null) return;
@@ -79,11 +79,10 @@ public abstract class NetHandlerPlayClientMixin {
         for (EnchantmentOffer offer : offeredEnchants) {
             ResourceLocation enchReg = offer.enchantment.getRegistryName();
             if (enchReg == null) continue;
-            EnchMarkSetting setting = EnchMarkSetting.get(enchReg.toString());
+            EnchMarkSetting setting = ConfigHandler.automark.enchantments.enchantmentsToMark.get(enchReg.toString());
             //Check if the offer is anything we care about
-            if ((setting != null && offer.lvl >= setting.minLvl) || EnchMarkSetting.acceptAll) {
-                String enchLabel = "";
-                if(setting != null) enchLabel = setting.abbreviation;
+            if ((setting != null && offer.lvl >= setting.minLvl) || ConfigHandler.automark.enchantments.enchantmentsToMark.containsKey("ALL")) {
+                String enchLabel = setting != null ? setting.abbreviation : "";
                 //no abbreviation or accepting all
                 if(enchLabel.isEmpty()) enchLabel = offer.enchantment.getTranslatedName(offer.lvl);
                 //Put lvl on abbreviated enchant

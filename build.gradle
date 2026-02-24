@@ -20,7 +20,7 @@ minecraft {
         client {
             args "--username=Nischhelm"
 
-            jvmArg "-Dfml.coreMods.load=${mixin_loader_class}"
+            jvmArg "-Dfml.coreMods.load=betterconfig.asm.BetterConfigPlugin"
 //            jvmArg "-Dmixin.hotSwap=true"
             jvmArg "-Dmixin.checks.interfaces=true"
             jvmArg "-Dmixin.debug.export=true"
@@ -33,7 +33,7 @@ minecraft {
 
         server {
 
-            jvmArg "-Dfml.coreMods.load=${mixin_loader_class}"
+            jvmArg "-Dfml.coreMods.load=betterconfig.asm.BetterConfigPlugin"
 //            jvmArg "-Dmixin.hotSwap=true"
             jvmArg "-Dmixin.checks.interfaces=true"
             jvmArg "-Dmixin.debug.export=true"
@@ -62,6 +62,7 @@ dependencies {
     annotationProcessor "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
 
     implementation fg.deobf("curse.maven:fermiumbooter-${fermiumbooter_version}")
+    implementation fg.deobf("curse.maven:betterconfig-${betterconfig_version}")
     implementation fg.deobf("curse.maven:antique-atlas-${antiqueatlas_version}")
 
     implementation fg.deobf("curse.maven:waystones-${waystones_version}")
@@ -139,9 +140,7 @@ jar {
                 "Implementation-Title"       : mod_name,
                 "Implementation-Version"     : mod_version,
                 "Implementation-Vendor"      : mod_author,
-                "Implementation-Timestamp"   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'FMLCorePlugin'              : mixin_loader_class,
-                'FMLCorePluginContainsFMLMod': 'true'
+                "Implementation-Timestamp"   : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }

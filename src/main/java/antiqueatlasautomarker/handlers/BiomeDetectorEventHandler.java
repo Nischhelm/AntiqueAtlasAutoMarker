@@ -15,7 +15,7 @@ public class BiomeDetectorEventHandler {
     public static void onBiomeDetected(BiomeDetectorEvent event){
         switch (event.getDimension()){
             case 1:
-                if(ModCompat.betterEnd.isLoaded() && ConfigHandler.overhaul.tileConfig.purpleVoid) {
+                if(ModCompat.betterEnd.isLoaded() && ConfigHandler.tiles.purpleVoid) {
                     if (event.getChosenType().equals("void") && event.getMainBiome() == BetterEndCompat.getIceStarfieldBiome())
                         event.setChosenBiomeId(BetterEndCompat.BE_ICE_STARFIELD_VOID);
                 }

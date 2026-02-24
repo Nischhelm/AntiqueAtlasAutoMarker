@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.util;
+package antiqueatlasautomarker.mixinwrapper;
 
 public interface IDeletedMarkerList {
     boolean markerIsDeleted(int markerID);

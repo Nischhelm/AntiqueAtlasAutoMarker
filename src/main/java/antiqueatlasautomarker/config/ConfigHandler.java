@@ -1,111 +1,65 @@
 package antiqueatlasautomarker.config;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.config.folders.*;
+import meldexun.betterconfig.api.BetterConfig;
+import meldexun.betterconfig.api.BetterConfigManager;
+import meldexun.betterconfig.api.LoadEarly;
+import meldexun.betterconfig.api.Order;
+import meldexun.betterconfig.api.tree.IConfigCategory;
+import meldexun.betterconfig.api.tree.IConfigContext;
 import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.maven.artifact.versioning.ArtifactVersion;
 
-@Config(modid = AntiqueAtlasAutoMarker.MODID)
+@BetterConfig(
+		modid = Tags.MODID,
+		version = Tags.CFG_VERSION,
+		bigCategoryComments = false
+)
+@LoadEarly
 public class ConfigHandler {
-	@Config.Comment("Battletowers Marker Config")
-	@Config.Name("Battletowers")
-	public static BattletowersConfig battletowers = new BattletowersConfig();
+	@Config.Comment("Settings for various structures to automark")
+	@Config.Name("Auto Marking")
+	@Order(0) public static AutoMarkConfig automark = new AutoMarkConfig();
 
-	@Config.Comment("Defiled Lands Config")
-	@Config.Name("Defiled Lands")
-	public static DefiledLandsConfig defiledlands = new DefiledLandsConfig();
+	@Config.Comment("Modifications for Quality of life")
+	@Config.Name("Antique Atlas Tweaks")
+	@Order(1) public static TweakConfig tweaks = new TweakConfig();
 
-	@Config.Comment("Doomlike Dungeons Marker Config")
-	@Config.Name("Doomlike Dungeons")
-	public static DoomlikeConfig doomlike = new DoomlikeConfig();
+	@Config.Comment("Bug fixes and performance")
+	@Config.Name("Antique Atlas Fixes")
+	@Order(2) public static FixConfig fixes = new FixConfig();
 
-	@Config.Comment("Dungeons2 Marker Config")
-	@Config.Name("Dungeons2")
-	public static Dungeons2Config dungeons2 = new Dungeons2Config();
-
-	@Config.Comment("Roguelike Dungeons Marker Config")
-	@Config.Name("Roguelike Dungeons")
-	public static RoguelikeConfig roguelike = new RoguelikeConfig();
-
-	@Config.Comment("Quark Marker Config")
-	@Config.Name("Quark")
-	public static QuarkConfig quark = new QuarkConfig();
-
-	@Config.Comment("AARCAddon Marker Config")
-	@Config.Name("AARCAddon")
-	public static AARCAddonConfig aarcaddon = new AARCAddonConfig();
-
-	@Config.Comment("Ice And Fire Marker Config")
-	@Config.Name("Ice And Fire")
-	public static IceAndFireConfig iceandfire = new IceAndFireConfig();
-
-	@Config.Comment("Better Mineshafts Marker Config")
-	@Config.Name("Better Mineshafts")
-	public static BetterMineshaftConfig bettermineshafts = new BetterMineshaftConfig();
-
-	@Config.Comment("LycanitesMobs Marker Config")
-	@Config.Name("LycanitesMobs")
-	public static LycanitesConfig lycanitesmobs = new LycanitesConfig();
-
-	@Config.Comment("Custom Position Markers Config")
-	@Config.Name("Custom Positions")
-	public static CustomPositionConfig customPosition = new CustomPositionConfig();
-
-	@Config.Comment("OTG Config")
-	@Config.Name("Open Terrain Generator")
-	public static OTGConfig otg = new OTGConfig();
-
-	@Config.Comment("Ruins Marker Config")
-	@Config.Name("Ruins")
-	public static RuinsConfig ruins = new RuinsConfig();
-
-	@Config.Comment("Options for custom marker labels")
-	@Config.Name("Lang Keys")
-	public static LocalisationConfig localisation = new LocalisationConfig();
+	@Config.Comment("Various modifications of which atlas tiles are used when")
+	@Config.Name("Antique Atlas Tiles")
+	@Order(3) public static TileConfig tiles = new TileConfig();
 
 	@Config.Comment("Internal Config")
-	@Config.Name("Internal")
-	public static InternalConfig internal = new InternalConfig();
+	@Config.Name("AAAM Internals")
+	@Order(4) public static InternalConfig internal = new InternalConfig();
 
-	@Config.Comment("Waystone Marker Config")
-	@Config.Name("Waystones")
-	public static WaystonesConfig waystones = new WaystonesConfig();
-
-	@Config.Comment("Enchantment Marker Config")
-	@Config.Name("Enchantments")
-	public static EnchantmentConfig enchantments = new EnchantmentConfig();
-
-	@Config.Comment("Overhaul Antique Atlas")
-	@Config.Name("Antique Atlas Overhaul")
-	public static AAOverhaulConfig overhaul = new AAOverhaulConfig();
-
-	@Config.Comment("Structure Marker Config - Some mods add their structs to this list as well")
-	@Config.Name("Structures")
-	public static StructuresConfig vanillaStructs = new StructuresConfig();
-
-	@Mod.EventBusSubscriber(modid = AntiqueAtlasAutoMarker.MODID)
+	@SuppressWarnings("unused")
+	@Mod.EventBusSubscriber
 	private static class EventHandler{
-
 		@SubscribeEvent
 		public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-			if(event.getModID().equals(AntiqueAtlasAutoMarker.MODID)) {
-				ConfigManager.sync(AntiqueAtlasAutoMarker.MODID, Config.Type.INSTANCE);
-				AutoMarkSetting.reset();
-				EnchMarkSetting.reset();
-				waystones.resetSetting();
-				iceandfire.resetSetting();
-				lycanitesmobs.resetSetting();
-				bettermineshafts.resetSetting();
-				otg.resetSetting();
-				quark.resetSetting();
-				dungeons2.resetSetting();
-				doomlike.resetSetting();
-				battletowers.resetSetting();
-				roguelike.resetSetting();
-			}
+			if(event.getModID().equals(Tags.MODID))
+				BetterConfigManager.sync(Tags.MODID);
 		}
+	}
+
+	@SuppressWarnings("unused")
+	@LoadEarly.Callback
+	public static void afterEarlyLoad(){
+		MixinConfigurations.enqueueMixins();
+	}
+
+	@SuppressWarnings("unused")
+	@BetterConfig.AfterRead
+	public static <T extends IConfigContext<T>> void migrateConfigs(IConfigCategory<T> category, T context, ArtifactVersion version){
+		ConfigMigrator.handleMigration(category, context, version);
 	}
 }

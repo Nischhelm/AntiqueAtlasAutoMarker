@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.overhaul;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.marker.Marker;
 import hunternif.mc.atlas.marker.MarkersData;
@@ -25,8 +25,8 @@ public abstract class LoadDuplicatedIdDebug {
     private void debugMsg(Marker marker, CallbackInfoReturnable<Marker> cir){
         if(ConfigHandler.internal.doDebugLogs){
             boolean alreadyExists = this.idMap.containsKey(marker.getId());
-            AntiqueAtlasAutoMarker.LOGGER.info("Loading Marker into atlas, marker id {}, already exists {}", marker.getId(), alreadyExists);
-            if(alreadyExists ) AntiqueAtlasAutoMarker.LOGGER.info("Existing marker is {}", this.idMap.get(marker.getId()));
+            Tags.LOGGER.info("Loading Marker into atlas, marker id {}, already exists {}", marker.getId(), alreadyExists);
+            if(alreadyExists ) Tags.LOGGER.info("Existing marker is {}", this.idMap.get(marker.getId()));
         }
     }
 }

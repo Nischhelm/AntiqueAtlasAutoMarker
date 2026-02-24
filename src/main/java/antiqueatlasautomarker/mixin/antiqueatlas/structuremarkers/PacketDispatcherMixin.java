@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.structuremarkers.network.AddedStructureMarkersPacket;
 import antiqueatlasautomarker.structuremarkers.network.OptionalStructureMarkerPacket;
 import hunternif.mc.atlas.network.AbstractMessage;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PacketDispatcher.class)
 public abstract class PacketDispatcherMixin {
     @Shadow(remap = false) private static <T extends AbstractMessage<T> & IMessageHandler<T, IMessage>> void registerMessage(Class<T> clazz) {
-        AntiqueAtlasAutoMarker.LOGGER.error("Failed to shadow Antique Atlas PacketDispatcher.registerMessage");
+        Tags.LOGGER.error("Failed to shadow Antique Atlas PacketDispatcher.registerMessage");
     }
 
     @Inject(

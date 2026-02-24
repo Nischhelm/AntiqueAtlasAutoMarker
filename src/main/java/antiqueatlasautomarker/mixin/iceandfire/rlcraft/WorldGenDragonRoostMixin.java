@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.iceandfire.rlcraft;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.github.alexthe666.iceandfire.structures.WorldGenDragonRoost;
 import com.github.alexthe666.iceandfire.structures.WorldGenFireDragonRoost;
@@ -25,7 +25,7 @@ public class WorldGenDragonRoostMixin {
         else if(((Object) this) instanceof WorldGenLightningDragonRoost) dragonType = "lightningDragon";
         else return;
 
-        AutoMarkSetting setting = AutoMarkSetting.get(dragonType);
+        AutoMarkSetting.Data setting = AutoMarkSetting.get(dragonType);
         if(setting == null || !setting.enabled) return;
         String usedLabel = setting.label;
         if(usedLabel.equals("DEFAULT")) {

@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.network;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import hunternif.mc.atlas.registry.MarkerRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -92,7 +92,7 @@ public class PacketExportPutMarker implements IMessage {
                     clickableLink.getStyle().setUnderlined(true);
                     Minecraft.getMinecraft().player.sendMessage(new TextComponentTranslation("gui.antiqueatlas.copymarker.packetcommand", message.playerName, clickableLink));
                 } else {
-                    AntiqueAtlasAutoMarker.LOGGER.info("{} tried to share a marker with type {} not present on client, ignoring", message.playerName, message.type);
+                    Tags.LOGGER.info("{} tried to share a marker with type {} not present on client, ignoring", message.playerName, message.type);
                 }
             });
             return null;

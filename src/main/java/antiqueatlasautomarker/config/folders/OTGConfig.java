@@ -1,11 +1,17 @@
 package antiqueatlasautomarker.config.folders;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.Tags;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
-@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@MixinConfig(name = Tags.MODID)
 public class OTGConfig {
 
     @Config.Comment("Set to false to disable OTG Auto Markers. You should not have to disable this unless an OTG update causes immediate issues.")
@@ -17,11 +23,7 @@ public class OTGConfig {
 
     @Config.Comment({
             "List of OTG BO3 and BO4 objects to auto mark, these can be structures or entities.",
-            "Pattern: objectName:objectBranch; marker label; marker type.",
-            "    objectName - File name or name from \"/otg structure\"",
-            "    objectBranch - File name or name from \"/otg structure\", if provided, is where the marker gets placed",
-            "    marker labl - Hover over marker text, \"DEFAULT\" will use the lag key \"gui.aaam.marker.otg.<objectBranch>\"",
-            "    market type - Marker Type Icon",
+            "DEFAULT uses the corresponding lang key set in lang file or in the lang key config \"gui.aaam.marker.otg.<objectBranch>\"",
             "objectName and objectBranch can be specified like this:",
             "    objectName:objectBranch - Structure + Branch identifier, the branch must be attached to the structure",
             "    objectName - Structure match, only when the structure is spawned via biome configs from \"WorldBiomes\"",
@@ -32,183 +34,169 @@ public class OTGConfig {
             "The default list primarily uses \"objectName:objectBranch\" when possible, as it shows the intended structure being marked."
     })
     @Config.Name("OTG Markers")
-    public String[] otgMarkers = {
+    public Map<String, AutoMarkSetting.Data> otgMarkers = new LinkedHashMap<>(Stream.of(
             // Safe
-            "SpawnHex:SpawnHexC9R9;DEFAULT;antiqueatlas:google",
-            "AcaciaVillage;DEFAULT;antiqueatlas:village", // Has too many variations, can't center properly
-            "Harbor:HarborC4R3;DEFAULT;antiqueatlas:village",
-            "Herbalist:HerbalistC3R4;DEFAULT;antiqueatlas:village",
-            "v_bunker_start;DEFAULT;antiqueatlas:village", // Underground Village Bunker
-            ":c_bunker_mid_way;DEFAULT;antiqueatlas:waystone", // 0 or more Waystone
-            ":v_bunker_mid_way;DEFAULT;antiqueatlas:waystone",
-            ":o_bunker_mid_way;DEFAULT;antiqueatlas:waystone",
-            "viking_main_peacefull;DEFAULT;antiqueatlas:village", // Has too many variations, can't center properly
+            new AutoMarkSetting.Data("SpawnHex:SpawnHexC9R9", true, "antiqueatlas:google", "DEFAULT"),
+            new AutoMarkSetting.Data("AcaciaVillage", true, "antiqueatlas:village", "DEFAULT"), // Has too many variations, can't center properly
+            new AutoMarkSetting.Data("Harbor:HarborC4R3", true, "antiqueatlas:village", "DEFAULT"),
+            new AutoMarkSetting.Data("Herbalist:HerbalistC3R4", true, "antiqueatlas:village", "DEFAULT"),
+            new AutoMarkSetting.Data("v_bunker_start", true, "antiqueatlas:village", "DEFAULT"), // Underground Village Bunker
+            new AutoMarkSetting.Data(":c_bunker_mid_way", true, "antiqueatlas:waystone", "DEFAULT"), // 0 or more Waystone
+            new AutoMarkSetting.Data(":v_bunker_mid_way", true, "antiqueatlas:waystone", "DEFAULT"),
+            new AutoMarkSetting.Data(":o_bunker_mid_way", true, "antiqueatlas:waystone", "DEFAULT"),
+            new AutoMarkSetting.Data("viking_main_peacefull", true, "antiqueatlas:village", "DEFAULT"), // Has too many variations, can't center properly
             // Vanilla
-            ":DeepTunnel_EntranceHighC2R1;DEFAULT;antiqueatlas:dungeon", // Multiple variants use this entrance
-            "maintenance_hub;DEFAULT;antiqueatlas:dungeon",
-            "Quarry:quarryC5R6;DEFAULT;antiqueatlas:pickaxe",
-            "SwampHouseBig;DEFAULT;antiqueatlas:monsterspawner",
-            "viking_main;DEFAULT;antiqueatlas:sword",
+            new AutoMarkSetting.Data(":DeepTunnel_EntranceHighC2R1", true, "antiqueatlas:dungeon", "DEFAULT"), // Multiple variants use this entrance
+            new AutoMarkSetting.Data("maintenance_hub", true, "antiqueatlas:dungeon", "DEFAULT"),
+            new AutoMarkSetting.Data("Quarry:quarryC5R6", true, "antiqueatlas:pickaxe", "DEFAULT"),
+            new AutoMarkSetting.Data("SwampHouseBig", true, "antiqueatlas:monsterspawner", "DEFAULT"),
+            new AutoMarkSetting.Data("viking_main", true, "antiqueatlas:sword", "DEFAULT"),
             // 15k map destinations, one time and multiple spawning
             // Safe
-            "DaerocVillage:DaerocVillageC11R8;DEFAULT;antiqueatlas:village",
-            "DaerocVillage:DaerocVillageC11R13;DEFAULT;antiqueatlas:nether_portal", // End Portal
-            "origin:originC15R8;DEFAULT;antiqueatlas:village",
-            "origin:originC5R4;DEFAULT;antiqueatlas:nether_portal", // End Portal
-            "JungleVillage;DEFAULT;antiqueatlas:village", // Has too many variations, can't center properly
+            new AutoMarkSetting.Data("DaerocVillage:DaerocVillageC11R8", true, "antiqueatlas:village", "DEFAULT"),
+            new AutoMarkSetting.Data("DaerocVillage:DaerocVillageC11R13", true, "antiqueatlas:nether_portal", "DEFAULT"), // End Portal
+            new AutoMarkSetting.Data("origin:originC15R8", true, "antiqueatlas:village", "DEFAULT"),
+            new AutoMarkSetting.Data("origin:originC5R4", true, "antiqueatlas:nether_portal", "DEFAULT"), // End Portal
+            new AutoMarkSetting.Data("JungleVillage", true, "antiqueatlas:village", "DEFAULT"), // Has too many variations, can't center properly
             // Dungeon
-            "Church:ChurchC0R0;DEFAULT;antiqueatlas:dungeon",
-            ":Dungeon01C1R1;DEFAULT;antiqueatlas:dungeon ",
-            ":Dungeon02C1R1;DEFAULT;antiqueatlas:dungeon",
-            ":Dungeon03C1R1;DEFAULT;antiqueatlas:dungeon",
-            "Mineshaft;DEFAULT;antiqueatlas:pickaxe",
-            "W-Mineshaft;DEFAULT;antiqueatlas:pickaxe",
+            new AutoMarkSetting.Data("Church:ChurchC0R0", true, "antiqueatlas:dungeon", "DEFAULT"),
+            new AutoMarkSetting.Data(":Dungeon01C1R1", true, "antiqueatlas:dungeon", "DEFAULT"),
+            new AutoMarkSetting.Data(":Dungeon02C1R1", true, "antiqueatlas:dungeon", "DEFAULT"),
+            new AutoMarkSetting.Data(":Dungeon03C1R1", true, "antiqueatlas:dungeon", "DEFAULT"),
+            new AutoMarkSetting.Data("Mineshaft", true, "antiqueatlas:pickaxe", "DEFAULT"),
+            new AutoMarkSetting.Data("W-Mineshaft", true, "antiqueatlas:pickaxe", "DEFAULT"),
             // 15 Random Stuff
-            "LegacySpawn:LegacySpawnC1R1;DEFAULT;antiqueatlas:google",
-            "CastleRuins:CastleRuinsC2R3;DEFAULT;antiqueatlas:wizardtower",
-            "FrozenShip-1;DEFAULT;antiqueatlas:ship",
-            "FrozenShip-2;DEFAULT;antiqueatlas:ship",
-            "FrozenShip-3;DEFAULT;antiqueatlas:ship",
-            "FrozenShip-4;DEFAULT;antiqueatlas:ship",
-            "TempleFrozen:TempleFrozenC1R2;DEFAULT;antiqueatlas:dungeon",
-            "LavaTemple:LavaTempleC1R1;DEFAULT;antiqueatlas:dungeon",
+            new AutoMarkSetting.Data("LegacySpawn:LegacySpawnC1R1", true, "antiqueatlas:google", "DEFAULT"),
+            new AutoMarkSetting.Data("CastleRuins:CastleRuinsC2R3", true, "antiqueatlas:wizardtower", "DEFAULT"),
+            new AutoMarkSetting.Data("FrozenShip-1", true, "antiqueatlas:ship", "DEFAULT"),
+            new AutoMarkSetting.Data("FrozenShip-2", true, "antiqueatlas:ship", "DEFAULT"),
+            new AutoMarkSetting.Data("FrozenShip-3", true, "antiqueatlas:ship", "DEFAULT"),
+            new AutoMarkSetting.Data("FrozenShip-4", true, "antiqueatlas:ship", "DEFAULT"),
+            new AutoMarkSetting.Data("TempleFrozen:TempleFrozenC1R2", true, "antiqueatlas:dungeon", "DEFAULT"),
+            new AutoMarkSetting.Data("LavaTemple:LavaTempleC1R1", true, "antiqueatlas:dungeon", "DEFAULT"),
             // End of 15k
             // Gem Traders
-            "Trader_Castle:Trader_CastleC0R1;DEFAULT;antiqueatlas:brutalcoin",
-            "Trader_Club:Trader_ClubC0R1;DEFAULT;antiqueatlas:brutalcoin",
-            "Trader_Silo:Trader_SiloC1R0;DEFAULT;antiqueatlas:brutalcoin",
-            "Trader_Swamp:Trader_SwampC1R0;DEFAULT;antiqueatlas:brutalcoin",
+            new AutoMarkSetting.Data("Trader_Castle:Trader_CastleC0R1", true, "antiqueatlas:brutalcoin", "DEFAULT"),
+            new AutoMarkSetting.Data("Trader_Club:Trader_ClubC0R1", true, "antiqueatlas:brutalcoin", "DEFAULT"),
+            new AutoMarkSetting.Data("Trader_Silo:Trader_SiloC1R0", true, "antiqueatlas:brutalcoin", "DEFAULT"),
+            new AutoMarkSetting.Data("Trader_Swamp:Trader_SwampC1R0", true, "antiqueatlas:brutalcoin", "DEFAULT"),
             // Brutal
-            "brutal_warnpost;DEFAULT;antiqueatlas:radiation",
-            "abyssal_tower:AbyssTowerC4R4;DEFAULT;antiqueatlas:megatower",
+            new AutoMarkSetting.Data("brutal_warnpost", true, "antiqueatlas:radiation", "DEFAULT"),
+            new AutoMarkSetting.Data("abyssal_tower:AbyssTowerC4R4", true, "antiqueatlas:megatower", "DEFAULT"),
             // Underneath
-            "access_duct:access_ductC1R0;DEFAULT;antiqueatlas:wrench", // EZ Loot more bunker stuff
-            "portal_overworld_high;DEFAULT;antiqueatlas:nether_portal",
-            "portal_overworld_low;DEFAULT;antiqueatlas:nether_portal",
+            new AutoMarkSetting.Data("access_duct:access_ductC1R0", true, "antiqueatlas:wrench", "DEFAULT"), // EZ Loot more bunker stuff
+            new AutoMarkSetting.Data("portal_overworld_high", true, "antiqueatlas:nether_portal", "DEFAULT"),
+            new AutoMarkSetting.Data("portal_overworld_low", true, "antiqueatlas:nether_portal", "DEFAULT"),
             // Nuclear Craft Bunkers
-            ":f_bunker_atrium_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_mid_nuclear_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_silo_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_apartements_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_01_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_02_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_03_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_04_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_05_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_06_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_07_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_small_08_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_storage_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_factory_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_mid_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_rich_spawn;DEFAULT;antiqueatlas:wrench",
-            ":f_bunker_tunnelC4R1;DEFAULT;antiqueatlas:wrench",
-            "f_bunker_tunnel:DeepTunnel_EntranceHighC2R1;DEFAULT;antiqueatlas:wrench", // Override other usage of DeepTunnel_EntranceHighC2R1
+            new AutoMarkSetting.Data(":f_bunker_atrium_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_mid_nuclear_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_silo_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_apartements_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_01_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_02_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_03_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_04_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_05_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_06_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_07_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_small_08_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_storage_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_factory_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_mid_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_rich_spawn", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data(":f_bunker_tunnelC4R1", true, "antiqueatlas:wrench", "DEFAULT"),
+            new AutoMarkSetting.Data("f_bunker_tunnel:DeepTunnel_EntranceHighC2R1", true, "antiqueatlas:wrench", "DEFAULT"), // Override other usage of DeepTunnel_EntranceHighC2R1
             // I&F
-            "cyclops_main:cyclops_mainC2R1;DEFAULT;antiqueatlas:red_x_small",
-            "GorgonTemple:GorgonTemple_C6R6;DEFAULT;antiqueatlas:red_x_small",
-            "GorgonTemple:GorgonTemple_02C6R6;DEFAULT;antiqueatlas:red_x_small",
-            "GorgonTemple:GorgontempleGigiC6R6;DEFAULT;antiqueatlas:red_x_small",
-            "Roost_Lightning:Roost_LightningC0R1;DEFAULT;antiqueatlas:dragon_gold",
+            new AutoMarkSetting.Data("cyclops_main:cyclops_mainC2R1", true, "antiqueatlas:red_x_small", "DEFAULT"),
+            new AutoMarkSetting.Data("GorgonTemple:GorgonTemple_C6R6", true, "antiqueatlas:red_x_small", "DEFAULT"),
+            new AutoMarkSetting.Data("GorgonTemple:GorgonTemple_02C6R6", true, "antiqueatlas:red_x_small", "DEFAULT"),
+            new AutoMarkSetting.Data("GorgonTemple:GorgontempleGigiC6R6", true, "antiqueatlas:red_x_small", "DEFAULT"),
+            new AutoMarkSetting.Data("Roost_Lightning:Roost_LightningC0R1", true, "antiqueatlas:dragon_gold", "DEFAULT"),
             // Flying Encounters
             // All
-            "Aimton:sub_Aimton;DEFAULT;antiqueatlas:dragon_red",
-            "Al_Capone:sub_Al_Capone;DEFAULT;antiqueatlas:lycanites",
-            "Bufffaton_Bill:sub_Buffaton_Bill;DEFAULT;antiqueatlas:lycanites",
-            "ChevaxiTon:sub_ChevaxiTon;DEFAULT;antiqueatlas:lycanites",
-            "GokuTon:sub_GokuTon;DEFAULT;antiqueatlas:dragon_gold",
-            "JesterTon:sub_JesterTon;DEFAULT;antiqueatlas:lycanites",
-            "OldMan:sub_OldMan;DEFAULT;antiqueatlas:dragon_gold",
-            "Tax_Collector:sub_Tax_Collector;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Aimton:sub_Aimton", true, "antiqueatlas:dragon_red", "DEFAULT"),
+            new AutoMarkSetting.Data("Al_Capone:sub_Al_Capone", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Bufffaton_Bill:sub_Buffaton_Bill", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("ChevaxiTon:sub_ChevaxiTon", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("GokuTon:sub_GokuTon", true, "antiqueatlas:dragon_gold", "DEFAULT"),
+            new AutoMarkSetting.Data("JesterTon:sub_JesterTon", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("OldMan:sub_OldMan", true, "antiqueatlas:dragon_gold", "DEFAULT"),
+            new AutoMarkSetting.Data("Tax_Collector:sub_Tax_Collector", true, "antiqueatlas:lycanites", "DEFAULT"),
             // City
-            "Banisher:sub_Banisher;DEFAULT;antiqueatlas:skull",
-            "Corroder:sub_Corroder;DEFAULT;antiqueatlas:skull",
-            "Decayer:sub_Decayer;DEFAULT;antiqueatlas:skull",
-            "Dislocator:sub_Dislocator;DEFAULT;antiqueatlas:skull",
-            "Dismounting_Raider:sub_Dismounting_Raider;DEFAULT;antiqueatlas:skull",
-            "Relocator:sub_Relocator;DEFAULT;antiqueatlas:skull",
+            new AutoMarkSetting.Data("Banisher:sub_Banisher", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Corroder:sub_Corroder", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Decayer:sub_Decayer", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Dislocator:sub_Dislocator", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Dismounting_Raider:sub_Dismounting_Raider", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Relocator:sub_Relocator", true, "antiqueatlas:skull", "DEFAULT"),
             // Defiled
-            "Defiled_King:sub_Defiled_King;DEFAULT;antiqueatlas:lycanites",
-            "Detonator:sub_Detonator;DEFAULT;antiqueatlas:lycanites",
-            "Executioner:sub_Executioner;DEFAULT;antiqueatlas:lycanites",
-            "Morbid_Skeleton:sub_Morbid_Skeleton;DEFAULT;antiqueatlas:lycanites",
-            "Umbrium_Knight:sub_Umbrium_Knight;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Defiled_King:sub_Defiled_King", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Detonator:sub_Detonator", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Executioner:sub_Executioner", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Morbid_Skeleton:sub_Morbid_Skeleton", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Umbrium_Knight:sub_Umbrium_Knight", true, "antiqueatlas:lycanites", "DEFAULT"),
             // Desert
-            "Duster:sub_Duster;DEFAULT;antiqueatlas:lycanites",
-            "Red_Assassin:sub_Red_Assassin;DEFAULT;antiqueatlas:lycanites",
-            "Ruster:sub_Ruster;DEFAULT;antiqueatlas:skull",
-            "Sampler:sub_Sampler;DEFAULT;antiqueatlas:lycanites",
-            "Wanderer:sub_Wanderer;DEFAULT;antiqueatlas:skull",
+            new AutoMarkSetting.Data("Duster:sub_Duster", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Red_Assassin:sub_Red_Assassin", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Ruster:sub_Ruster", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Sampler:sub_Sampler", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Wanderer:sub_Wanderer", true, "antiqueatlas:skull", "DEFAULT"),
             // Ice
-            "Aerial_Dismounter:sub_Aerial_Dismounter;DEFAULT;antiqueatlas:lycanites",
-            "Frigid_Warper:sub_Frigid_Warper;DEFAULT;antiqueatlas:lycanites",
-            "Ice_King:sub_Ice_King;DEFAULT;antiqueatlas:dragon_blue",
-            "NumbingTon:sub_NumbingTon;DEFAULT;antiqueatlas:lycanites",
-            "Piercing_Stray:sub_Piercing_Stray;DEFAULT;antiqueatlas:lycanites",
-            "Unfroster:sub_Unfroster;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Aerial_Dismounter:sub_Aerial_Dismounter", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Frigid_Warper:sub_Frigid_Warper", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Ice_King:sub_Ice_King", true, "antiqueatlas:dragon_blue", "DEFAULT"),
+            new AutoMarkSetting.Data("NumbingTon:sub_NumbingTon", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Piercing_Stray:sub_Piercing_Stray", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Unfroster:sub_Unfroster", true, "antiqueatlas:lycanites", "DEFAULT"),
             // Jungle
-            "Aerial_Templar:sub_Aerial_Templar;DEFAULT;antiqueatlas:skull",
-            "Crocodile_Skelly:sub_Crocodile_Skelly;DEFAULT;antiqueatlas:lycanites",
-            "Decaying_Veteran:sub_Decaying_Veteran;DEFAULT;antiqueatlas:skull",
-            "Flying_Rags:sub_Flying_Rags;DEFAULT;antiqueatlas:skull",
-            "Knightly_Dismounter:sub_Knightly_Dismounter;DEFAULT;antiqueatlas:skull",
+            new AutoMarkSetting.Data("Aerial_Templar:sub_Aerial_Templar", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Crocodile_Skelly:sub_Crocodile_Skelly", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Decaying_Veteran:sub_Decaying_Veteran", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Flying_Rags:sub_Flying_Rags", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Knightly_Dismounter:sub_Knightly_Dismounter", true, "antiqueatlas:skull", "DEFAULT"),
             // Ocean
-            "Capiton:sub_Capiton;DEFAULT;antiqueatlas:lycanites",
-            "Dismounting_Commotone:sub_Dismounting_Commotone;DEFAULT;antiqueatlas:lycanites",
-            "LuffyTon:sub_LuffyTon;DEFAULT;antiqueatlas:lycanites",
-            "QuartermasTon:sub_QuartermasTon;DEFAULT;antiqueatlas:lycanites",
-            "Skelemate:sub_Skelemate;DEFAULT;antiqueatlas:lycanites",
-            "Skeleswain:sub_Skeleswain;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Capiton:sub_Capiton", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Dismounting_Commotone:sub_Dismounting_Commotone", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("LuffyTon:sub_LuffyTon", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("QuartermasTon:sub_QuartermasTon", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Skelemate:sub_Skelemate", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Skeleswain:sub_Skeleswain", true, "antiqueatlas:lycanites", "DEFAULT"),
             // Parasite
-            "Dismisser:sub_Dismisser;DEFAULT;antiqueatlas:lycanites",
-            "Dismounter:sub_Dismounter;DEFAULT;antiqueatlas:lycanites",
-            "Grounder:sub_Grounder;DEFAULT;antiqueatlas:lycanites",
-            "Inflicter:sub_Inflicter;DEFAULT;antiqueatlas:lycanites",
-            "Perplexer:sub_Perplexer;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Dismisser:sub_Dismisser", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Dismounter:sub_Dismounter", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Grounder:sub_Grounder", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Inflicter:sub_Inflicter", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Perplexer:sub_Perplexer", true, "antiqueatlas:lycanites", "DEFAULT"),
             // Swamp
-            "Crone:sub_Crone;DEFAULT;antiqueatlas:lycanites",
-            "HagTon:sub_HagTon;DEFAULT;antiqueatlas:lycanites",
-            "PlagueTon:sub_PlagueTon;DEFAULT;antiqueatlas:lycanites",
-            "Rancid_Skeleton:sub_Rancid_Skeleton;DEFAULT;antiqueatlas:lycanites",
-            "Sackhead:sub_Sackhead;DEFAULT;antiqueatlas:lycanites",
-            "Swampton:sub_Swampton;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Crone:sub_Crone", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("HagTon:sub_HagTon", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("PlagueTon:sub_PlagueTon", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Rancid_Skeleton:sub_Rancid_Skeleton", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Sackhead:sub_Sackhead", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Swampton:sub_Swampton", true, "antiqueatlas:lycanites", "DEFAULT"),
             // Temperate
-            "Down_Caster:sub_Down_Caster;DEFAULT;antiqueatlas:lycanites",
-            "Fumbler:sub_Fumbler;DEFAULT;antiqueatlas:lycanites",
-            "Impaler:sub_Impaler;DEFAULT;antiqueatlas:lycanites",
-            "Impeder:sub_Impeder;DEFAULT;antiqueatlas:lycanites",
-            "Spinner:sub_Spinner;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Down_Caster:sub_Down_Caster", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Fumbler:sub_Fumbler", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Impaler:sub_Impaler", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Impeder:sub_Impeder", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("Spinner:sub_Spinner", true, "antiqueatlas:lycanites", "DEFAULT"),
             // Viking
-            "Jotunn:sub_Jotunn;DEFAULT;antiqueatlas:dragon_blue",
-            "LokiTon:sub_LokiTon;DEFAULT;antiqueatlas:dragon_blue",
-            "Surt:sub_Surt;DEFAULT;antiqueatlas:lycanites",
-            "ThorTon:sub_ThorTon;DEFAULT;antiqueatlas:dragon_gold",
-            "Tyr:sub_Tyr;DEFAULT;antiqueatlas:lycanites",
+            new AutoMarkSetting.Data("Jotunn:sub_Jotunn", true, "antiqueatlas:dragon_blue", "DEFAULT"),
+            new AutoMarkSetting.Data("LokiTon:sub_LokiTon", true, "antiqueatlas:dragon_blue", "DEFAULT"),
+            new AutoMarkSetting.Data("Surt:sub_Surt", true, "antiqueatlas:lycanites", "DEFAULT"),
+            new AutoMarkSetting.Data("ThorTon:sub_ThorTon", true, "antiqueatlas:dragon_gold", "DEFAULT"),
+            new AutoMarkSetting.Data("Tyr:sub_Tyr", true, "antiqueatlas:lycanites", "DEFAULT"),
             // Wastelands
-            "Asher:sub_Asher;DEFAULT;antiqueatlas:dragon_red",
-            "Dust_Scrapper:sub_Dust_Scrapper;DEFAULT;antiqueatlas:skull",
-            "Launcher:sub_Launcher;DEFAULT;antiqueatlas:skull",
-            "Piercing_Duster:sub_Piercing_Duster;DEFAULT;antiqueatlas:skull",
-            "Scrapper:sub_Scrapper;DEFAULT;antiqueatlas:skull",
+            new AutoMarkSetting.Data("Asher:sub_Asher", true, "antiqueatlas:dragon_red", "DEFAULT"),
+            new AutoMarkSetting.Data("Dust_Scrapper:sub_Dust_Scrapper", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Launcher:sub_Launcher", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Piercing_Duster:sub_Piercing_Duster", true, "antiqueatlas:skull", "DEFAULT"),
+            new AutoMarkSetting.Data("Scrapper:sub_Scrapper", true, "antiqueatlas:skull", "DEFAULT")
             // End of Encounters
             // Debug Mark Everything
-//            "BO3:START;DEFAULT;antiqueatlas:diamond",
-//            "BO3:BRANCH;DEFAULT;antiqueatlas:bed",
-//            "BO4:START;DEFAULT;antiqueatlas:diamond",
-//            "BO4:BRANCH;DEFAULT;antiqueatlas:bed"
-    };
-
-    public void preInit(){
-        resetSetting();
-    }
-
-    public void resetSetting(){
-        for(String config : otgMarkers) {
-            String[] entries = config.split(";");
-            if(entries.length < 3)
-                break;
-
-            AutoMarkSetting.registerAutoMarkSetting(entries[0].trim(), true, entries[1].trim(), entries[2].trim());
-        }
-    }
+//            new AutoMarkSetting.Data("BO3:START", true, "antiqueatlas:diamond", "DEFAULT"),
+//            new AutoMarkSetting.Data("BO3:BRANCH", true, "antiqueatlas:bed", "DEFAULT"),
+//            new AutoMarkSetting.Data("BO4:START", true, "antiqueatlas:diamond", "DEFAULT"),
+//            new AutoMarkSetting.Data("BO4:BRANCH", true, "antiqueatlas:bed", "DEFAULT")
+    ).collect(Collectors.toMap(data -> data.context, Function.identity())));
 }

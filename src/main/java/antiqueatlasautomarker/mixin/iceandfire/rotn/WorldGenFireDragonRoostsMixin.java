@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.iceandfire.rotn;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.github.alexthe666.iceandfire.world.gen.WorldGenFireDragonRoosts;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +16,7 @@ import java.util.Random;
 public class WorldGenFireDragonRoostsMixin {
     @Inject(method = "generate", at = @At("HEAD"))
     void markFireDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
-        AutoMarkSetting setting = AutoMarkSetting.get("fireDragon");
+        AutoMarkSetting.Data setting = AutoMarkSetting.get("fireDragon");
         if(setting == null || !setting.enabled) return;
         String usedLabel = setting.label;
         if(usedLabel.equals("DEFAULT")) usedLabel = "entity.firedragon.name";

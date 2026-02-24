@@ -1,6 +1,6 @@
-package antiqueatlasautomarker.compat;
+package antiqueatlasautomarker.compat.crafttweaker;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.structuremarkers.event.MarkStructureEvent;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -13,7 +13,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 @SuppressWarnings("unused")
 @ZenRegister
-@ZenClass(AntiqueAtlasAutoMarker.MODID+".StructureMarker")
+@ZenClass(Tags.MODID+".StructureMarker")
 public class CraftTweakerCompat {
     /**
      * Puts a structure marker at the specified location in the Structure Marker list for people to discover

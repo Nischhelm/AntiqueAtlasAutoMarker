@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.compat;
+package antiqueatlasautomarker.handlers;
 
 import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
@@ -48,7 +48,7 @@ public class DefiledLandsKeyHandler {
         if(atlases.isEmpty()) return;
 
         World world = Minecraft.getMinecraft().world;
-        String markerType = MarkerRegistry.hasKey(ConfigHandler.defiledlands.goldenBookwyrmMarker) ? ConfigHandler.defiledlands.goldenBookwyrmMarker : "antiqueatlas:red_x_small";
+        String markerType = MarkerRegistry.hasKey(ConfigHandler.automark.defiledlands.type) ? ConfigHandler.automark.defiledlands.type : "antiqueatlas:red_x_small";
         List<EntityBookWyrm> bookWyrms = world.getEntities(EntityBookWyrm.class, e -> true).stream()
                 .filter(EntityBookWyrm::isGolden)
                 .collect(Collectors.toList());
@@ -65,10 +65,10 @@ public class DefiledLandsKeyHandler {
                 markersAtChunk.stream()
                         .filter(marker -> Math.abs(marker.getX() - posX) < 32 && Math.abs(marker.getZ() - posZ) < 32)
                         .filter(marker -> marker.getType().equals(markerType))
-                        .filter(marker -> marker.getLabel().equals(ConfigHandler.defiledlands.goldenBookwyrmLabel))
+                        .filter(marker -> marker.getLabel().equals(ConfigHandler.automark.defiledlands.label))
                         .forEach(marker -> AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId()));
 
-                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, markerType, ConfigHandler.defiledlands.goldenBookwyrmLabel, posX, posZ);
+                AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, markerType, ConfigHandler.automark.defiledlands.label, posX, posZ);
             }
         }
     }

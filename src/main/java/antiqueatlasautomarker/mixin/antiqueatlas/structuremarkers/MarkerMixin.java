@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
-import antiqueatlasautomarker.util.IMarkerConstructor;
+import antiqueatlasautomarker.mixinwrapper.IMarkerConstructor;
 import hunternif.mc.atlas.marker.Marker;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

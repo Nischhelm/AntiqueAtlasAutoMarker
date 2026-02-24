@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.lycanitesmobs;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.lycanitesmobs.core.dungeon.definition.DungeonSchematic;
 import com.lycanitesmobs.core.dungeon.instance.DungeonInstance;
@@ -39,7 +39,7 @@ public class DungeonInstanceMixin {
     @Inject(method = "buildChunk", at = @At("HEAD"), remap = false)
     private void aaam$markLycanitesDungeon(World world, ChunkPos chunkPos, CallbackInfo ci) {
         if (this.chunksBuilt != 0) return;
-        AutoMarkSetting setting = AutoMarkSetting.get("lycanite");
+        AutoMarkSetting.Data setting = AutoMarkSetting.get("lycanite");
         if (setting != null && setting.enabled) {
             String label = setting.label;
             if ("DEFAULT".equals(label)) {

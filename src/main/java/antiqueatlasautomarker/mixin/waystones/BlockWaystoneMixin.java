@@ -27,16 +27,16 @@ public abstract class BlockWaystoneMixin {
             remap = false
     )
     private void aaam_markActivatedWaystone(Args args, @Local(argsOnly = true) EntityPlayer player, @Local(argsOnly = true) World world) {
-        if (!ConfigHandler.waystones.enabled) return;
+        if (!ConfigHandler.automark.waystones.activatedWaystones.enabled) return;
 
         String waystoneName = args.get(0);
         BlockPos waystonePos = args.get(1);
 
-        String label = ConfigHandler.waystones.label.equals("DEFAULT") ? waystoneName : ConfigHandler.waystones.label;
+        String label = ConfigHandler.automark.waystones.activatedWaystones.label.equals("DEFAULT") ? waystoneName : ConfigHandler.automark.waystones.activatedWaystones.label;
 
         //Search for atlases in player inventory and mark waystone
         for (int atlasID : AtlasAPI.getPlayerAtlases(player))
-            AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, ConfigHandler.waystones.marker, label, waystonePos.getX(), waystonePos.getZ());
+            AtlasAPI.getMarkerAPI().putMarker(world, true, atlasID, ConfigHandler.automark.waystones.activatedWaystones.type, label, waystonePos.getX(), waystonePos.getZ());
     }
 
     @Inject(

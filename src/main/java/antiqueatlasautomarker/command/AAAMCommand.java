@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.command;
 
-import antiqueatlasautomarker.util.IDeletedMarkerList;
+import antiqueatlasautomarker.mixinwrapper.IDeletedMarkerList;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.marker.Marker;

@@ -1,12 +1,12 @@
 package antiqueatlasautomarker.structuremarkers.network;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.compat.AARCCompat;
 import antiqueatlasautomarker.compat.ModCompat;
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
+import antiqueatlasautomarker.mixinwrapper.IMarkerConstructor;
 import antiqueatlasautomarker.structuremarkers.event.ReceivedStructureMarkerEvent;
-import antiqueatlasautomarker.util.IMarkerConstructor;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import hunternif.mc.atlas.AntiqueAtlasMod;
@@ -89,7 +89,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
         AddedStructureMarkersPacket updatePacket = new AddedStructureMarkersPacket(atlasID, player.world.provider.getDimension());
         int addedMarkerCount = 0;
 
-        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Receiving {} structure markers for atlas #{}", markersByType.size(), atlasID);
+        if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Receiving {} structure markers for atlas #{}", markersByType.size(), atlasID);
 
         for (Marker marker : markersByType.values()) {
 
@@ -101,38 +101,38 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             String serverType = context_type[1];
             String serverLabel = marker.getLabel();
 
-            if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Trying to add marker {} {} {}", context, serverLabel, serverType);
+            if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Trying to add marker {} {} {}", context, serverLabel, serverType);
 
-            AutoMarkSetting clientSetting;
+            AutoMarkSetting.Data clientSetting;
 
             //AARC compat
             if(ModCompat.aarc.isLoaded() && context.startsWith("AARCAddon")) {
-                if(!ConfigHandler.aarcaddon.enabled) continue;
+                if(!ConfigHandler.automark.aarcEnabled) continue;
                 clientSetting = AARCCompat.getAARCSetting(context);
             }
 
             //Overwrite for AA global markers (village+end_city/generic), use serverside label/type but clientside enabled config (true if generic global marker by some random mod idk)
-            else if(context.startsWith("aa_")) clientSetting = new AutoMarkSetting(context.equals("aa_global") || SettingsConfig.gameplay.autoVillageMarkers, "DEFAULT", "DEFAULT", context);
+            else if(context.startsWith("aa_")) clientSetting = new AutoMarkSetting.Data(context.equals("aa_global") || SettingsConfig.gameplay.autoVillageMarkers, "DEFAULT", "DEFAULT", context);
 
             else if(context.startsWith("ruins_")){
-                if(!ConfigHandler.ruins.enabled) continue;
-                clientSetting = AutoMarkSetting.get(context);
+                if(!ConfigHandler.automark.ruins.enabled) continue;
+                clientSetting = ConfigHandler.automark.ruins.ruinsMarkers.get(context.substring("ruins_".length()));
             }
 
             //Custom position markers
             else if(context.equals("customPos"))
-                clientSetting = new AutoMarkSetting(true, "DEFAULT", "DEFAULT", context);
+                clientSetting = new AutoMarkSetting.Data(true, "DEFAULT", "DEFAULT", context);
 
             //Structure Markers added by MarkStructureEvent
             else if(context.isEmpty())
-                clientSetting = new AutoMarkSetting(true, "DEFAULT", "DEFAULT", context);
+                clientSetting = new AutoMarkSetting.Data(true, "DEFAULT", "DEFAULT", context);
 
             //AAAM base behavior, also for ruins
             else clientSetting = AutoMarkSetting.get(context);
 
             if(ConfigHandler.internal.doDebugLogs) {
-                if (clientSetting == null) AntiqueAtlasAutoMarker.LOGGER.info("Client setting for marker is null");
-                else AntiqueAtlasAutoMarker.LOGGER.info("Found client setting for marker {} {} {} {}", clientSetting.enabled, clientSetting.context, clientSetting.label, clientSetting.type);
+                if (clientSetting == null) Tags.LOGGER.info("Client setting for marker is null");
+                else Tags.LOGGER.info("Found client setting for marker {} {} {} {}", clientSetting.enabled, clientSetting.context, clientSetting.label, clientSetting.type);
             }
 
             //Check if client has a config for this and whether its enabled
@@ -153,7 +153,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
             }
         }
 
-        if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Added {} new structure markers", addedMarkerCount);
+        if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Added {} new structure markers", addedMarkerCount);
 
         //Send the new Markers back to the server
         if(addedMarkerCount > 0)

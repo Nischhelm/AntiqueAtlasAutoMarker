@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.otg;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.pg85.otg.common.LocalWorld;
@@ -32,7 +32,7 @@ public abstract class BO4CustomStructure_Mixin extends CustomStructure {
             return;
 
         // Try to get structureName:branchName
-        AutoMarkSetting settings = AutoMarkSetting.get(this.start.bo3Name + ":" + currentPiece.bo3Name);
+        AutoMarkSetting.Data settings = AutoMarkSetting.get(this.start.bo3Name + ":" + currentPiece.bo3Name);
         if(settings == null) {
             if(currentPiece == this.start) {
                 // Try to get structureName

@@ -4,7 +4,10 @@ import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.marker.Marker;
+import net.blay09.mods.waystones.WarpMode;
+import net.blay09.mods.waystones.util.WaystoneEntry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,10 +17,39 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WaystoneUtil {
+    public static final ThreadLocal<WarpProperty> warpProperty = ThreadLocal.withInitial(() -> null);
+    public static WarpProperty getAndClearThreadLocal(){
+        WarpProperty currentWarpProperty = warpProperty.get();
+        warpProperty.remove();
+        return currentWarpProperty;
+    }
+
+    public static class WarpProperty{
+        public final WaystoneEntry[] entries;
+        public final EnumHand hand;
+        public final WarpMode mode;
+        public final WaystoneEntry fromWaystone;
+        public WarpProperty(WaystoneEntry[] entries, EnumHand hand, WarpMode mode, WaystoneEntry fromWaystone){
+            this.entries = entries;
+            this.hand = hand;
+            this.mode = mode;
+            this.fromWaystone = fromWaystone;
+        }
+    }
+
+    public static final ThreadLocal<Boolean> atlasFromWaystone = ThreadLocal.withInitial(() -> false);
+    public static boolean getIsFromWaystone(){
+        return atlasFromWaystone.get();
+    }
+    public static void setFromWaystone(boolean isFromWaystone){
+        atlasFromWaystone.set(isFromWaystone);
+    }
+
+
     @SideOnly(Side.CLIENT)
     public static void updateRenamedWaystoneMarker(EntityPlayer player, World world, BlockPos waystonePos, String newName) {
-        if (!ConfigHandler.waystones.autoUpdateWaystones) return;
-        if(!ConfigHandler.waystones.enabled) return;
+        if (!ConfigHandler.automark.waystones.activatedWaystones.autoUpdateWaystones) return;
+        if(!ConfigHandler.automark.waystones.activatedWaystones.enabled) return;
 
         for (int atlasID : AtlasAPI.getPlayerAtlases(player)) {
             //Get all markers at waystone position in current atlas with correct marker type
@@ -27,21 +59,21 @@ public class WaystoneUtil {
                     .getAllMarkers()
                     .stream()
                     .filter(marker -> Math.abs(marker.getX() - waystonePos.getX()) < 2 && Math.abs(marker.getZ() - waystonePos.getZ()) < 2)
-                    .filter(marker -> marker.getType().equals(ConfigHandler.waystones.marker))
+                    .filter(marker -> marker.getType().equals(ConfigHandler.automark.waystones.activatedWaystones.type))
                     .collect(Collectors.toList());
 
             //Remove old waystone markers
             int counterMarkersRemoved = 0;
             for (Marker marker : markersAtPosition) {
                 //Not renamed: don't delete, don't add
-                if (marker.getLabel().equals(newName) && !ConfigHandler.waystones.alwaysMarkWaystones) continue;
+                if (marker.getLabel().equals(newName) && !ConfigHandler.automark.waystones.activatedWaystones.alwaysMarkWaystones) continue;
                 //Remove
                 AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId());
                 counterMarkersRemoved++;
             }
             //Put new waystone marker, but not if player doesn't want a marker there
-            if (counterMarkersRemoved > 0 || ConfigHandler.waystones.alwaysMarkWaystones)
-                AtlasAPI.getMarkerAPI().putMarker(world, false, atlasID, ConfigHandler.waystones.marker, newName, waystonePos.getX(), waystonePos.getZ());
+            if (counterMarkersRemoved > 0 || ConfigHandler.automark.waystones.activatedWaystones.alwaysMarkWaystones)
+                AtlasAPI.getMarkerAPI().putMarker(world, false, atlasID, ConfigHandler.automark.waystones.activatedWaystones.type, newName, waystonePos.getX(), waystonePos.getZ());
         }
     }
 }

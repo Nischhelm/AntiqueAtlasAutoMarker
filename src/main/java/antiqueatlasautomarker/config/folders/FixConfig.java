@@ -1,12 +1,12 @@
 package antiqueatlasautomarker.config.folders;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
-@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
-public class AAOverhaulConfig {
-    @Config.Comment("AA Global Markers are bugged + laggy. Built-in global markers (village + end city) already get rerouted to AAAM structure markers. Keep this enabled to reroute any other modded markers to AAAM structure markers. Disabling this can lead to unexpected behavior.")
+@MixinConfig(name = Tags.MODID)
+public class FixConfig {
+    @Config.Comment("AA Global Markers are buggy + laggy. Built-in global markers (village + end city) already get rerouted to AAAM structure markers. Keep this enabled to reroute any other modded markers to AAAM structure markers. Disabling this can lead to unexpected behavior.")
     @Config.Name("Reroute modded Global Markers")
     public boolean rerouteGlobalMarkers = true;
 
@@ -17,44 +17,16 @@ public class AAOverhaulConfig {
     public boolean sendToAllHolding = true;
 
     @Config.Comment("AA doesn't allocate the correct size for some packets which can lead to crashes. This fixes it.")
-    @Config.Name("Fix Crash with Short/IntDimensionUpdatePacket")
+    @Config.Name("Fix DimensionUpdatePacket Crash")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.bytebufcrashfix.json", defaultValue = true)
     public boolean byteBufCrashFix = true;
 
     @Config.Comment("Whenever Antique Atlas checks for atlases in a players inventory it forgets to also check the offhand. Set to true to check offhand as well.")
-    @Config.Name("Also check player offhand for atlases")
+    @Config.Name("Check offhand for atlases")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.offhand.json", defaultValue = true)
     public boolean checkOffhand = true;
-
-    @Config.Comment({
-            "Displays other players on a shared atlas:",
-            "\tDirectional arrows for players. Hover to see names",
-            "\t\"List Players\" key (TAB) will swap to rendering player heads"
-    })
-    @Config.Name("Show Position of Other Players")
-    @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.showotherplayers.json", defaultValue = true)
-    public boolean showOtherPlayers = true;
-
-    @Config.Comment("If \"Show Position of Other Players\" is enabled, enabling this will always show other players as player heads, instead of player arrows")
-    @Config.Name("Show Other Players as Player Heads")
-    public boolean alwaysShowPlayerHeads = true;
-
-    @Config.Comment({
-            "Provides a variety of useful keybinds and buttons:",
-                "\tAdd Marker - Keybind",
-                "\tShow Markers - Keybind",
-                "\tFollow Player - Keybind",
-                "\tOpen Atlas - Keybind fixed to be usable with Atlas items.",
-                "\tCopy Marker - Button to select a marker to share in chat or copy to clipboard.",
-                "\tCompare Two Held Atlases - Button for viewing and copying over unique markers."
-    })
-    @Config.Name("Add Atlas Keybinds and Buttons")
-    @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.keybinds.json", defaultValue = true)
-    public boolean addKeybinds = true;
 
     @Config.Comment("Antique Atlas uses a questionable regex to check if a marker label is a lang key (not allowing numbers for example), instead of using I18n.hasKey. It also only allows one parameter for parameterised lang keys. Both get fixed by this.")
     @Config.Name("Fix Atlas Marker Lang Keys")
@@ -68,35 +40,11 @@ public class AAOverhaulConfig {
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.recipedupe.json", defaultValue = true)
     public boolean fixCombiningRecipe = true;
 
-    @Config.Comment("Markers data is sent in one packet per dimension, which can get really large and lag the server. Keep this enabled to send the markers in chunks of 100 markers per packet to reduce lag on player login.")
+    @Config.Comment("Marker data is sent in one packet per dimension, which can get really large and lag the server. Keep this enabled to send the markers in chunks of 100 markers per packet to reduce lag on player login.")
     @Config.Name("Marker data in smaller packets")
     @Config.RequiresMcRestart
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.markerpacketchunking.json", defaultValue = true)
-    public boolean markerPacketChunking = true;
-
-    @Config.Comment("Will allow to hide specific marker types when clicking on \"Hide markers\" in Atlas GUI. \n" +
-            "Shift-click a marker icon to only show that one or disable all markers except for it.\n" +
-            "Also provides a searchbar to filter shown markers by their labels")
-    @Config.Name("Allow hiding specific markers")
-    @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(
-            earlyMixin = "mixins.aaam.vanilla.displaydisablemarkertypes.json",
-            lateMixin = "mixins.aaam.antiqueatlas.displaydisablemarkertypes.json",
-            defaultValue = true
-    )
-    public boolean disableSpecificMarkers = true;
-
-    @Config.Comment("When putting a new marker on your atlas, will render the marker types to select from in a 7x3 box that scrolls vetically instead of a horizontal scroll area.")
-    @Config.Name("Scroll Marker Types Vertically")
-    @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.selectmarkersvertically.json", defaultValue = true)
-    public boolean verticalScrolling = true;
-
-    @Config.Comment("Shift clicking on a marker with the eraser tool will offer to delete all matching (type+label) markers. Confirm by clicking on link sent in chat.")
-    @Config.Name("Shift Delete Matching Markers")
-    @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.shiftdelete.json", defaultValue = true)
-    public boolean shiftDeleteMarkers = true;
+    public boolean markerPacketChunking = true; //TODO: chunk it even more
 
     @Config.Comment({
             "The area around every player is always scanned to check if anything has changed on the atlas or if theres newly explored chunks.",
@@ -114,7 +62,4 @@ public class AAOverhaulConfig {
     @Config.RequiresMcRestart
     public UpdateSide updateSide = UpdateSide.SERVER;
     public enum UpdateSide { SERVER, CLIENT, BOTH, DISABLE_MIXIN }
-
-    @Config.Name("Biome to Tile Config")
-    public BiomeTileConfig tileConfig = new BiomeTileConfig();
 }

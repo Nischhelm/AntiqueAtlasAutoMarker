@@ -26,7 +26,7 @@ public abstract class MarkerApiImpllMixin {
     )
     private Marker aaam_rerouteGlobalMarkers(MarkersData instance, String type, String label, int dimension, int x, int z, boolean visibleAhead, Operation<Marker> original, @Local(argsOnly = true) World world){
         //Mark as structure instead of making a global marker
-        if(ConfigHandler.overhaul.rerouteGlobalMarkers)
+        if(ConfigHandler.fixes.rerouteGlobalMarkers)
             return StructureMarkersDataHandler.markStructure(world, x, z, type, label, "aa_global");
         //Default behavior
         else return original.call(instance, type, label, dimension, x, z, visibleAhead);
@@ -37,9 +37,9 @@ public abstract class MarkerApiImpllMixin {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/network/PacketDispatcher;sendToAll(Lnet/minecraftforge/fml/common/network/simpleimpl/IMessage;)V", ordinal = 0),
             remap = false
     )
-    private boolean aaam_dontSendToAll(IMessage message, @Local Marker marker){
+    private boolean aaam_dontSendToAll(IMessage message){
         //Don't send global markers as global markers on creation to everyone, instead send them when finding them as structure markers
-        return !ConfigHandler.overhaul.rerouteGlobalMarkers;
+        return !ConfigHandler.fixes.rerouteGlobalMarkers;
     }
 
     @ModifyExpressionValue(

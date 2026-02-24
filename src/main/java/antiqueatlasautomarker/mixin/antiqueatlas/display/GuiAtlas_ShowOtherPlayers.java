@@ -80,7 +80,7 @@ public abstract class GuiAtlas_ShowOtherPlayers extends GuiComponent {
             Double[] position = entries.getValue();
 
             boolean showPlayerHeadAnyway = false;
-            if (ConfigHandler.overhaul.alwaysShowPlayerHeads && uuid != player.getUniqueID()) {
+            if (ConfigHandler.tweaks.alwaysShowPlayerHeads && uuid != player.getUniqueID()) {
                 showPlayerHeadAnyway = true;
             }
 

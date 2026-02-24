@@ -23,7 +23,7 @@ public class CustomMarkers {
                                                                     "monsterspawner", "parasite", "quadtower");
 
     public static void registerMarkers(){
-        Set<String> allowedMarkers = new HashSet<>(Arrays.asList(ConfigHandler.overhaul.tileConfig.usedCustomMarkers));
+        Set<String> allowedMarkers = new HashSet<>(Arrays.asList(ConfigHandler.tiles.usedCustomMarkers));
         markersArtsy.stream().filter(allowedMarkers::contains).forEach(name -> registerCustomMarker(name, name, "artsy"));
         markersGallade.stream().filter(allowedMarkers::contains).forEach(name -> registerCustomMarker(name, name, "knightgallade"));
     }

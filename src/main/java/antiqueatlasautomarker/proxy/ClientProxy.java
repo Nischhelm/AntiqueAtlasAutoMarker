@@ -2,16 +2,16 @@ package antiqueatlasautomarker.proxy;
 
 import antiqueatlasautomarker.client.handlers.KeyHandler;
 import antiqueatlasautomarker.client.handlers.LibrarianMarkerHandler;
-import antiqueatlasautomarker.compat.DefiledLandsKeyHandler;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.handlers.DefiledLandsKeyHandler;
 
 public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-        if(ConfigHandler.overhaul.addKeybinds) KeyHandler.initKeybind();
-        if(ConfigHandler.enchantments.enableLibrarianKey) LibrarianMarkerHandler.initKeybind();
-        if(ConfigHandler.defiledlands.enabled && ModCompat.defiledlands.isLoaded()) DefiledLandsKeyHandler.initKeybind();
+        if(ConfigHandler.tweaks.addKeybinds) KeyHandler.initKeybind();
+        if(ConfigHandler.automark.enchantments.librarianKey.enabled) LibrarianMarkerHandler.initKeybind();
+        if(ConfigHandler.automark.defiledlands.enabled && ModCompat.defiledlands.isLoaded()) DefiledLandsKeyHandler.initKeybind();
     }
 }

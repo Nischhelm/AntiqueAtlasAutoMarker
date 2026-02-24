@@ -8,8 +8,8 @@
   "mixins": [
     "BiomeDetectorBaseEvent",
     "CustomEndBiomesWithVoid",
-    "CustomNetherBiomesWithLava",
-    "CustomEndTextures"
+    "CustomEndTextures",
+    "CustomNetherBiomesWithLava"
   ],
   "injectors": {
     "maxShiftBy": 10

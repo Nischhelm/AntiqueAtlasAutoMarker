@@ -28,7 +28,7 @@ public abstract class CustomEndTextures {
                 "end_island_plants2.png"
         );
         if(fileName.equals("end_void.png"))
-            return "antiqueatlas:textures/gui/tiles/nischhelm/end/" + (ConfigHandler.overhaul.tileConfig.purpleVoid ? "end_void_purple.png" : "end_void_empty.png");
+            return "antiqueatlas:textures/gui/tiles/nischhelm/end/" + (ConfigHandler.tiles.purpleVoid ? "end_void_purple.png" : "end_void_empty.png");
         if(aaam$endTextures.contains(fileName))
                 return "antiqueatlas:textures/gui/tiles/nischhelm/end/" + fileName;
         return original;

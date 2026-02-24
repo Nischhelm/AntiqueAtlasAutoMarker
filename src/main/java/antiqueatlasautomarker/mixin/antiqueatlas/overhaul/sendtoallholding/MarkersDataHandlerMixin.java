@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.overhaul.sendtoallholding;
 
-import antiqueatlasautomarker.util.ILoadedDataList;
+import antiqueatlasautomarker.mixinwrapper.ILoadedDataList;
 import hunternif.mc.atlas.marker.MarkersData;
 import hunternif.mc.atlas.marker.MarkersDataHandler;
 import net.minecraft.world.World;

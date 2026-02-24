@@ -29,13 +29,13 @@ public class BetterNetherCompat {
         TextureSet wartForest = new TextureSet("BN_WART_FOREST", tileLoc("netherwart_forest", false));
         //TextureSet wartForestEdge = wartForest;
 
-        if(ConfigHandler.overhaul.tileConfig.netherTilesWithShore){
+        if(ConfigHandler.tiles.netherTilesWithShore){
             List<TextureSet> shoreSets = Arrays.asList(emptyNether, gravelDesert, grasslands, poorGrasslands);
             List<TextureSet> shorelessSets = Arrays.asList(netherJungle, boneReef, mushroom, wartForest);
             shoreSets.forEach(TextureSet.LAVA::stitchTo);
             TextureSet.stitchMutually(shoreSets.toArray(new TextureSet[0]));
             shoreSets.forEach(shoreSet -> shoreSet.stitchTo(TextureSet.CAVE_WALLS));
-            shoreSets.forEach(shoreSet -> shorelessSets.forEach(shorelessSet -> shoreSet.stitchTo(shorelessSet)));
+            shoreSets.forEach(shoreSet -> shorelessSets.forEach(shoreSet::stitchTo));
         }
 
         registerIfPresent(api, BiomeRegister.BIOME_EMPTY_NETHER, emptyNether);
@@ -59,7 +59,7 @@ public class BetterNetherCompat {
     }
 
     private static ResourceLocation[] tileLoc(String tileName, boolean hasShore){
-        if(hasShore && ConfigHandler.overhaul.tileConfig.netherTilesWithShore) return new ResourceLocation[]{
+        if(hasShore && ConfigHandler.tiles.netherTilesWithShore) return new ResourceLocation[]{
                 new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/betternether/shore/"+tileName+".png"),
                 new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/betternether/shore2/"+tileName+".png")
         };

@@ -1,6 +1,6 @@
-package antiqueatlasautomarker.mixin.antiqueatlas.mapselection;
+package antiqueatlasautomarker.mixin.antiqueatlas.waystonemapselection;
 
-import antiqueatlasautomarker.util.MapWaystoneSelectionUtil;
+import antiqueatlasautomarker.compat.WaystoneUtil;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import hunternif.mc.atlas.client.gui.GuiAtlas;
@@ -39,7 +39,7 @@ public abstract class GuiAtlasMixin {
     @Shadow(remap = false) @Final private GuiBookmarkButton btnMarker;
     @Unique private DimensionMarkersData aaam$waystoneMarkers = null;
     @Unique private Map<Marker,WaystoneEntry> aaam$markerToWaystoneMap = null;
-    @Unique private MapWaystoneSelectionUtil.WarpProperty aaam$warpProperty = null;
+    @Unique private WaystoneUtil.WarpProperty aaam$warpProperty = null;
 
     @WrapOperation(
             method = "updateAtlasData",
@@ -47,7 +47,7 @@ public abstract class GuiAtlasMixin {
             remap = false
     )
     private DimensionMarkersData aaam_rerouteIfWaystone(MarkersData instance, int dimension, Operation<DimensionMarkersData> original){
-        MapWaystoneSelectionUtil.WarpProperty warpProperty = MapWaystoneSelectionUtil.getAndClearThreadLocal();
+        WaystoneUtil.WarpProperty warpProperty = WaystoneUtil.getAndClearThreadLocal();
         if(warpProperty == null && this.aaam$waystoneMarkers == null) return original.call(instance, dimension);
 
         if(this.aaam$waystoneMarkers == null) {
@@ -58,7 +58,7 @@ public abstract class GuiAtlasMixin {
             this.btnDelMarker.setEnabled(false);
             this.btnShowMarkers.setEnabled(false);
             this.btnMarker.setEnabled(false);
-            MapWaystoneSelectionUtil.setFromWaystone(true);
+            WaystoneUtil.setFromWaystone(true);
             int id = 0;
             boolean costsXp = aaam$getCostsXp(warpProperty.mode);
             EntityPlayerSP player = Minecraft.getMinecraft().player;
@@ -108,7 +108,7 @@ public abstract class GuiAtlasMixin {
             cancellable = true
     )
     private void aaam_teleportToMarker(int mouseX, int mouseY, int mouseState, CallbackInfo ci){
-        if(MapWaystoneSelectionUtil.getIsFromWaystone()) {
+        if(WaystoneUtil.getIsFromWaystone()) {
             WaystoneEntry entry = aaam$markerToWaystoneMap.get(hoveredMarker);
             if (entry != null) {
                 NetworkHandler.channel.sendToServer(new MessageTeleportToWaystone(entry, this.aaam$warpProperty.mode, this.aaam$warpProperty.hand, this.aaam$warpProperty.fromWaystone));
@@ -130,6 +130,6 @@ public abstract class GuiAtlasMixin {
         this.btnDelMarker.setEnabled(true);
         this.btnShowMarkers.setEnabled(true);
         this.btnMarker.setEnabled(true);
-        MapWaystoneSelectionUtil.setFromWaystone(false);
+        WaystoneUtil.setFromWaystone(false);
     }
 }

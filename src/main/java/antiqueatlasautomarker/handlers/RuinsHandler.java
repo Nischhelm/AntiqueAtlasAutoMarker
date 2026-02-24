@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.handlers;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import atomicstryker.ruins.common.EventRuinTemplateSpawn;
 import atomicstryker.ruins.common.RuinTemplate;
@@ -14,13 +14,13 @@ public class RuinsHandler {
     public static void onRuinsGeneration(EventRuinTemplateSpawn event){
         if(event.isPrePhase) return;
         if(event.isCanceled()) return;
-        if(!ConfigHandler.ruins.enabled) return;
+        if(!ConfigHandler.automark.ruins.enabled) return;
 
         RuinTemplate template = event.template;
         String name = template.getName().replace(".tml","");
         BlockPos pos = new BlockPos(event.x, 0, event.z);
 
-        AutoMarkSetting ruinsSetting = AutoMarkSetting.get("ruins_"+name);
+        AutoMarkSetting.Data ruinsSetting = ConfigHandler.automark.ruins.ruinsMarkers.get(name);
         if(ruinsSetting == null || !ruinsSetting.enabled) return;
 
         String usedLabel = ruinsSetting.label;
@@ -32,7 +32,7 @@ public class RuinsHandler {
                 pos,
                 ruinsSetting.type,
                 usedLabel,
-                ruinsSetting.context
+                "ruins_"+ruinsSetting.context
         );
     }
 }

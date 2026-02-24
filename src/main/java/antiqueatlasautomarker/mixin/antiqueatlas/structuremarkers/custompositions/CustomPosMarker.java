@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers.custompositions;
 
 import antiqueatlasautomarker.structuremarkers.CustomPosition;
-import antiqueatlasautomarker.util.ICustomPosMarker;
+import antiqueatlasautomarker.mixinwrapper.ICustomPosMarker;
 import hunternif.mc.atlas.marker.Marker;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

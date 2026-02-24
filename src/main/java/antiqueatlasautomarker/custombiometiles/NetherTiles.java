@@ -21,7 +21,7 @@ public class NetherTiles {
         WALL = registerCustomTexture(api, TextureSet.CAVE_WALLS);
         api.setBiomeTexture(Biomes.HELL, HELL_TEXTURE);
 
-        if(ConfigHandler.overhaul.tileConfig.netherTilesWithShore) {
+        if(ConfigHandler.tiles.netherTilesWithShore) {
             TextureSet.LAVA.stitchTo(HELL_TEXTURE);
             HELL_TEXTURE.stitchTo(TextureSet.CAVE_WALLS);
         }
@@ -34,7 +34,7 @@ public class NetherTiles {
     }
 
     private static ResourceLocation[] tileLoc(String tileName){
-        if(ConfigHandler.overhaul.tileConfig.netherTilesWithShore) return new ResourceLocation[]{
+        if(ConfigHandler.tiles.netherTilesWithShore) return new ResourceLocation[]{
             new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/"+tileName+"_shore.png"),
             new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/"+tileName+"_shore2.png")
         };

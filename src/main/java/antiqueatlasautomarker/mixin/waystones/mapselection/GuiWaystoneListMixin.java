@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.waystones.mapselection;
 
-import antiqueatlasautomarker.util.GuiButtonMap;
-import antiqueatlasautomarker.util.MapWaystoneSelectionUtil;
+import antiqueatlasautomarker.client.GuiButtonWaystoneMap;
+import antiqueatlasautomarker.compat.WaystoneUtil;
 import net.blay09.mods.waystones.WarpMode;
 import net.blay09.mods.waystones.client.gui.GuiWaystoneList;
 import net.blay09.mods.waystones.util.WaystoneEntry;
@@ -25,15 +25,15 @@ public abstract class GuiWaystoneListMixin extends GuiScreen {
     @Shadow(remap = false) @Final private WarpMode warpMode;
     @Shadow(remap = false) @Final private WaystoneEntry fromWaystone;
     @Shadow(remap = false) private int headerY;
-    @Unique private GuiButton btnMap;
+    @Unique private GuiButton aaam$btnMap;
 
     @Inject(
             method = "initGui",
             at = @At(value = "INVOKE", target = "Lnet/blay09/mods/waystones/client/gui/GuiWaystoneList;updateList()V", remap = false)
     )
     private void initButton(CallbackInfo ci){
-        this.btnMap = new GuiButtonMap(2, this.width / 2 + 80, this.headerY + 18, new MapWaystoneSelectionUtil.WarpProperty(entries, hand, warpMode, fromWaystone));
-        this.buttonList.add(this.btnMap);
+        this.aaam$btnMap = new GuiButtonWaystoneMap(2, this.width / 2 + 80, this.headerY + 18, new WaystoneUtil.WarpProperty(entries, hand, warpMode, fromWaystone));
+        this.buttonList.add(this.aaam$btnMap);
     }
 
     @ModifyConstant(
@@ -51,6 +51,6 @@ public abstract class GuiWaystoneListMixin extends GuiScreen {
             remap = false
     )
     private void positionButtonCorrectly(CallbackInfo ci){
-        this.btnMap.y = this.headerY + 18;
+        this.aaam$btnMap.y = this.headerY + 18;
     }
 }

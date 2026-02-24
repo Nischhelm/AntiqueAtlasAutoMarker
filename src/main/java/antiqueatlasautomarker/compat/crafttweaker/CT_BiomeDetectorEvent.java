@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.compat.crafttweaker;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.event.BiomeDetectorEvent;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -25,7 +25,7 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 @ZenRegister
-@ZenClass("mods." + AntiqueAtlasAutoMarker.MODID + ".BiomeDetectorEvent")
+@ZenClass("mods." + Tags.MODID + ".BiomeDetectorEvent")
 public class CT_BiomeDetectorEvent implements IWorldEvent {
 
     private final BiomeDetectorEvent internal;

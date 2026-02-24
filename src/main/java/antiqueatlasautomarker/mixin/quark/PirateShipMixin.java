@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.quark;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
@@ -19,7 +19,7 @@ public class PirateShipMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/structure/template/Template;addBlocksToWorld(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/gen/structure/template/PlacementSettings;)V")
     )
     private static void markPirateShip(WorldServer world, Random random, BlockPos pos, CallbackInfo ci){
-        AutoMarkSetting setting = AutoMarkSetting.get("quarkPirateShip");
+        AutoMarkSetting.Data setting = AutoMarkSetting.get("quarkPirateShip");
         if(setting == null || !setting.enabled) return;
 
         String usedLabel = setting.label;

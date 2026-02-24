@@ -6,7 +6,7 @@ import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.event.ReceivedStructureMarkerEvent;
-import antiqueatlasautomarker.util.IMarkerConstructor;
+import antiqueatlasautomarker.mixinwrapper.IMarkerConstructor;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import hunternif.mc.atlas.AntiqueAtlasMod;

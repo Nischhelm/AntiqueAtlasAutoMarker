@@ -6,8 +6,8 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "client": [
-    "antiqueatlas.mapselection.GuiAtlasMixin",
-    "antiqueatlas.mapselection.GuiBookmarkButtonMixin",
+    "antiqueatlas.waystonemapselection.GuiAtlasMixin",
+    "antiqueatlas.waystonemapselection.GuiBookmarkButtonMixin",
     "waystones.mapselection.GuiWaystoneListMixin"
   ],
   "injectors": {

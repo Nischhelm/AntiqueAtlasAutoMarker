@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.util;
+package antiqueatlasautomarker.enchantments;
 
 import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;

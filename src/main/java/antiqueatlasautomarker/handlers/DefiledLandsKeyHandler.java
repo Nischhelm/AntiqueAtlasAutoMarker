@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.compat;
+package antiqueatlasautomarker.handlers;
 
 import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;

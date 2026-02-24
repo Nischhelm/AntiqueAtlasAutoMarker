@@ -2,7 +2,7 @@ package antiqueatlasautomarker.proxy;
 
 import antiqueatlasautomarker.client.handlers.KeyHandler;
 import antiqueatlasautomarker.client.handlers.LibrarianMarkerHandler;
-import antiqueatlasautomarker.compat.DefiledLandsKeyHandler;
+import antiqueatlasautomarker.handlers.DefiledLandsKeyHandler;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.config.ConfigHandler;
 

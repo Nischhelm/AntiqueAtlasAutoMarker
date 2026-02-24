@@ -1,8 +1,8 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
 import antiqueatlasautomarker.client.GuiHideMarkerTypeSelect;
-import antiqueatlasautomarker.util.ISetsBackgroundColor;
-import antiqueatlasautomarker.util.MapWaystoneSelectionUtil;
+import antiqueatlasautomarker.mixinwrapper.ISetsBackgroundColor;
+import antiqueatlasautomarker.compat.WaystoneUtil;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -90,7 +90,7 @@ public abstract class FilterMarkersByTypeAndLabel extends GuiComponent {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/GuiAtlas;renderMarker(Lhunternif/mc/atlas/marker/Marker;D)V", remap = false)
     )
     private boolean aaam_dontShowDisabledMarkers(GuiAtlas instance, Marker marker, double scale){
-        return marker != null && (MapWaystoneSelectionUtil.getIsFromWaystone() || !aaam$disabledMarkers.contains(marker.getType()));
+        return marker != null && (WaystoneUtil.getIsFromWaystone() || !aaam$disabledMarkers.contains(marker.getType()));
     }
 
     @WrapWithCondition(

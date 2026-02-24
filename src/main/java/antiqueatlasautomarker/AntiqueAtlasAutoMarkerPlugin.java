@@ -1,7 +1,7 @@
 package antiqueatlasautomarker;
 
-import antiqueatlasautomarker.betterconfig.ConfigCategory;
-import antiqueatlasautomarker.betterconfig.ConfigurationLoader;
+import antiqueatlasautomarker.config.betterconfigreader.ConfigCategory;
+import antiqueatlasautomarker.config.betterconfigreader.ConfigurationLoader;
 import antiqueatlasautomarker.compat.IceAndFireUtil;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EarlyConfigReader;
@@ -24,14 +24,14 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 	public AntiqueAtlasAutoMarkerPlugin() {
 		MixinBootstrap.init();
 
-		configs.add(new MixinConfiguration("mixins.aaam.battletowers.json", "battletowers", "general.Auto Markers.Battletowers.Enabled", true));
-		configs.add(new MixinConfiguration("mixins.aaam.doomlikedungeons.json", "dldungeonsjbg", "general.Auto Markers.Doomlike Dungeons.Enabled", true));
-		configs.add(new MixinConfiguration("mixins.aaam.dungeons2.json", "dungeons2", "general.Auto Markers.Dungeons2.Enabled", true));
-		configs.add(new MixinConfiguration("mixins.aaam.quark.json", "quark", "general.Auto Markers.Quark Pirateship.Enabled", true));
-		configs.add(new MixinConfiguration("mixins.aaam.bettermineshafts.json", "bettermineshafts", "general.Auto Markers.Better Mineshafts.Enabled", false));
-		configs.add(new MixinConfiguration("mixins.aaam.lycanitesmobs.json", "lycanitesmobs", "general.Auto Markers.Lycanites Dungeons.Enabled", true));
-		configs.add(new MixinConfiguration("mixins.aaam.waystones.wild.json", "waystones", "general.Auto Markers.Waystones.Wild Waystones.Enabled", false));
-		configs.add(new MixinConfiguration("mixins.aaam.waystones.activated.json", "waystones", "general.Auto Markers.Waystones.Activated Waystones.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.battletowers.json", "battletowers", "general.Auto Marking.Battletowers.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.doomlikedungeons.json", "dldungeonsjbg", "general.Auto Marking.Doomlike Dungeons.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.dungeons2.json", "dungeons2", "general.Auto Marking.Dungeons2.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.quark.json", "quark", "general.Auto Marking.Quark Pirateship.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.bettermineshafts.json", "bettermineshafts", "general.Auto Marking.Better Mineshafts.Enabled", false));
+		configs.add(new MixinConfiguration("mixins.aaam.lycanitesmobs.json", "lycanitesmobs", "general.Auto Marking.Lycanites Dungeons.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.waystones.wild.json", "waystones", "general.Auto Marking.Waystones.Wild Waystones.Enabled", false));
+		configs.add(new MixinConfiguration("mixins.aaam.waystones.activated.json", "waystones", "general.Auto Marking.Waystones.Activated Waystones.Enabled", true));
 
 		try{
 			ConfigCategory cat = ConfigurationLoader.load(new File("config", AntiqueAtlasAutoMarker.MODID + ".cfg"));

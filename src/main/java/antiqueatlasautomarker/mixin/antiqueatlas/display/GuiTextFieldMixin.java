@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
-import antiqueatlasautomarker.util.ISetsBackgroundColor;
+import antiqueatlasautomarker.mixinwrapper.ISetsBackgroundColor;
 import net.minecraft.client.gui.GuiTextField;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;

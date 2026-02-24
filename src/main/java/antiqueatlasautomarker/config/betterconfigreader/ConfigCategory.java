@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.betterconfig;
+package antiqueatlasautomarker.config.betterconfigreader;
 
 import org.apache.commons.lang3.ObjectUtils;
 

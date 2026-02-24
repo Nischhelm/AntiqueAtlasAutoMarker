@@ -10,7 +10,7 @@ import antiqueatlasautomarker.displayotherplayers.OtherPlayersDataHandler;
 import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.proxy.CommonProxy;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
-import antiqueatlasautomarker.util.PlayerLogoutHandler;
+import antiqueatlasautomarker.handlers.PlayerLogoutHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;

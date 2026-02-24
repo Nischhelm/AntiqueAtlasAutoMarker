@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.config;
 
-import antiqueatlasautomarker.betterconfig.ConfigCategory;
+import antiqueatlasautomarker.config.betterconfigreader.ConfigCategory;
 import fermiumbooter.FermiumRegistryAPI;
 import fermiumbooter.util.FermiumJarScanner;
 

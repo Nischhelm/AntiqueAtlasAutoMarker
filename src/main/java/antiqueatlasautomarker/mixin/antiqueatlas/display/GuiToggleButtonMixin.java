@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
-import antiqueatlasautomarker.util.IUntoggleable;
+import antiqueatlasautomarker.mixinwrapper.IUntoggleable;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;

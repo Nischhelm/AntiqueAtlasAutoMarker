@@ -3,8 +3,9 @@ package antiqueatlasautomarker.structuremarkers;
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.data.AutoMarkSetting;
-import antiqueatlasautomarker.util.IDeletedMarkerList;
-import antiqueatlasautomarker.util.IMarkerConstructor;
+import antiqueatlasautomarker.config.folders.CustomPositionConfig;
+import antiqueatlasautomarker.mixinwrapper.IDeletedMarkerList;
+import antiqueatlasautomarker.mixinwrapper.IMarkerConstructor;
 import hunternif.mc.atlas.SettingsConfig;
 import hunternif.mc.atlas.marker.DimensionMarkersData;
 import hunternif.mc.atlas.marker.Marker;
@@ -92,11 +93,11 @@ public class StructureMarkersDataHandler {
         return markStructure(world, pos.getX(), pos.getZ(), settings);
     }
 
-    public static Marker markCustomPositionStructure(@Nonnull World world, int dim, int x, int z, int xDiscover, int zDiscover, String markerType, String markerName){
+    public static Marker markCustomPositionStructure(@Nonnull World world, CustomPositionConfig.Data data){
         //set threadLocal to position where the custom marker would get discovered
-        CustomPosition.set(xDiscover, zDiscover);
+        CustomPosition.set(data.xDiscover, data.zDiscover);
         //The actual marker position is where the marker will appear in the atlas
-        Marker createdMarker = markStructure(world, x, z, markerType, markerName, "customPos", dim);
+        Marker createdMarker = markStructure(world, data.xMarker, data.zMarker, data.type, data.label, "customPos", data.dimension);
         CustomPosition.clear();
         return createdMarker;
     }

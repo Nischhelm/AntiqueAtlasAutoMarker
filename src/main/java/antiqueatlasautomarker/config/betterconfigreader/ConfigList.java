@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.betterconfig;
+package antiqueatlasautomarker.config.betterconfigreader;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,16 +1,18 @@
 package antiqueatlasautomarker.config.data;
 
+import meldexun.betterconfig.api.Order;
 import net.minecraftforge.common.config.Config;
 
 public class EnchMarkSetting {
     @Config.Ignore
-    public String enchId = "";
-    @Config.Comment("Optional. If above 1, minimum level needed to mark a librarian with this enchant")
+    @Order(0) public String enchId = "";
+    @Config.Comment("Optional. If above 1: Minimum level needed to mark a librarian with this enchant")
     @Config.Name("Min Level")
-    public int minLvl = 1;
+    @Config.RangeInt(min = 1)
+    @Order(1) public int minLvl = 1;
     @Config.Comment("Optional. If set, uses this abbreviation on the marker labels instead of the full enchantment name")
     @Config.Name("Abbreviation")
-    public String abbreviation = "";
+    @Order(2) public String abbreviation = "";
 
     public EnchMarkSetting() {}
     public EnchMarkSetting(String enchId) {

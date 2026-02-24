@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.compat;
+package antiqueatlasautomarker.compat.crafttweaker;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.structuremarkers.event.MarkStructureEvent;

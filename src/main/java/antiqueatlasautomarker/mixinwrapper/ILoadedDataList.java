@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.util;
+package antiqueatlasautomarker.mixinwrapper;
 
 import java.util.List;
 

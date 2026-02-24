@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.config.data;
 
+import meldexun.betterconfig.api.Order;
 import net.minecraftforge.common.config.Config;
 
 import javax.annotation.Nullable;
@@ -11,13 +12,13 @@ public class AutoMarkSetting {
         @Config.Comment("Set to false to never mark this structure")
         @Config.Name("Enabled")
         @Config.RequiresMcRestart
-        public boolean enabled = true;
+        @Order(0) public boolean enabled = true;
         @Config.Comment("Mark with this Marker Type")
         @Config.Name("Marker")
-        public String type = "";
+        @Order(1) public String type = "";
         @Config.Comment("Mark with this Label. Use DEFAULT to label the marker with a best fitting version.")
         @Config.Name("Label")
-        public String label = "DEFAULT";
+        @Order(2) public String label = "DEFAULT";
 
         @Config.Ignore
         public String context = "";

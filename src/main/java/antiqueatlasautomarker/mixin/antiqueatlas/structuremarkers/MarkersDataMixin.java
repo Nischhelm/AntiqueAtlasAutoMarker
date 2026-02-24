@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
-import antiqueatlasautomarker.util.IDeletedMarkerList;
+import antiqueatlasautomarker.mixinwrapper.IDeletedMarkerList;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import hunternif.mc.atlas.marker.MarkersData;
 import net.minecraft.nbt.NBTTagCompound;

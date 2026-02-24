@@ -1,5 +1,6 @@
-package antiqueatlasautomarker.util;
+package antiqueatlasautomarker.client;
 
+import antiqueatlasautomarker.compat.WaystoneUtil;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.RegistrarAntiqueAtlas;
 import net.minecraft.client.Minecraft;
@@ -8,14 +9,17 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class GuiButtonMap extends GuiButtonExt {
+@SideOnly(Side.CLIENT)
+public class GuiButtonWaystoneMap extends GuiButtonExt {
     private static final ResourceLocation ANTIQUEATLAS = new ResourceLocation("antiqueatlas:textures/items/antique_atlas.png");
-    private static MapWaystoneSelectionUtil.WarpProperty tmpWarpProperty = null;
+    private static WaystoneUtil.WarpProperty tmpWarpProperty = null;
 
-    public GuiButtonMap(int id, int x, int y, MapWaystoneSelectionUtil.WarpProperty warpProperty) {
+    public GuiButtonWaystoneMap(int id, int x, int y, WaystoneUtil.WarpProperty warpProperty) {
         super(id, x, y, "");
         this.width = 20;
         this.height = 20;
@@ -41,7 +45,7 @@ public class GuiButtonMap extends GuiButtonExt {
             if(firstAtlas == null) return false;
 
             mc.player.closeScreen();
-            MapWaystoneSelectionUtil.warpProperty.set(tmpWarpProperty);
+            WaystoneUtil.warpProperty.set(tmpWarpProperty);
             tmpWarpProperty = null;
             AntiqueAtlasMod.proxy.openAtlasGUI(firstAtlas);
             return true;

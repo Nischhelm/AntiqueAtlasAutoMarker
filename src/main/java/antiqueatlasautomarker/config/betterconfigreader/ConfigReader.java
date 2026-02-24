@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.betterconfig;
+package antiqueatlasautomarker.config.betterconfigreader;
 
 import javax.annotation.Nullable;
 import java.io.BufferedReader;

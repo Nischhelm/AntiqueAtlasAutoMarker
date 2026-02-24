@@ -1,6 +1,6 @@
-package antiqueatlasautomarker.mixin.antiqueatlas.mapselection;
+package antiqueatlasautomarker.mixin.antiqueatlas.waystonemapselection;
 
-import antiqueatlasautomarker.util.MapWaystoneSelectionUtil;
+import antiqueatlasautomarker.compat.WaystoneUtil;
 import hunternif.mc.atlas.client.gui.GuiBookmarkButton;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,7 +15,7 @@ public abstract class GuiBookmarkButtonMixin {
             cancellable = true
     )
     private void dontRender(int mouseX, int mouseY, float partialTick, CallbackInfo ci){
-        if(MapWaystoneSelectionUtil.getIsFromWaystone())
+        if(WaystoneUtil.getIsFromWaystone())
             ci.cancel();
     }
 }

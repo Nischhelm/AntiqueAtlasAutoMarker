@@ -21,7 +21,7 @@ public class EventHandlerMixin {
             remap = false
     )
     private Marker aaam_replaceAARCglobalMarkerWithLocalMarker(MarkerAPI instance, @Nonnull World world, boolean visibleAhead, String markerType, String label, int x, int z, @Local(ordinal = 0) String structureName) {
-        if (ConfigHandler.automark.aarcaddon.enabled) {
+        if (ConfigHandler.automark.aarcEnabled) {
             //Context AARCAddon gets $structureName appended in order to use client settings
             return StructureMarkersDataHandler.markStructure(world, x, z, markerType, label, "AARCAddon$"+structureName);
         } else

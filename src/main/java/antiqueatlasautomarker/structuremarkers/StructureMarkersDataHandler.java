@@ -1,8 +1,8 @@
 package antiqueatlasautomarker.structuremarkers;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.util.IDeletedMarkerList;
 import antiqueatlasautomarker.util.IMarkerConstructor;
 import hunternif.mc.atlas.SettingsConfig;

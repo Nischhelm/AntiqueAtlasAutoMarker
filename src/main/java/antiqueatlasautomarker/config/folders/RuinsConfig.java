@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.config.folders;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import net.minecraftforge.common.config.Config;
 
 import java.util.Map;

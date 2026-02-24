@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.quark;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;

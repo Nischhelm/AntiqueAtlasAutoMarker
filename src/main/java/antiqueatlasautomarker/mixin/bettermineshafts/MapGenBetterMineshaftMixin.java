@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.bettermineshafts;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.yungnickyoung.minecraft.bettermineshafts.world.MapGenBetterMineshaft;
 import net.minecraft.world.gen.structure.MapGenMineshaft;

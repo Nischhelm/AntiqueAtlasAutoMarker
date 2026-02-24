@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.biometiles;
 
-import antiqueatlasautomarker.config.folders.BiomeTileConfig;
+import antiqueatlasautomarker.config.folders.TileConfig;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Cancellable;
@@ -26,7 +26,7 @@ public abstract class AutomaticTextureSetRules {
     )
     private Set<BiomeDictionary.Type> aaam_overwriteAutomaticLogic(Biome biome, Operation<Set<BiomeDictionary.Type>> original, @Cancellable CallbackInfo ci){
         Set<BiomeDictionary.Type> types = original.call(biome);
-        this.setTexture(biome, BiomeTileConfig.getTextureSet(types));
+        this.setTexture(biome, TileConfig.getTextureSet(types));
         ci.cancel();
         return types;
     }

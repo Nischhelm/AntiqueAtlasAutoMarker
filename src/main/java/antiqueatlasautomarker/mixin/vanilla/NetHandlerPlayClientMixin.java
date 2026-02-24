@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.vanilla;
 
 import antiqueatlasautomarker.config.ConfigHandler;
-import antiqueatlasautomarker.config.EnchMarkSetting;
+import antiqueatlasautomarker.config.data.EnchMarkSetting;
 import antiqueatlasautomarker.util.EnchantmentOffer;
 import antiqueatlasautomarker.util.EnchantmentUtil;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -79,9 +79,9 @@ public abstract class NetHandlerPlayClientMixin {
         for (EnchantmentOffer offer : offeredEnchants) {
             ResourceLocation enchReg = offer.enchantment.getRegistryName();
             if (enchReg == null) continue;
-            EnchMarkSetting setting = EnchMarkSetting.get(enchReg.toString());
+            EnchMarkSetting setting = ConfigHandler.automark.enchantments.enchantmentsToMark.get(enchReg.toString());
             //Check if the offer is anything we care about
-            if ((setting != null && offer.lvl >= setting.minLvl) || EnchMarkSetting.acceptAll) {
+            if ((setting != null && offer.lvl >= setting.minLvl) || ConfigHandler.automark.enchantments.enchantmentsToMark.containsKey("ALL")) {
                 String enchLabel = "";
                 if(setting != null) enchLabel = setting.abbreviation;
                 //no abbreviation or accepting all

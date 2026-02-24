@@ -40,7 +40,7 @@ public abstract class ItemAtlasMixin {
             for (Marker m : newMarkers)
                 packet.putMarker(m);
             if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Sending {} structure markers",newMarkers.size());
-            if(ConfigHandler.overhaul.sendToAllHolding)
+            if(ConfigHandler.fixes.sendToAllHolding)
                 CustomPacketDispatcher.sendToAllHoldingAtlas(stack.getItemDamage(), packet);
             else
                 PacketDispatcher.sendToAll(packet);

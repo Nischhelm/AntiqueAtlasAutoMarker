@@ -1,8 +1,7 @@
 package antiqueatlasautomarker.config.folders;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
-import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.config.AutoMarkSetting.Data;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 

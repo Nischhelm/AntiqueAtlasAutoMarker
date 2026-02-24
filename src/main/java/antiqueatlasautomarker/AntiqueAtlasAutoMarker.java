@@ -4,16 +4,14 @@ import antiqueatlasautomarker.command.AAAMCommand;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.compat.crafttweaker.CT_BiomeDetectorEvent;
 import antiqueatlasautomarker.config.ConfigHandler;
-import antiqueatlasautomarker.config.EnchMarkSetting;
-import antiqueatlasautomarker.config.folders.BiomeTileConfig;
+import antiqueatlasautomarker.config.folders.TileConfig;
 import antiqueatlasautomarker.custombiometiles.*;
-import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.displayotherplayers.OtherPlayersDataHandler;
+import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.proxy.CommonProxy;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
 import antiqueatlasautomarker.util.PlayerLogoutHandler;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -38,24 +36,18 @@ public class AntiqueAtlasAutoMarker {
     public static final String NAME = "AntiqueAtlasAutoMarker";
     public static final Logger LOGGER = LogManager.getLogger();
     public static final boolean isDebugging = false;
-    public static Configuration CONFIG;
 
     @SidedProxy(clientSide = "antiqueatlasautomarker.proxy.ClientProxy", serverSide = "antiqueatlasautomarker.proxy.CommonProxy")
     public static CommonProxy PROXY;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        CONFIG = new Configuration(event.getSuggestedConfigurationFile());
-        CONFIG.load();
-
-        EnchMarkSetting.init();
-
-        if(event.getSide() == Side.CLIENT) BiomeTileConfig.init();
+        if(event.getSide() == Side.CLIENT) TileConfig.init();
 
         //Just for event testing purposes
         if(isDebugging) MinecraftForge.EVENT_BUS.register(TestAAAMEventHandler.class);
 
-        if(ConfigHandler.overhaul.sendToAllHolding) MinecraftForge.EVENT_BUS.register(PlayerLogoutHandler.class);
+        if(ConfigHandler.fixes.sendToAllHolding) MinecraftForge.EVENT_BUS.register(PlayerLogoutHandler.class);
         if(Loader.isModLoaded("ruins")) MinecraftForge.EVENT_BUS.register(RuinsHandler.class);
         if(Loader.isModLoaded("crafttweaker")) MinecraftForge.EVENT_BUS.register(CT_BiomeDetectorEvent.CT_EventForwarder.class);
         PROXY.preInit();
@@ -63,7 +55,7 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
-        if(ConfigHandler.overhaul.showOtherPlayers && event.getSide() == Side.CLIENT) MinecraftForge.EVENT_BUS.register(OtherPlayersDataHandler.class);
+        if(ConfigHandler.tweaks.showOtherPlayers && event.getSide() == Side.CLIENT) MinecraftForge.EVENT_BUS.register(OtherPlayersDataHandler.class);
         PROXY.init();
     }
 
@@ -73,13 +65,13 @@ public class AntiqueAtlasAutoMarker {
 
         if(event.getSide() == Side.CLIENT) {
             NetherTiles.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && ModCompat.betterEnd.isLoaded() && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedBOPTiles && ModCompat.biomesOPlenty.isLoaded()) BiomesOPlentyCompat.registerTiles();
-            if (ConfigHandler.overhaul.tileConfig.useColorisedDregoraTiles && ModCompat.otg.isLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
+            if (ConfigHandler.tiles.useColorisedBetterEndTiles && ModCompat.betterEnd.isLoaded() && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
+            if (ConfigHandler.tiles.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
+            if (ConfigHandler.tiles.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
+            if (ConfigHandler.tiles.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
+            if (ConfigHandler.tiles.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
+            if (ConfigHandler.tiles.useColorisedBOPTiles && ModCompat.biomesOPlenty.isLoaded()) BiomesOPlentyCompat.registerTiles();
+//            if (ConfigHandler.tiles.useColorisedDregoraTiles && ModCompat.otg.isLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
         }
     }
 

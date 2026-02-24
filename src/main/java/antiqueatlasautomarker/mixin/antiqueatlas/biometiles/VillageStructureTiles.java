@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.biometiles;
 
-import antiqueatlasautomarker.custombiometiles.CustomVillageTiles;
+import antiqueatlasautomarker.config.ConfigHandler;
 import com.google.common.collect.ImmutableMap;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -19,8 +19,7 @@ public abstract class VillageStructureTiles {
             at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;", ordinal = 0, remap = false)
     )
     private static void aaam_addCustomVillageTiles_Texture(CallbackInfo ci, @Local ImmutableMap.Builder<String, String> builder){
-        CustomVillageTiles.registerVillageTiles();
-        CustomVillageTiles.partToTileMap.forEach(builder::put);
+        ConfigHandler.tiles.customVillageTiles.forEach(data -> builder.put(data.component, data.textureSet));
     }
 
     @Inject(
@@ -28,7 +27,7 @@ public abstract class VillageStructureTiles {
             at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;", ordinal = 1, remap = false)
     )
     private static void aaam_addCustomVillageTiles_Priority(CallbackInfo ci, @Local ImmutableMap.Builder<String, Integer> builder){
-        CustomVillageTiles.tilePriority.forEach(builder::put);
+        ConfigHandler.tiles.customVillageTiles.forEach(data -> builder.put(data.textureSet, data.priority));
     }
 
     @WrapOperation(

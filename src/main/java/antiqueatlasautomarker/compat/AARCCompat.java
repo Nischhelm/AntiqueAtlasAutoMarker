@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.compat;
 
 import aarcaddon.handlers.ConfigHandler;
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

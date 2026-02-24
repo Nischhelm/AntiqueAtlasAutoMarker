@@ -3,8 +3,8 @@ package antiqueatlasautomarker.structuremarkers.network;
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.compat.AARCCompat;
 import antiqueatlasautomarker.compat.ModCompat;
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.event.ReceivedStructureMarkerEvent;
 import antiqueatlasautomarker.util.IMarkerConstructor;
 import com.google.common.collect.ArrayListMultimap;
@@ -107,7 +107,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
 
             //AARC compat
             if(ModCompat.aarc.isLoaded() && context.startsWith("AARCAddon")) {
-                if(!ConfigHandler.automark.aarcaddon.enabled) continue;
+                if(!ConfigHandler.automark.aarcEnabled) continue;
                 clientSetting = AARCCompat.getAARCSetting(context);
             }
 

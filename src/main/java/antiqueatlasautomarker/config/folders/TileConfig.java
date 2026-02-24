@@ -2,6 +2,8 @@ package antiqueatlasautomarker.config.folders;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.config.data.CustomVillageTiles;
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import hunternif.mc.atlas.client.BiomeTextureMap;
 import hunternif.mc.atlas.client.TextureSet;
@@ -12,9 +14,10 @@ import net.minecraftforge.common.config.Config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import com.google.common.base.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class BiomeTileConfig {
+public class TileConfig {
     @Config.Comment("If a biome doesn't have BiomeTextureSets registered, its biome dictionary types will be used to assign it a textureset. \n" +
             "The rules provided here are matched against the given types in order. The first rule that matches will be used." +
             "This order means that rules with more rare sets of biometypes need to be defined farther up, it gets more generic farther down.\n" +
@@ -25,7 +28,7 @@ public class BiomeTileConfig {
             "NOTE: by default, this is using the same rules that Antique Atlas is using.")
     @Config.Name("Automatic Biometype Rules")
     @Config.RequiresMcRestart
-    public String[] automaticTypeRules = {
+    public List<String> automaticTypeRules = Stream.of(
             "SWAMP, HILLS = SWAMP_HILLS",
             "SWAMP = SWAMP",
             "WATER|RIVER, FOREST|JUNGLE, HILLS = SWAMP_HILLS",
@@ -62,7 +65,7 @@ public class BiomeTileConfig {
             "HILLS, SNOWY|COLD = SNOW_HILLS",
             "HILLS, SANDY = DESERT_HILLS",
             "HILLS = HILLS"
-    };
+    ).collect(Collectors.toList());
 
     @Config.Comment("Define custom village tiles for custom village components here. \n" +
             "Pattern: componentName, textureSetName, priority\n" +
@@ -71,7 +74,7 @@ public class BiomeTileConfig {
             "Waystone Id is \"waystones:village_waystone\"")
     @Config.Name("Custom Village Tiles")
     @Config.RequiresMcRestart
-    public String[] customVillageTiles = {};
+    public List<CustomVillageTiles> customVillageTiles = new ArrayList<>();
 
     @Config.Comment("Will only apply if BetterEnd Backport and NetherAPI are present. By Artsy (2025), slightly modified by Nischhelm.")
     @Config.Name("Use Colorised BetterEnd Tiles")
@@ -86,7 +89,7 @@ public class BiomeTileConfig {
 //    @Config.Comment("Will only apply if DregoraRL and OTG are present. Not made yet.")
 //    @Config.Name("Use Colorised Dregora Tiles")
 //    @Config.RequiresMcRestart
-    public boolean useColorisedDregoraTiles = true;
+//    public boolean useColorisedDregoraTiles = true;
 
     @Config.Comment("Will only apply if DefiledLands is present. By Artsy (2021), modified original tiles by AA.")
     @Config.Name("Use Colorised DefiledLands Tiles")
@@ -119,14 +122,14 @@ public class BiomeTileConfig {
             "By default, AA meant to have ROCK_SHORE and LAVA_SHORE stitch to null.")
     @Config.Name("TextureSets stitch to null")
     @Config.RequiresMcRestart
-    public String[] stitchToNullSets = {
+    public Set<String> stitchToNullSets = Stream.of(
             "END_VOID",
             "LAVA_SHORE",
             "LAVA"
-    };
+    ).collect(Collectors.toSet());
 
     public static void init() {
-        for (String configLine : ConfigHandler.overhaul.tileConfig.automaticTypeRules)
+        for (String configLine : ConfigHandler.tiles.automaticTypeRules)
             new TextureSetRule(configLine);
     }
     private static final List<TextureSetRule> allRules = new ArrayList<>();

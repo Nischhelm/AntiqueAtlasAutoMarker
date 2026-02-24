@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.doomlikedungeons;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import jaredbgreat.dldungeons.builder.Builder;

@@ -48,12 +48,12 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		//Antique Atlas Structure Markers
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json");
 
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.updateside.json", () -> !EarlyConfigReader.getString("Atlas Scanning Update Side", ConfigHandler.overhaul.updateSide.toString()).equals("DISABLE_MIXIN"));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.updateside.json", () -> !EarlyConfigReader.getString("Atlas Scanning Update Side", ConfigHandler.fixes.updateSide.toString()).equals("DISABLE_MIXIN"));
 
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json"); //TODO add toggle
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json"); //TODO add toggle
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", () -> EarlyConfigReader.isArrayFilled("Automatic Biometype Rules", ConfigHandler.overhaul.tileConfig.automaticTypeRules.length != 0));
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", () -> EarlyConfigReader.isArrayFilled("TextureSets stitch to null", ConfigHandler.overhaul.tileConfig.stitchToNullSets.length != 0));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", () -> EarlyConfigReader.isArrayFilled("Automatic Biometype Rules", !ConfigHandler.tiles.automaticTypeRules.isEmpty()));
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", () -> EarlyConfigReader.isArrayFilled("TextureSets stitch to null", !ConfigHandler.tiles.stitchToNullSets.isEmpty()));
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.custom_nether_end_biomes.json"); //TODO add toggle
 
 		//Ice and Fire

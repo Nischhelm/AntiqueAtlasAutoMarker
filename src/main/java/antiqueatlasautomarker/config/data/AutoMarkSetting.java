@@ -1,4 +1,4 @@
-package antiqueatlasautomarker.config;
+package antiqueatlasautomarker.config.data;
 
 import net.minecraftforge.common.config.Config;
 

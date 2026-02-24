@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.iceandfire.rlcraft;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.github.alexthe666.iceandfire.structures.WorldGenHydraCave;
 import net.minecraft.util.math.BlockPos;

@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.waystones;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.blay09.mods.waystones.worldgen.LegacyWorldGen;

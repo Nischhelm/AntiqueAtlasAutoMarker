@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.battletowers;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import atomicstryker.battletowers.common.AS_WorldGenTower;
 import atomicstryker.battletowers.common.WorldGenHandler;

@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.mixin.vanilla;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.ConfigHandler;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.Locale;
@@ -23,18 +22,12 @@ public abstract class LocaleMixin {
     )
     private void aaam_injectLangKeys(List<IResource> resourcesList, CallbackInfo ci){
         if(ConfigHandler.automark.localisation != null) {
-            for (String s : ConfigHandler.automark.localisation.langKeys) {
-                String[] split = s.split("=");
-                if (split.length != 2) {
-                    AntiqueAtlasAutoMarker.LOGGER.warn("AAAM Unable to parse Lang Key line (expected pattern: key=translation): {}", s);
-                    continue;
-                }
-                String key = "gui.aaam.marker." + split[0];
-                String translation = split[1];
+            for (Map.Entry<String, String> entry : ConfigHandler.automark.localisation.langKeys.entrySet()) {
+                String key = "gui.aaam.marker." + entry.getKey();
                 //We only inject if there isn't a lang file already which provides a translation for the current key
                 //Or if config is prioritised
                 if (!properties.containsKey(key) || ConfigHandler.automark.localisation.prioritiseConfigLangKeys)
-                    properties.put(key, translation);
+                    properties.put(key, entry.getValue());
             }
         }
     }

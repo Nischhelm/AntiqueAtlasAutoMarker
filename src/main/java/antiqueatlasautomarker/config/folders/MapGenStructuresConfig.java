@@ -1,17 +1,15 @@
 package antiqueatlasautomarker.config.folders;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.mixin.vanilla.MapGenStructureIOAccessor;
 import fermiumbooter.annotations.MixinConfig;
-import meldexun.betterconfig.ConfigCategory;
-import meldexun.betterconfig.ConfigurationManger;
 import meldexun.betterconfig.api.Unmodifiable;
 import net.minecraftforge.common.config.Config;
-import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.common.config.ConfigManager;
 
-import java.io.File;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class MapGenStructuresConfig {
@@ -23,6 +21,7 @@ public class MapGenStructuresConfig {
 
     @Config.Comment("Automatically fills with entries after restart.")
     @Config.Name("Markers")
+    @Unmodifiable
     public Map<String, AutoMarkSetting.Data> structureOptions = new HashMap<>();
 
     public void postInit(){
@@ -35,6 +34,6 @@ public class MapGenStructuresConfig {
                 structureOptions.put(s, new AutoMarkSetting.Data(s, false, "antiqueatlas:google", "DEFAULT"));
 
         if(structureOptions.size() - nStructs > 0) //if structures were added
-            AntiqueAtlasAutoMarker.CONFIG.save();
+            ConfigManager.sync(AntiqueAtlasAutoMarker.MODID, Config.Type.INSTANCE);
     }
 }

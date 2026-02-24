@@ -2,6 +2,10 @@ package antiqueatlasautomarker.config.folders;
 
 import net.minecraftforge.common.config.Config;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class LocalisationConfig {
     @Config.Comment("If there is both a lang key translation in the lang file and one in the default lang key config here, prioritise the config one. Enable this to adjust your localised marker labels")
     @Config.Name("Prioritise Config Lang Keys")
@@ -10,7 +14,7 @@ public class LocalisationConfig {
     @Config.Comment("AAAM will use these lang keys if there is no other lang file present that would translate those lang keys (internal name of the lang keys: gui.aaam.marker.xxx). Use this to rename structure markers, allows players with other languages seeing the same marker in their own language.")
     @Config.Name("Default Lang Keys")
     @Config.RequiresMcRestart
-    public String[] langKeys = {
+    public Map<String,String> langKeys = Stream.of(
             "wildWaystone=Wild Waystone",
             "betterMineshaft=Mineshaft",
             "dungeons2=Dungeon2",
@@ -33,5 +37,5 @@ public class LocalisationConfig {
             "ArrowTrapTomb=Simple Dungeon Loot",
             "SnowCastleSpire=Blaze Spawners",
             "NetherShrine=Nether Portal"
-    };
+    ).map(s -> s.split("=")).collect(Collectors.toMap(spl -> spl[0], spl -> spl[1]));
 }

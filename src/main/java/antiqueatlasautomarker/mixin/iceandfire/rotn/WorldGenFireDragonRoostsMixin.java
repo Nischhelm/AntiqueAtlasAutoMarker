@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.iceandfire.rotn;
 
-import antiqueatlasautomarker.config.AutoMarkSetting;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import com.github.alexthe666.iceandfire.world.gen.WorldGenFireDragonRoosts;
 import net.minecraft.util.math.BlockPos;

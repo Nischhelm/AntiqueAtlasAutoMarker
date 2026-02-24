@@ -103,29 +103,29 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
 
             if(ConfigHandler.internal.doDebugLogs) AntiqueAtlasAutoMarker.LOGGER.info("Trying to add marker {} {} {}", context, serverLabel, serverType);
 
-            AutoMarkSetting clientSetting;
+            AutoMarkSetting.Data clientSetting;
 
             //AARC compat
             if(ModCompat.aarc.isLoaded() && context.startsWith("AARCAddon")) {
-                if(!ConfigHandler.aarcaddon.enabled) continue;
+                if(!ConfigHandler.automark.aarcaddon.enabled) continue;
                 clientSetting = AARCCompat.getAARCSetting(context);
             }
 
             //Overwrite for AA global markers (village+end_city/generic), use serverside label/type but clientside enabled config (true if generic global marker by some random mod idk)
-            else if(context.startsWith("aa_")) clientSetting = new AutoMarkSetting(context.equals("aa_global") || SettingsConfig.gameplay.autoVillageMarkers, "DEFAULT", "DEFAULT", context);
+            else if(context.startsWith("aa_")) clientSetting = new AutoMarkSetting.Data(context.equals("aa_global") || SettingsConfig.gameplay.autoVillageMarkers, "DEFAULT", "DEFAULT", context);
 
             else if(context.startsWith("ruins_")){
-                if(!ConfigHandler.ruins.enabled) continue;
-                clientSetting = AutoMarkSetting.get(context);
+                if(!ConfigHandler.automark.ruins.enabled) continue;
+                clientSetting = ConfigHandler.automark.ruins.ruinsMarkers.get(context.substring("ruins_".length()));
             }
 
             //Custom position markers
             else if(context.equals("customPos"))
-                clientSetting = new AutoMarkSetting(true, "DEFAULT", "DEFAULT", context);
+                clientSetting = new AutoMarkSetting.Data(true, "DEFAULT", "DEFAULT", context);
 
             //Structure Markers added by MarkStructureEvent
             else if(context.isEmpty())
-                clientSetting = new AutoMarkSetting(true, "DEFAULT", "DEFAULT", context);
+                clientSetting = new AutoMarkSetting.Data(true, "DEFAULT", "DEFAULT", context);
 
             //AAAM base behavior, also for ruins
             else clientSetting = AutoMarkSetting.get(context);

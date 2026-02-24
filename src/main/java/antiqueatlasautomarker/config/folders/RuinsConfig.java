@@ -1,32 +1,41 @@
 package antiqueatlasautomarker.config.folders;
 
+import antiqueatlasautomarker.config.AutoMarkSetting;
 import net.minecraftforge.common.config.Config;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class RuinsConfig {
-    @Config.Comment("Set to false to never mark Ruins structures")
+    @Config.Comment("Set to false to never mark any Ruins structures")
     @Config.Name("Ruins Enabled")
     public boolean enabled = true;
 
-    @Config.Comment("Pattern: ruinsName; enabled; marker label; marker type. DEFAULT uses the corresponding lang key set in lang file or in the lang key config")
+    @Config.Comment({
+            "DEFAULT uses the corresponding lang key set in lang file or in the lang key config",
+            "Ruins structure names can be found in /yourinstall/config/ruins_config/some_biome/[StructureName].tml"
+    })
     @Config.Name("Ruins Structure Markers")
-    public String[] ruinsMarkers = {
-            "Tower-ruined-short; false; DEFAULT; antiqueatlas:ruins",
-            "Tower-edit; true; DEFAULT; antiqueatlas:tower",
-            "TowerEasy; true; DEFAULT; antiqueatlas:tower",
-            "TowerMedium; true; DEFAULT; antiqueatlas:tower",
-            "TowerHard; true; DEFAULT; antiqueatlas:tower",
-            "ZombieHut; false; DEFAULT; antiqueatlas:sword",
-            "SkyCastle; true; DEFAULT; antiqueatlas:diamond",
-            "UnderwaterBase; false; DEFAULT; antiqueatlas:diamond",
-            "Floater; true; DEFAULT; antiqueatlas:diamond",
-            "PirateShip; true; DEFAULT; antiqueatlas:ship",
-            "StoneHouseM; false; DEFAULT; antiqueatlas:ruins",
-            "PortalShrine; true; DEFAULT; antiqueatlas:nether_portal",
-            "GraveyardHaunted; true; DEFAULT; antiqueatlas:diamond",
-            "GateUnderGlass; false; DEFAULT; antiqueatlas:nether_portal",
-            "Mausoleum; false; DEFAULT; antiqueatlas:sword",
-            "ArrowTrapTomb; false; DEFAULT; antiqueatlas:diamond",
-            "SnowCastleSpire; false; DEFAULT; antiqueatlas:sword",
-            "NetherShrine; true; DEFAULT; antiqueatlas:nether_portal"
-    };
+    public Map<String, AutoMarkSetting.Data> ruinsMarkers = Stream.of(
+            new AutoMarkSetting.Data("Tower-ruined-short",false,"antiqueatlas:ruins","DEFAULT"),
+            new AutoMarkSetting.Data("Tower-edit",true,"antiqueatlas:tower","DEFAULT"),
+            new AutoMarkSetting.Data("TowerEasy",true,"antiqueatlas:tower","DEFAULT"),
+            new AutoMarkSetting.Data("TowerMedium",true,"antiqueatlas:tower","DEFAULT"),
+            new AutoMarkSetting.Data("TowerHard",true,"antiqueatlas:tower","DEFAULT"),
+            new AutoMarkSetting.Data("ZombieHut",false,"antiqueatlas:sword","DEFAULT"),
+            new AutoMarkSetting.Data("SkyCastle",true,"antiqueatlas:diamond","DEFAULT"),
+            new AutoMarkSetting.Data("UnderwaterBase",false,"antiqueatlas:diamond","DEFAULT"),
+            new AutoMarkSetting.Data("Floater",true,"antiqueatlas:diamond","DEFAULT"),
+            new AutoMarkSetting.Data("PirateShip",true,"antiqueatlas:ship","DEFAULT"),
+            new AutoMarkSetting.Data("StoneHouseM",false,"antiqueatlas:ruins","DEFAULT"),
+            new AutoMarkSetting.Data("PortalShrine",true,"antiqueatlas:nether_portal","DEFAULT"),
+            new AutoMarkSetting.Data("GraveyardHaunted",true,"antiqueatlas:diamond","DEFAULT"),
+            new AutoMarkSetting.Data("GateUnderGlass",false,"antiqueatlas:nether_portal","DEFAULT"),
+            new AutoMarkSetting.Data("Mausoleum",false,"antiqueatlas:sword","DEFAULT"),
+            new AutoMarkSetting.Data("ArrowTrapTomb",false,"antiqueatlas:diamond","DEFAULT"),
+            new AutoMarkSetting.Data("SnowCastleSpire",false,"antiqueatlas:sword","DEFAULT"),
+            new AutoMarkSetting.Data("NetherShrine",true,"antiqueatlas:nether_portal","DEFAULT")
+    ).collect(Collectors.toMap(data -> data.context, Function.identity()));
 }

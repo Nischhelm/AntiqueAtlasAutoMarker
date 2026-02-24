@@ -3,7 +3,6 @@ package antiqueatlasautomarker;
 import antiqueatlasautomarker.command.AAAMCommand;
 import antiqueatlasautomarker.compat.ModCompat;
 import antiqueatlasautomarker.compat.crafttweaker.CT_BiomeDetectorEvent;
-import antiqueatlasautomarker.config.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EnchMarkSetting;
 import antiqueatlasautomarker.config.folders.BiomeTileConfig;
@@ -30,7 +29,7 @@ import org.apache.logging.log4j.Logger;
         modid = AntiqueAtlasAutoMarker.MODID,
         version = AntiqueAtlasAutoMarker.VERSION,
         name = AntiqueAtlasAutoMarker.NAME,
-        dependencies = "required-after:fermiumbooter@[1.3.2,);required-after:antiqueatlas",
+        dependencies = "required-after:fermiumbooter@[1.3.2,);required-after:antiqueatlas;after:betterconfig",
         acceptableRemoteVersions = "*"
 )
 public class AntiqueAtlasAutoMarker {
@@ -49,16 +48,6 @@ public class AntiqueAtlasAutoMarker {
         CONFIG = new Configuration(event.getSuggestedConfigurationFile());
         CONFIG.load();
 
-        ConfigHandler.battletowers.preInit();
-        ConfigHandler.bettermineshafts.preInit();
-        ConfigHandler.doomlike.preInit();
-        ConfigHandler.dungeons2.preInit();
-        ConfigHandler.iceandfire.preInit();
-        ConfigHandler.lycanitesmobs.preInit();
-        ConfigHandler.quark.preInit();
-        ConfigHandler.waystones.preInit();
-
-        AutoMarkSetting.init();
         EnchMarkSetting.init();
 
         if(event.getSide() == Side.CLIENT) BiomeTileConfig.init();
@@ -80,7 +69,7 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        ConfigHandler.vanillaStructs.postInit();
+        ConfigHandler.automark.mapGenStructs.postInit();
 
         if(event.getSide() == Side.CLIENT) {
             NetherTiles.registerTiles();

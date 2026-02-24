@@ -22,8 +22,8 @@ public abstract class LocaleMixin {
             at = @At("RETURN")
     )
     private void aaam_injectLangKeys(List<IResource> resourcesList, CallbackInfo ci){
-        if(ConfigHandler.localisation != null) {
-            for (String s : ConfigHandler.localisation.langKeys) {
+        if(ConfigHandler.automark.localisation != null) {
+            for (String s : ConfigHandler.automark.localisation.langKeys) {
                 String[] split = s.split("=");
                 if (split.length != 2) {
                     AntiqueAtlasAutoMarker.LOGGER.warn("AAAM Unable to parse Lang Key line (expected pattern: key=translation): {}", s);
@@ -33,7 +33,7 @@ public abstract class LocaleMixin {
                 String translation = split[1];
                 //We only inject if there isn't a lang file already which provides a translation for the current key
                 //Or if config is prioritised
-                if (!properties.containsKey(key) || ConfigHandler.localisation.prioritiseConfigLangKeys)
+                if (!properties.containsKey(key) || ConfigHandler.automark.localisation.prioritiseConfigLangKeys)
                     properties.put(key, translation);
             }
         }

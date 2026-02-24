@@ -1,55 +1,45 @@
 package antiqueatlasautomarker.config;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
+import net.minecraftforge.common.config.Config;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class AutoMarkSetting {
-    public final String label;
-    public final boolean enabled;
-    public final String type;
-    public final String context;
+    public static class Data {
+        @Config.Comment("Set to false to never mark this structure")
+        @Config.Name("Enabled")
+        @Config.RequiresMcRestart
+        public boolean enabled = true;
+        @Config.Comment("Mark with this Marker Type")
+        @Config.Name("Marker")
+        public String type = "";
+        @Config.Comment("Mark with this Label. Use DEFAULT to label the marker with a best fitting version.")
+        @Config.Name("Label")
+        public String label = "DEFAULT";
 
-    public AutoMarkSetting(boolean enabled, String label, String type, String context){
-        this.enabled = enabled;
-        this.label = label;
-        this.type = type;
-        this.context = context;
-    }
+        @Config.Ignore
+        public String context = "";
 
-    private static final Map<String, AutoMarkSetting> autoMarkSettings = new HashMap<>();
-    @Nullable
-    public static AutoMarkSetting get(String name){
-        return autoMarkSettings.get(name);
-    }
-    public static void init(){
-        List<String> stringConfigs = Arrays.stream(ConfigHandler.ruins.ruinsMarkers).map(s -> "ruins_" + s).collect(Collectors.toList()); //adding "ruins_" in front of each context
-        stringConfigs.addAll(Arrays.asList(ConfigHandler.vanillaStructs.structureOptions));
-
-        for(String s : stringConfigs){
-            String[] split = s.split(";");
-            if(split.length != 4) continue;
-            try {
-                registerAutoMarkSetting(
-                        split[0].trim(), //context
-                        Boolean.parseBoolean(split[1].trim()), //enabled
-                        split[2].trim(), //label
-                        split[3].trim() //type
-                );
-            } catch (Exception e){
-                AntiqueAtlasAutoMarker.LOGGER.warn("Could not parse AAAM config line, skipping {}", s);
-            }
+        public Data() {}
+        public Data(String context, boolean defaultEnabled, String defaultType, String defaultLabel){
+            this.context = context;
+            if(context != null && !context.isEmpty())
+                registerAutoMarkSetting(context, this);
+            this.enabled = defaultEnabled;
+            this.type = defaultType;
+            this.label = defaultLabel;
+        }
+        public Data(boolean defaultEnabled, String defaultLabel, String defaultType, String context){
+            this(context, defaultEnabled, defaultType, defaultLabel);
         }
     }
 
-    public static void reset(){
-        autoMarkSettings.clear();
-        init();
+    public static final Map<String, Data> autoMarkSettings = new HashMap<>();
+    @Nullable
+    public static AutoMarkSetting.Data get(String name){
+        return autoMarkSettings.get(name);
     }
 
     /**
@@ -57,15 +47,7 @@ public class AutoMarkSetting {
      * The structures can be marked using the MarkStructureEvent.setContext
      * This can also be done without registering a new context here, but will force clients to use the marker settings the event uses
      */
-    public static void registerAutoMarkSetting(String context, boolean enabled, String label, String type){
-        autoMarkSettings.put(context,
-                new AutoMarkSetting(
-                        enabled,
-                        label,
-                        type,
-                        context
-                )
-        );
+    public static void registerAutoMarkSetting(String context, Data data){
+        autoMarkSettings.put(context, data);
     }
-
 }

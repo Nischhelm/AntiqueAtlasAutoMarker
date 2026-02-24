@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MapGenBetterMineshaftMixin extends MapGenMineshaft {
     @Inject(method = "getStructureStart", at = @At("HEAD"))
     private void markBetterMineshaft(int chunkX, int chunkZ, CallbackInfoReturnable<StructureStart> cir){
-        AutoMarkSetting setting = AutoMarkSetting.get("betterMineshaft");
+        AutoMarkSetting.Data setting = AutoMarkSetting.get("betterMineshaft");
         if(setting == null || !setting.enabled) return;
 
         String usedLabel = setting.label;

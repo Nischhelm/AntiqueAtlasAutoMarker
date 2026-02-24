@@ -39,7 +39,7 @@ public abstract class NetHandlerPlayClientMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/IMerchant;setRecipes(Lnet/minecraft/village/MerchantRecipeList;)V")
     )
     public void onMerchantTradeOffers(SPacketCustomPayload packetIn, CallbackInfo ci, @Local MerchantRecipeList tradeList, @Local IMerchant merchant) {
-        if (!ConfigHandler.enchantments.enabled) return;
+        if (!ConfigHandler.automark.enchantments.enabled) return;
 
         EntityPlayer player = this.client.player; //bruh
         if (player == null) return;

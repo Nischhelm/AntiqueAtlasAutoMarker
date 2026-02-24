@@ -1,20 +1,46 @@
 package antiqueatlasautomarker;
 
+import antiqueatlasautomarker.betterconfig.ConfigCategory;
+import antiqueatlasautomarker.betterconfig.ConfigurationLoader;
 import antiqueatlasautomarker.compat.IceAndFireUtil;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EarlyConfigReader;
+import antiqueatlasautomarker.config.MixinConfiguration;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.launch.MixinBootstrap;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @IFMLLoadingPlugin.MCVersion("1.12.2")
 public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
+	private static final List<MixinConfiguration> configs = new ArrayList<>();
+
 	public AntiqueAtlasAutoMarkerPlugin() {
 		MixinBootstrap.init();
+
+		configs.add(new MixinConfiguration("mixins.aaam.battletowers.json", "battletowers", "general.Auto Markers.Battletowers.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.doomlikedungeons.json", "dldungeonsjbg", "general.Auto Markers.Doomlike Dungeons.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.dungeons2.json", "dungeons2", "general.Auto Markers.Dungeons2.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.quark.json", "quark", "general.Auto Markers.Quark Pirateship.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.bettermineshafts.json", "bettermineshafts", "general.Auto Markers.Better Mineshafts.Enabled", false));
+		configs.add(new MixinConfiguration("mixins.aaam.lycanitesmobs.json", "lycanitesmobs", "general.Auto Markers.Lycanites Dungeons.Enabled", true));
+		configs.add(new MixinConfiguration("mixins.aaam.waystones.wild.json", "waystones", "general.Auto Markers.Waystones.Wild Waystones.Enabled", false));
+		configs.add(new MixinConfiguration("mixins.aaam.waystones.activated.json", "waystones", "general.Auto Markers.Waystones.Activated Waystones.Enabled", true));
+
+		try{
+			ConfigCategory cat = ConfigurationLoader.load(new File("config", AntiqueAtlasAutoMarker.MODID + ".cfg"));
+			configs.removeIf(cfg -> !cfg.isEnabled(cat));
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+
+		configs.forEach(MixinConfiguration::enqueue);
 
 		//Vanilla
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");

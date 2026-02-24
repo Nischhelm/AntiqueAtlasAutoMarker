@@ -16,7 +16,7 @@ import java.util.Random;
 public class WorldGenIceDragonRoostsMixin {
     @Inject(method = "generate", at = @At("HEAD"))
     void markIceDragon(World worldIn, Random rand, BlockPos position, CallbackInfoReturnable<Boolean> cir){
-        AutoMarkSetting setting = AutoMarkSetting.get("iceDragon");
+        AutoMarkSetting.Data setting = AutoMarkSetting.get("iceDragon");
         if(setting == null || !setting.enabled) return;
         String usedLabel = setting.label;
         if(usedLabel.equals("DEFAULT")) usedLabel = "entity.icedragon.name";

@@ -22,7 +22,7 @@ public class BTWorldGenMixin {
     private void markBattleTower(AS_WorldGenTower instance, World world, Random random, int x, int y, int z, int choice, boolean  underground, Operation<Void> original){
         original.call(instance, world, random,  x, y, z, choice, underground);
 
-        AutoMarkSetting setting = AutoMarkSetting.get("battleTower");
+        AutoMarkSetting.Data setting = AutoMarkSetting.get("battleTower");
         if(setting == null || !setting.enabled) return;
 
         String usedLabel = setting.label;

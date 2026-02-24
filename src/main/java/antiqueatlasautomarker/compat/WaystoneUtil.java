@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class WaystoneUtil {
     @SideOnly(Side.CLIENT)
     public static void updateRenamedWaystoneMarker(EntityPlayer player, World world, BlockPos waystonePos, String newName) {
-        if (!ConfigHandler.waystones.autoUpdateWaystones) return;
-        if(!ConfigHandler.waystones.enabled) return;
+        if (!ConfigHandler.automark.waystones.autoUpdateWaystones) return;
+        if(!ConfigHandler.automark.waystones.activatedWaystones.enabled) return;
 
         for (int atlasID : AtlasAPI.getPlayerAtlases(player)) {
             //Get all markers at waystone position in current atlas with correct marker type
@@ -27,21 +27,21 @@ public class WaystoneUtil {
                     .getAllMarkers()
                     .stream()
                     .filter(marker -> Math.abs(marker.getX() - waystonePos.getX()) < 2 && Math.abs(marker.getZ() - waystonePos.getZ()) < 2)
-                    .filter(marker -> marker.getType().equals(ConfigHandler.waystones.marker))
+                    .filter(marker -> marker.getType().equals(ConfigHandler.automark.waystones.activatedWaystones.type))
                     .collect(Collectors.toList());
 
             //Remove old waystone markers
             int counterMarkersRemoved = 0;
             for (Marker marker : markersAtPosition) {
                 //Not renamed: don't delete, don't add
-                if (marker.getLabel().equals(newName) && !ConfigHandler.waystones.alwaysMarkWaystones) continue;
+                if (marker.getLabel().equals(newName) && !ConfigHandler.automark.waystones.alwaysMarkWaystones) continue;
                 //Remove
                 AtlasAPI.getMarkerAPI().deleteMarker(world, atlasID, marker.getId());
                 counterMarkersRemoved++;
             }
             //Put new waystone marker, but not if player doesn't want a marker there
-            if (counterMarkersRemoved > 0 || ConfigHandler.waystones.alwaysMarkWaystones)
-                AtlasAPI.getMarkerAPI().putMarker(world, false, atlasID, ConfigHandler.waystones.marker, newName, waystonePos.getX(), waystonePos.getZ());
+            if (counterMarkersRemoved > 0 || ConfigHandler.automark.waystones.alwaysMarkWaystones)
+                AtlasAPI.getMarkerAPI().putMarker(world, false, atlasID, ConfigHandler.automark.waystones.activatedWaystones.type, newName, waystonePos.getX(), waystonePos.getZ());
         }
     }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class EnchantmentUtil {
     public static void markLibrarian(EntityPlayer player, BlockPos villagerPos, String newLabel) {
-        if(!ConfigHandler.enchantments.enabled) return;
+        if(!ConfigHandler.automark.enchantments.enabled) return;
 
         for (int atlasID : AtlasAPI.getPlayerAtlases(player)) {
             //Get all enchantment markers around librarian (+-64 blocks) in current atlas
@@ -23,7 +23,7 @@ public class EnchantmentUtil {
                     .stream()
                     //TODO: this filter sucks
                     .filter(marker -> Math.abs(marker.getX() - villagerPos.getX()) < 64 && Math.abs(marker.getZ() - villagerPos.getZ()) < 64)
-                    .filter(marker -> marker.getType().equals(ConfigHandler.enchantments.marker))
+                    .filter(marker -> marker.getType().equals(ConfigHandler.automark.enchantments.marker))
                     .collect(Collectors.toList());
 
             //Remove old librarian markers
@@ -33,7 +33,7 @@ public class EnchantmentUtil {
                     AtlasAPI.getMarkerAPI().deleteMarker(player.world, atlasID, marker.getId());
             }
             //Put new librarian marker
-            AtlasAPI.getMarkerAPI().putMarker(player.world, false, atlasID, ConfigHandler.enchantments.marker, newLabel, villagerPos.getX(), villagerPos.getZ());
+            AtlasAPI.getMarkerAPI().putMarker(player.world, false, atlasID, ConfigHandler.automark.enchantments.marker, newLabel, villagerPos.getX(), villagerPos.getZ());
         }
     }
 

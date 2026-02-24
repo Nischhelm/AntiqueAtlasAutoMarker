@@ -27,7 +27,7 @@ public class BuilderMixin {
     @Inject(method = "buildDungeonsChunk", at = @At(value = "TAIL"), remap = false)
     private static void markDoomlike(int cx, int cz, List<Coords> dcs, World world, CallbackInfo ci) {
         if(aaam$savedDungeon == null) return;
-        AutoMarkSetting setting = AutoMarkSetting.get("doomlike");
+        AutoMarkSetting.Data setting = AutoMarkSetting.get("doomlike");
 
         if (setting != null && setting.enabled) {
             String label = setting.label;

@@ -82,13 +82,13 @@ public class StructureMarkersDataHandler {
         return markStructure(world, pos.getX(), pos.getZ(), markerType, markerName, context);
     }
 
-    public static Marker markStructure(@Nonnull World world, int x, int z, AutoMarkSetting settings) {
+    public static Marker markStructure(@Nonnull World world, int x, int z, AutoMarkSetting.Data settings) {
         if (settings != null && settings.enabled)
             return markStructure(world, x, z, settings.type, settings.label, settings.context);
         return null;
     }
 
-    public static Marker markStructure(@Nonnull World world, BlockPos pos, AutoMarkSetting settings) {
+    public static Marker markStructure(@Nonnull World world, BlockPos pos, AutoMarkSetting.Data settings) {
         return markStructure(world, pos.getX(), pos.getZ(), settings);
     }
 

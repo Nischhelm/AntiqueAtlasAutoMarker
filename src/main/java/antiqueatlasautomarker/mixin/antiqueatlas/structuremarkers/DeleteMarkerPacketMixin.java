@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(DeleteMarkerPacket.class)
-public abstract class DeleteMarkerPacketMixin implements IDeletedMarkerList {
+public abstract class DeleteMarkerPacketMixin {
     @Shadow(remap = false) private int markerID;
     @Shadow(remap = false) protected abstract boolean isGlobal();
     @Shadow(remap = false) private int atlasID;

@@ -9,9 +9,9 @@ import java.util.UUID;
 
 public class OtherPlayersData { // Does not need to save to disk, so not a WorldSavedData. Clientside only
 
-    @Unique public final Map<UUID, double[]> playerPositions; // xPos, zPos, rotYaw
+    @Unique public final Map<UUID, Double[]> playerPositions; // xPos, zPos, rotYaw
 
-    public OtherPlayersData(Map<UUID, double[]> playerPositions) {
+    public OtherPlayersData(Map<UUID, Double[]> playerPositions) {
         this();
         this.playerPositions.putAll(playerPositions);
     }
@@ -22,10 +22,10 @@ public class OtherPlayersData { // Does not need to save to disk, so not a World
 
     public void updateVisiblePlayer(EntityPlayer player) { //only used for current clientside player
         if (player.isEntityAlive()) {
-            double[] playerData = this.playerPositions.computeIfAbsent(player.getUniqueID(), uuid -> new double[3]);
+            Double[] playerData = this.playerPositions.computeIfAbsent(player.getUniqueID(), uuid -> new Double[3]);
             playerData[0] = player.posX;
             playerData[1] = player.posZ;
-            playerData[2] = player.rotationYaw;
+            playerData[2] = (double) player.rotationYaw;
         }
     }
 }

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class PacketOtherAtlasHolders implements IMessage {
 
     private int atlasID;
-    private final Map<UUID, double[]> playerPositions = new HashMap<>(); // xpos, zpos, rot
+    private final Map<UUID, Double[]> playerPositions = new HashMap<>(); // xpos, zpos, rot
 
     public PacketOtherAtlasHolders() {}
     public PacketOtherAtlasHolders(@Nonnull EntityPlayer player, int atlasID) {
@@ -34,10 +34,10 @@ public class PacketOtherAtlasHolders implements IMessage {
         this.playerPositions.putAll(visiblePlayers.stream().collect(Collectors.toMap(
                 Entity::getUniqueID,
                 entityPlayerMP -> {
-                    double[] playerData = new double[3];
+                    Double[] playerData = new Double[3];
                     playerData[0] = entityPlayerMP.posX;
                     playerData[1] = entityPlayerMP.posZ;
-                    playerData[2] = entityPlayerMP.rotationYaw;
+                    playerData[2] = (double) entityPlayerMP.rotationYaw;
                     return playerData;
                 })
         ));
@@ -58,7 +58,7 @@ public class PacketOtherAtlasHolders implements IMessage {
         for(int i = 0; i < size; i++){
             this.playerPositions.put(
                     packet.readUniqueId(),
-                    new double[]{
+                    new Double[]{
                             packet.readDouble(),
                             packet.readDouble(),
                             packet.readDouble()

@@ -45,10 +45,10 @@ public abstract class GuiAtlas_ShowOtherPlayers extends GuiComponent {
     @Shadow(remap = false) @Final private GuiStates state;
     @Shadow(remap = false) @Final private GuiStates.IState PLACING_MARKER;
 
-    @Shadow(remap = false) protected abstract double getIconScale();
+    @Shadow(remap = false) private double getIconScale() {throw new AssertionError();}
 
     @ModifyExpressionValue(
-            method = "drawScreen",
+            method = {"drawScreen", },
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/core/GuiStates;is(Lhunternif/mc/atlas/client/gui/core/GuiStates$IState;)Z", ordinal = 1, remap = false)
     )
     private boolean aaam_replaceDrawPlayer(boolean isHidingMarkers){
@@ -68,9 +68,9 @@ public abstract class GuiAtlas_ShowOtherPlayers extends GuiComponent {
         int drawWidth = (int) Math.round(PLAYER_ICON_WIDTH*iconScale);
         int drawHeight = (int) Math.round(PLAYER_ICON_HEIGHT*iconScale);
 
-        for(Map.Entry<UUID, double[]> entries : data.playerPositions.entrySet()) {
+        for(Map.Entry<UUID, Double[]> entries : data.playerPositions.entrySet()) {
             UUID uuid = entries.getKey();
-            double[] position = entries.getValue();
+            Double[] position = entries.getValue();
 
             // How much the player has moved from the top left corner of the map, in pixels:
             int playerOffsetX = (int)(position[0] * this.mapScale) + this.mapOffsetX;

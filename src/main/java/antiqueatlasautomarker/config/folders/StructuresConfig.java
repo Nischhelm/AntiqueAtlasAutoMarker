@@ -2,15 +2,11 @@ package antiqueatlasautomarker.config.folders;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.AutoMarkSetting;
-import antiqueatlasautomarker.mixin.vanilla.ConfigManagerAccessor;
 import antiqueatlasautomarker.mixin.vanilla.MapGenStructureIOAccessor;
 import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.Loader;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +33,7 @@ public class StructuresConfig {
             if (AutoMarkSetting.get(s) == null)
                 toAdd.add(s + "; false; your label here; your marker type here");
 
-        Configuration config = ConfigManagerAccessor.getConfigMap().get(new File(Loader.instance().getConfigDir(), AntiqueAtlasAutoMarker.MODID + ".cfg").getAbsolutePath());
-        config.get("general.Structures", "Structure Markers", structureOptions, "Pattern: structureName; enabled; marker label; marker type. Automatically fills with entries after restart.").set(toAdd.toArray(new String[0]));
+        AntiqueAtlasAutoMarker.CONFIG.get("general.Structures", "Structure Markers", structureOptions, "Pattern: structureName; enabled; marker label; marker type. Automatically fills with entries after restart.").set(toAdd.toArray(new String[0]));
 
         structureOptions = toAdd.toArray(new String[0]);
         if(structureOptions.length - nStructs > 0)

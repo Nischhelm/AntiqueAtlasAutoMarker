@@ -14,6 +14,8 @@ import antiqueatlasautomarker.proxy.CommonProxy;
 import antiqueatlasautomarker.structuremarkers.event.handlers.TestAAAMEventHandler;
 import antiqueatlasautomarker.util.PlayerLogoutHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -25,6 +27,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.Map;
+
 @Mod(
         modid = AntiqueAtlasAutoMarker.MODID,
         version = AntiqueAtlasAutoMarker.VERSION,
@@ -34,9 +40,10 @@ import org.apache.logging.log4j.Logger;
 )
 public class AntiqueAtlasAutoMarker {
     public static final String MODID = "antiqueatlasautomarker";
-    public static final String VERSION = "1.5.3.3";
+    public static final String VERSION = "1.5.3.4";
     public static final String NAME = "AntiqueAtlasAutoMarker";
     public static final Logger LOGGER = LogManager.getLogger();
+    public static Configuration CONFIG;
     public static final boolean isDebugging = false;
 
     @SidedProxy(clientSide = "antiqueatlasautomarker.proxy.ClientProxy", serverSide = "antiqueatlasautomarker.proxy.CommonProxy")
@@ -44,6 +51,16 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        try {
+            Field field = ConfigManager.class.getDeclaredField("CONFIGS");
+            field.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            Map<String, Configuration> map = (Map<String, Configuration>) field.get(null);
+            CONFIG = map.get(new File(Loader.instance().getConfigDir(), AntiqueAtlasAutoMarker.MODID + ".cfg").getAbsolutePath());
+        } catch (Exception e){
+            AntiqueAtlasAutoMarker.LOGGER.error("Failed to load config file from ConfigManager cache, falling back to new one! This will delete config comments in file temporarily");
+            CONFIG = new Configuration(new File(Loader.instance().getConfigDir(), AntiqueAtlasAutoMarker.MODID + ".cfg"));
+        }
 
         ConfigHandler.battletowers.preInit();
         ConfigHandler.bettermineshafts.preInit();

@@ -89,8 +89,8 @@ public class AAAMCommand implements ICommand {
             String typeToMatch = args[1];
             final int range, targetAtlasID;
             try {
-                range = args.length >= 3 ? Integer.parseInt(args[2]) : -1;
-                targetAtlasID = args.length >= 4 ? Integer.parseInt(args[3]) : -1;
+                range = args.length < 3 || args[2].equals("INF") ? -1 : Integer.parseInt(args[2]);
+                targetAtlasID = args.length < 4 || args[3].equals("ALL") ? -1 : Integer.parseInt(args[3]);
             } catch (NumberFormatException e) {
                 throw new CommandException("commands.aaam.invalidusage");
             }
@@ -165,8 +165,16 @@ public class AAAMCommand implements ICommand {
         }
         else if("removemarkers".equals(args[0])) {
             if(args.length == 2) completions.addAll(CommandBase.getListOfStringsMatchingLastWord(args, MarkerRegistry.getKeys()));
-            else if(args.length == 3) completions.addAll(CommandBase.getListOfStringsMatchingLastWord(args, "16", "32", "64"));
-            else if(args.length == 4) completions.addAll(CommandBase.getListOfStringsMatchingLastWord(args, "*", "labeltomatch"));
+            else if(args.length == 3) completions.addAll(CommandBase.getListOfStringsMatchingLastWord(args, "INF", "16", "32", "64"));
+            else if(args.length == 4) {
+                if (sender instanceof EntityPlayer) {
+                    List<String> ids = AtlasAPI.getPlayerAtlases((EntityPlayer) sender).stream().map(String::valueOf).collect(Collectors.toList());
+                    ids.add("ALL");
+                    completions.addAll(CommandBase.getListOfStringsMatchingLastWord(args, ids));
+                } else
+                    completions.addAll(CommandBase.getListOfStringsMatchingLastWord(args, "ALL"));
+            }
+            else if(args.length == 5) completions.addAll(CommandBase.getListOfStringsMatchingLastWord(args, "*", "labeltomatch"));
         }
         return completions;
     }

@@ -3,10 +3,10 @@ package antiqueatlasautomarker;
 import antiqueatlasautomarker.compat.IceAndFireUtil;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.EarlyConfigReader;
+import fermiumbooter.FermiumBooter;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import org.spongepowered.asm.launch.MixinBootstrap;
 
 import java.util.Map;
 
@@ -14,7 +14,8 @@ import java.util.Map;
 public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 	public AntiqueAtlasAutoMarkerPlugin() {
-		MixinBootstrap.init();
+		if(!FermiumBooter.NAME.equals("FermiumBooter"))
+			System.out.println("Running on modified FermiumBooter. This is not recommended and can cause crashes. FermiumBooter is compatible with all known other Mixin providers.");
 
 		//Vanilla
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");

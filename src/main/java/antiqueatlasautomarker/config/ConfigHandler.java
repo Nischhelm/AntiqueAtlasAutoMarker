@@ -26,6 +26,10 @@ public class ConfigHandler {
 	@Config.Name("Dungeons2")
 	public static Dungeons2Config dungeons2 = new Dungeons2Config();
 
+	@Config.Comment("Roguelike Dungeons Marker Config")
+	@Config.Name("Roguelike Dungeons")
+	public static RoguelikeConfig roguelike = new RoguelikeConfig();
+
 	@Config.Comment("Quark Marker Config")
 	@Config.Name("Quark")
 	public static QuarkConfig quark = new QuarkConfig();
@@ -95,6 +99,7 @@ public class ConfigHandler {
 				dungeons2.resetSetting();
 				doomlike.resetSetting();
 				battletowers.resetSetting();
+				roguelike.resetSetting();
 			}
 		}
 	}

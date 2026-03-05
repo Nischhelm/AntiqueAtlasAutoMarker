@@ -70,6 +70,7 @@ public class AntiqueAtlasAutoMarker {
         ConfigHandler.lycanitesmobs.preInit();
         ConfigHandler.quark.preInit();
         ConfigHandler.waystones.preInit();
+        ConfigHandler.roguelike.preInit();
 
         AutoMarkSetting.init();
         EnchMarkSetting.init();

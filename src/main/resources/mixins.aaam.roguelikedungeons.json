@@ -3,12 +3,9 @@
   "package": "antiqueatlasautomarker.mixin.fnarsroguelikedungeons",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
-  "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
-    "RogueLikeMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+    "DungeonMixin",
+    "WorldEditor1_12Accessor"
+  ]
 }

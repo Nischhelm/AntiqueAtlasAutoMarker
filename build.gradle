@@ -61,25 +61,25 @@ dependencies {
     annotationProcessor "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
 
     implementation fg.deobf("curse.maven:fermiumbooter-${fermiumbooter_version}")
-    compileOnly fg.deobf("curse.maven:waystones-${waystones_version}")
-    compileOnly fg.deobf("curse.maven:antique-atlas-${antiqueatlas_version}")
+    implementation fg.deobf("curse.maven:waystones-${waystones_version}")
+    implementation fg.deobf("curse.maven:antique-atlas-${antiqueatlas_version}")
     compileOnly fg.deobf("curse.maven:aarc-${aarc_version}")
 
     //Bruh
     compileOnly fg.deobf("curse.maven:iceandfire-${iceandfire_version}")
     compileOnly fg.deobf("curse.maven:iceandfire-rlcraft-${iceandfirerl_version}")
-    compileOnly fg.deobf("curse.maven:iceandfire-rotn-${iceandfirerotn_version}")
+    implementation fg.deobf("curse.maven:iceandfire-rotn-${iceandfirerotn_version}")
     compileOnly fg.deobf("curse.maven:llibrary-${llibrary_version}")
 
     //Dungeons
     compileOnly fg.deobf("curse.maven:dungeons2-${dungeons2_version}")
     compileOnly fg.deobf("curse.maven:gottschcore-${gottschcore_version}")
-    compileOnly fg.deobf("curse.maven:yungs-better-mineshafts-forge-${bettermineshafts_version}")
-    compileOnly fg.deobf("curse.maven:ruins-${ruins_version}")
-    compileOnly fg.deobf("curse.maven:lycanitesmobs-${lycanites_version}")
-    compileOnly fg.deobf("curse.maven:doomlikedungeons-${doomlikedungeons_version}")
-    compileOnly fg.deobf("curse.maven:fnars-roguelike-dungeons-${fnarsroguelikedungeons_version}")
-    compileOnly fg.deobf("curse.maven:atomicstrykers-battle-towers-${battletowers_version}")
+    implementation fg.deobf("curse.maven:yungs-better-mineshafts-forge-${bettermineshafts_version}")
+    implementation fg.deobf("curse.maven:ruins-${ruins_version}")
+    implementation fg.deobf("curse.maven:lycanitesmobs-${lycanites_version}")
+    implementation fg.deobf("curse.maven:doomlikedungeons-${doomlikedungeons_version}")
+    implementation fg.deobf("curse.maven:fnars-roguelike-dungeons-${fnarsroguelikedungeons_version}")
+    implementation fg.deobf("curse.maven:atomicstrykers-battle-towers-${battletowers_version}")
     compileOnly fg.deobf("curse.maven:quark-${quark_version}")
 
     //Tiles
@@ -92,9 +92,9 @@ dependencies {
     compileOnly fg.deobf("curse.maven:biomes-o-plenty-${bop_version}")
     compileOnly fg.deobf("maven.modrinth:nether-api:${netherapi_version}")
 
-    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-${crafttweaker_version}")
-    compileOnly fg.deobf("CraftTweaker2:ZenScript:${zs_version}")
-    compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-API:${zs_version}")
+    implementation fg.deobf("CraftTweaker2:CraftTweaker2-${crafttweaker_version}")
+    implementation fg.deobf("CraftTweaker2:ZenScript:${zs_version}")
+    implementation fg.deobf("CraftTweaker2:CraftTweaker2-API:${zs_version}")
 }
 
 mixin {
@@ -140,26 +140,11 @@ jar {
         attr['FMLCorePlugin']               = mixin_loader_class
         attr['FMLCorePluginContainsFMLMod'] = 'true'
         attr['TweakClass']                  = 'org.spongepowered.asm.launch.MixinTweaker'
-        attr['ForceLoadAsMod'] = "true"
 
         def currentTasks = gradle.startParameter.taskNames
         if (currentTasks[0] == 'build' || currentTasks[0] == 'assemble')
             attr['ForceLoadAsMod'] = "true"
         attributes(attr)
-    }
-}
-
-tasks.register("copyReobfJar", Copy) {
-    dependsOn("reobfJar")
-
-    from(layout.buildDirectory.file("reobfJar/output.jar"))
-    into(layout.projectDirectory.dir("run/mods"))
-    rename("output.jar", "${mod_name}-${mod_version}.jar")
-}
-
-afterEvaluate {
-    tasks.matching { it.name.startsWith("reobfJar") }.configureEach {
-        finalizedBy("copyReobfJar")
     }
 }
 

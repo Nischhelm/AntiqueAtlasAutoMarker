@@ -13,7 +13,7 @@ public class RoguelikeConfig {
     @Config.Comment("Set to false to never mark Roguelike Dungeons")
     @Config.Name("Roguelike Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.roguelikedungeons.json", defaultValue = false)
-    @MixinConfig.CompatHandling(modid = "roguelike", desired = true, warnIngame = false, reason = "No issue, auto disabled")
+    @MixinConfig.CompatHandling(modid = "roguelike", desired = true, warnIngame = false, reason = "No issue, auto disabled", modName = "Roguelike Dungeons -- Fnar Edition")
     @Config.RequiresMcRestart
     public boolean enabled = false;
 

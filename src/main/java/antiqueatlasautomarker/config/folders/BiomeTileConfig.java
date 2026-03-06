@@ -108,6 +108,11 @@ public class BiomeTileConfig {
     @Config.RequiresMcRestart
     public boolean useColorisedThaumcraftTiles = true;
 
+    @Config.Comment("Replaces some AA markers and adds a few more. By Artsy (2021) and Knight Gallade (2025).")
+    @Config.Name("Use Custom Markers")
+    @Config.RequiresMcRestart
+    public boolean useCustomMarkers = true;
+
     @Config.Comment("Will apply colorised vanilla tiles by either Artsy, Golrith or both, where Golrith is prioritised as that set has missing tiles for various biomes for which Artsy textures are used. By Golrith (2015) and Artsy (2021).")
     @Config.Name("Use Colorised Vanilla Tiles")
     @Config.RequiresMcRestart

@@ -2,7 +2,6 @@ package antiqueatlasautomarker.custombiometiles;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.ConfigHandler;
-import hunternif.mc.atlas.client.TextureSetMap;
 import hunternif.mc.atlas.ext.ExtTileIdMap;
 
 import java.util.HashMap;

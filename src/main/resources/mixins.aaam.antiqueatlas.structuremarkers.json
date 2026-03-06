@@ -6,10 +6,8 @@
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
+    "biometiles.ColorisedVanillaTextures",
     "structuremarkers.DeleteMarkerPacketMixin",
-    "structuremarkers.custompositions.DimensionMarkersDataMixin",
-    "structuremarkers.custompositions.CustomPosMarker",
-    "structuremarkers.custompositions.SaveLoadCustomPosMarkers",
     "structuremarkers.ItemAtlasMixin",
     "structuremarkers.MarkerApiImpllMixin",
     "structuremarkers.MarkerMixin",
@@ -17,7 +15,9 @@
     "structuremarkers.PacketDispatcherMixin",
     "structuremarkers.StructureWatcherGenericMixin",
     "structuremarkers.StructureWatcherVillageMixin",
-    "biometiles.ColorisedVanillaTextures"
+    "structuremarkers.custompositions.CustomPosMarker",
+    "structuremarkers.custompositions.DimensionMarkersDataMixin",
+    "structuremarkers.custompositions.SaveLoadCustomPosMarkers"
   ],
   "injectors": {
     "maxShiftBy": 10

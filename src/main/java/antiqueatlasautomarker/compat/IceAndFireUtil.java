@@ -4,8 +4,6 @@ import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 
-import java.util.Arrays;
-
 public class IceAndFireUtil {
     public enum IceAndFireVersion {
         BASE_OLD,

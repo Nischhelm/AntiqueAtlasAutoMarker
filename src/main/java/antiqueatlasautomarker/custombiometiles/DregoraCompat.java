@@ -1,10 +1,6 @@
 package antiqueatlasautomarker.custombiometiles;
 
 import hunternif.mc.atlas.AntiqueAtlasMod;
-import hunternif.mc.atlas.api.AtlasAPI;
-import hunternif.mc.atlas.api.TileAPI;
-import hunternif.mc.atlas.client.TextureSet;
-import hunternif.mc.atlas.client.Textures;
 import net.minecraft.util.ResourceLocation;
 
 public class DregoraCompat {

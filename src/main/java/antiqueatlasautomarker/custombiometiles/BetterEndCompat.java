@@ -1,6 +1,5 @@
 package antiqueatlasautomarker.custombiometiles;
 
-import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.api.TileAPI;

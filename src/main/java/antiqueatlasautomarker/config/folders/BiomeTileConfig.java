@@ -2,6 +2,7 @@ package antiqueatlasautomarker.config.folders;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.ConfigHandler;
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import hunternif.mc.atlas.client.BiomeTextureMap;
 import hunternif.mc.atlas.client.TextureSet;
@@ -12,7 +13,6 @@ import net.minecraftforge.common.config.Config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import com.google.common.base.Predicate;
 
 public class BiomeTileConfig {
     @Config.Comment("If a biome doesn't have BiomeTextureSets registered, its biome dictionary types will be used to assign it a textureset. \n" +

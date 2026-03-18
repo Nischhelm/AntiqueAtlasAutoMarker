@@ -49,7 +49,9 @@ public class CustomMarkers {
     }
 
     private static void registerCustomMarker(String typeName, String loc, String author){
-        AtlasAPI.getMarkerAPI().registerMarker(new MarkerType(new ResourceLocation(AntiqueAtlasMod.ID, typeName), markerLoc(loc, author)));
+        AtlasAPI.getMarkerAPI().registerMarker(new MarkerType(new ResourceLocation(AntiqueAtlasMod.ID, typeName), markerLoc(loc, author))
+                .setIsTechnical(typeName.startsWith("end_city"))
+        );
     }
 
     private static ResourceLocation markerLoc(String markerName, String author){

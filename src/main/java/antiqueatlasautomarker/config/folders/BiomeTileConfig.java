@@ -4,6 +4,7 @@ import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.config.ConfigHandler;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import fermiumbooter.annotations.MixinConfig;
 import hunternif.mc.atlas.client.BiomeTextureMap;
 import hunternif.mc.atlas.client.TextureSet;
 import hunternif.mc.atlas.client.TextureSetMap;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
 public class BiomeTileConfig {
     @Config.Comment("If a biome doesn't have BiomeTextureSets registered, its biome dictionary types will be used to assign it a textureset. \n" +
             "The rules provided here are matched against the given types in order. The first rule that matches will be used." +
@@ -118,6 +120,12 @@ public class BiomeTileConfig {
     @Config.RequiresMcRestart
     public EnumTextureSetArtist useColorisedVanillaTiles = EnumTextureSetArtist.ARTSY;
     public enum EnumTextureSetArtist{ ARTSY, GOLRITH, BOTH, NONE}
+
+    @Config.Comment("Will modify end void to be slightly purple and change nether tiles to show more land instead of prioritising lava (due to the land tile being lava shore).")
+    @Config.Name("Use Modified Nether+End Tiles")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.tiles.customendvoid.json", defaultValue = true)
+    public boolean useModifiedEndTiles = true;
 
     @Config.Comment("Stitching to null (undiscovered chunks) was meant to exist in Antique Atlas but never correctly implemented. AAAM fixes it. \n" +
             "Add texture set names here to make them stitch to null.\n" +

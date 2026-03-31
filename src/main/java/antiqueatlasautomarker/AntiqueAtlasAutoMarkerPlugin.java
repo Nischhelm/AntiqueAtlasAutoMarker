@@ -30,7 +30,6 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json"); //TODO add toggle
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", () -> EarlyConfigReader.isArrayFilled("Automatic Biometype Rules", ConfigHandler.overhaul.tileConfig.automaticTypeRules.length != 0));
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", () -> EarlyConfigReader.isArrayFilled("TextureSets stitch to null", ConfigHandler.overhaul.tileConfig.stitchToNullSets.length != 0));
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.custom_nether_end_biomes.json"); //TODO add toggle
 
 		//Ice and Fire
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infrotn.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.ROTN);
@@ -38,9 +37,6 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infbase.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_OLD);
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.infbase191.json", () -> Loader.isModLoaded("iceandfire") && IceAndFireUtil.getIceAndFireVersion() == IceAndFireUtil.IceAndFireVersion.BASE_1_9_1);
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.inf.easter.json", () -> Loader.isModLoaded("iceandfire"));
-
-		//Dungeons
-		//FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.roguelike.json", () -> Loader.isModLoaded("roguelike"));
 	}
 
 	@Override

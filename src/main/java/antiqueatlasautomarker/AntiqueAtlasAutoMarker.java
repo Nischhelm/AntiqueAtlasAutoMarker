@@ -97,7 +97,7 @@ public class AntiqueAtlasAutoMarker {
         ConfigHandler.vanillaStructs.postInit();
 
         if(event.getSide() == Side.CLIENT) {
-            NetherTiles.registerTiles();
+            if (ConfigHandler.overhaul.tileConfig.modifyBiomeDetection) NetherTiles.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useCustomMarkers) CustomMarkers.registerMarkers();
             if (ConfigHandler.overhaul.tileConfig.useColorisedBetterEndTiles && ModCompat.betterEnd.isLoaded() && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
             if (ConfigHandler.overhaul.tileConfig.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();

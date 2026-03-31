@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.handlers;
 
 import antiqueatlasautomarker.compat.ModCompat;
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.custombiometiles.BetterEndCompat;
 import antiqueatlasautomarker.custombiometiles.BiomesOPlentyCompat;
 import antiqueatlasautomarker.event.BiomeDetectorEvent;
@@ -14,7 +15,7 @@ public class BiomeDetectorEventHandler {
     public static void onBiomeDetected(BiomeDetectorEvent event){
         switch (event.getDimension()){
             case 1:
-                if(ModCompat.betterEnd.isLoaded()) {
+                if(ModCompat.betterEnd.isLoaded() && ConfigHandler.overhaul.tileConfig.purpleVoid) {
                     if (event.getChosenType().equals("void") && event.getMainBiome() == BetterEndCompat.getIceStarfieldBiome())
                         event.setChosenBiomeId(BetterEndCompat.BE_ICE_STARFIELD_VOID);
                 }

@@ -88,6 +88,7 @@ public class BiomeTileConfig {
 //    @Config.Comment("Will only apply if DregoraRL and OTG are present. Not made yet.")
 //    @Config.Name("Use Colorised Dregora Tiles")
 //    @Config.RequiresMcRestart
+    @Config.Ignore
     public boolean useColorisedDregoraTiles = true;
 
     @Config.Comment("Will only apply if DefiledLands is present. By Artsy (2021), modified original tiles by AA.")
@@ -121,11 +122,21 @@ public class BiomeTileConfig {
     public EnumTextureSetArtist useColorisedVanillaTiles = EnumTextureSetArtist.ARTSY;
     public enum EnumTextureSetArtist{ ARTSY, GOLRITH, BOTH, NONE}
 
-    @Config.Comment("Will modify end void to be slightly purple and change nether tiles to show more land instead of prioritising lava (due to the land tile being lava shore).")
-    @Config.Name("Use Modified Nether+End Tiles")
+    @Config.Comment("Will modify end void to display as slightly purple. Requires \"Modify Nether+End Biome Detection\"")
+    @Config.Name("Purple End Void")
     @Config.RequiresMcRestart
-    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.tiles.customendvoid.json", defaultValue = true)
-    public boolean useModifiedEndTiles = true;
+    public boolean purpleVoid = true;
+
+    @Config.Comment({
+            "Modifies Biome Tile Detectors for Nether and End to also check for biomes.",
+            "By default, Antique Atlas just checks for lava, ground and wall in nether, and void, plants, ground in end.",
+            "This mixin allows to modify the tiles of these dimensions by nether/end biome when using for example NetherAPI.",
+            "This also propagates an event (BiomeDetectorEvent, has CraftTweaker impl.) to further specify the chosen tile"
+    })
+    @Config.Name("Nether & End Biome Detection")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.tiles.custom_nether_end_biomes.json", defaultValue = true)
+    public boolean modifyBiomeDetection = true;
 
     @Config.Comment("Stitching to null (undiscovered chunks) was meant to exist in Antique Atlas but never correctly implemented. AAAM fixes it. \n" +
             "Add texture set names here to make them stitch to null.\n" +

@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.biometiles;
 
+import antiqueatlasautomarker.config.ConfigHandler;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.client.Textures;
@@ -24,11 +25,12 @@ public abstract class CustomEndTextures {
                 "end_island.png",
                 "end_island2.png",
                 "end_island_plants.png",
-                "end_island_plants2.png",
-                "end_void.png"
+                "end_island_plants2.png"
         );
+        if(fileName.equals("end_void.png"))
+            return "antiqueatlas:textures/gui/tiles/nischhelm/end/" + (ConfigHandler.overhaul.tileConfig.purpleVoid ? "end_void_purple.png" : "end_void_empty.png");
         if(aaam$endTextures.contains(fileName))
-            return "antiqueatlas:textures/gui/tiles/nischhelm/end/" + fileName;
+                return "antiqueatlas:textures/gui/tiles/nischhelm/end/" + fileName;
         return original;
     }
 }

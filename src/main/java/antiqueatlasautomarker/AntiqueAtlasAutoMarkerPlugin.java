@@ -22,8 +22,8 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 		//Antique Atlas Structure Markers
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json");
-		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.colorisedvanillatiles.json");
 
+		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.colorisedvanillatiles.json", () -> !EarlyConfigReader.getString("Use Colorised Vanilla Tiles", ConfigHandler.overhaul.tileConfig.useColorisedVanillaTiles.toString()).equals("NONE"));
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.updateside.json", () -> !EarlyConfigReader.getString("Atlas Scanning Update Side", ConfigHandler.overhaul.updateSide.toString()).equals("DISABLE_MIXIN"));
 
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json"); //TODO add toggle

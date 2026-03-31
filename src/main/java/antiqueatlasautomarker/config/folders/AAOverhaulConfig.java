@@ -38,6 +38,10 @@ public class AAOverhaulConfig {
     @MixinConfig.MixinToggle(lateMixin  = "mixins.aaam.antiqueatlas.overhaul.showotherplayers.json", defaultValue = true)
     public boolean showOtherPlayers = true;
 
+    @Config.Comment("If \"Show Position of Other Players\" is enabled, enabling this will always show other players as player heads, instead of player arrows")
+    @Config.Name("Show Other Players as Player Heads")
+    public boolean alwaysShowPlayerHeads = true;
+
     @Config.Comment({
             "Provides a variety of useful keybinds and buttons:",
                 "\tAdd Marker - Keybind",

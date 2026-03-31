@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.display;
 
+import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.displayotherplayers.OtherPlayersData;
 import antiqueatlasautomarker.displayotherplayers.OtherPlayersDataHandler;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -47,6 +48,9 @@ public abstract class GuiAtlas_ShowOtherPlayers extends GuiComponent {
 
     @Shadow(remap = false) private double getIconScale() {throw new AssertionError();}
 
+    @Shadow
+    public abstract void initGui();
+
     @ModifyExpressionValue(
             method = {"drawScreen", },
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/client/gui/core/GuiStates;is(Lhunternif/mc/atlas/client/gui/core/GuiStates$IState;)Z", ordinal = 1, remap = false)
@@ -59,38 +63,57 @@ public abstract class GuiAtlas_ShowOtherPlayers extends GuiComponent {
         data.updateVisiblePlayer(this.player);
 
         boolean renderPlayerHead = Keyboard.isKeyDown(this.mc.gameSettings.keyBindPlayerList.getKeyCode());
-        double iconScale = renderPlayerHead
-                ? this.getIconScale() * 2 // Scale when showing player head
-                : this.getIconScale(); // Scale when showing directional arrow
+        double iconScale = this.getIconScale(); // Scale when showing directional arrow
 
         int drawXPosMod = (int) (-PLAYER_ICON_WIDTH/2D*iconScale);
         int drawYPosMod = (int) (-PLAYER_ICON_HEIGHT/2D*iconScale);
         int drawWidth = (int) Math.round(PLAYER_ICON_WIDTH*iconScale);
         int drawHeight = (int) Math.round(PLAYER_ICON_HEIGHT*iconScale);
 
+        int drawXPosMod2 = (int) (-PLAYER_ICON_WIDTH/2D*iconScale * 2);
+        int drawYPosMod2 = (int) (-PLAYER_ICON_HEIGHT/2D*iconScale * 2);
+        int drawWidth2 = (int) Math.round(PLAYER_ICON_WIDTH*iconScale * 2);
+        int drawHeight2 = (int) Math.round(PLAYER_ICON_HEIGHT*iconScale * 2);
+
         for(Map.Entry<UUID, Double[]> entries : data.playerPositions.entrySet()) {
             UUID uuid = entries.getKey();
             Double[] position = entries.getValue();
 
+            boolean showPlayerHeadAnyway = false;
+            if (ConfigHandler.overhaul.alwaysShowPlayerHeads && uuid != player.getUniqueID()) {
+                showPlayerHeadAnyway = true;
+            }
+
             // How much the player has moved from the top left corner of the map, in pixels:
-            int playerOffsetX = (int)(position[0] * this.mapScale) + this.mapOffsetX;
-            int playerOffsetZ = (int)(position[1] * mapScale) + this.mapOffsetY;
-            if (playerOffsetX < -MAP_WIDTH/2) playerOffsetX = -MAP_WIDTH/2;
-            if (playerOffsetX > MAP_WIDTH/2) playerOffsetX = MAP_WIDTH/2;
-            if (playerOffsetZ < -MAP_HEIGHT/2) playerOffsetZ = -MAP_HEIGHT/2;
-            if (playerOffsetZ > MAP_HEIGHT/2 - 2) playerOffsetZ = MAP_HEIGHT/2 - 2;
+            int playerOffsetX = (int) (position[0] * this.mapScale) + this.mapOffsetX;
+            int playerOffsetZ = (int) (position[1] * mapScale) + this.mapOffsetY;
+            if (playerOffsetX < -MAP_WIDTH / 2) playerOffsetX = -MAP_WIDTH / 2;
+            if (playerOffsetX > MAP_WIDTH / 2) playerOffsetX = MAP_WIDTH / 2;
+            if (playerOffsetZ < -MAP_HEIGHT / 2) playerOffsetZ = -MAP_HEIGHT / 2;
+            if (playerOffsetZ > MAP_HEIGHT / 2 - 2) playerOffsetZ = MAP_HEIGHT / 2 - 2;
             // Draw the icon:
             GlStateManager.color(1, 1, 1, this.state.is(PLACING_MARKER) ? 0.5f : 1);
 
-            int drawXPos = getGuiX() + GuiAtlas.WIDTH/2 + playerOffsetX;
-            int drawYPos = getGuiY() + GuiAtlas.HEIGHT/2 + playerOffsetZ;
+            int drawXPos = getGuiX() + GuiAtlas.WIDTH / 2 + playerOffsetX;
+            int drawYPos = getGuiY() + GuiAtlas.HEIGHT / 2 + playerOffsetZ;
 
             GlStateManager.pushMatrix();
 
             NetworkPlayerInfo networkPlayerInfo = this.mc.player.connection.getPlayerInfo(uuid);
 
-            if(renderPlayerHead && networkPlayerInfo != null)
-                aaam$drawPlayerHead(uuid, networkPlayerInfo, drawXPos + drawXPosMod, drawYPos + drawYPosMod, drawWidth, drawHeight);
+            //TODO: this is jank
+            if ((showPlayerHeadAnyway || renderPlayerHead) && networkPlayerInfo != null) {
+                aaam$drawPlayerHead(uuid, networkPlayerInfo, drawXPos + drawXPosMod2, drawYPos + drawYPosMod2, drawWidth2, drawHeight2);
+
+                GlStateManager.popMatrix();
+
+                //Draw player name
+                if (isMouseOver && ((GuiComponentAccessor) this).invokeIsMouseInRegion(drawXPos + drawXPosMod2, drawYPos + drawYPosMod2, drawWidth2, drawHeight2) && networkPlayerInfo != null) {
+                    GlStateManager.color(0.5f, 0.5f, 0.5f, 1);
+                    String name = networkPlayerInfo.getDisplayName() != null ? networkPlayerInfo.getDisplayName().getFormattedText() : networkPlayerInfo.getGameProfile().getName();
+                    drawTooltip(Collections.singletonList(name), mc.fontRenderer);
+                }
+            }
             else {
                 //Draw player arrow
                 GlStateManager.translate(drawXPos, drawYPos, 0);
@@ -99,16 +122,18 @@ public abstract class GuiAtlas_ShowOtherPlayers extends GuiComponent {
                 GlStateManager.translate(drawXPosMod, drawYPosMod, 0);
                 AtlasRenderHelper.drawFullTexture(Textures.PLAYER, 0, 0,
                         (int)Math.round(PLAYER_ICON_WIDTH*iconScale), (int)Math.round(PLAYER_ICON_HEIGHT*iconScale));
+
+
+                GlStateManager.popMatrix();
+
+                //Draw player name
+                if (isMouseOver && ((GuiComponentAccessor) this).invokeIsMouseInRegion(drawXPos + drawXPosMod, drawYPos + drawYPosMod, drawWidth, drawHeight) && networkPlayerInfo != null) {
+                    GlStateManager.color(0.5f, 0.5f, 0.5f, 1);
+                    String name = networkPlayerInfo.getDisplayName() != null ? networkPlayerInfo.getDisplayName().getFormattedText() : networkPlayerInfo.getGameProfile().getName();
+                    drawTooltip(Collections.singletonList(name), mc.fontRenderer);
+                }
             }
 
-            GlStateManager.popMatrix();
-
-            //Draw player name
-            if (isMouseOver && ((GuiComponentAccessor) this).invokeIsMouseInRegion(drawXPos + drawXPosMod, drawYPos + drawYPosMod, drawWidth, drawHeight) && networkPlayerInfo != null) {
-                GlStateManager.color(0.5f, 0.5f, 0.5f, 1);
-                String name = networkPlayerInfo.getDisplayName() != null ? networkPlayerInfo.getDisplayName().getFormattedText() : networkPlayerInfo.getGameProfile().getName();
-                drawTooltip(Collections.singletonList(name), mc.fontRenderer);
-            }
 
         }
         GlStateManager.color(1, 1, 1, 1);

@@ -19,7 +19,7 @@ public class AntiqueAtlasAutoMarkerPlugin implements IFMLLoadingPlugin {
 
 		//Vanilla
 		FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
-		//FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.forge.json");
+
 		//Antique Atlas Structure Markers
 		FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json");
 

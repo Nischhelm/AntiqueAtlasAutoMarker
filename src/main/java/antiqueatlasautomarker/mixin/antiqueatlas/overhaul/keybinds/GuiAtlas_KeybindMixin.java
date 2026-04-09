@@ -71,7 +71,7 @@ public abstract class GuiAtlas_KeybindMixin extends GuiComponent {
             remap = false
     )
     public void aaam_antiqueAtlasGuiAtlas_initCancelDeleteReset(CallbackInfo ci){
-        this.addChild(aaam$btnCopyMarker).offsetGuiCoords(300, -5);
+        this.addChild(aaam$btnCopyMarker).offsetGuiCoords(321, 24);
         this.aaam$btnCopyMarker.addListener(button -> {
             if (this.stack != null || !SettingsConfig.gameplay.itemNeeded) {
                 if (this.state.is(COPY_MARKER)) {

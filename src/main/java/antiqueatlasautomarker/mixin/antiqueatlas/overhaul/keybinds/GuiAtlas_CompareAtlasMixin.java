@@ -78,7 +78,7 @@ public abstract class GuiAtlas_CompareAtlasMixin extends GuiComponent {
             remap = false
     )
     public void aaam_antiqueAtlasGuiAtlas_initCompareAtlasButton(CallbackInfo ci) {
-        this.addChild(aaam$btnCompareMarker).offsetGuiCoords(300, 94);
+        this.addChild(aaam$btnCompareMarker).offsetGuiCoords(321, 43);
         this.aaam$btnCompareMarker.addListener(button -> {
             if (this.stack != null && SettingsConfig.gameplay.itemNeeded) { //TODO: button should prob not even exist if not itemneeded?
                 if (this.state.is(COMPARE_ATLAS_MARKERS)) {

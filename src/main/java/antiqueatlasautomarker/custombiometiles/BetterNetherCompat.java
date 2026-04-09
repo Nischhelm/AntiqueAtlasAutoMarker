@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.custombiometiles;
 
+import antiqueatlasautomarker.config.ConfigHandler;
 import git.jbredwards.nether_api.mod.common.compat.betternether.BetterNetherHandler;
 import git.jbredwards.nether_api.mod.common.compat.betternether.BiomeBetterNether;
 import hunternif.mc.atlas.AntiqueAtlasMod;
@@ -10,20 +11,32 @@ import net.minecraft.util.ResourceLocation;
 import paulevs.betternether.biomes.BiomeRegister;
 import paulevs.betternether.biomes.NetherBiome;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class BetterNetherCompat {
     public static void registerTiles(){
         TileAPI api = AtlasAPI.getTileAPI();
 
         TextureSet emptyNether = NetherTiles.HELL_TEXTURE; //Normal nether
-        TextureSet gravelDesert = new TextureSet("BN_GRAVEL_DESERT", tileLoc("gravel_desert"));
-        TextureSet netherJungle = new TextureSet("BN_JUNGLE", tileLoc("nether_jungle"));
-        TextureSet boneReef = new TextureSet("BN_BONE_REEF", tileLoc("bone_reef"));
-        TextureSet grasslands = new TextureSet("BN_GRASSLANDS", tileLoc("nether_grasslands"));
-        TextureSet mushroom = new TextureSet("BN_MUSHROOM_FOREST", tileLoc("nether_mushroom_forest"));
+        TextureSet gravelDesert = new TextureSet("BN_GRAVEL_DESERT", tileLoc("gravel_desert", true));
+        TextureSet netherJungle = new TextureSet("BN_JUNGLE", tileLoc("nether_jungle", false));
+        TextureSet boneReef = new TextureSet("BN_BONE_REEF", tileLoc("bone_reef", false));
+        TextureSet grasslands = new TextureSet("BN_GRASSLANDS", tileLoc("nether_grasslands", true));
+        TextureSet mushroom = new TextureSet("BN_MUSHROOM_FOREST", tileLoc("nether_mushroom_forest", false));
         //TextureSet mushroomEdge = mushroom;
-        TextureSet poorGrasslands = new TextureSet("BN_POOR_GRASSLANDS", tileLoc("poor_nether_grasslands"));
-        TextureSet wartForest = new TextureSet("BN_WART_FOREST", tileLoc("netherwart_forest"));
+        TextureSet poorGrasslands = new TextureSet("BN_POOR_GRASSLANDS", tileLoc("poor_nether_grasslands", true));
+        TextureSet wartForest = new TextureSet("BN_WART_FOREST", tileLoc("netherwart_forest", false));
         //TextureSet wartForestEdge = wartForest;
+
+        if(ConfigHandler.overhaul.tileConfig.netherTilesWithShore){
+            List<TextureSet> shoreSets = Arrays.asList(emptyNether, gravelDesert, grasslands, poorGrasslands);
+            List<TextureSet> shorelessSets = Arrays.asList(netherJungle, boneReef, mushroom, wartForest);
+            shoreSets.forEach(TextureSet.LAVA::stitchTo);
+            TextureSet.stitchMutually(shoreSets.toArray(new TextureSet[0]));
+            shoreSets.forEach(shoreSet -> shoreSet.stitchTo(TextureSet.CAVE_WALLS));
+            shoreSets.forEach(shoreSet -> shorelessSets.forEach(shorelessSet -> shoreSet.stitchTo(shorelessSet)));
+        }
 
         registerIfPresent(api, BiomeRegister.BIOME_EMPTY_NETHER, emptyNether);
         registerIfPresent(api, BiomeRegister.BIOME_GRAVEL_DESERT, gravelDesert);
@@ -45,7 +58,13 @@ public class BetterNetherCompat {
         } catch (Exception ignored){/* we just don't register here*/}
     }
 
-    private static ResourceLocation tileLoc(String tileName){
-        return new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/betternether/"+tileName+".png");
+    private static ResourceLocation[] tileLoc(String tileName, boolean hasShore){
+        if(hasShore && ConfigHandler.overhaul.tileConfig.netherTilesWithShore) return new ResourceLocation[]{
+                new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/betternether/shore/"+tileName+".png"),
+                new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/betternether/shore2/"+tileName+".png")
+        };
+        return new ResourceLocation[]{
+                new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/betternether/"+tileName+".png")
+        };
     }
 }

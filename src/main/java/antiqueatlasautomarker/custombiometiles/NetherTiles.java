@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.custombiometiles;
 
+import antiqueatlasautomarker.config.ConfigHandler;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.api.AtlasAPI;
 import hunternif.mc.atlas.api.TileAPI;
@@ -19,6 +20,11 @@ public class NetherTiles {
 
         WALL = registerCustomTexture(api, TextureSet.CAVE_WALLS);
         api.setBiomeTexture(Biomes.HELL, HELL_TEXTURE);
+
+        if(ConfigHandler.overhaul.tileConfig.netherTilesWithShore) {
+            TextureSet.LAVA.stitchTo(HELL_TEXTURE);
+            HELL_TEXTURE.stitchTo(TextureSet.CAVE_WALLS);
+        }
     }
 
     private static int registerCustomTexture(TileAPI api, TextureSet set){
@@ -27,7 +33,13 @@ public class NetherTiles {
         return ExtTileIdMap.instance().getOrCreatePseudoBiomeID(set.name);
     }
 
-    private static ResourceLocation tileLoc(String tileName){
-        return new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/"+tileName+".png");
+    private static ResourceLocation[] tileLoc(String tileName){
+        if(ConfigHandler.overhaul.tileConfig.netherTilesWithShore) return new ResourceLocation[]{
+            new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/"+tileName+"_shore.png"),
+            new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/"+tileName+"_shore2.png")
+        };
+        return new ResourceLocation[]{
+                new ResourceLocation(AntiqueAtlasMod.ID, "textures/gui/tiles/artsy/"+tileName+".png")
+        };
     }
 }

@@ -85,6 +85,14 @@ public class BiomeTileConfig {
     @Config.RequiresMcRestart
     public boolean useColorisedBetterNetherTiles = true;
 
+    @Config.Comment({
+            "Add Lava Shore layer above overridden Nether land tile and the less vegetated half of the BetterNether tiles. ",
+            "Achieves a similar smooth shore effect as vanilla Antique Atlas nether system (lava, lava_shore, cave_wall)."
+    })
+    @Config.Name("Nether Tiles use Lava Shore")
+    @Config.RequiresMcRestart
+    public boolean netherTilesWithShore = true;
+
 //    @Config.Comment("Will only apply if DregoraRL and OTG are present. Not made yet.")
 //    @Config.Name("Use Colorised Dregora Tiles")
 //    @Config.RequiresMcRestart

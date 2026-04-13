@@ -13,6 +13,7 @@ import net.minecraftforge.common.config.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @MixinConfig(name = AntiqueAtlasAutoMarker.MODID)
@@ -123,6 +124,18 @@ public class BiomeTileConfig {
     @Config.Name("Use Custom Markers")
     @Config.RequiresMcRestart
     public boolean useCustomMarkers = true;
+
+    @Config.Comment("List of additional/replaced Markers to use if \"Use Custom Markers\" is enabled. Remove from here to disable individually. By Artsy (2021) and Knight Gallade (2025).")
+    @Config.Name("Used Custom Markers")
+    @Config.RequiresMcRestart
+    public String[] usedCustomMarkers = {
+            "anvil", "bed", "book", "cave", "defiled", "diamond",
+            "dragon_blue", "dragon_gold", "dragon_green", "dragon_red", "dungeon",
+            "end_city", "end_city_far", "end_city_mipped_16", "end_city_mipped_32", "farm",
+            "nether_portal", "pickaxe", "ruins", "ship", "sword",
+            "tower", "tracks", "waystone", "wizardtower",
+            "dragon_purple", "lycanites", "megatower",
+            "monsterspawner", "parasite", "quadtower"};
 
     @Config.Comment("Will apply colorised vanilla tiles by either Artsy, Golrith or both, where Golrith is prioritised as that set has missing tiles for various biomes for which Artsy textures are used. By Golrith (2015) and Artsy (2021).")
     @Config.Name("Use Colorised Vanilla Tiles")

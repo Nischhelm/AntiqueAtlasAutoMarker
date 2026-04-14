@@ -125,7 +125,10 @@ public class BiomeTileConfig {
     @Config.RequiresMcRestart
     public boolean useCustomMarkers = true;
 
-    @Config.Comment("List of additional/replaced Markers to use if \"Use Custom Markers\" is enabled. Remove from here to disable individually. By Artsy (2021) and Knight Gallade (2025).")
+    @Config.Comment({
+            "List of additional/replaced Markers to use if \"Use Custom Markers\" is enabled. Remove from here to disable individually. By Artsy (2021) and Knight Gallade (2025).",
+            "Note: Disabling markers leaves their registration enabled, since that is handled automatically in AntiqueAtlas markers.json config. Delete or modify that file to unregister."
+    })
     @Config.Name("Used Custom Markers")
     @Config.RequiresMcRestart
     public String[] usedCustomMarkers = {

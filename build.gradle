@@ -4,6 +4,7 @@ plugins {
     id 'net.minecraftforge.gradle' version "${forge_gradle_version}"
     id 'org.spongepowered.mixin' version "${mixin_gradle_version}"
     id 'wtf.gofancy.fancygradle' version "${fancy_gradle_version}"
+    id 'me.modmuss50.mod-publish-plugin' version "${mod_publish_gradle_version}"
 }
 
 version = mod_version
@@ -60,7 +61,7 @@ dependencies {
     compileOnly "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
     annotationProcessor "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
 
-    implementation fg.deobf("curse.maven:fermiumbooter-${fermiumbooter_version}")
+    implementation fg.deobf("libs:FermiumBooter:1.5.0-indev")
     compileOnly fg.deobf("curse.maven:waystones-${waystones_version}")
     compileOnly fg.deobf("curse.maven:antique-atlas-${antiqueatlas_version}")
     compileOnly fg.deobf("curse.maven:aarc-${aarc_version}")
@@ -87,10 +88,10 @@ dependencies {
     compileOnly fg.deobf("curse.maven:open-terrain-generator-${otg_version}")
     compileOnly fg.deobf("curse.maven:traverse-reforged-${traverse_version}")
     compileOnly fg.deobf("curse.maven:defiledlands-${defiledlands_version}")
-    compileOnly fg.deobf("curse.maven:betternether-${betternether_version}")
+    implementation fg.deobf("curse.maven:betternether-${betternether_version}")
     compileOnly fg.deobf("curse.maven:thaumcraft-${thaumcraft_version}")
     compileOnly fg.deobf("curse.maven:biomes-o-plenty-${bop_version}")
-    compileOnly fg.deobf("maven.modrinth:nether-api:${netherapi_version}")
+    implementation fg.deobf("maven.modrinth:nether-api:${netherapi_version}")
 
     compileOnly fg.deobf("CraftTweaker2:CraftTweaker2-${crafttweaker_version}")
     compileOnly fg.deobf("CraftTweaker2:ZenScript:${zs_version}")
@@ -140,27 +141,53 @@ jar {
         attr['FMLCorePlugin']               = mixin_loader_class
         attr['FMLCorePluginContainsFMLMod'] = 'true'
         attr['TweakClass']                  = 'org.spongepowered.asm.launch.MixinTweaker'
-        attr['ForceLoadAsMod'] = "true"
+        attr['ForceLoadAsMod'] = gradle.startParameter.taskNames[0] != 'runClient' && gradle.startParameter.taskNames[0] != 'runServer'
 
-        def currentTasks = gradle.startParameter.taskNames
-        if (currentTasks[0] == 'build' || currentTasks[0] == 'assemble')
-            attr['ForceLoadAsMod'] = "true"
         attributes(attr)
     }
 }
 
-tasks.register("copyReobfJar", Copy) {
-    dependsOn("reobfJar")
+jar.finalizedBy('reobfJar')
 
-    from(layout.buildDirectory.file("reobfJar/output.jar"))
-    into(layout.projectDirectory.dir("run/mods"))
-    rename("output.jar", "${mod_name}-${mod_version}.jar")
-}
+publishMods {
+    file = jar.archiveFile
+    changelog = providers.environmentVariable("CHANGELOG").orElse("See GitHub releases for changelog")
+    version = mod_version
+    type = STABLE
+    modLoaders.add("forge")
 
-afterEvaluate {
-    tasks.matching { it.name.startsWith("reobfJar") }.configureEach {
-        finalizedBy("copyReobfJar")
+    if (project.findProperty("publish_to_github") == "true") {
+        github {
+            accessToken = providers.environmentVariable("GITHUB_TOKEN")
+            repository = providers.environmentVariable("GITHUB_REPOSITORY").orElse("owner/repo")
+            commitish = "main"
+        }
+    }
+
+    if (project.findProperty("curseforge_project_id")) {
+        curseforge {
+            accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+            projectId = project.findProperty("curseforge_project_id")
+            minecraftVersions.add(minecraft_version)
+            modLoaders.add("forge")
+
+            client = true
+            server = true
+
+            requires("fermiumbooter")
+            requires("antique-atlas")
+        }
+    }
+
+    if (project.findProperty("modrinth_project_id")) {
+        modrinth {
+            accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+            projectId = project.findProperty("modrinth_project_id")
+            minecraftVersions.add(minecraft_version)
+            modLoaders.add("forge")
+
+            requires("fermiumbooter")
+            requires("antique-atlas")
+        }
     }
 }
-
-jar.finalizedBy('reobfJar')

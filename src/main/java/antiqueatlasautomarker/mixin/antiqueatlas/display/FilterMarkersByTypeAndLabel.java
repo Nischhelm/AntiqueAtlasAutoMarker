@@ -80,7 +80,7 @@ public abstract class FilterMarkersByTypeAndLabel extends GuiComponent {
                 MAP_WIDTH / 3,
                 this.fontRenderer.FONT_HEIGHT + 3
         );
-        ((ISetsBackgroundColor) this.aaam$searchBar).aaam$setBackgroundColor(0x64A59372,0x63D0B990);
+        ((ISetsBackgroundColor) this.aaam$searchBar).aaam$setBackgroundColor(0x64484132,0x63D0B990);
         this.aaam$searchBar.setEnabled(false);
         this.aaam$searchBar.setVisible(false);
     }

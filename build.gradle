@@ -72,6 +72,8 @@ dependencies {
     compileOnly fg.deobf("curse.maven:iceandfire-rotn-${iceandfirerotn_version}")
     compileOnly fg.deobf("curse.maven:llibrary-${llibrary_version}")
 
+    compileOnly fg.deobf("curse.maven:open-terrain-generator-${otg_version}")
+
     //Dungeons
     compileOnly fg.deobf("curse.maven:dungeons2-${dungeons2_version}")
     compileOnly fg.deobf("curse.maven:gottschcore-${gottschcore_version}")
@@ -85,7 +87,6 @@ dependencies {
 
     //Tiles
     compileOnly fg.deobf("curse.maven:betterendforge-backport-${betterend_version}")
-    compileOnly fg.deobf("curse.maven:open-terrain-generator-${otg_version}")
     compileOnly fg.deobf("curse.maven:traverse-reforged-${traverse_version}")
     compileOnly fg.deobf("curse.maven:defiledlands-${defiledlands_version}")
     implementation fg.deobf("curse.maven:betternether-${betternether_version}")

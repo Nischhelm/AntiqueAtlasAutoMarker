@@ -50,6 +50,151 @@ gui.aaam.marker.ArrowTrapTomb=Simple Dungeon Loot
 gui.aaam.marker.SnowCastleSpire=Blaze Spawners
 gui.aaam.marker.NetherShrine=Nether Portal
 
+# Dregora Marker labels
+gui.aaam.marker.otg.SpawnHexC9R9=Dregora Center
+gui.aaam.marker.otg.AcaciaVillage=Acacia Tribal Village
+gui.aaam.marker.otg.HarborC4R3=Harbor
+gui.aaam.marker.otg.HerbalistC3R4=Herbalist
+gui.aaam.marker.otg.v_bunker_start=Underground Fallout Shelter
+gui.aaam.marker.otg.c_bunker_mid_way=Underground Waystone
+gui.aaam.marker.otg.v_bunker_mid_way=Underground Waystone
+gui.aaam.marker.otg.o_bunker_mid_way=Underground Waystone
+gui.aaam.marker.otg.viking_main_peacefull=Viking Village
+# Hostile Vanilla
+gui.aaam.marker.otg.DeepTunnel_EntranceHighSpecial=Deep Maintenance Tunnels
+gui.aaam.marker.otg.DeepTunnel_EntranceHighC2R1=Deep Maintenance Tunnels
+gui.aaam.marker.otg.maintenance_hub=Maintenance Hub
+gui.aaam.marker.otg.quarryC5R6=Quarry
+gui.aaam.marker.otg.SwampHouseBig=Witch House
+gui.aaam.marker.otg.viking_main=Viking Cult
+# Village 15k map destination
+gui.aaam.marker.otg.DaerocVillageC11R8=Kingdom of Daeroc
+gui.aaam.marker.otg.DaerocVillageC11R13=Daeroc's End Portal
+gui.aaam.marker.otg.originC15R8=Medieval City, ORIGIN
+gui.aaam.marker.otg.originC5R4=Origin's End Portal
+gui.aaam.marker.otg.JungleVillage=Jungle Tribal Village
+# Dungeon 15k map destination
+gui.aaam.marker.otg.ChurchC0R0=Haunted Church
+gui.aaam.marker.otg.Dungeon01C1R1=Dungeon of the Beasts
+gui.aaam.marker.otg.Dungeon02C1R1=Dungeon of the Beasts
+gui.aaam.marker.otg.Dungeon03C1R1=Dungeon of the Beasts
+gui.aaam.marker.otg.Mineshaft=Happy Times Industries
+gui.aaam.marker.otg.W-Mineshaft=Happy Times Industries
+# Other 15k map destination
+gui.aaam.marker.otg.LegacySpawnC1R1=Legacy Spawn
+gui.aaam.marker.otg.CastleRuinsC2R3=Castle Ruins
+gui.aaam.marker.otg.FrozenShip-1=Frozen Ship
+gui.aaam.marker.otg.FrozenShip-2=Frozen Ship
+gui.aaam.marker.otg.FrozenShip-3=Frozen Ship
+gui.aaam.marker.otg.FrozenShip-4=Frozen Ship
+gui.aaam.marker.otg.TempleFrozenC1R2=Temple of Winter
+gui.aaam.marker.otg.LavaTempleC1R1=Temple of Lava
+# Gem Traders
+gui.aaam.marker.otg.Trader_CastleC0R1=Gem Trader
+gui.aaam.marker.otg.Trader_ClubC0R1=Gem Trader
+gui.aaam.marker.otg.Trader_SiloC1R0=Gem Trader
+gui.aaam.marker.otg.Trader_SwampC1R0=Gem Trader
+# Brutal
+gui.aaam.marker.otg.brutal_warnpost=DANGER!
+gui.aaam.marker.otg.AbyssTowerC4R4=Brutal Tower
+gui.aaam.marker.otg.access_ductC1R0=Access Duct
+gui.aaam.marker.otg.portal_overworld_high=City Portal
+gui.aaam.marker.otg.portal_overworld_low=Cavern Portal
+# Bunkers
+gui.aaam.marker.otg.f_bunker_apartements_spawn=Bunker - Apartments
+gui.aaam.marker.otg.f_bunker_atrium_spawn=Bunker - Atrium
+gui.aaam.marker.otg.f_bunker_factory_spawn=Bunker - Factory
+gui.aaam.marker.otg.f_bunker_mid_spawn=Bunker - Medium
+gui.aaam.marker.otg.f_bunker_mid_nuclear_spawn=Bunker - Medium Nuclear
+gui.aaam.marker.otg.f_bunker_radio_spawn=Bunker - Radio
+gui.aaam.marker.otg.f_bunker_rich_spawn=Bunker - Rich
+gui.aaam.marker.otg.f_bunker_silo_spawn=Bunker - Silo
+gui.aaam.marker.otg.f_bunker_small_01_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_small_02_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_small_03_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_small_04_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_small_05_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_small_06_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_small_07_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_small_08_spawn=Bunker - Small
+gui.aaam.marker.otg.f_bunker_storage_spawn=Bunker - Storage
+gui.aaam.marker.otg.f_bunker_tunnelC4R1=Bunker - Tunnel
+# Ice and Fire
+gui.aaam.marker.otg.cyclops_mainC2R1=Cyclops Cave
+gui.aaam.marker.otg.GorgonTemple_C6R6=Gorgon Temple
+gui.aaam.marker.otg.GorgonTemple_02C6R6=Gorgon Temple
+gui.aaam.marker.otg.GorgontempleGigiC6R6=Gorgon Temple
+gui.aaam.marker.otg.Roost_LightningC0R1=Lightning Dragon
+# Flying Encounters
+gui.aaam.marker.otg.sub_Aimton=Aimton
+gui.aaam.marker.otg.sub_Al_Capone=Al Capone
+gui.aaam.marker.otg.sub_Buffaton_Bill=Buffaton Bill
+gui.aaam.marker.otg.sub_ChevaxiTon=ChevaxiTon
+gui.aaam.marker.otg.sub_GokuTon=Goku
+gui.aaam.marker.otg.sub_JesterTon=Jester
+gui.aaam.marker.otg.sub_OldMan=OldMan
+gui.aaam.marker.otg.sub_Tax_Collector=Tax Collector
+gui.aaam.marker.otg.sub_Banisher=Banisher
+gui.aaam.marker.otg.sub_Corroder=Corroder
+gui.aaam.marker.otg.sub_Decayer=Decayer
+gui.aaam.marker.otg.sub_Dislocator=Dislocator
+gui.aaam.marker.otg.sub_Dismounting_Raider=Dismounting Raider
+gui.aaam.marker.otg.sub_Relocator=Relocator
+gui.aaam.marker.otg.sub_Defiled_King=Defiled King
+gui.aaam.marker.otg.sub_Detonator=Detonator
+gui.aaam.marker.otg.sub_Executioner=Executioner
+gui.aaam.marker.otg.sub_Morbid_Skeleton=Morbid Skeleton
+gui.aaam.marker.otg.sub_Umbrium_Knight=Umbrium Knight
+gui.aaam.marker.otg.sub_Duster=Duster
+gui.aaam.marker.otg.sub_Red_Assassin=Red Assassin
+gui.aaam.marker.otg.sub_Ruster=Ruster
+gui.aaam.marker.otg.sub_Sampler=Sampler
+gui.aaam.marker.otg.sub_Wanderer=Wanderer
+gui.aaam.marker.otg.sub_Aerial_Dismounter=Aerial Dismounter
+gui.aaam.marker.otg.sub_Frigid_Warper=Frigid Warper
+gui.aaam.marker.otg.sub_Ice_King=Ice King
+gui.aaam.marker.otg.sub_NumbingTon=NumbingTon
+gui.aaam.marker.otg.sub_Piercing_Stray=Piercing Stray
+gui.aaam.marker.otg.sub_Unfroster=Unfroster
+gui.aaam.marker.otg.sub_Aerial_Templar=Aerial Templar
+gui.aaam.marker.otg.sub_Crocodile_Skelly=Crocodile Skelly
+gui.aaam.marker.otg.sub_Decaying_Veteran=Decaying Veteran
+gui.aaam.marker.otg.sub_Flying_Rags=Flying Rags
+gui.aaam.marker.otg.sub_Knightly_Dismounter=Knightly Dismounter
+gui.aaam.marker.otg.sub_Capiton=Capiton
+gui.aaam.marker.otg.sub_Dismounting_Commotone=Dismounting Commotone
+gui.aaam.marker.otg.sub_LuffyTon=LuffyTon
+gui.aaam.marker.otg.sub_QuartermasTon=QuartermasTon
+gui.aaam.marker.otg.sub_Skelemate=Skelemate
+gui.aaam.marker.otg.sub_Skeleswain=Skeleswain
+gui.aaam.marker.otg.sub_Dismisser=Dismisser
+gui.aaam.marker.otg.sub_Dismounter=Dismounter
+gui.aaam.marker.otg.sub_Grounder=Grounder
+gui.aaam.marker.otg.sub_Inflicter=Inflicter
+gui.aaam.marker.otg.sub_Perplexer=Perplexer
+gui.aaam.marker.otg.sub_Crone=Crone
+gui.aaam.marker.otg.sub_HagTon=HagTon
+gui.aaam.marker.otg.sub_PlagueTon=PlagueTon
+gui.aaam.marker.otg.sub_Rancid_Skeleton=Rancid Skeleton
+gui.aaam.marker.otg.sub_Sackhead=Sackhead
+gui.aaam.marker.otg.sub_Swampton=Swampton
+gui.aaam.marker.otg.sub_Down_Caster=Down Caster
+gui.aaam.marker.otg.sub_Fumbler=Fumbler
+gui.aaam.marker.otg.sub_Impaler=Impaler
+gui.aaam.marker.otg.sub_Impeder=Impeder
+gui.aaam.marker.otg.sub_Spinner=Spinner
+gui.aaam.marker.otg.sub_Jotunn=Jotunn
+gui.aaam.marker.otg.sub_LokiTon=LokiTon
+gui.aaam.marker.otg.sub_Surt=Surt
+gui.aaam.marker.otg.sub_ThorTon=ThorTon
+gui.aaam.marker.otg.sub_Tyr=Tyr
+gui.aaam.marker.otg.sub_Asher=Asher
+gui.aaam.marker.otg.sub_Dust_Scrapper=Dust Scrapper
+gui.aaam.marker.otg.sub_Launcher=Launcher
+gui.aaam.marker.otg.sub_Piercing_Duster=Piercing Duster
+gui.aaam.marker.otg.sub_Scrapper=Scrapper
+# Dregora End
+
 # Doomlike Dungeons.
 # Themes names are the file names in /config/DLDungeonsJBG/themes
 gui.aaam.marker.doomlike_common=Common Doomlike Dungeon

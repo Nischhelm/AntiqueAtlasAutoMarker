@@ -1,7 +1,25 @@
 package antiqueatlasautomarker.config;
 
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
-import antiqueatlasautomarker.config.folders.*;
+import antiqueatlasautomarker.config.folders.AAOverhaulConfig;
+import antiqueatlasautomarker.config.folders.AARCAddonConfig;
+import antiqueatlasautomarker.config.folders.BattletowersConfig;
+import antiqueatlasautomarker.config.folders.BetterMineshaftConfig;
+import antiqueatlasautomarker.config.folders.CustomPositionConfig;
+import antiqueatlasautomarker.config.folders.DefiledLandsConfig;
+import antiqueatlasautomarker.config.folders.DoomlikeConfig;
+import antiqueatlasautomarker.config.folders.Dungeons2Config;
+import antiqueatlasautomarker.config.folders.EnchantmentConfig;
+import antiqueatlasautomarker.config.folders.IceAndFireConfig;
+import antiqueatlasautomarker.config.folders.InternalConfig;
+import antiqueatlasautomarker.config.folders.LocalisationConfig;
+import antiqueatlasautomarker.config.folders.LycanitesConfig;
+import antiqueatlasautomarker.config.folders.OTGConfig;
+import antiqueatlasautomarker.config.folders.QuarkConfig;
+import antiqueatlasautomarker.config.folders.RoguelikeConfig;
+import antiqueatlasautomarker.config.folders.RuinsConfig;
+import antiqueatlasautomarker.config.folders.StructuresConfig;
+import antiqueatlasautomarker.config.folders.WaystonesConfig;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -54,6 +72,10 @@ public class ConfigHandler {
 	@Config.Name("Custom Positions")
 	public static CustomPositionConfig customPosition = new CustomPositionConfig();
 
+	@Config.Comment("OTG Config")
+	@Config.Name("Open Terrain Generator")
+	public static OTGConfig otg = new OTGConfig();
+
 	@Config.Comment("Ruins Marker Config")
 	@Config.Name("Ruins")
 	public static RuinsConfig ruins = new RuinsConfig();
@@ -95,6 +117,7 @@ public class ConfigHandler {
 				iceandfire.resetSetting();
 				lycanitesmobs.resetSetting();
 				bettermineshafts.resetSetting();
+				otg.resetSetting();
 				quark.resetSetting();
 				dungeons2.resetSetting();
 				doomlike.resetSetting();

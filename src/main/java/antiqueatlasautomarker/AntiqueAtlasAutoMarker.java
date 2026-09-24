@@ -35,7 +35,9 @@ import java.util.Map;
         modid = AntiqueAtlasAutoMarker.MODID,
         version = AntiqueAtlasAutoMarker.VERSION,
         name = AntiqueAtlasAutoMarker.NAME,
-        dependencies = "required-after:fermiumbooter@[1.3.2,);required-after:antiqueatlas",
+        dependencies =
+                "required-after:fermiumbooter@[1.5.2,);" +
+                "required-after:antiqueatlas",
         acceptableRemoteVersions = "*"
 )
 public class AntiqueAtlasAutoMarker {

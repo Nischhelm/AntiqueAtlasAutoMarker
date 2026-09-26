@@ -127,7 +127,7 @@ public class AAAMCommand implements ICommand {
                     if(marker.isGlobal()) return; //can't remove global markers anyway but just safety check
                     MarkersData data = AntiqueAtlasMod.markersData.getMarkersData(atlasID, player.getEntityWorld());
                     if(data == null) return; //shouldn't be necessary, since AA would crash anyway
-                    ((IDeletedMarkerList) data).addDeletedMarker(marker.getId());
+                    ((IDeletedMarkerList) data).aaam$addDeletedMarker(marker.getId());
                 });
             }
             if(removedCount > 0) sender.sendMessage(new TextComponentTranslation("commands.aaam.removemarkers.success", removedCount));

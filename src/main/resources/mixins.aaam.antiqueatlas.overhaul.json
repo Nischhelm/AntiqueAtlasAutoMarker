@@ -10,8 +10,5 @@
   ],
   "client": [
     "OverlayDoubleRenderFix"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

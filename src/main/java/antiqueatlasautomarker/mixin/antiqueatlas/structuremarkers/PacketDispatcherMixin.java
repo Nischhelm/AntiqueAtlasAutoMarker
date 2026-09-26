@@ -24,7 +24,7 @@ public abstract class PacketDispatcherMixin {
             at = @At(value = "TAIL"),
             remap = false
     )
-    private static void registerStructureMarkerPackets(CallbackInfo ci){
+    private static void aaam_registerStructureMarkerPackets(CallbackInfo ci){
         registerMessage(OptionalStructureMarkerPacket.class);
         registerMessage(AddedStructureMarkersPacket.class);
     }

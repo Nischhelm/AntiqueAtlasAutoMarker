@@ -11,8 +11,5 @@
     "WorldGenHydraCaveMixin",
     "WorldGenIceDragonRoostsMixin",
     "base191.EntityDragonBaseMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

@@ -29,7 +29,7 @@ public abstract class ItemAtlasMixin {
             method = "onUpdate",
             at = @At(value = "TAIL")
     )
-    private void updateStructureMarkers(ItemStack stack, World world, Entity entity, int slot, boolean isEquipped, CallbackInfo ci, @Local EntityPlayer player) {
+    private void aaam_updateStructureMarkers(ItemStack stack, World world, Entity entity, int slot, boolean isEquipped, CallbackInfo ci, @Local EntityPlayer player) {
         if (world.isRemote) return;
         if (!(entity instanceof EntityPlayerMP)) return;
         MarkersData atlasMarkers = AntiqueAtlasMod.markersData.getMarkersData(stack, world);

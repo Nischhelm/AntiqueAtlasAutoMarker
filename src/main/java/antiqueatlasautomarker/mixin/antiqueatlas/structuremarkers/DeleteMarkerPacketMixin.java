@@ -23,13 +23,13 @@ public abstract class DeleteMarkerPacketMixin {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/api/MarkerAPI;deleteMarker(Lnet/minecraft/world/World;II)V"),
             remap = false
     )
-    private void saveDeletedMarkerId(EntityPlayer player, Side side, CallbackInfo ci){
+    private void aaam_saveDeletedMarkerId(EntityPlayer player, Side side, CallbackInfo ci){
         //Saving what Structure Markers got deleted
         if(side.isClient()) return;
         if(this.markerID >= 0) return;
         if(this.isGlobal()) return; //can't remove global markers anyway but just safety check
         MarkersData data = AntiqueAtlasMod.markersData.getMarkersData(this.atlasID, player.getEntityWorld());
         if(data == null) return; //shouldn't be necessary, since AA would crash anyway
-        ((IDeletedMarkerList) data).addDeletedMarker(this.markerID);
+        ((IDeletedMarkerList) data).aaam$addDeletedMarker(this.markerID);
     }
 }

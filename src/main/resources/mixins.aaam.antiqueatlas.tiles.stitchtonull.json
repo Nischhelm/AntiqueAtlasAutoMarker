@@ -8,8 +8,5 @@
   "mixins": [
     "ConfigStitchToNull",
     "FixStitchToNull"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

@@ -17,7 +17,7 @@ public abstract class MarkerMixin implements IMarkerConstructor {
     @Shadow(remap = false) @Final private boolean visibleAhead;
 
     @Override @Unique
-    public Marker structureMarkerCopy(String clientType, String clientLabel){
+    public Marker aaam$structureMarkerCopy(String clientType, String clientLabel){
         //Acts like global markers in having negative ids
         //client setting label is used except if client uses DEFAULT, then the structure info from server is used
         return new Marker(

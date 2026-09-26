@@ -30,17 +30,14 @@ public class MixinConfigurations {
         .filter(c -> c.isEnabled)
         .forEach(Data::enqueue);
 
-        //Vanilla
-        FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.json");
-
         //Antique Atlas Structure Markers
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.structuremarkers.json");
 
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.colorisedvanillatiles.json", () -> ConfigHandler.tiles.useColorisedVanillaTiles != TileConfig.EnumTextureSetArtist.NONE);
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.updateside.json", () -> ConfigHandler.fixes.updateSide != FixConfig.UpdateSide.DISABLE_MIXIN);
 
-        FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json"); //TODO add toggle
-        FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json"); //TODO add toggle
+        FermiumRegistryAPI.enqueueMixin(false, "mixins.aaam.vanilla.localisation.json", () -> !ConfigHandler.automark.localisation.langKeys.isEmpty());
+        FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json", () -> !ConfigHandler.tiles.customVillageTiles.isEmpty());
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", () -> !ConfigHandler.tiles.automaticTypeRules.isEmpty());
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", () -> !ConfigHandler.tiles.stitchToNullSets.isEmpty());
 

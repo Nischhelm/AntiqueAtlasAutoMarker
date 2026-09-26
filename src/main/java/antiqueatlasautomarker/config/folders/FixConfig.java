@@ -54,12 +54,20 @@ public class FixConfig {
             "That's why shared atlases that arent #0 would not update the other players explored area except for client relogs",
             "To make shared atlases update the other players tiles, this config is set to SERVER by default.",
             "Setting to CLIENT will only remove networking overhead, as the server will still scan around the player, just not send to client.",
-            "Setting to BOTH restores the behavior of old atlas #0 for all atlases, but i can't really see any upsides of it during gameplay (might be minimally smoother)",
+            "Setting to BOTH restores the behavior of old atlas #0, but for all atlases. I can't really see any upsides of doing so (might be minimally smoother)",
             "This fix should also remove rare occurrences of the entries of one atlas bleeding into another of a totally different player",
-            "Set to DISABLE_MIXIN to disable this fix."
+            "Set to DISABLE_MIXIN to disable this fix on next restart."
     })
     @Config.Name("Atlas Scanning Update Side")
-    @Config.RequiresMcRestart
     public UpdateSide updateSide = UpdateSide.SERVER;
     public enum UpdateSide { SERVER, CLIENT, BOTH, DISABLE_MIXIN }
+
+    @Config.Comment({
+            "The original Structure Watchers (for adding custom tiles and markers to villages, nether cities, end cities) use some hacks due to not having access to mixins. ",
+            "This makes it more straightforward, reducing the performance impact."
+    })
+    @Config.Name("Fix StructureWatcher Performance")
+    @Config.RequiresMcRestart
+    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.antiqueatlas.overhaul.structurewatchers.json", defaultValue = true)
+    public boolean fixStructureWatchers = true;
 }

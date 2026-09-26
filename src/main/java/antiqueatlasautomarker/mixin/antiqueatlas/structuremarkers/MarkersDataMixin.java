@@ -21,17 +21,17 @@ public abstract class MarkersDataMixin extends WorldSavedData implements IDelete
     //Saves and loads deleted marker ids
     public MarkersDataMixin(String name) { super(name); }
 
-    @Unique private List<Integer> removedMarkerIds = null;
+    @Unique private List<Integer> aaam$removedMarkerIds = null;
 
     @Override
-    public boolean markerIsDeleted(int markerID) {
-        return removedMarkerIds != null && removedMarkerIds.contains(markerID);
+    public boolean aaam$markerIsDeleted(int markerID) {
+        return aaam$removedMarkerIds != null && aaam$removedMarkerIds.contains(markerID);
     }
 
     @Override
-    public void addDeletedMarker(int markerID) {
-        if(removedMarkerIds == null) removedMarkerIds = new ArrayList<>();
-        removedMarkerIds.add(markerID);
+    public void aaam$addDeletedMarker(int markerID) {
+        if(aaam$removedMarkerIds == null) aaam$removedMarkerIds = new ArrayList<>();
+        aaam$removedMarkerIds.add(markerID);
         this.markDirty();
     }
 
@@ -39,10 +39,10 @@ public abstract class MarkersDataMixin extends WorldSavedData implements IDelete
             method = "writeToNBT",
             at = @At("RETURN")
     )
-    private NBTTagCompound writeDeletedIdsToNBT(NBTTagCompound original){
-        if(removedMarkerIds == null || removedMarkerIds.isEmpty()) return original;
+    private NBTTagCompound aaam_writeDeletedIdsToNBT(NBTTagCompound original){
+        if(aaam$removedMarkerIds == null || aaam$removedMarkerIds.isEmpty()) return original;
         NBTTagList idList = new NBTTagList();
-        for(Integer removedId : removedMarkerIds)
+        for(Integer removedId : aaam$removedMarkerIds)
             idList.appendTag(new NBTTagInt(removedId));
         original.setTag("aaam_removedIds", idList);
         return original;
@@ -53,13 +53,13 @@ public abstract class MarkersDataMixin extends WorldSavedData implements IDelete
             method = "readFromNBT",
             at = @At("TAIL")
     )
-    private void readDeletedIdsFromNBT(NBTTagCompound compound, CallbackInfo ci){
+    private void aaam_readDeletedIdsFromNBT(NBTTagCompound compound, CallbackInfo ci){
         if(!compound.hasKey("aaam_removedIds")) return;
         NBTTagList idList = compound.getTagList("aaam_removedIds", 3);
 
-        if(removedMarkerIds == null) removedMarkerIds = new ArrayList<>();
+        if(aaam$removedMarkerIds == null) aaam$removedMarkerIds = new ArrayList<>();
         for(int i=0; i<idList.tagCount(); i++)
-            removedMarkerIds.add(idList.getIntAt(i));
+            aaam$removedMarkerIds.add(idList.getIntAt(i));
 
         this.markDirty();
     }

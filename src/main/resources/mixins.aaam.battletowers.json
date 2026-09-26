@@ -8,8 +8,5 @@
   "mixins": [
     "AS_TowerDestroyerMixin",
     "BTWorldGenMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

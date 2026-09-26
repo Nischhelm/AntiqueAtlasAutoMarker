@@ -8,8 +8,5 @@
   "mixins": [
     "MapGenStructureIOAccessor",
     "MapGenStructureMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

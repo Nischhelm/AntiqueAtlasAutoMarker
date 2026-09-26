@@ -8,8 +8,5 @@
   "client": [
     "BlockWaystoneMixin",
     "GuiEditWaystoneMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

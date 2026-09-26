@@ -17,8 +17,5 @@
     "structuremarkers.custompositions.CustomPosMarker",
     "structuremarkers.custompositions.DimensionMarkersDataMixin",
     "structuremarkers.custompositions.SaveLoadCustomPosMarkers"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

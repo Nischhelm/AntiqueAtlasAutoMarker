@@ -17,7 +17,7 @@ public abstract class StructureWatcherGenericMixin {
             at = @At(value = "INVOKE", target = "Lhunternif/mc/atlas/api/MarkerAPI;putGlobalMarker(Lnet/minecraft/world/World;ZLjava/lang/String;Ljava/lang/String;II)Lhunternif/mc/atlas/marker/Marker;"),
             remap = false
     )
-    private Marker makeGlobalMarkerStructureMarker(MarkerAPI instance, World world, boolean visibleAhead, String type, String label, int x, int z){
+    private Marker aaam_makeGlobalMarkerStructureMarker(MarkerAPI instance, World world, boolean visibleAhead, String type, String label, int x, int z){
         //dont put the global marker lol
 
         //don't need to check for enabled in AA config bc that was already checked

@@ -8,9 +8,6 @@
   "mixins": [
     "FilterMarkersByTypeAndLabel"
   ],
-  "injectors": {
-    "maxShiftBy": 10
-  },
   "client": [
     "GuiToggleButtonAccessor",
     "GuiToggleButtonMixin"

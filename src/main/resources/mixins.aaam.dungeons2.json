@@ -7,8 +7,5 @@
   "minVersion": "0.8",
   "mixins": [
     "DungeonBuilderMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

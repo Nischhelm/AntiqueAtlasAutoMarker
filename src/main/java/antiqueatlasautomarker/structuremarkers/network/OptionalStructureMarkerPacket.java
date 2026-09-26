@@ -143,7 +143,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
                     String clientLabel = clientSetting.label.equals("DEFAULT") ? serverLabel : clientSetting.label;
 
                     //Copy has client side type+label and negative id to not run into conflicts (can conflict with global markers though)
-                    Marker newMarker = ((IMarkerConstructor) marker).structureMarkerCopy(clientType, clientLabel);
+                    Marker newMarker = ((IMarkerConstructor) marker).aaam$structureMarkerCopy(clientType, clientLabel);
                     markersData.loadMarker(newMarker);
 
                     //Collect for sending back to server for sync

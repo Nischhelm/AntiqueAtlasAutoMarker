@@ -8,8 +8,5 @@
   "mixins": [
     "AtlasUpdateSide",
     "UpdateCorrectClientAtlas"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

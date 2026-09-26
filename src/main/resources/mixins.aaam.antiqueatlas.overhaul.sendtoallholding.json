@@ -12,8 +12,5 @@
     "MarkersDataAccessor",
     "MarkersDataHandlerMixin",
     "TileApiImplMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

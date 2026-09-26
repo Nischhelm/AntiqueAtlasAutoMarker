@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixinwrapper;
 
 public interface IDeletedMarkerList {
-    boolean markerIsDeleted(int markerID);
-    void addDeletedMarker(int markerID);
+    boolean aaam$markerIsDeleted(int markerID);
+    void aaam$addDeletedMarker(int markerID);
 }

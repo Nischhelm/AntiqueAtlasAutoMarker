@@ -3,7 +3,7 @@ package antiqueatlasautomarker.mixinwrapper;
 import hunternif.mc.atlas.marker.Marker;
 
 public interface IMarkerConstructor {
-    Marker structureMarkerCopy(String clientSettingType, String clientSettingLabel);
+    Marker aaam$structureMarkerCopy(String clientSettingType, String clientSettingLabel);
 
     static String addContext(String type, String context){
         return context + ";" + type;

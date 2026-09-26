@@ -10,8 +10,5 @@
     "rlcraft.WorldGenCyclopsCaveMixin",
     "rlcraft.WorldGenDragonRoostMixin",
     "rlcraft.WorldGenHydraCaveMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

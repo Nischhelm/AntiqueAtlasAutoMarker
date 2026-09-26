@@ -1,12 +1,11 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.otg",
+  "package": "antiqueatlasautomarker.mixin.vanilla",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
-  "mixins": [
-    "BO3_Mixin",
-    "BO4CustomStructure_Mixin"
+  "client": [
+    "NetHandlerPlayClientMixin"
   ]
 }

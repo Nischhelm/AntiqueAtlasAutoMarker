@@ -9,8 +9,5 @@
     "antiqueatlas.waystonemapselection.GuiAtlasMixin",
     "antiqueatlas.waystonemapselection.GuiBookmarkButtonMixin",
     "waystones.mapselection.GuiWaystoneListMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

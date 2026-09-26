@@ -10,8 +10,5 @@
     "base.WorldGenCyclopsCaveMixin",
     "base.WorldGenFireDragonRoostsMixin",
     "base.WorldGenIceDragonRoostsMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

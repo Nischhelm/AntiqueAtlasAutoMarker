@@ -10,8 +10,5 @@
     "CustomEndBiomesWithVoid",
     "CustomEndTextures",
     "CustomNetherBiomesWithLava"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

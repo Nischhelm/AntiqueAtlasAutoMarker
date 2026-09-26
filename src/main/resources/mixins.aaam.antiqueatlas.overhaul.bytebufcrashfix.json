@@ -8,8 +8,5 @@
   "mixins": [
     "IntByteBufCrashFix",
     "ShortByteBufCrashFix"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

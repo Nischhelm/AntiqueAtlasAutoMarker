@@ -2,6 +2,7 @@ package antiqueatlasautomarker.config.folders;
 
 import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.config.data.EnchMarkSetting;
+import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
 import java.util.LinkedHashMap;
@@ -12,6 +13,7 @@ import java.util.stream.Stream;
 public class EnchantmentConfig {
     @Config.Comment("Set to false to never mark Enchantment Trades")
     @Config.Name("Enchantment Trade Marker Enabled")
+    @MixinConfig.MixinToggle(earlyMixin = "mixins.aaam.vanilla.enchantmentmarking.json", defaultValue = true)
     public boolean enabled = true;
 
     @Config.Comment("Mark Enchantment Trades with this Marker Type")

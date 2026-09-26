@@ -73,7 +73,8 @@ public class TileConfig {
             "Pattern: componentName, textureSetName, priority\n" +
             "Component Names can be found in saves/yourworld/data/Village.dat in entries called \"id\"\n" +
             "This also allows Recurrent Complex village components, use their \"RcSId\"\n" +
-            "Waystone Id is \"waystones:village_waystone\"")
+            "Waystone Id is \"waystones:village_waystone\"," +
+            "Mixin will get disabled on next start if list is empty.")
     @Config.Name("Custom Village Tiles")
     @Config.RequiresMcRestart
     public List<CustomVillageTiles> customVillageTiles = new ArrayList<>();

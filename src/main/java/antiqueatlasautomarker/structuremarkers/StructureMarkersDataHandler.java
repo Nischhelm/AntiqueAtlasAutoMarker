@@ -138,7 +138,7 @@ public class StructureMarkersDataHandler {
                     //Check if we got the marker already, so we don't send existing markers multiple times (wouldn't get added anyway bc same id, but less networking
                     if (existingMarkers == null || !listContainsMarker(existingMarkers, marker))
                         //Check if that marker has been deleted on players atlas
-                        if(!((IDeletedMarkerList) atlasMarkers).markerIsDeleted(-marker.getId())) {
+                        if(!((IDeletedMarkerList) atlasMarkers).aaam$markerIsDeleted(-marker.getId())) {
                             if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Adding marker to to-send list {}",marker);
                             updatedMarkers.add(marker);
                         }

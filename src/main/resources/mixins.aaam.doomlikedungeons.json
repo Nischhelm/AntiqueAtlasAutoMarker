@@ -7,8 +7,5 @@
   "minVersion": "0.8",
   "mixins": [
     "BuilderMixin"
-  ],
-  "injectors": {
-    "maxShiftBy": 10
-  }
+  ]
 }

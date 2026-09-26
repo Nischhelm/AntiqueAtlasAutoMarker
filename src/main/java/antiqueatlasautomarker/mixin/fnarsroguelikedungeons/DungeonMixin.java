@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.fnarsroguelikedungeons;
 
-import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
 import greymerk.roguelike.dungeon.Dungeon;
 import greymerk.roguelike.dungeon.settings.DungeonSettings;

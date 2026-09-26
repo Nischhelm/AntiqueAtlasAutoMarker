@@ -27,8 +27,6 @@ public class IceAndFireConfig {
     @Config.Name("Cyclops Den")
     public AutoMarkSetting.Data cyclops = new AutoMarkSetting.Data("hydraCave", false, "antiqueatlas:red_x_small", "DEFAULT");
 
-    //TODO: move mixintoggles into the data
-
     @Config.Comment("Set to false to never mark Ice and Fire Structures - using I&F RLCraft Edition")
     @Config.Name("Ice And Fire RLCraft Enabled")
     @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.infrl.json", defaultValue = true)

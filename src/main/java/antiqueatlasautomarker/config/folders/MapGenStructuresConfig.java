@@ -8,7 +8,6 @@ import meldexun.betterconfig.api.Unmodifiable;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

@@ -6,7 +6,6 @@ import antiqueatlasautomarker.config.folders.TileConfig;
 import fermiumbooter.FermiumBooter;
 import fermiumbooter.FermiumRegistryAPI;
 import fermiumbooter.util.FermiumJarScanner;
-import net.minecraftforge.fml.common.Loader;
 
 import java.util.stream.Stream;
 
@@ -15,7 +14,6 @@ public class MixinConfigurations {
         if(!FermiumBooter.NAME.equals("FermiumBooter"))
             Tags.LOGGER.warn("Running on modified FermiumBooter. This is not recommended and can cause crashes. FermiumBooter is compatible with all known other Mixin providers.");
 
-        //TODO: test if AutomarkSetting.defaultenabled = false works
         Stream.of(
                 new Data("mixins.aaam.battletowers.json", "battletowers", ConfigHandler.automark.battletowers.enabled),
                 new Data("mixins.aaam.doomlikedungeons.json", "dldungeonsjbg", ConfigHandler.automark.doomlike.enabled),

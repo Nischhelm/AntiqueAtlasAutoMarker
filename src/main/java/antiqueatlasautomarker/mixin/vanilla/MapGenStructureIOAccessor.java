@@ -10,6 +10,6 @@ import java.util.Map;
 
 @Mixin(MapGenStructureIO.class)
 public interface MapGenStructureIOAccessor {
-    @Accessor(value = "startNameToClassMap")
-    static Map<String, Class<? extends StructureStart>> getMap() { return Collections.emptyMap(); }
+    @Accessor("startNameToClassMap")
+    static Map<String, Class<? extends StructureStart>> getStartNameToClassMap() { return Collections.emptyMap(); }
 }

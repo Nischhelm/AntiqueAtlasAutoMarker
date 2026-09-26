@@ -12,11 +12,7 @@ import hunternif.mc.atlas.client.TextureSetMap;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.config.Config;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
 
 @MixinConfig(name = Tags.MODID)
 public class TileConfig {
@@ -30,7 +26,7 @@ public class TileConfig {
             "NOTE: by default, this is using the same rules that Antique Atlas is using.")
     @Config.Name("Automatic Biometype Rules")
     @Config.RequiresMcRestart
-    public List<String> automaticTypeRules = Stream.of(
+    public List<String> automaticTypeRules = new ArrayList<>(Arrays.asList(
             "SWAMP, HILLS = SWAMP_HILLS",
             "SWAMP = SWAMP",
             "WATER|RIVER, FOREST|JUNGLE, HILLS = SWAMP_HILLS",
@@ -67,7 +63,7 @@ public class TileConfig {
             "HILLS, SNOWY|COLD = SNOW_HILLS",
             "HILLS, SANDY = DESERT_HILLS",
             "HILLS = HILLS"
-    ).collect(Collectors.toList());
+    ));
 
     @Config.Comment("Define custom village tiles for custom village components here. \n" +
             "Pattern: componentName, textureSetName, priority\n" +
@@ -134,14 +130,15 @@ public class TileConfig {
     })
     @Config.Name("Used Custom Markers")
     @Config.RequiresMcRestart
-    public String[] usedCustomMarkers = {
+    public Set<String> usedCustomMarkers = new LinkedHashSet<>(Arrays.asList(
             "anvil", "bed", "book", "cave", "defiled", "diamond",
             "dragon_blue", "dragon_gold", "dragon_green", "dragon_red", "dungeon",
             "end_city", "end_city_far", "end_city_mipped_16", "end_city_mipped_32", "farm",
             "nether_portal", "pickaxe", "ruins", "ship", "sword",
             "tower", "tracks", "waystone", "wizardtower",
             "dragon_purple", "lycanites", "megatower",
-            "monsterspawner", "parasite", "quadtower"};
+            "monsterspawner", "parasite", "quadtower"
+    ));
 
     @Config.Comment("Will apply colorised vanilla tiles by either Artsy, Golrith or both, where Golrith is prioritised as that set has missing tiles for various biomes for which Artsy textures are used. By Golrith (2015) and Artsy (2021).")
     @Config.Name("Use Colorised Vanilla Tiles")
@@ -170,11 +167,11 @@ public class TileConfig {
             "By default, AA meant to have ROCK_SHORE and LAVA_SHORE stitch to null.")
     @Config.Name("TextureSets stitch to null")
     @Config.RequiresMcRestart
-    public Set<String> stitchToNullSets = Stream.of(
+    public Set<String> stitchToNullSets = new LinkedHashSet<>(Arrays.asList(
             "END_VOID",
             "LAVA_SHORE",
             "LAVA"
-    ).collect(Collectors.toSet());
+    ));
 
     public static void init() {
         for (String configLine : ConfigHandler.tiles.automaticTypeRules)

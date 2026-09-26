@@ -7,9 +7,7 @@ import hunternif.mc.atlas.registry.MarkerType;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class CustomMarkers {
 
@@ -23,9 +21,8 @@ public class CustomMarkers {
                                                                     "monsterspawner", "parasite", "quadtower");
 
     public static void registerMarkers(){
-        Set<String> allowedMarkers = new HashSet<>(Arrays.asList(ConfigHandler.tiles.usedCustomMarkers));
-        markersArtsy.stream().filter(allowedMarkers::contains).forEach(name -> registerCustomMarker(name, name, "artsy"));
-        markersGallade.stream().filter(allowedMarkers::contains).forEach(name -> registerCustomMarker(name, name, "knightgallade"));
+        markersArtsy.stream().filter(ConfigHandler.tiles.usedCustomMarkers::contains).forEach(name -> registerCustomMarker(name, name, "artsy"));
+        markersGallade.stream().filter(ConfigHandler.tiles.usedCustomMarkers::contains).forEach(name -> registerCustomMarker(name, name, "knightgallade"));
     }
 
     private static void registerCustomMarker(String typeName, String loc, String author){

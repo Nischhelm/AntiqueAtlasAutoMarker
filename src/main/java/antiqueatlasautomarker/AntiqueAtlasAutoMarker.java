@@ -10,6 +10,7 @@ import antiqueatlasautomarker.displayotherplayers.OtherPlayersDataHandler;
 import antiqueatlasautomarker.handlers.PlayerLogoutHandler;
 import antiqueatlasautomarker.handlers.RuinsHandler;
 import antiqueatlasautomarker.proxy.CommonProxy;
+import meldexun.betterconfig.api.BetterConfigManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -31,6 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
         acceptableRemoteVersions = "*"
 )
 public class AntiqueAtlasAutoMarker {
+    public static boolean configWasChangedInternally = false; // true -> save to file on postInit
 
     @SidedProxy(clientSide = "antiqueatlasautomarker.proxy.ClientProxy", serverSide = "antiqueatlasautomarker.proxy.CommonProxy")
     public static CommonProxy PROXY;
@@ -53,7 +55,7 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        ConfigHandler.automark.mapGenStructs.postInit();
+        ConfigHandler.automark.mapGenStructs.initMapGenStructureMarkersFromRegistry();
 
         if(event.getSide() == Side.CLIENT) {
             if (ConfigHandler.tiles.modifyBiomeDetection) NetherTiles.registerTiles();
@@ -66,6 +68,8 @@ public class AntiqueAtlasAutoMarker {
             if (ConfigHandler.tiles.useColorisedBOPTiles && ModCompat.biomesOPlenty.isLoaded()) BiomesOPlentyCompat.registerTiles();
             if (ConfigHandler.tiles.useColorisedDregoraTiles && ModCompat.otg.isLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
         }
+
+        if(configWasChangedInternally) BetterConfigManager.sync(Tags.MODID);
     }
 
     @Mod.EventHandler

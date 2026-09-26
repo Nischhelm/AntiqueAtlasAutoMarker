@@ -21,11 +21,11 @@ public class IceAndFireConfig {
 
     @Config.Comment("Hydra Cave Marker Config")
     @Config.Name("Hydra Cave")
-    public AutoMarkSetting.Data hydra = new AutoMarkSetting.Data("cyclopsCave", true, "antiqueatlas:dragon_green", "DEFAULT");
+    public AutoMarkSetting.Data hydra = new AutoMarkSetting.Data("hydraCave", true, "antiqueatlas:dragon_green", "DEFAULT");
 
     @Config.Comment("Cyclops Den Marker Config")
     @Config.Name("Cyclops Den")
-    public AutoMarkSetting.Data cyclops = new AutoMarkSetting.Data("hydraCave", false, "antiqueatlas:red_x_small", "DEFAULT");
+    public AutoMarkSetting.Data cyclops = new AutoMarkSetting.Data("cyclopsCave", false, "antiqueatlas:red_x_small", "DEFAULT");
 
     @Config.Comment("Set to false to never mark Ice and Fire Structures - using I&F RLCraft Edition")
     @Config.Name("Ice And Fire RLCraft Enabled")

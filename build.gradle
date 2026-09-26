@@ -12,6 +12,7 @@ group = mod_id
 base.archivesName = mod_name
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.withSourcesJar()
 
 minecraft {
     mappings channel: mappings_channel, version: mappings_version

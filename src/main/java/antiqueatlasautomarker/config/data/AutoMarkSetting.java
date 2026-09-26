@@ -43,11 +43,6 @@ public class AutoMarkSetting {
         return autoMarkSettings.get(name);
     }
 
-    /**
-     * Mods can use this function to register their own structure markers
-     * The structures can be marked using the MarkStructureEvent.setContext
-     * This can also be done without registering a new context here, but will force clients to use the marker settings the event uses
-     */
     public static void registerAutoMarkSetting(String context, Data data){
         autoMarkSettings.put(context, data);
     }

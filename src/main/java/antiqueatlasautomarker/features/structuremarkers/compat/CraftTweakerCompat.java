@@ -1,12 +1,11 @@
 package antiqueatlasautomarker.features.structuremarkers.compat;
 
 import antiqueatlasautomarker.Tags;
-import antiqueatlasautomarker.features.structuremarkers.event.MarkStructureEvent;
+import antiqueatlasautomarker.api.StructureMarkersAPI;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -36,6 +35,6 @@ public class CraftTweakerCompat {
             CraftTweakerAPI.logWarning("World for dimension " + dimension + " is not loaded.");
             return;
         }
-        MinecraftForge.EVENT_BUS.post(new MarkStructureEvent(world, x, z, markerType, markerLabel));
+        StructureMarkersAPI.markStructure(world, x,z, markerType, markerLabel, "");
     }
 }

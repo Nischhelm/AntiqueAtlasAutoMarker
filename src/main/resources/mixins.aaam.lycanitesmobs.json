@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.lycanitesmobs",
+  "package": "antiqueatlasautomarker.mixin.automark.lycanitesmobs",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",

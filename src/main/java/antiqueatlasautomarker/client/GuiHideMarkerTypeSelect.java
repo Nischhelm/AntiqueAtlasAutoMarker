@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.client;
 
-import antiqueatlasautomarker.mixin.antiqueatlas.display.GuiToggleButtonAccessor;
-import antiqueatlasautomarker.mixinwrapper.IUntoggleable;
+import antiqueatlasautomarker.mixin.antiqueatlas.showhidesearchmarkers.GuiToggleButtonAccessor;
+import antiqueatlasautomarker.mixininterface.IUntoggleable;
 import hunternif.mc.atlas.client.gui.GuiMarkerInList;
 import hunternif.mc.atlas.client.gui.core.GuiComponent;
 import hunternif.mc.atlas.client.gui.core.GuiScrollingContainer;

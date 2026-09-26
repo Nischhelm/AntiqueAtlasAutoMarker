@@ -2,9 +2,9 @@ package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.config.ConfigHandler;
-import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
-import antiqueatlasautomarker.structuremarkers.network.CustomPacketDispatcher;
-import antiqueatlasautomarker.structuremarkers.network.OptionalStructureMarkerPacket;
+import antiqueatlasautomarker.features.structuremarkers.StructureMarkersDataHandler;
+import antiqueatlasautomarker.features.structuremarkers.network.CustomPacketDispatcher;
+import antiqueatlasautomarker.features.structuremarkers.network.OptionalStructureMarkerPacket;
 import com.llamalad7.mixinextras.sugar.Local;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.item.ItemAtlas;

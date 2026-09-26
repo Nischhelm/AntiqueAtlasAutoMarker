@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers.custompositions;
 
-import antiqueatlasautomarker.mixinwrapper.ICustomPosMarker;
-import antiqueatlasautomarker.structuremarkers.CustomPosition;
+import antiqueatlasautomarker.mixininterface.ICustomPosMarker;
+import antiqueatlasautomarker.features.structuremarkers.CustomPosition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import hunternif.mc.atlas.marker.DimensionMarkersData;

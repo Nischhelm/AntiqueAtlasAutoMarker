@@ -1,6 +1,6 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
-import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
+import antiqueatlasautomarker.features.structuremarkers.StructureMarkersDataHandler;
 import hunternif.mc.atlas.api.MarkerAPI;
 import hunternif.mc.atlas.ext.watcher.impl.StructureWatcherGeneric;
 import hunternif.mc.atlas.marker.Marker;

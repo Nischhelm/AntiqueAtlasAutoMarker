@@ -3,7 +3,7 @@ package antiqueatlasautomarker.config.folders;
 import antiqueatlasautomarker.AntiqueAtlasAutoMarker;
 import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.config.data.AutoMarkSetting;
-import antiqueatlasautomarker.mixin.vanilla.MapGenStructureIOAccessor;
+import antiqueatlasautomarker.mixin.automark.vanilla.MapGenStructureIOAccessor;
 import fermiumbooter.annotations.MixinConfig;
 import meldexun.betterconfig.api.Unmodifiable;
 import net.minecraftforge.common.config.Config;

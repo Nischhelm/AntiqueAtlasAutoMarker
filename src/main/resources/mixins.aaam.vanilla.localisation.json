@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.vanilla",
+  "package": "antiqueatlasautomarker.mixin.automark.vanilla",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",

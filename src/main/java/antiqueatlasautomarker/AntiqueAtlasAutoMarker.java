@@ -2,13 +2,13 @@ package antiqueatlasautomarker;
 
 import antiqueatlasautomarker.command.AAAMCommand;
 import antiqueatlasautomarker.compat.ModCompat;
-import antiqueatlasautomarker.compat.crafttweaker.CT_BiomeDetectorEvent;
+import antiqueatlasautomarker.features.biomedetector.compat.CT_BiomeDetectorEvent;
 import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.folders.TileConfig;
-import antiqueatlasautomarker.custombiometiles.*;
-import antiqueatlasautomarker.displayotherplayers.OtherPlayersDataHandler;
+import antiqueatlasautomarker.features.custombiometiles.*;
+import antiqueatlasautomarker.features.displayotherplayers.OtherPlayersDataHandler;
 import antiqueatlasautomarker.handlers.PlayerLogoutHandler;
-import antiqueatlasautomarker.handlers.RuinsHandler;
+import antiqueatlasautomarker.features.structuremarkers.compat.RuinsHandler;
 import antiqueatlasautomarker.proxy.CommonProxy;
 import meldexun.betterconfig.api.BetterConfigManager;
 import net.minecraftforge.common.MinecraftForge;

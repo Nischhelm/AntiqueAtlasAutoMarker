@@ -1,0 +1,95 @@
+package antiqueatlasautomarker.features.displayotherplayers;
+
+import hunternif.mc.atlas.api.AtlasAPI;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+public class PacketOtherAtlasHolders implements IMessage {
+
+    private int atlasID;
+    private final Map<UUID, Double[]> playerPositions = new HashMap<>(); // xpos, zpos, rot
+
+    public PacketOtherAtlasHolders() {}
+    public PacketOtherAtlasHolders(@Nonnull EntityPlayer player, int atlasID) {
+        List<EntityPlayerMP> visiblePlayers = player.world.getPlayers(EntityPlayerMP.class, entityPlayerMP ->
+                canSeeOtherPlayer(player, entityPlayerMP, atlasID));
+
+        this.atlasID = atlasID;
+        this.playerPositions.putAll(visiblePlayers.stream().collect(Collectors.toMap(
+                Entity::getUniqueID,
+                entityPlayerMP -> {
+                    Double[] playerData = new Double[3];
+                    playerData[0] = entityPlayerMP.posX;
+                    playerData[1] = entityPlayerMP.posZ;
+                    playerData[2] = (double) entityPlayerMP.rotationYaw;
+                    return playerData;
+                })
+        ));
+    }
+
+    public static boolean canSeeOtherPlayer(EntityPlayer queryPlayer, EntityPlayer otherPlayer, int atlasID){
+        if(queryPlayer == otherPlayer) return false;
+        if(!queryPlayer.isEntityAlive() || !otherPlayer.isEntityAlive()) return false;
+        if(queryPlayer.dimension != otherPlayer.dimension) return false;
+        return AtlasAPI.getPlayerAtlases(otherPlayer).contains(atlasID);
+    }
+
+    @Override
+    public void fromBytes(ByteBuf buf) {
+        PacketBuffer packet = new PacketBuffer(buf);
+        this.atlasID = packet.readInt();
+        int size = packet.readInt();
+        for(int i = 0; i < size; i++){
+            this.playerPositions.put(
+                    packet.readUniqueId(),
+                    new Double[]{
+                            packet.readDouble(),
+                            packet.readDouble(),
+                            packet.readDouble()
+                    }
+            );
+        }
+    }
+
+    @Override
+    public void toBytes(ByteBuf buf) {
+        PacketBuffer packet = new PacketBuffer(buf);
+        packet.writeInt(this.atlasID);
+        packet.writeInt(this.playerPositions.size());
+        this.playerPositions.forEach((uuid, doubles) -> {
+            packet.writeUniqueId(uuid);
+            packet.writeDouble(doubles[0]);
+            packet.writeDouble(doubles[1]);
+            packet.writeDouble(doubles[2]);
+        });
+    }
+
+    public static class ClientHandler implements IMessageHandler<PacketOtherAtlasHolders, IMessage> {
+
+        @Override
+        public IMessage onMessage(PacketOtherAtlasHolders message, MessageContext ctx) {
+            Minecraft.getMinecraft().addScheduledTask(() -> {
+                // Replace client's set of player coords
+                OtherPlayersDataHandler.setData(
+                        message.atlasID,
+                        new OtherPlayersData(message.playerPositions));
+            });
+            return null;
+        }
+    }
+
+}

@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.iceandfire",
+  "package": "antiqueatlasautomarker.mixin.automark.iceandfire",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",

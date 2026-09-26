@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.antiqueatlas.overhaul.keybinds",
+  "package": "antiqueatlasautomarker.mixin.antiqueatlas.keybinds",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
@@ -9,7 +9,7 @@
     "ClientProxy_KeybindMixin",
     "GuiAtlas_CompareAtlasMixin",
     "GuiAtlas_KeybindMixin",
-    "GuiBookmarkButton_Invoker",
-    "GuiComponentButton_Invoker"
+    "GuiBookmarkButtonAccessor",
+    "GuiComponentButtonAccessor"
   ]
 }

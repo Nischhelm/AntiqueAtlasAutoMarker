@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "antiqueatlasautomarker.mixin.waystones",
+  "package": "antiqueatlasautomarker.mixin.automark.waystones",
   "refmap": "mixins.antiqueatlasautomarker.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",

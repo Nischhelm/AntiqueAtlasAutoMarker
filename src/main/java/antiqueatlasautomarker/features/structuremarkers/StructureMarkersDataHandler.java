@@ -1,0 +1,185 @@
+package antiqueatlasautomarker.features.structuremarkers;
+
+import antiqueatlasautomarker.Tags;
+import antiqueatlasautomarker.config.ConfigHandler;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
+import antiqueatlasautomarker.config.folders.CustomPositionConfig;
+import antiqueatlasautomarker.mixininterface.IDeletedMarkerList;
+import antiqueatlasautomarker.mixininterface.IMarkerConstructor;
+import hunternif.mc.atlas.SettingsConfig;
+import hunternif.mc.atlas.marker.DimensionMarkersData;
+import hunternif.mc.atlas.marker.Marker;
+import hunternif.mc.atlas.marker.MarkersData;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Mod;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Mod.EventBusSubscriber
+public class StructureMarkersDataHandler {
+    private static final String DATA_KEY = "aAtlasStructureMarkers";
+
+    //This is technically not needed bc we already load on world load
+    public static MarkersData getData(World world) {
+        //Create or load the data
+        MarkersData data = (MarkersData) world.loadData(MarkersData.class, DATA_KEY);
+        if (data == null) {
+            data = new MarkersData(DATA_KEY);
+            data.markDirty();
+            world.setData(DATA_KEY, data);
+        }
+        return data;
+    }
+
+    public static Marker markStructure(@Nonnull World world, int x, int z, String markerType, String markerName, String context, int... providedDimension) {
+        if(world.isRemote){
+            if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Trying to access structure marker data from clientside! context {}",context);
+            return null;
+        }
+        MarkersData data = getData(world);
+        boolean isCustomPositionMarker = providedDimension != null && providedDimension.length == 1;
+        int dimension = !isCustomPositionMarker ? world.provider.getDimension() : providedDimension[0];
+
+        markerType = IMarkerConstructor.addContext(markerType, context); //append context to marker type
+
+        //Only for stupid things like doomlike dungeons generating the same dungeon multiple times bruh
+        //Server side only comparison, so it's fine with clientside deletions/overrides
+        boolean hasMarkerAlready = false;
+
+        int checkPosX, checkPosZ;
+        if(CustomPosition.isEmpty()){
+            checkPosX = (x >> 4) / MarkersData.CHUNK_STEP;
+            checkPosZ = (z >> 4) / MarkersData.CHUNK_STEP;
+        } else {
+            checkPosX = CustomPosition.get().bigChunkX;
+            checkPosZ = CustomPosition.get().bigChunkZ;
+        }
+
+        List<Marker> markersHere = data.getMarkersAtChunk(dimension, checkPosX, checkPosZ);
+        if(markersHere != null) {
+            for (Marker marker : markersHere) {
+                if (marker.getX() != x) continue;
+                if (marker.getZ() != z) continue;
+                if (!marker.getType().equals(markerType)) continue;
+                if (!marker.getLabel().equals(markerName)) continue;
+                hasMarkerAlready = true;
+            }
+        }
+
+        if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Marking Structure at {},{} with marker {} {} {}, already exists {}",x,z,context, markerName, markerType, hasMarkerAlready);
+
+        if (!hasMarkerAlready)
+            //Use context appended at type, client overrides if not AARC and DEFAULT
+            return data.createAndSaveMarker(markerType, markerName, dimension, x, z, isCustomPositionMarker);
+        return null;
+    }
+
+    public static Marker markStructure(@Nonnull World world, BlockPos pos, String markerType, String markerName, String context) {
+        return markStructure(world, pos.getX(), pos.getZ(), markerType, markerName, context);
+    }
+
+    public static Marker markStructure(@Nonnull World world, int x, int z, AutoMarkSetting.Data settings) {
+        if (settings != null && settings.enabled)
+            return markStructure(world, x, z, settings.type, settings.label, settings.context);
+        return null;
+    }
+
+    public static Marker markStructure(@Nonnull World world, BlockPos pos, AutoMarkSetting.Data settings) {
+        return markStructure(world, pos.getX(), pos.getZ(), settings);
+    }
+
+    public static Marker markCustomPositionStructure(@Nonnull World world, CustomPositionConfig.Data data){
+        //set threadLocal to position where the custom marker would get discovered
+        CustomPosition.set(data.xDiscover, data.zDiscover);
+        //The actual marker position is where the marker will appear in the atlas
+        Marker createdMarker = markStructure(world, data.xMarker, data.zMarker, data.type, data.label, "customPos", data.dimension);
+        CustomPosition.clear();
+        return createdMarker;
+    }
+
+    public static ArrayList<Marker> updateMarkersAroundPlayer(EntityPlayer player, MarkersData atlasMarkers) {
+        ArrayList<Marker> updatedMarkers = new ArrayList<>();
+
+        //Only every x ticks
+        int newScanInterval = Math.round(SettingsConfig.performance.newScanInterval * 20);
+        if (player.ticksExisted % newScanInterval != 0) return updatedMarkers;//no new markers
+
+        //Truncate dividing (instead of Math.floorDiv) will do weird behavior around x=0 and z=0 but that's how AA coded it
+        //So we replicate it
+        int playerBigChunkX = (player.getPosition().getX() >> 4) / MarkersData.CHUNK_STEP;
+        int playerBigChunkZ = (player.getPosition().getZ() >> 4) / MarkersData.CHUNK_STEP;
+
+        //Usually = 1
+        int checkRadius = SettingsConfig.performance.scanRadius / MarkersData.CHUNK_STEP;
+
+        int dimension = player.world.provider.getDimension();
+        DimensionMarkersData markersInDimension = getData(player.world).getMarkersDataInDimension(dimension);
+
+        //Any existing markers?
+        //The "big chunks" of antique atlas marker are so big that it's just a check of the 3x3 big chunks (8x8 chunks) around current position
+        for (int i = -checkRadius; i <= checkRadius; i++) {
+            for (int j = -checkRadius; j <= checkRadius; j++) {
+                int bigChunkX = playerBigChunkX + i;
+                int bigChunkZ = playerBigChunkZ + j;
+
+                List<Marker> structureMarkers = markersInDimension.getMarkersAtChunk(bigChunkX, bigChunkZ);
+                if (structureMarkers == null) continue;
+
+                if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Found Markers to send in bigchunk {},{} count {}",bigChunkX, bigChunkZ, structureMarkers.size());
+
+
+                List<Marker> existingMarkers = atlasMarkers.getMarkersAtChunk(dimension, bigChunkX, bigChunkZ);
+                for (Marker marker : structureMarkers) {
+                    //Check if we got the marker already, so we don't send existing markers multiple times (wouldn't get added anyway bc same id, but less networking
+                    if (existingMarkers == null || !listContainsMarker(existingMarkers, marker))
+                        //Check if that marker has been deleted on players atlas
+                        if(!((IDeletedMarkerList) atlasMarkers).aaam$markerIsDeleted(-marker.getId())) {
+                            if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Adding marker to to-send list {}",marker);
+                            updatedMarkers.add(marker);
+                        }
+                }
+            }
+        }
+
+        return updatedMarkers;
+    }
+
+    private static boolean listContainsMarker(List<Marker> list, Marker markerServer) {
+        for (Marker markerPlayer : list)
+            if (markerEquals(markerPlayer, markerServer))
+                return true;
+        return false;
+    }
+
+    private static boolean markerEquals(Marker markerPlayer, Marker markerServer) {
+        //Only works for structure markers (player atlas marker id is negative)
+        if (markerPlayer.getId() >= 0 ) return false;
+        //Assumes that the player atlas marker id is the same id as the structure marker id just with a minus
+        if (markerPlayer.getId() != -markerServer.getId()) return false;
+        return true;
+    }
+
+    public static void removeStructureMarker(World world, String context, BlockPos coords, int radius) {
+        if(world.isRemote) return;
+
+        List<Marker> markersHere = getData(world)
+                .getMarkersDataInDimension(world.provider.getDimension())
+                .getMarkersAtChunk((coords.getX() >> 4) / MarkersData.CHUNK_STEP, (coords.getZ() >> 4) / MarkersData.CHUNK_STEP);
+
+        if(markersHere == null) return;
+
+        markersHere = markersHere.stream()
+            .filter(marker -> IMarkerConstructor.splitContext(marker.getType())[0].equals(context))
+            .filter(marker -> Math.abs(marker.getX() - coords.getX()) <= radius && Math.abs(marker.getZ() - coords.getZ()) <= radius)
+            .collect(Collectors.toList());
+
+        if(ConfigHandler.internal.doDebugLogs) Tags.LOGGER.info("Removing {} structure markers", markersHere.size());
+
+        markersHere.forEach(marker -> getData(world).removeMarker(marker.getId()));
+    }
+}

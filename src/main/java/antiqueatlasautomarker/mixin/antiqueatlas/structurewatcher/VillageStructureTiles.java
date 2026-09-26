@@ -1,0 +1,42 @@
+package antiqueatlasautomarker.mixin.antiqueatlas.structurewatcher;
+
+import antiqueatlasautomarker.config.ConfigHandler;
+import com.google.common.collect.ImmutableMap;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import hunternif.mc.atlas.ext.watcher.impl.StructureWatcherVillage;
+import net.minecraft.nbt.NBTTagCompound;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+@Mixin(StructureWatcherVillage.class)
+public abstract class VillageStructureTiles {
+    @Inject(
+            method = "<clinit>",
+            at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;", ordinal = 0, remap = false)
+    )
+    private static void aaam_addCustomVillageTiles_Texture(CallbackInfo ci, @Local ImmutableMap.Builder<String, String> builder){
+        ConfigHandler.tiles.customVillageTiles.forEach(data -> builder.put(data.component, data.textureSet));
+    }
+
+    @Inject(
+            method = "<clinit>",
+            at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMap$Builder;build()Lcom/google/common/collect/ImmutableMap;", ordinal = 1, remap = false)
+    )
+    private static void aaam_addCustomVillageTiles_Priority(CallbackInfo ci, @Local ImmutableMap.Builder<String, Integer> builder){
+        ConfigHandler.tiles.customVillageTiles.forEach(data -> builder.put(data.textureSet, data.priority));
+    }
+
+    @WrapOperation(
+            method = "visitVillage",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/nbt/NBTTagCompound;getString(Ljava/lang/String;)Ljava/lang/String;")
+    )
+    private String aaam_alsoCheckRecurrentIds(NBTTagCompound instance, String key, Operation<String> original){
+        //For Recurrent Complex
+        if(instance.hasKey("RcSId")) return original.call(instance, "RCSId");
+        return original.call(instance, key);
+    }
+}

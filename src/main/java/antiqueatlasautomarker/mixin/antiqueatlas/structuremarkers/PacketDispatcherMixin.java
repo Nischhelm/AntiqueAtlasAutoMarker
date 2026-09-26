@@ -1,8 +1,8 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.Tags;
-import antiqueatlasautomarker.structuremarkers.network.AddedStructureMarkersPacket;
-import antiqueatlasautomarker.structuremarkers.network.OptionalStructureMarkerPacket;
+import antiqueatlasautomarker.features.structuremarkers.network.AddedStructureMarkersPacket;
+import antiqueatlasautomarker.features.structuremarkers.network.OptionalStructureMarkerPacket;
 import hunternif.mc.atlas.network.AbstractMessage;
 import hunternif.mc.atlas.network.PacketDispatcher;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

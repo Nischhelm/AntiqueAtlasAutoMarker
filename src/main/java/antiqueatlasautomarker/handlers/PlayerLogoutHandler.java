@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.handlers;
 
-import antiqueatlasautomarker.mixin.antiqueatlas.overhaul.sendtoallholding.MarkersDataAccessor;
-import antiqueatlasautomarker.mixinwrapper.ILoadedDataList;
+import antiqueatlasautomarker.mixin.antiqueatlas.sendtoallholding.MarkersDataAccessor;
+import antiqueatlasautomarker.mixininterface.ILoadedDataList;
 import hunternif.mc.atlas.AntiqueAtlasMod;
 import hunternif.mc.atlas.marker.MarkersData;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

@@ -1,7 +1,7 @@
 package antiqueatlasautomarker.mixin.antiqueatlas.structuremarkers;
 
 import antiqueatlasautomarker.config.ConfigHandler;
-import antiqueatlasautomarker.structuremarkers.StructureMarkersDataHandler;
+import antiqueatlasautomarker.features.structuremarkers.StructureMarkersDataHandler;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

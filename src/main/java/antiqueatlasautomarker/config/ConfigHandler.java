@@ -52,12 +52,6 @@ public class ConfigHandler {
 	}
 
 	@SuppressWarnings("unused")
-	@LoadEarly.Callback
-	public static void afterEarlyLoad(){
-		MixinConfigurations.enqueueMixins();
-	}
-
-	@SuppressWarnings("unused")
 	@BetterConfig.AfterRead
 	public static <T extends IConfigContext<T>> void migrateConfigs(IConfigCategory<T> category, T context, ArtifactVersion version){
 		ConfigMigrator.handleMigration(category, context, version);

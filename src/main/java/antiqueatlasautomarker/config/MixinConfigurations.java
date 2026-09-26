@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Loader;
 
 import java.util.stream.Stream;
 
-class MixinConfigurations {
+public class MixinConfigurations {
     public static void enqueueMixins(){
         if(!FermiumBooter.NAME.equals("FermiumBooter"))
             Tags.LOGGER.warn("Running on modified FermiumBooter. This is not recommended and can cause crashes. FermiumBooter is compatible with all known other Mixin providers.");

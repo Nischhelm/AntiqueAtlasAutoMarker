@@ -40,9 +40,6 @@ public class MixinConfigurations {
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.customvillagetiles.json", () -> !ConfigHandler.tiles.customVillageTiles.isEmpty());
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.autobiomerules.json", () -> !ConfigHandler.tiles.automaticTypeRules.isEmpty());
         FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.antiqueatlas.tiles.stitchtonull.json", () -> !ConfigHandler.tiles.stitchToNullSets.isEmpty());
-
-        //Ice and Fire
-        FermiumRegistryAPI.enqueueMixin(true, "mixins.aaam.inf.easter.json", () -> Loader.isModLoaded("iceandfire"));
     }
 
     static class Data {

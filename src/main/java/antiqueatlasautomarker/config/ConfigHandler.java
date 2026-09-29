@@ -47,7 +47,7 @@ public class ConfigHandler {
 	private static class EventHandler{
 		@SubscribeEvent
 		public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-			if(event.getModID().equals(Tags.MODID))
+			if(event.getModID().equals(Tags.MODID)) {
 				BetterConfigManager.sync(Tags.MODID);
 				ConfigHandler.automark.ruins.ruinsMarkers.forEach(AutoMarkSetting::registerAutoMarkSetting);
 				ConfigHandler.automark.otg.otgMarkers.forEach(AutoMarkSetting::registerAutoMarkSetting);

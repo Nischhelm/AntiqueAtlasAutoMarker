@@ -1,11 +1,8 @@
 package antiqueatlasautomarker.config.folders;
 
-import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.config.data.AutoMarkSetting;
-import fermiumbooter.annotations.MixinConfig;
 import net.minecraftforge.common.config.Config;
 
-@MixinConfig(name = Tags.MODID)
 public class WaystonesConfig {
     @Config.Comment("Activated Waystones Marker Config")
     @Config.Name("Activated Waystones")

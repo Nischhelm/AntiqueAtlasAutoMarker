@@ -1,5 +1,6 @@
 package antiqueatlasautomarker.config.folders;
 
+import antiqueatlasautomarker.Tags;
 import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.config.data.EnchMarkSetting;
 import fermiumbooter.annotations.MixinConfig;
@@ -8,6 +9,7 @@ import net.minecraftforge.common.config.Config;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+@MixinConfig(name = Tags.MODID)
 public class EnchantmentConfig {
     @Config.Comment("Set to false to never mark Enchantment Trades")
     @Config.Name("Enchantment Trade Marker Enabled")

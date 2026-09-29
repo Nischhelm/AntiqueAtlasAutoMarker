@@ -31,9 +31,17 @@ public class MapGenStructuresConfig {
         if(!enabled) return;
 
         int nStructsBefore = structureOptions.size();
-        for(String s : MapGenStructureIOAccessor.getStartNameToClassMap().keySet())
-            if (!structureOptions.containsKey(s))
-                structureOptions.put(s, new AutoMarkSetting.Data(s, false, "antiqueatlas:google", "DEFAULT"));
+        for(String structureName : MapGenStructureIOAccessor.getStartNameToClassMap().keySet())
+            if (!structureOptions.containsKey(structureName)) {
+                String markerType = "antiqueatlas:google";
+                switch (structureName){
+                    // Default marker types for some vanilla structs
+                    case "EndCity": markerType = "antiqueatlas:end_city"; break;
+                    case "Village": markerType = "antiqueatlas:village"; break;
+                    case "Mineshaft": markerType = "antiqueatlas:pickaxe"; break;
+                }
+                structureOptions.put(structureName, new AutoMarkSetting.Data(structureName, false, markerType, "DEFAULT"));
+            }
 
         if(structureOptions.size() > nStructsBefore) { // sync cfg to file if structures were added
             AntiqueAtlasAutoMarker.configWasChangedInternally = true;

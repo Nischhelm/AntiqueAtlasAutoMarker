@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.config;
 
 import antiqueatlasautomarker.Tags;
+import antiqueatlasautomarker.config.data.AutoMarkSetting;
 import antiqueatlasautomarker.config.folders.*;
 import meldexun.betterconfig.api.BetterConfig;
 import meldexun.betterconfig.api.BetterConfigManager;
@@ -48,6 +49,10 @@ public class ConfigHandler {
 		public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 			if(event.getModID().equals(Tags.MODID))
 				BetterConfigManager.sync(Tags.MODID);
+				ConfigHandler.automark.ruins.ruinsMarkers.forEach(AutoMarkSetting::registerAutoMarkSetting);
+				ConfigHandler.automark.otg.otgMarkers.forEach(AutoMarkSetting::registerAutoMarkSetting);
+				ConfigHandler.automark.mapGenStructs.structureOptions.forEach(AutoMarkSetting::registerAutoMarkSetting);
+			}
 		}
 	}
 

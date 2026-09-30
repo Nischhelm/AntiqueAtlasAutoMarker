@@ -10,7 +10,7 @@ import java.util.function.Function;
 public class ConfigMigrator {
     public static <T extends IConfigContext<T>> void handleMigration(IConfigCategory<T> general, T context, ArtifactVersion fileVersion) {
         if (general.getElements().isEmpty() && general.getSubCategories().isEmpty()) return; //fresh start, no cfg file -> no migration
-        if (fileVersion == null) migrateTo1_0(general, context); // migrate from pre cfgVers 1.0 where there was no version entry yet
+        if (fileVersion == null && !general.getSubCategories().containsKey("auto marking")) migrateTo1_0(general, context); // migrate from pre cfgVers 1.0 where there was no version entry yet
     }
 
     private static <T extends IConfigContext<T>> void migrateTo1_0(IConfigCategory<T> general, T context) {

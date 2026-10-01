@@ -4,49 +4,51 @@ import antiqueatlasautomarker.config.ConfigHandler;
 import antiqueatlasautomarker.config.data.EnchMarkSetting;
 import antiqueatlasautomarker.features.enchantmentmarkers.EnchantmentOffer;
 import antiqueatlasautomarker.features.enchantmentmarkers.EnchantmentUtil;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.network.play.server.SPacketCustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Mixin(EntityVillager.class)
-public abstract class EntityVillagerMixin extends EntityLiving {
-    public EntityVillagerMixin(World worldIn) {
-        super(worldIn);
-    }
-
-    @Shadow @Nullable private MerchantRecipeList buyingList;
+//Imagine mixin'ing into the network logic skull
+@Mixin(NetHandlerPlayClient.class)
+public abstract class NetHandlerPlayClientMixin {
+    @Shadow private Minecraft client;
 
     @Inject(
-            method = "processInteract",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;displayVillagerTradeGui(Lnet/minecraft/entity/IMerchant;)V")
+            method = "handleCustomPayload",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/IMerchant;setRecipes(Lnet/minecraft/village/MerchantRecipeList;)V")
     )
-    public void onMerchantTradeOffers(EntityPlayer player, EnumHand hand, CallbackInfoReturnable<Boolean> cir) {
+    public void onMerchantTradeOffers(SPacketCustomPayload packetIn, CallbackInfo ci, @Local MerchantRecipeList tradeList, @Local IMerchant merchant) {
         if (!ConfigHandler.automark.enchantments.enabled) return;
+
+        EntityPlayer player = this.client.player; //bruh
+        if (player == null) return;
+
+        if (tradeList == null) return;
 
         //Get all enchanted book trades
         List<EnchantmentOffer> offeredEnchants = new ArrayList<>();
-        for (MerchantRecipe trade : this.buyingList) {
+        for (MerchantRecipe trade : tradeList) {
             if (trade.getItemToSell().getItem() instanceof ItemEnchantedBook) {
                 Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(trade.getItemToSell());
                 ItemStack stackBuy1 = trade.getItemToBuy();
@@ -100,6 +102,6 @@ public abstract class EntityVillagerMixin extends EntityLiving {
         //Nothing we care about
         if(markerLabel.isEmpty()) return;
 
-        EnchantmentUtil.markLibrarian(player, this.getPosition(), markerLabel);
+        EnchantmentUtil.markLibrarian(player, merchant.getPos(), markerLabel);
     }
 }

@@ -16,6 +16,7 @@ import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketCustomPayload;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
@@ -102,6 +103,17 @@ public abstract class NetHandlerPlayClientMixin {
         //Nothing we care about
         if(markerLabel.isEmpty()) return;
 
+        // Try to read villager position from packet (if server has AAAM)
+        try {
+            if (packetIn.getBufferData().isReadable()) {
+                int x = packetIn.getBufferData().readInt();
+                int z = packetIn.getBufferData().readInt();
+                EnchantmentUtil.markLibrarian(player, new BlockPos(x, 0, z), markerLabel);
+                return;
+            }
+        } catch (Exception ignored) {} //can happen if any other mod modifies this packet
+
+        // Fallback using player position (yes merchant.getPos is playerPos on client...)
         EnchantmentUtil.markLibrarian(player, merchant.getPos(), markerLabel);
     }
 }

@@ -1,6 +1,7 @@
 package antiqueatlasautomarker.handlers;
 
 import antiqueatlasautomarker.compat.ModCompat;
+import antiqueatlasautomarker.config.ConfigHandler;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -15,6 +16,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public class PlayerLoginHandler {
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        if (!ConfigHandler.automark.aarcAddon.warnNotInstalled) return;
         if (ModCompat.reccomplex.isLoaded() && !ModCompat.aarc.isLoaded()) {
             ITextComponent clickableLink = new TextComponentString("AARC Addon");
             clickableLink.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.curseforge.com/minecraft/mc-mods/antiqueatlas-recurrentcomplex-compatability"));

@@ -248,3 +248,7 @@ commands.aaam.removemarkers.success=Removed %d matching markers
 commands.aaam.removemarkers.fail=No matching markers found
 commands.aaam.putmarker.success=Added "%s"
 commands.aaam.putmarker.fail=All Atlases already contain "%s"
+
+# Compat
+msg.aaam.aarcaddon.missing=AntiqueAtlasaAutoMarker detected Recurrent Complex, but no AARC Addon. Install %s for even more automarking! Disable in config to not see this again.
+msg.aaam.aarcaddon.link=CurseForge Download Link

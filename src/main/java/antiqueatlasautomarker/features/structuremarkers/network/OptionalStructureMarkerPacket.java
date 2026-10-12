@@ -107,7 +107,7 @@ public class OptionalStructureMarkerPacket extends AbstractMessage.AbstractClien
 
             //AARC compat
             if(ModCompat.aarc.isLoaded() && context.startsWith("AARCAddon")) {
-                if(!ConfigHandler.automark.aarcEnabled) continue;
+                if(!ConfigHandler.automark.aarcAddon.enabled) continue;
                 clientSetting = AARCCompat.getAARCSetting(context);
             }
 

@@ -74,12 +74,8 @@ public class AutoMarkConfig {
     @Config.Name("Lang Keys")
     public LocalisationConfig localisation = new LocalisationConfig();
 
-    @Config.Comment("Keep on true on server to turn Antique Atlas RecurrentComplex Compatibility (AARC) Global markers into AAAM local markers.\n" +
-            "Warning: turning this off will have serious side effects on the structure markers in your atlases")
-    @Config.Name("AARC Compat Enabled")
-    @MixinConfig.MixinToggle(lateMixin = "mixins.aaam.aarc.json", defaultValue = true)
-    @MixinConfig.CompatHandling(modid = "aarcaddon", desired = true, warnIngame = false, reason = "No issue, auto disabled")
-    @Config.RequiresMcRestart
-    public boolean aarcEnabled = true;
+    @Config.Comment("Options for AARC Addon Compat")
+    @Config.Name("AARC Addon")
+    public AARCAddonConfig aarcAddon = new AARCAddonConfig();
 
 }

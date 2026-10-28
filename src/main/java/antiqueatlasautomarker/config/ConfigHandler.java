@@ -15,6 +15,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 
+import java.util.Map;
+
 @BetterConfig(
 		modid = Tags.MODID,
 		version = Tags.CFG_VERSION,
@@ -49,11 +51,26 @@ public class ConfigHandler {
 		public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 			if(event.getModID().equals(Tags.MODID)) {
 				BetterConfigManager.sync(Tags.MODID);
-				ConfigHandler.automark.ruins.ruinsMarkers.forEach(AutoMarkSetting::registerAutoMarkSetting);
-				ConfigHandler.automark.otg.otgMarkers.forEach(AutoMarkSetting::registerAutoMarkSetting);
-				ConfigHandler.automark.mapGenStructs.structureOptions.forEach(AutoMarkSetting::registerAutoMarkSetting);
+				registerMapAutoMarkSettings();
 			}
 		}
+	}
+
+	/**
+	 * Map entries read from the cfg file are created via Data() which neither registers them nor sets their context (not saved in cfg).
+	 * Restores context from the map key and registers them, overriding the hardcoded defaults.
+	 */
+	public static void registerMapAutoMarkSettings() {
+		registerMapAutoMarkSettings(ConfigHandler.automark.ruins.ruinsMarkers);
+		registerMapAutoMarkSettings(ConfigHandler.automark.otg.otgMarkers);
+		registerMapAutoMarkSettings(ConfigHandler.automark.mapGenStructs.structureOptions);
+	}
+
+	private static void registerMapAutoMarkSettings(Map<String, AutoMarkSetting.Data> settings) {
+		settings.forEach((context, data) -> {
+			data.context = context;
+			AutoMarkSetting.registerAutoMarkSetting(context, data);
+		});
 	}
 
 	@SuppressWarnings("unused")

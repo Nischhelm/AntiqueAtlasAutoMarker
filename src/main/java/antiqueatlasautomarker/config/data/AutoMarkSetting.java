@@ -26,8 +26,9 @@ public class AutoMarkSetting {
         public Data() {}
         public Data(String context, boolean defaultEnabled, String defaultType, String defaultLabel){
             this.context = context;
+            //putIfAbsent: BetterConfig copies config objects for default values, rerunning field initializers. Don't let those copies replace the live instance
             if(context != null && !context.isEmpty())
-                registerAutoMarkSetting(context, this);
+                autoMarkSettings.putIfAbsent(context, this);
             this.enabled = defaultEnabled;
             this.type = defaultType;
             this.label = defaultLabel;

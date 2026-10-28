@@ -40,6 +40,7 @@ public class AntiqueAtlasAutoMarker {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(event.getSide() == Side.CLIENT) TileConfig.init();
+        ConfigHandler.registerMapAutoMarkSettings();
 
         if(ConfigHandler.fixes.sendToAllHolding) MinecraftForge.EVENT_BUS.register(PlayerLogoutHandler.class);
         if(Loader.isModLoaded("ruins")) MinecraftForge.EVENT_BUS.register(RuinsHandler.class);

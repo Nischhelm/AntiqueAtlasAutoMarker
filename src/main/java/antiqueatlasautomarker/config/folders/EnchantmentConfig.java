@@ -20,7 +20,11 @@ public class EnchantmentConfig {
     @Config.Name("Enchantment Trade Marker")
     public String marker = "antiqueatlas:book";
 
-    @Config.Comment("Add entry with \"ALL\" as enchantment id to mark all trades, ignoring the rest of the config. Otherwise pattern is modid:enchname; minLvlToMark; optionalAbbreviation")
+    @Config.Comment("Mark all enchantment trades, ignoring min levels in the list below. Abbreviations are still used.")
+    @Config.Name("Mark All Enchantment Trades")
+    public boolean markAll = false;
+
+    @Config.Comment("Enchantment trades to mark, keyed by enchantment id (modid:enchname)")
     @Config.Name("Enchantments Trades to mark")
     public LinkedHashMap<String, EnchMarkSetting> enchantmentsToMark = new LinkedHashMap<>();
     public void initEnchantmentMarkers() {

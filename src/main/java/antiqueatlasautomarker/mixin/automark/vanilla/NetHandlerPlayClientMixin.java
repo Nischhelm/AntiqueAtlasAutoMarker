@@ -75,6 +75,9 @@ public abstract class NetHandlerPlayClientMixin {
         }
         offeredEnchants.removeAll(toRemove);
 
+        //"ALL" key kept for configs that still have it
+        boolean markAll = ConfigHandler.automark.enchantments.markAll || ConfigHandler.automark.enchantments.enchantmentsToMark.containsKey("ALL");
+
         String markerLabel = "";
         boolean isFirst = true;
         for (EnchantmentOffer offer : offeredEnchants) {
@@ -82,7 +85,7 @@ public abstract class NetHandlerPlayClientMixin {
             if (enchReg == null) continue;
             EnchMarkSetting setting = ConfigHandler.automark.enchantments.enchantmentsToMark.get(enchReg.toString());
             //Check if the offer is anything we care about
-            if ((setting != null && offer.lvl >= setting.minLvl) || ConfigHandler.automark.enchantments.enchantmentsToMark.containsKey("ALL")) {
+            if ((setting != null && offer.lvl >= setting.minLvl) || markAll) {
                 String enchLabel = setting != null ? setting.abbreviation : "";
                 //no abbreviation or accepting all
                 if(enchLabel.isEmpty()) enchLabel = offer.enchantment.getTranslatedName(offer.lvl);

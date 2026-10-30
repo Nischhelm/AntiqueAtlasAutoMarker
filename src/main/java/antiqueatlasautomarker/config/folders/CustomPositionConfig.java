@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomPositionConfig {
-    @Config.Comment("Pattern: dimension; posX; posZ; discoverX; discoverZ; marker label; marker type.\n" +
-            "where the first set of coordinates are where the marker will be located on the atlas,\n" +
-            "and the second set of coordinates will be where the player has to be to discover that marker.\n" +
+    @Config.Comment("Each entry: Marker Type, Marker Label, Dimension, xMarker, zMarker, xDiscover, zDiscover.\n" +
+            "xMarker/zMarker is where the marker will be located on the atlas,\n" +
+            "xDiscover/zDiscover is where the player has to be to discover that marker.\n" +
             "Will get set on server world creation. Only needs to be defined on server")
     @Config.Name("Custom Position Markers")
     @Config.RequiresWorldRestart

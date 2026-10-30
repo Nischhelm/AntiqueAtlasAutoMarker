@@ -95,7 +95,7 @@ public class ConfigMigrator {
         migrateWaystones(moveCategory(general, autoMarking, "waystones"), context);
         makeCategory(moveCategory(general, autoMarking, "ruins"), "Ruins Structure Markers", el -> transformAutoMarkList((IConfigList<T>) el, context));
         makeCategory(moveCategory(general, autoMarking, "lang keys"), "Default Lang Keys", el -> transformListToMap((IConfigList<T>) el, context));
-        moveCategory(general, autoMarking, "custom positions");
+        migrateCustomPositions(moveCategory(general, autoMarking, "custom positions"), context);
         migrateAARCAddon(general, autoMarking);
         migrateEnchantments(moveCategory(general, autoMarking, "enchantments"), context);
 
@@ -120,6 +120,42 @@ public class ConfigMigrator {
         IConfigCategory<T> aarcaddon = general.getSubCategories().remove("aarcaddon");
         if (aarcaddon == null) return;
         moveAndRenameElement(aarcaddon, autoMarking, "AARC Enabled", "AARC Compat Enabled");
+    }
+
+    private static <T extends IConfigContext<T>> void migrateCustomPositions(IConfigCategory<T> customPositions, T context) {
+        if (customPositions == null) return;
+        IConfigElement<T> oldList = customPositions.getElements().get("Custom Position Markers");
+        if (!(oldList instanceof IConfigList)) return;
+        customPositions.getElements().put("Custom Position Markers", transformCustomPositionList((IConfigList<T>) oldList, context));
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends IConfigContext<T>> IConfigList<T> transformCustomPositionList(IConfigList<T> oldList, T context) {
+        IConfigList<T> newList = context.createList();
+
+        for (IConfigElement<T> item : oldList.getList()) {
+            if (!(item instanceof IConfigValue)) continue;
+            String line = ((IConfigValue<T>) item).getValue();
+            if (line.trim().isEmpty()) continue;
+
+            // Parse: "dimension; posX; posZ; discoverX; discoverZ; marker label; marker type"
+            String[] parts = line.split(";");
+            if (parts.length < 7) continue;
+
+            IConfigCategory<T> entry = context.createCategory();
+            entry.getElements().put("Marker Type", createValue(parts[6].trim(), context));
+            entry.getElements().put("Marker Label", createValue(parts[5].trim(), context));
+            entry.getElements().put("Dimension", createValue(parts[0].trim(), context));
+            entry.getElements().put("xMarker", createValue(parts[1].trim(), context));
+            entry.getElements().put("zMarker", createValue(parts[2].trim(), context));
+            entry.getElements().put("xDiscover", createValue(parts[3].trim(), context));
+            entry.getElements().put("zDiscover", createValue(parts[4].trim(), context));
+
+            // IConfigCategory isn't an IConfigElement in the api, but the implementation is
+            newList.getList().add((IConfigElement<T>) (Object) entry);
+        }
+
+        return newList;
     }
 
     private static <T extends IConfigContext<T>> void migrateEnchantments(IConfigCategory<T> ench, T context) {

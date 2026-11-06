@@ -16,8 +16,8 @@ public class ThaumcraftCompat {
         //TextureSet eldritch = new TextureSet("TC_ELDRITCH", tileLoc("tc_eldritch"));
         //TextureSet taint = new TextureSet("TC_TAINT", tileLoc("tc_taint1"), tileLoc("tc_taint2"), tileLoc("tc_taint3"), tileLoc("tc_taint4"), tileLoc("tc_taint5"));
 
-        api.setBiomeTexture(BiomeHandler.EERIE, eerie);
-        api.setBiomeTexture(BiomeHandler.MAGICAL_FOREST, magicalForest);
+        BiomeTileRegistration.setBiomeTexture(api, BiomeHandler.EERIE, eerie);
+        BiomeTileRegistration.setBiomeTexture(api, BiomeHandler.MAGICAL_FOREST, magicalForest);
         //api.setBiomeTexture(BiomeHandler.ELDRITCH, eldritch);  //Golrith didn't make a TextureSet for this biome
         //api.setBiomeTexture(BiomeHandler.biomeTaint, taint);  //taint biome doesnt exist as a separate biome anymore since TC 6.0
     }

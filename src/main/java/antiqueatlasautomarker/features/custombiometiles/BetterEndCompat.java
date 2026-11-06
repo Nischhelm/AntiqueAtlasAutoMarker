@@ -65,7 +65,7 @@ public class BetterEndCompat {
 
     private static void registerTextureIfPresent(TileAPI api, Biome biome, TextureSet texture){
         //disabled BetterEnd biomes have a null registryName
-        if(biome.getRegistryName() != null) api.setBiomeTexture(biome, texture);
+        if(biome.getRegistryName() != null) BiomeTileRegistration.setBiomeTexture(api, biome, texture);
     }
 
     private static int registerCustomVoidTexture(TileAPI api, TextureSet set){

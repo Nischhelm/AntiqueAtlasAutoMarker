@@ -19,13 +19,13 @@ public class DefiledLandsCompat {
         TextureSet forest = new TextureSet("DL_TENEBRA", tileLoc("dl_forest"), tileLoc("dl_forest2"), tileLoc("dl_forest3"));
         //TextureSet vilespineForest = new TextureSet("DL_VILESPINE", tileLoc("dl_forest"), tileLoc("dl_forest2"), tileLoc("dl_forest3"));
 
-        api.setBiomeTexture(ModBiomes.desertDefiled, desert);
-        api.setBiomeTexture(ModBiomes.hillsDefiled, hills);
-        api.setBiomeTexture(ModBiomes.plainsDefiled, plains);
-        api.setBiomeTexture(ModBiomes.swampDefiled, swamp);
-        api.setBiomeTexture(ModBiomes.icePlainsDefiled, icePlains);
-        api.setBiomeTexture(ModBiomes.forestTenebra, forest); //TODO: distinguish tenebra from vilespine and both from normal trees
-        api.setBiomeTexture(ModBiomes.forestVilespine, forest);
+        BiomeTileRegistration.setBiomeTexture(api, ModBiomes.desertDefiled, desert);
+        BiomeTileRegistration.setBiomeTexture(api, ModBiomes.hillsDefiled, hills);
+        BiomeTileRegistration.setBiomeTexture(api, ModBiomes.plainsDefiled, plains);
+        BiomeTileRegistration.setBiomeTexture(api, ModBiomes.swampDefiled, swamp);
+        BiomeTileRegistration.setBiomeTexture(api, ModBiomes.icePlainsDefiled, icePlains);
+        BiomeTileRegistration.setBiomeTexture(api, ModBiomes.forestTenebra, forest); //TODO: distinguish tenebra from vilespine and both from normal trees
+        BiomeTileRegistration.setBiomeTexture(api, ModBiomes.forestVilespine, forest);
     }
 
     private static ResourceLocation tileLoc(String tileName){

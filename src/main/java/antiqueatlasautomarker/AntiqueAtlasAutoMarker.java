@@ -39,7 +39,11 @@ public class AntiqueAtlasAutoMarker {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        if(event.getSide() == Side.CLIENT) TileConfig.init();
+        if(event.getSide() == Side.CLIENT) {
+            BiomeTileRegistration.registerMissingDefaultTextureSets();
+            TileConfig.init();
+            MinecraftForge.EVENT_BUS.register(BiomeTileRegistration.class);
+        }
         ConfigHandler.registerMapAutoMarkSettings();
 
         if(ConfigHandler.fixes.sendToAllHolding) MinecraftForge.EVENT_BUS.register(PlayerLogoutHandler.class);
@@ -59,15 +63,11 @@ public class AntiqueAtlasAutoMarker {
         ConfigHandler.automark.mapGenStructs.initMapGenStructureMarkersFromRegistry();
 
         if(event.getSide() == Side.CLIENT) {
-            if (ConfigHandler.tiles.modifyBiomeDetection) NetherTiles.registerTiles();
+            BiomeTileRegistration.registerBiomeTiles(); //normally already done during the biome registry event
             if (ConfigHandler.tiles.useCustomMarkers) CustomMarkers.registerMarkers();
+            //These use Nether API lookups, so they stay in postInit
             if (ConfigHandler.tiles.useColorisedBetterEndTiles && ModCompat.betterEnd.isLoaded() && Loader.isModLoaded("nether_api")) BetterEndCompat.registerTiles();
             if (ConfigHandler.tiles.useColorisedBetterNetherTiles && Loader.isModLoaded("betternether") && Loader.isModLoaded("nether_api")) BetterNetherCompat.registerTiles();
-            if (ConfigHandler.tiles.useColorisedDefiledLandsTiles && Loader.isModLoaded("defiledlands")) DefiledLandsCompat.registerTiles();
-            if (ConfigHandler.tiles.useColorisedTraverseTiles && Loader.isModLoaded("traverse")) TraverseCompat.registerTiles();
-            if (ConfigHandler.tiles.useColorisedThaumcraftTiles && Loader.isModLoaded("thaumcraft")) ThaumcraftCompat.registerTiles();
-            if (ConfigHandler.tiles.useColorisedBOPTiles && ModCompat.biomesOPlenty.isLoaded()) BiomesOPlentyCompat.registerTiles();
-            if (ConfigHandler.tiles.useColorisedDregoraTiles && ModCompat.otg.isLoaded() && Loader.isModLoaded("dregorarl")) DregoraCompat.registerTiles();
         }
 
         if(configWasChangedInternally) BetterConfigManager.sync(Tags.MODID);

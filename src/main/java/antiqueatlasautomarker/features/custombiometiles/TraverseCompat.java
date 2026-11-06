@@ -69,7 +69,7 @@ public class TraverseCompat {
     
     private static void registerTexture(TileAPI api, Biome biome, TextureSet texture){
         if(biome != null && TraverseWorld.biomeList.stream().anyMatch(entry -> entry.getBiome() == biome))
-            api.setBiomeTexture(biome, texture);
+            BiomeTileRegistration.setBiomeTexture(api, biome, texture);
     }
 
     private static ResourceLocation tileLoc(String tileName){

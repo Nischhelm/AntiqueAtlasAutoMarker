@@ -54,7 +54,7 @@ public class BetterNetherCompat {
         try {
             BiomeBetterNether nether_api_biome = BetterNetherHandler.getBiomeFromLookup(better_nether_biome);
             if(nether_api_biome != null) //needed due to fermiummixins fix for old betternether
-                api.setBiomeTexture(nether_api_biome, texture);
+                BiomeTileRegistration.setBiomeTexture(api, nether_api_biome, texture);
         } catch (Exception ignored){/* we just don't register here*/}
     }
 

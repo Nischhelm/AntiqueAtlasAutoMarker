@@ -19,7 +19,7 @@ public class NetherTiles {
         HELL_TEXTURE = new TextureSet("CUSTOM_HELL", tileLoc("hell")); //Normal nether
 
         WALL = registerCustomTexture(api, TextureSet.CAVE_WALLS);
-        api.setBiomeTexture(Biomes.HELL, HELL_TEXTURE);
+        BiomeTileRegistration.setBiomeTexture(api, Biomes.HELL, HELL_TEXTURE);
 
         if(ConfigHandler.tiles.netherTilesWithShore) {
             TextureSet.LAVA.stitchTo(HELL_TEXTURE);

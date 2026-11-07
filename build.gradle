@@ -175,6 +175,7 @@ publishMods {
 
             requires("fermiumbooter")
             requires("antique-atlas")
+            requires("better-config")
         }
     }
 
@@ -187,6 +188,7 @@ publishMods {
 
             requires("fermiumbooter")
             requires("antique-atlas")
+            requires("better-config")
         }
     }
 }
